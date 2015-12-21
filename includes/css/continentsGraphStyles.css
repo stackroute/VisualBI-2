@@ -1,6 +1,7 @@
 
 body {
   font: 10px sans-serif;
+    background-color: #e3e3e3;
 }
 
 .axis path,
@@ -18,4 +19,32 @@ body {
   fill: none;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+.widget-body{
+  background-color: #e3e3e3;
+}
+.widget-header{
+  margin-left: 20px;
+  text-align: left;
+  font-size: 22px;
+}
+.widget-wrapper{
+  border-radius: 8px;
+  background-color: #00b09a;
+  /*width:700px;*/
+  /*height: 200px;*/
+  padding: 5px 20px;
+}
+.widget-items{
+  margin-left: 40px;
+}
+.window-ctrls{
+  /*display: inline;*/
+}
+.widget-header-title{
+  /*display: inline;*/
+}
+.label{
+  background-color: transparent;
+  padding: 15px 0px;
 }
