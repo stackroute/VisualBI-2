@@ -4,11 +4,20 @@ Custom CSS
 =============
 
 */
+.navbar{
+   background-color:black;
+}
 
+.dropdown{
+   color: white;
+}
 #searchBox {
    width: 300px;
 }
 
+#wrap {
+   margin-top: 100px;
+}
 
 /* --------------------------------------
    Media Queries
