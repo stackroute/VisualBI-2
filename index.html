@@ -10,19 +10,19 @@
    <div class="container-fluid">
       <div class="navbar navbar-fixed-top">
    		<div class="container-fluid">
-   			<a class="navbar-brand" href="/"><img src="includes/images/logo1.png" alt="Your Logo"></a>
+            <div class="row">
+               <a class="navbar-brand col-sm-6" href="/"><img src="includes/images/logo.png" alt="Your Logo"></a>
 
-   			<div class="nav-collapse collapse navbar-responsive-collapse">
+      			<div class="nav-collapse collapse navbar-responsive-collapse col-sm-6">
+                  <form class="navbar-form">
+      					<input type="text" class="form-control" placeholder="Search this site..." id="searchBox">
+      					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      				</form><!-- end navbar-form -->
+      			</div><!-- end nav-collapse -->
+            </div>
 
-
-
-
-               <form class="navbar-form pull-right">
-   					<input type="text" class="form-control" placeholder="Search this site..." id="searchBox">
-   					<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-   				</form><!-- end navbar-form -->
-   			</div><!-- end nav-collapse -->
-            <div class="row clearfix">
+         </div>
+            <div class="row">
                <ul class="nav navbar-nav pull-right">
    					<li class="dropdown">
    						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> My Account <strong class="caret"></strong></a>
@@ -47,7 +47,6 @@
    						</ul>
    					</li>
    				</ul><!-- end nav pull-right -->
-            </div>
    		</div><!-- end container -->
 		</div><!-- end navbar -->
 
@@ -79,7 +78,7 @@
          </p>
       </div>
    </footer>
-   <script src="includes/js/jquery-1.8.2.min.js" charset="utf-8"></script>
+   <script src="includes/js/jquery.min.js" charset="utf-8"></script>
    <script src="bootstrap/js/bootstrap.js" charset="utf-8"></script>
    <script src="includes/js/main.js" charset="utf-8"></script>
 </body>
