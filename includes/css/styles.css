@@ -5,18 +5,34 @@ Custom CSS
 
 */
 .navbar{
-   background-color:black;
+   background-color:#00008b;
 }
 
-.dropdown{
+#image{
+  margin-top: -10px;
+  border-radius: 15px;
+}
+
+.nav .open a{
+  background-color: #00008b;
+  color:white;
+}
+.dropdown-toggle{
    color: white;
 }
-#searchBox {
-   width: 300px;
+.nav .open a, .nav .open a:hover, .nav .open a:focus{
+  background-color:#00008b;
 }
+/*#searchBox {
+   width: 300px;
+}*/
 
-#wrap {
-   margin-top: 200px;
+.wrap {
+   margin-top: 35px;
+}
+h1{
+  text-align: center;
+  color: #00008b;
 }
 
 /* --------------------------------------
