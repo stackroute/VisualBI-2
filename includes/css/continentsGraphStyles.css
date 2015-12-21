@@ -24,9 +24,8 @@ body {
   background-color: #e3e3e3;
 }
 .widget-header{
-  margin-left: 20px;
   text-align: left;
-  font-size: 22px;
+  font-size: 18px;
 }
 .widget-wrapper{
   border-radius: 8px;
@@ -39,12 +38,11 @@ body {
   margin-left: 40px;
 }
 .window-ctrls{
-  /*display: inline;*/
+  margin-left: 0px;
 }
 .widget-header-title{
   /*display: inline;*/
 }
 .label{
   background-color: transparent;
-  padding: 15px 0px;
 }
