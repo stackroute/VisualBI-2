@@ -39,6 +39,16 @@
 								</li>
               </ul>
             </li>
+         <ul class="nav nav-tabs" id="dashboards">
+            <!-- <li><a href="#tab1" data-toggle="tab">Dashboard 1</a></li>
+            <li><a href="#tab1" data-toggle="tab">Dashboard 2</a></li>
+            <li><a href="#tab1" data-toggle="tab">Dashboard 3</a></li> -->
+            <script id="dashbordsTemplate" type="template">
+               {{#each this}}
+               <li><a href="#{{tabID}}" data-toggle="tab">{{title}}</a></li>
+               {{/each}}
+            </script>
+
           </ul>
           <!--Search field goes here -->
           <form class="navbar-form pull-right">
@@ -59,6 +69,7 @@
   <!--Script files goes here-->
   <script src="includes/js/jquery.min.js" charset="utf-8"></script>
   <script src="bootstrap/js/bootstrap.js" charset="utf-8"></script>
+   <script src="includes/js/handlebars.js" charset="utf-8"></script>
   <script src="includes/js/main.js" charset="utf-8"></script>
 
 </body>
