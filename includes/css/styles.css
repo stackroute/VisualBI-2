@@ -1,21 +1,95 @@
 /*
-
 Custom CSS
 =============
-
 */
+.navbar{
+   background-color:#00008b;
+}
 
+<<<<<<< HEAD
 /* --------------------------------------
    Templates
    -------------------------------------- */
-  .col-sm-6{
+  #dashboards.col-sm-6{
     padding: 20px;
-    overflow: hidden;
   }
-  img{
+  #dashboards img{
     width: 100%;
     margin: auto;
+    overflow: hidden;
   }
+=======
+#image{
+  margin-top: -10px;
+  border-radius: 15px;
+}
+.nav .open a{
+  background-color: #00008b;
+  color:white;
+}
+.dropdown-toggle{
+   color: white;
+}
+.nav .open a, .nav .open a:hover, .nav .open a:focus{
+  background-color:#00008b;
+}
+#searchBox {
+   width: 300px;
+}
+
+.tabbable {
+   margin: 0 10px;
+}
+.wrap {
+   margin-top: 100px;
+}
+h1{
+  text-align: center;
+  color: #00008b;
+}
+
+.widget-body{
+  background-color: #e3e3e3;
+}
+.widget-header{
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.widget-wrapper{
+  border-radius: 8px;
+  background-color: #00b09a;
+  /*width:700px;*/
+  /*height: 200px;*/
+  padding: 0px 20px;
+}
+.widget-items{
+  margin-left: 40px;
+}
+.window-ctrls{
+  margin-left: 0px;
+}
+.widget-header-title{
+  /*display: inline;*/
+}
+.label{
+  background-color: transparent;
+}
+
+#mainComments {
+  margin-left: 20px;
+}
+
+#mainComments textarea {
+  font-size: 14px;
+}
+
+#mainComments p {
+  margin-top: 10px;
+  font-size: 12px;
+}
+>>>>>>> 4ae784ed34bd107f7a689ed14975c2f81b8be55a
 
 /* --------------------------------------
    Media Queries

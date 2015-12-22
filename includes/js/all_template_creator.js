@@ -30,7 +30,7 @@
     }
   };
   templateCreator.init({
-    template: $('#widget_template_1cols').html(),
-    url: '/../includes/json/laylout_1cols.json'
+    template: $('#widget_template_3cols').html(),
+    url: '/../includes/json/laylout_3cols.json'
   });
 })();
