@@ -3,7 +3,8 @@ Custom CSS
 =============
 */
 .navbar{
-   background-color:#00008b;
+   /*background-image: url("/includes/images/back.jpg");*/
+   background-color: black;
 }
 
 #image{
@@ -11,14 +12,14 @@ Custom CSS
   border-radius: 15px;
 }
 .nav .open a{
-  background-color: #00008b;
+  background-color: #B22222;
   color:white;
 }
 .dropdown-toggle{
    color: white;
 }
 .nav .open a, .nav .open a:hover, .nav .open a:focus{
-  background-color:#00008b;
+  background-color:#B22222;
 }
 /*#searchBox {
    width: 300px;
