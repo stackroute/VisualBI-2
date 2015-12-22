@@ -32,6 +32,33 @@ h1{
   color: #00008b;
 }
 
+.widget-body{
+  background-color: #e3e3e3;
+}
+.widget-header{
+  text-align: left;
+  font-size: 16px;
+}
+.widget-wrapper{
+  border-radius: 8px;
+  background-color: #00b09a;
+  /*width:700px;*/
+  /*height: 200px;*/
+  padding: 0px 20px;
+}
+.widget-items{
+  margin-left: 40px;
+}
+.window-ctrls{
+  margin-left: 0px;
+}
+.widget-header-title{
+  /*display: inline;*/
+}
+.label{
+  background-color: transparent;
+}
+
 /* --------------------------------------
    Media Queries
    -------------------------------------- */
