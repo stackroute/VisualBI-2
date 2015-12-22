@@ -1,5 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function(param) {
+  alert(param);
   $.ajax({
+
     url: "../includes/json/widgetProp1.json",
     dataType: "text",
     success: function(data) {
@@ -9,7 +11,6 @@ $(document).ready(function() {
       var barSrc = json[0].chartJson;
       var commentPath = json[0].commentPath;
 
-      
       $('#headerCaption').text(title);
       $('#barChart #bar').attr("src", barSrc);
 
