@@ -7,9 +7,9 @@
 	},
 	{
 		"title": "Dashboard 2",
-		"containerID": "template2",
+		"containerID": "gdpstack",
 		"tabID":"tab2",
-		"htmlPage": "template1.html"
+		"htmlPage": "pages/gdpStackedBarChart.html"
 	},
 	{
 		"title": "Dashboard 3",

@@ -1,0 +1,16 @@
+[{
+  "template": "bootstrap-row.hb",
+  "columns": [6, 6],
+  "background": "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg",
+  "widget": ["widgetid1", "widgetid2"]
+},{
+  "template": "bootstrap-row.hb",
+  "columns": [6, 6],
+  "background": "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg",
+  "widget": ["widgetid1", "widgetid2"]
+},{
+  "template": "bootstrap-row.hb",
+  "columns": [6, 6],
+  "background": "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg",
+  "widget": ["widgetid1", "widgetid2"]
+}]

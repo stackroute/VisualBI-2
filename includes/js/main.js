@@ -26,6 +26,15 @@
             tabId.addClass("active");
          }
 
+<<<<<<< HEAD
+=======
+         // tabId.on('click',function(){
+         //    //attach click event so the content loads when tab is clicked
+         //    console.log(this);
+         //    //$(this).load(item.htmlPage +" #"+ item.containerID);
+         //    // $('#' + item.tabID).load(item.htmlPage +" #"+ item.containerID);
+         // });
+>>>>>>> 0ae86fd822b60c31703602b30642cf84253abe49
       })
    });
 
