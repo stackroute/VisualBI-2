@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <link href="../includes/css/chart.css" rel="stylesheet">
     <link href="../includes/css/styles.css" rel="stylesheet">
+
+    <!-- Include Modernizr in the head, before any other Javascript -->
+    <script src="../includes/js/modernizr-2.6.2.min.js"></script>
   </head>
   <body>
 
@@ -18,15 +21,12 @@
       <!-- Bar Chart -->
       <div id="barChart">
         <script id="bar"></script>
-        <script src="includes/js/gdpPerCapitaBarChart.js"></script>
+        <script src="../includes/js/gdpPerCapitaBarChart.js"></script>
       </div>
 
       <!-- Comments -->
-      <div id ="mainComments">
-        <p><strong>Comments:</strong></p>
-        <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
-        <div id ="comments"></div>
-      </div>
+      <div id ="mainComments"></div>
+      <script>$('#mainComments').load("widgetComments.html");</script>
 
       <script src="../includes/js/customJs.js"></script>
   </body>
