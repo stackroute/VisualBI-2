@@ -2,4 +2,12 @@
 	"title": "GDP Per Capita (constant 2005 US$) Continent",
 	"chartJson": "../includes/js/gdpContinentChart.js",
 	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "GDP GNI",
+	"chartJson": "../includes/js/gdpStackedBarChart.js",
+	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "GDP GNI Per Capita",
+	"chartJson": "../includes/js/gdpPerCapitaBarChart.js",
+	"commentPath": "../includes/json/comments1.json"
 }]

@@ -41,6 +41,8 @@ h1{
 .widget-header{
   text-align: left;
   font-size: 16px;
+  font-weight: bold;
+  color: #fff;
 }
 .widget-wrapper{
   border-radius: 8px;
@@ -71,7 +73,8 @@ h1{
 }
 
 #mainComments p {
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 /* --------------------------------------
