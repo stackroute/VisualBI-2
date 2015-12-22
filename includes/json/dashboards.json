@@ -2,21 +2,37 @@
 	{
 		"title": "Dashboard 1",
 		"containerID": "template1",
-		"tabID":"tab1"
+		"tabID":"tab1",
+		"htmlPage": "template1.html"
 	},
 	{
 		"title": "Dashboard 2",
-		"containerID": "template2",
-		"tabID":"tab2"
+		"containerID": "gdpstack",
+		"tabID":"tab2",
+		"htmlPage": "pages/gdpStackedBarChart.html"
 	},
 	{
 		"title": "Dashboard 3",
 		"containerID": "template3",
-		"tabID":"tab3"
+		"tabID":"tab3",
+		"htmlPage": "template1.html"
 	},
 	{
 		"title": "Dashboard 4",
 		"containerID": "template4",
-		"tabID":"tab4"
+		"tabID":"tab4",
+		"htmlPage": "template1.html"
+	},
+	{
+		"title": "My dashboard 5",
+		"containerID": "template6",
+		"tabID":"tab5",
+		"htmlPage": "template1.html"
+	},
+	{
+		"title": "new template 7",
+		"containerID": "template7",
+		"tabID":"tab7",
+		"htmlPage": "template1.html"
 	}
 ]

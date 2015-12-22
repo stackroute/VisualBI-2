@@ -15,11 +15,7 @@ body {
   display: none;
 }
 
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
+
 .widget-body{
   background-color: #e3e3e3;
 }
