@@ -4,42 +4,30 @@
 <head>
     <meta charset="utf-8">
     <title></title>
-    <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-      <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
-
-		<!-- Custom CSS -->
-  		<!-- <link rel="stylesheet" href="../includes/css/styles.css"> -->
-  		<link rel="stylesheet" href="../includes/css/bootstrap-glyphicons.css" media="screen" title="no title" charset="utf-8">
-  		<link rel="stylesheet" href="../includes/css/animate.css" media="screen" title="no title" charset="utf-8">
-  		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato|Lobster|Play|Raleway|Ubuntu|Open+Sans">
-      <link rel="stylesheet" href="../includes/css/continentsGraphStyles.css" media="screen" title="no title" charset="utf-8">
-
-
-    <!-- Include Modernizr in the head, before any other Javascript -->
-      <script src="../includes/js/modernizr-2.6.2.min.js"></script>
-      <script type="text/javascript" src="../includes/js/jquery-1.8.2.min.js"></script>
-      <script type="text/javascript" src="../includes/js/script.js"></script>
-
-
-
 </head>
 
 <body>
-  <div class="widget-wrapper">
-    <div class="row">
-  		<div class="col-md-10 widget-header-title">
-        <span id="headerCaption" class="widget-header label pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
-      </div>
-      <div class="col-md-2 btn-group-xs window-ctrls clearfix" role="group" aria-label="..">
-        <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
-        <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
-        <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
-      </div>
-  </div>
-</div>
-    <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="../includes/js/jquery-1.11.3.js"></script>
+
+  <!-- Header -->
+  <div id="header"></div>
+  <script>$('#header').load("widgetHeader.html");</script>
+
+  <!-- Bar Chart -->
+  <div id="barChart">
+    <script id="bar"></script>
     <script type="text/javascript" src="../includes/js/continents.js"></script>
+  </div>
+
+  <!-- Comments -->
+  <div id ="mainComments">
+    <p><strong>Comments:</strong></p>
+    <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
+    <div id ="comments"></div>
+  </div>
+
+  <script src="../includes/js/customJs.js"></script>
 </body>
 
 </html>
