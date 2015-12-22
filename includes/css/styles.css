@@ -24,6 +24,9 @@ Custom CSS
    width: 300px;
 }*/
 
+.tabbable {
+   margin: 0 10px;
+}
 .wrap {
    margin-top: 35px;
 }
