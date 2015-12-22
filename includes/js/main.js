@@ -26,8 +26,6 @@
             tabId.addClass("active");
          }
 
-
-
          // tabId.on('click',function(){
          //    //attach click event so the content loads when tab is clicked
          //    console.log(this);

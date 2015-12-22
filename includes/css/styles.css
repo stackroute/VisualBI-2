@@ -20,15 +20,15 @@ Custom CSS
 .nav .open a, .nav .open a:hover, .nav .open a:focus{
   background-color:#00008b;
 }
-/*#searchBox {
+#searchBox {
    width: 300px;
-}*/
+}
 
 .tabbable {
    margin: 0 10px;
 }
 .wrap {
-   margin-top: 35px;
+   margin-top: 100px;
 }
 h1{
   text-align: center;
