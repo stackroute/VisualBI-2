@@ -3,38 +3,28 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="../includes/css/IndiaArableStyles.css" media="screen" title="no title" charset="utf-8">
+    <title>Africa Arable Area analysis</title>
+    <link href="../includes/css/chart.css" rel="stylesheet">
     <link rel="stylesheet" href="../includes/css/styles.css" media="screen" title="no title" charset="utf-8">
-
-    <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-      <link rel="stylesheet" href="../includes/bootstrap/css/bootstrap.min.css">
-
-    <!-- Custom CSS -->
-      <!-- <link rel="stylesheet" href="../includes/css/styles.css"> -->
-      <link rel="stylesheet" href="../includes/css/bootstrap-glyphicons.css" media="screen" title="no title" charset="utf-8">
-      <link rel="stylesheet" href="../includes/css/styles.css" media="screen" title="no title" charset="utf-8">
-      <link rel="stylesheet" href="../includes/css/chart.css" media="screen" title="no title" charset="utf-8">
-
-
 </head>
-
 <body>
-  <div class="widget-wrapper">
-      <div class="row">
-        <div class="col-md-10 widget-header-title">
-          <span id="headerCaption" class="widget-header label pull-left" >  Arable land (% of land area) for African countries in the year 2010.</span>
-        </div>
-        <div class="col-md-2 btn-group-xs window-ctrls clearfix" role="group" aria-label="..">
-          <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
-          <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
-          <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
-        </div>
-    </div>
-  </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script type="text/javascript" src="../includes/js/indiaArableArea.js"></script>
-</body>
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="../includes/js/jquery-1.11.3.js"></script>
 
+  <!-- Header -->
+  <div id="header"></div>
+  <script>$('#header').load("widgetHeader.html");</script>
+
+  <!-- Bar Chart -->
+  <div id="barChart">
+    <script id="bar"></script>
+    <script src="../includes/js/indiaArableArea.js"></script>
+  </div>
+
+  <!-- Comments -->
+  <div id ="mainComments"></div>
+  <script>$('#mainComments').load("widgetComments.html");</script>
+
+  <script src="../includes/js/customJs.js"></script>
+</body>
 </html>
