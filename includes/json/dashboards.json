@@ -1,0 +1,22 @@
+[
+	{
+		"title": "Dashboard 1",
+		"containerID": "template1",
+		"tabID":"tab1"
+	},
+	{
+		"title": "Dashboard 2",
+		"containerID": "template2",
+		"tabID":"tab2"
+	},
+	{
+		"title": "Dashboard 3",
+		"containerID": "template3",
+		"tabID":"tab3"
+	},
+	{
+		"title": "Dashboard 4",
+		"containerID": "template4",
+		"tabID":"tab4"
+	}
+]

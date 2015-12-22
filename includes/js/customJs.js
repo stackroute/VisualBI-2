@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $.ajax({
-    url: "includes/json/widgetProp1.json",
+    url: "../includes/json/widgetProp1.json",
     dataType: "text",
     success: function(data) {
       var json = $.parseJSON(data);
