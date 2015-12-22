@@ -5,7 +5,17 @@ Custom CSS
 
 */
 
-
+/* --------------------------------------
+   Templates
+   -------------------------------------- */
+  .col-sm-6{
+    padding: 20px;
+    overflow: hidden;
+  }
+  img{
+    width: 100%;
+    margin: auto;
+  }
 
 /* --------------------------------------
    Media Queries
