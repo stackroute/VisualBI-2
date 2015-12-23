@@ -2,26 +2,20 @@
 	{
 		"title": "Dashboard 2",
 		"containerID": "dashboards",
-		"tabID":"tab2",
+		"tabID":"tab1",
 		"htmlPage": "pages/dashboards.html"
 	},
 	
 	{
-		"title": "Dashboard 4",
+		"title": "Dashboard 3",
 		"containerID": "template4",
-		"tabID":"tab4",
+		"tabID":"tab2",
 		"htmlPage": "template1.html"
 	},
 	{
-		"title": "My dashboard 5",
+		"title": "Dashboard 1",
 		"containerID": "template6",
-		"tabID":"tab5",
-		"htmlPage": "template1.html"
-	},
-	{
-		"title": "new template 7",
-		"containerID": "template7",
-		"tabID":"tab7",
+		"tabID":"tab3",
 		"htmlPage": "template1.html"
 	}
 ]

@@ -9,8 +9,8 @@
             dashboards.append(template(data));
             dashboards.find('li').first().addClass("active");
             //Add tab contents
-            var contentTemplate = Handlebars.compile($('#dashboardsContentTemplate').html());
-            $('#dashboardsContent').append(contentTemplate(data));
+            // var contentTemplate = Handlebars.compile($('#dashboardsContentTemplate').html());
+            // $('#dashboardsContent').append(contentTemplate(data));
          }))
       },
       fetchLayouts: function(data) {
@@ -21,7 +21,6 @@
             tabId.load(item.htmlPage +" #"+ item.containerID, function(){
                console.log('loaded');
             });
-
 
             if(index === 0) {
                // make first tab as active
@@ -41,8 +40,6 @@
       }
    };
 
-   tabs.init().done(function(data){
-      tabs.fetchLayouts(data);
-   });
+   tabs.init();
 
 })();
