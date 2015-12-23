@@ -1,4 +1,4 @@
-#chart rect{
+#barChart rect{
   fill: #4aaeea;
 }
 #measure{
@@ -8,7 +8,7 @@
 #head{
   text-align: center;
 }
-#chart text{
+#barChart text{
   fill: #000000;
   font: 10px sans-serif;
   text-anchor: end;

@@ -26,7 +26,7 @@ var x = d3.scale.ordinal().rangeRoundBands([0, width], .1);
 //scale to numerical value by height
 var y = d3.scale.linear().range([height, 0]);
 
-var chart = d3.select("#chart")
+var chart = d3.select("#barChart")
               .append("svg")  //append svg element inside #chart
               .attr("width", width+(2*margin.left)+margin.right)    //set width
               .attr("height", height+margin.top+margin.bottom);  //set height

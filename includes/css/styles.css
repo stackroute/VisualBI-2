@@ -7,18 +7,16 @@ Custom CSS
    background-color: black;
 }
 
-/* --------------------------------------
-   Templates
-   -------------------------------------- */
-  #dashboards.col-sm-6{
-    padding: 20px;
-  }
-  #dashboards img{
-    width: 100%;
-    margin: auto;
-    overflow: hidden;
-  }
-=======
+#dashboards.col-sm-6{
+  padding: 20px;
+}
+
+#dashboards img{
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+
 #image{
   margin-top: -10px;
   border-radius: 15px;
