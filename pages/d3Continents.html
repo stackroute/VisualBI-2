@@ -11,24 +11,26 @@
 </head>
 
 <body>
-  <script src="//d3js.org/d3.v3.min.js"></script>
-  <script src="../includes/js/jquery-1.11.3.js"></script>
+  <div id="d3Continents">
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="../includes/js/jquery-1.11.3.js"></script>
 
-  <!-- Header -->
-  <div id="header"></div>
-  <script>$('#header').load("widgetHeader.html");</script>
+    <!-- Header -->
+    <div id="header"></div>
+    <script>$('#header').load("widgetHeader.html");</script>
 
-  <!-- Bar Chart -->
-  <div id="barChart">
-    <script id="bar"></script>
-    <script type="text/javascript" src="../includes/js/continents.js"></script>
+    <!-- Bar Chart -->
+    <div id="barChart">
+      <script id="bar"></script>
+      <script type="text/javascript" src="../includes/js/continents.js"></script>
+    </div>
+
+    <!-- Comments -->
+    <div id ="mainComments"></div>
+    <script>$('#mainComments').load("widgetComments.html");</script>
+
+    <script src="../includes/js/customJs.js"></script>
   </div>
-
-  <!-- Comments -->
-  <div id ="mainComments"></div>
-  <script>$('#mainComments').load("widgetComments.html");</script>
-
-  <script src="../includes/js/customJs.js"></script>
 </body>
 
 </html>

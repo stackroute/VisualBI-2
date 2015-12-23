@@ -7,28 +7,24 @@
   </head>
   <body>
     <div id ="measure">
+      <script src="../includes/js/jquery.min.js"></script>
+      <script src="//d3js.org/d3.v3.min.js"></script>
 
-        <script src="../includes/js/jquery.min.js"></script>
-        <script src="//d3js.org/d3.v3.min.js"></script>
+      <!-- Header -->
+      <div id="header"></div>
+      <script>$('#header').load("widgetHeader.html");</script>
 
-        <!-- Header -->
-        <div id="header"></div>
-        <script>$('#header').load("widgetHeader.html");</script>
+      <!-- Bar Chart -->
+      <div id="chart">
+        <script id="bar"></script>
+        <script type="text/javascript" src="../includes/js/CommercialSum.d3.js"></script>
+      </div>
 
-        <!-- Bar Chart -->
-        <div id="chart">
-          <script id="bar"></script>
-          <script type="text/javascript" src="../includes/js/CommercialSum.d3.js"></script>
-        </div>
+      <!-- Comments -->
+      <div id ="mainComments"></div>
+      <script>$('#mainComments').load("widgetComments.html");</script>
 
-        <!-- Comments -->
-        <div id ="mainComments"></div>
-        <script>$('#mainComments').load("widgetComments.html");</script>
-
-        <script src="../includes/js/customJs.js"></script>
-
-
-  </div>
-
+      <script src="../includes/js/customJs.js"></script>
+    </div>
   </body>
 </html>
