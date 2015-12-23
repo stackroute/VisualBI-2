@@ -16,7 +16,10 @@
       $.each(data, function(index, item){
          var tabId = $('#' + item.tabID);
          console.log(tabId);
-         tabId.load(item.htmlPage +" #"+ item.containerID, function(){
+         // tabId.load(item.htmlPage +" #"+ item.containerID, function(){
+         //    console.log('loaded');
+         // });
+         tabId.load(item.htmlPage, function(){
             console.log('loaded');
          });
 
