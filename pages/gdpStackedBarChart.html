@@ -10,23 +10,25 @@
     <script src="../includes/js/modernizr-2.6.2.min.js"></script>
   </head>
   <body>
-      <script src="//d3js.org/d3.v3.min.js"></script>
-      <script src="../includes/js/jquery.min.js"></script>
+      <div id="gdpChart">
+        <script src="//d3js.org/d3.v3.min.js"></script>
+        <script src="../includes/js/jquery.min.js"></script>
 
-      <!-- Header -->
-      <div id="header"></div>
-      <script>$('#header').load("widgetHeader.html");</script>
+        <!-- Header -->
+        <div id="header"></div>
+        <script>$('#header').load("widgetHeader.html");</script>
 
-      <!-- Bar Chart -->
-      <div id="barChart">
-        <script id="bar"></script>
+        <!-- Bar Chart -->
+        <div id="barChart">
+          <script id="bar"></script>
+        </div>
+
+        <!-- Comments -->
+        <div id ="mainComments"></div>
+        <script>$('#mainComments').load("widgetComments.html");</script>
+
+        <script>var param="1";</script>
+        <script src="../includes/js/customJs.js"></script>
       </div>
-
-      <!-- Comments -->
-      <div id ="mainComments"></div>
-      <script>$('#mainComments').load("widgetComments.html");</script>
-
-      <script>var param="1";</script>
-      <script src="../includes/js/customJs.js"></script>
   </body>
 </html>

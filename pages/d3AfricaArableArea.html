@@ -8,23 +8,25 @@
     <link rel="stylesheet" href="../includes/css/styles.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  <script src="//d3js.org/d3.v3.min.js"></script>
-  <script src="../includes/js/jquery.min.js"></script>
+  <div id="africaArable">
+    <script src="//d3js.org/d3.v3.min.js"></script>
+    <script src="../includes/js/jquery.min.js"></script>
 
-  <!-- Header -->
-  <div id="header"></div>
-  <script>$('#header').load("widgetHeader.html");</script>
+    <!-- Header -->
+    <div id="header"></div>
+    <script>$('#header').load("widgetHeader.html");</script>
 
-  <!-- Bar Chart -->
-  <div id="barChart">
-    <script id="bar"></script>
-    <script src="../includes/js/africaArableArea.js"></script>
+    <!-- Bar Chart -->
+    <div id="barChart">
+      <script id="bar"></script>
+      <script src="../includes/js/africaArableArea.js"></script>
+    </div>
+
+    <!-- Comments -->
+    <div id ="mainComments"></div>
+    <script>$('#mainComments').load("widgetComments.html");</script>
+
+    <script src="../includes/js/customJs.js"></script>
   </div>
-
-  <!-- Comments -->
-  <div id ="mainComments"></div>
-  <script>$('#mainComments').load("widgetComments.html");</script>
-
-  <script src="../includes/js/customJs.js"></script>
 </body>
 </html>
