@@ -1,11 +1,5 @@
 [
 	{
-		"title": "Dashboard 1",
-		"containerID": "template1",
-		"tabID":"tab1",
-		"htmlPage": "template1.html"
-	},
-	{
 		"title": "Dashboard 2",
 		"containerID": "dashboards",
 		"tabID":"tab2",
