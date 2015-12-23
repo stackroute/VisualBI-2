@@ -10,4 +10,28 @@
 	"title": "GDP GNI Per Capita",
 	"chartJson": "../includes/js/gdpPerCapitaBarChart.js",
 	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "Africa Arable Area",
+	"chartJson": "../includes/js/africaArableArea.js",
+	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "Continents",
+	"chartJson": "../includes/js/continents.js",
+	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "India Arable Area",
+	"chartJson": "../includes/js/indiaArableArea.js",
+	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "India Arable Hectares Per Person",
+	"chartJson": "../includes/js/indiaHectarespp.js",
+	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "India Hectares",
+	"chartJson": "../includes/js/indiaHectares.js",
+	"commentPath": "../includes/json/comments1.json"
+},{
+	"title": "Commercial sum",
+	"chartJson": "../includes/js/CommercialSum.d3.js",
+	"commentPath": "../includes/json/comments1.json"
 }]
