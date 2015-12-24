@@ -69,30 +69,23 @@
          <div class="tab-pane active" id="tab1">
             <div id="template_2_widgets">
               <div class="row" id="row1">
-                <div class="col-sm-12" id="col1">
+                <div class="col-sm-6" id="col1">
                    <div id="continentChart1">
-                    <script src="includes/js/jquery.min.js"></script>
-                    <script src="//d3js.org/d3.v3.min.js"></script>
 
-                    <!-- Header -->
+                      <!-- Header -->
                     <div id="header">
-                      <div class="widget-wrapper">
-                        <div class="row">
-                          <div class="col-10 widget-header-title">
-                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
-                          </div>
-                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
-                          </div>
-                        </div>
-                      </div>
+                       <div class="col-4 widget-header-title">
+                         <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                       </div>
+                       <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                         <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                         <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                         <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                       </div>
                     </div>
-
                     <!-- Bar Chart -->
                     <div id="barChart">
-                      <script id="bar"></script>
+                      <!-- <script id="bar"></script> -->
                     </div>
 
                     <!-- Comments -->
@@ -104,85 +97,18 @@
 
                   </div>
                 </div>
+
+                <div class="col-sm-6" id="col2">
+                 <div id="continentChart1">
+                   <!-- Bar Chart -->
+                   <div id="barChart">
+                    <!-- <script id="bar"></script> -->
+                   </div>
+
+                 </div>
+              </div>
 
               </div><!-- end row_1 -->
-
-              <div class="row" id="row2">
-                <div class="col-sm-12" id="col1">
-                   <div id="continentChart2">
-                    <script src="includes/js/jquery.min.js"></script>
-                    <script src="//d3js.org/d3.v3.min.js"></script>
-                    <!-- Header -->
-                    <div id="header">
-                      <div class="widget-wrapper">
-                        <div class="row">
-                          <div class="col-10 widget-header-title">
-                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
-                          </div>
-                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Bar Chart -->
-                    <div id="barChart">
-                      <script id="bar"></script>
-                    </div>
-
-                    <!-- Comments -->
-                    <div id ="mainComments">
-                      <p><strong>Comments:</strong></p>
-                      <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
-                      <div id ="comments"></div>
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="row" id="row3">
-                <div class="col-sm-12" id="col1">
-                   <div id="continentChart3">
-                    <script src="includes/js/jquery.min.js"></script>
-                    <script src="//d3js.org/d3.v3.min.js"></script>
-
-                    <!-- Header -->
-                    <div id="header">
-                      <div class="widget-wrapper">
-                        <div class="row">
-                          <div class="col-10 widget-header-title">
-                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
-                          </div>
-                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
-                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Bar Chart -->
-                    <div id="barChart">
-                      <script id="bar"></script>
-                    </div>
-
-                    <!-- Comments -->
-                    <div id ="mainComments">
-                      <p><strong>Comments:</strong></p>
-                      <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
-                      <div id ="comments"></div>
-                    </div>
-
-                  </div>
-                </div>
-
-              </div>
 
             </div><!-- end template_2_widgets -->
          </div>
@@ -272,9 +198,11 @@
 
   <!--Script files goes here-->
   <script src="includes/js/jquery.min.js" charset="utf-8"></script>
+  <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="bootstrap/js/bootstrap.js" charset="utf-8"></script>
   <script src="includes/js/handlebars.js" charset="utf-8"></script>
+  <script src="includes/js/gdpContinentChart.js"></script>
   <script src="includes/js/main.js" charset="utf-8"></script>
-  <script src="includes/js/customNewJs.js"></script>
+
 </body>
 </html>
