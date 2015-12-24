@@ -6,12 +6,13 @@
    <link rel="stylesheet" href="includes/css/styles.css" charset="utf-8">
    <link rel="stylesheet" href="includes/css/bootstrap-glyphicons.css" charset="utf-8">
 
+   <!-- Bootstrap CSS -->
+     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+   <!-- Custom CSS -->
+     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato|Lobster|Play|Raleway|Ubuntu|Open+Sans">
+
    <title>Visual Business Intelligence</title>
-<style media="screen">
-   #continentChart,#continentChart1{
-      overflow: scroll;
-   }
-</style>
 </head>
 <body>
 
@@ -67,15 +68,27 @@
       <div class="tab-content" id="dashboardsContent">
          <div class="tab-pane active" id="tab1">
             <div id="template_2_widgets">
-              <div class="row" id="row_1">
-                <div class="col-sm-6">
-                   <div id="continentChart">
-                    <script src="../includes/js/jquery.min.js"></script>
+              <div class="row" id="row1">
+                <div class="col-sm-12" id="col1">
+                   <div id="continentChart1">
+                    <script src="includes/js/jquery.min.js"></script>
                     <script src="//d3js.org/d3.v3.min.js"></script>
 
                     <!-- Header -->
-                    <div id="header"></div>
-                    <script>$('#header').load("pages/widgetHeader.html");</script>
+                    <div id="header">
+                      <div class="widget-wrapper">
+                        <div class="row">
+                          <div class="col-10 widget-header-title">
+                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                          </div>
+                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <!-- Bar Chart -->
                     <div id="barChart">
@@ -83,102 +96,101 @@
                     </div>
 
                     <!-- Comments -->
-                    <div id ="mainComments"></div>
-                    <script>$('#mainComments').load("pages/widgetComments.html");</script>
+                    <div id ="mainComments">
+                      <p><strong>Comments:</strong></p>
+                      <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
+                      <div id ="comments"></div>
+                    </div>
 
-                    <script>var param="3";</script>
-                    <script src="includes/js/customJs.js"></script>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                   <div id="continentChart1">
-                  <script src="../includes/js/jquery.min.js"></script>
-                  <script src="//d3js.org/d3.v3.min.js"></script>
 
-                  <!-- Header -->
-                  <div id="header"></div>
-                  <script>$('#header').load("pages/widgetHeader.html");</script>
-
-                  <!-- Bar Chart -->
-                  <div id="barChart">
-                    <script id="bar"></script>
-                  </div>
-
-                  <!-- Comments -->
-                  <div id ="mainComments"></div>
-                  <script>$('#mainComments').load("pages/widgetComments.html");</script>
-
-                  <script>var param="3";</script>
-                  <script src="includes/js/customJs.js"></script>
-                </div>
-                </div>
               </div><!-- end row_1 -->
-              <div class="row" id="row_2">
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
+
+              <div class="row" id="row2">
+                <div class="col-sm-12" id="col1">
+                   <div id="continentChart2">
+                    <script src="includes/js/jquery.min.js"></script>
+                    <script src="//d3js.org/d3.v3.min.js"></script>
+                    <!-- Header -->
+                    <div id="header">
+                      <div class="widget-wrapper">
+                        <div class="row">
+                          <div class="col-10 widget-header-title">
+                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                          </div>
+                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Bar Chart -->
+                    <div id="barChart">
+                      <script id="bar"></script>
+                    </div>
+
+                    <!-- Comments -->
+                    <div id ="mainComments">
+                      <p><strong>Comments:</strong></p>
+                      <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
+                      <div id ="comments"></div>
+                    </div>
+
+                  </div>
                 </div>
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
+
+              </div>
+
+              <div class="row" id="row3">
+                <div class="col-sm-12" id="col1">
+                   <div id="continentChart3">
+                    <script src="includes/js/jquery.min.js"></script>
+                    <script src="//d3js.org/d3.v3.min.js"></script>
+
+                    <!-- Header -->
+                    <div id="header">
+                      <div class="widget-wrapper">
+                        <div class="row">
+                          <div class="col-10 widget-header-title">
+                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                          </div>
+                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Bar Chart -->
+                    <div id="barChart">
+                      <script id="bar"></script>
+                    </div>
+
+                    <!-- Comments -->
+                    <div id ="mainComments">
+                      <p><strong>Comments:</strong></p>
+                      <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
+                      <div id ="comments"></div>
+                    </div>
+
+                  </div>
                 </div>
-              </div><!-- end row_2 -->
-              <div class="row" id="row_3">
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-              </div><!-- end row_3 -->
-              <div class="row" id="row_4">
-                <div class="col-sm-6">
-                   <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-                <div class="col-sm-6">
-                   <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-              </div><!-- end row_4 -->
-              <div class="row" id="row_5">
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-              </div><!-- end row_5 -->
-              <div class="row" id="row_6">
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-                <div class="col-sm-6">
-                 <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-              </div><!-- end row_6 -->
+
+              </div>
+
             </div><!-- end template_2_widgets -->
          </div>
          <div class="tab-pane" id="tab2">
             <div id="template_2_widgets">
               <div class="row" id="row_1">
                 <div class="col-sm-4">
-                  <div id="continentChart1">
-                  <script src="../includes/js/jquery.min.js"></script>
-                  <script src="//d3js.org/d3.v3.min.js"></script>
 
-                  <!-- Header -->
-                  <div id="header"></div>
-                  <script>$('#header').load("pages/widgetHeader.html");</script>
-
-                  <!-- Bar Chart -->
-                  <div id="barChart">
-                    <script id="bar"></script>
-                  </div>
-
-                  <!-- Comments -->
-                  <div id ="mainComments"></div>
-                  <script>$('#mainComments').load("pages/widgetComments.html");</script>
-
-                  <script>var param="3";</script>
-                  <script src="includes/js/customJs.js"></script>
-                </div>
                 </div>
                 <div class="col-sm-4">
                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
@@ -263,6 +275,6 @@
   <script src="bootstrap/js/bootstrap.js" charset="utf-8"></script>
   <script src="includes/js/handlebars.js" charset="utf-8"></script>
   <script src="includes/js/main.js" charset="utf-8"></script>
-
+  <script src="includes/js/customNewJs.js"></script>
 </body>
 </html>

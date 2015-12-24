@@ -20,7 +20,7 @@ var yAxis = d3.svg.axis()
     .orient("left")
     .tickFormat(d3.format("1s"));
 
-var svg = d3.select("#barChart").append("svg")
+var svg1 = d3.select("#row1 #col1 #barChart").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -42,7 +42,7 @@ d3.json("includes/json/gdpContinent.json", function(error, data) {
   x.domain(data.map(function(d) { return d.year; }));
   y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
-  svg.append("g")
+  svg1.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
@@ -52,7 +52,7 @@ d3.json("includes/json/gdpContinent.json", function(error, data) {
         .attr("dy", "-.50em")
         .attr("transform", "rotate(-90)");
 
-  svg.append("g")
+  svg1.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
@@ -62,7 +62,7 @@ d3.json("includes/json/gdpContinent.json", function(error, data) {
       .style("text-anchor", "end")
       .text("GDP per capita (constant 2005 US$)");
 
-  var year = svg.selectAll(".year")
+  var year = svg1.selectAll(".year")
       .data(data)
     .enter().append("g")
       .attr("class", "g")
@@ -76,7 +76,7 @@ d3.json("includes/json/gdpContinent.json", function(error, data) {
       .attr("height", function(d) { return y(d.y0) - y(d.y1); })
       .style("fill", function(d) { return color(d.name); });
 
-  var legend = svg.selectAll(".legend")
+  var legend = svg1.selectAll(".legend")
       .data(color.domain().slice().reverse())
     .enter().append("g")
       .attr("class", "legend")
