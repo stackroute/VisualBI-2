@@ -71,6 +71,10 @@ h1{
 .widget-header-title{
   /*display: inline;*/
 }
+
+/*.tab-pane {
+   width: 1500px;
+}*/
 .label{
   background-color: transparent;
 }

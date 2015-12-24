@@ -74,14 +74,18 @@
 
                       <!-- Header -->
                     <div id="header">
-                       <div class="col-4 widget-header-title">
-                         <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
-                       </div>
-                       <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
-                         <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
-                         <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
-                         <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
-                       </div>
+                      <div class="widget-wrapper">
+                        <div class="row">
+                          <div class="col-10 widget-header-title">
+                            <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                          </div>
+                          <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                            <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <!-- Bar Chart -->
                     <div id="barChart">
@@ -98,11 +102,34 @@
                   </div>
                 </div>
 
-                <div class="col-sm-6" id="col2">
-                 <div id="continentChart1">
+                <div class="col-sm-6" id="continentChart2">
+                 <div id="continentChart21">
+
+                    <!-- Header -->
+                   <div id="header">
+                     <div class="widget-wrapper">
+                       <div class="row">
+                        <div class="col-10 widget-header-title">
+                           <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                        </div>
+                        <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                           <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                           <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                           <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                        </div>
+                       </div>
+                     </div>
+                   </div>
                    <!-- Bar Chart -->
                    <div id="barChart">
                     <!-- <script id="bar"></script> -->
+                   </div>
+
+                   <!-- Comments -->
+                   <div id ="mainComments">
+                    <p><strong>Comments:</strong></p>
+                    <textarea id="enterComments" placeholder="Add your comments..."></textarea>
+                    <div id ="comments"></div>
                    </div>
 
                  </div>
@@ -125,62 +152,44 @@
                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
                 </div>
               </div><!-- end row_1 -->
-              <div class="row" id="row_2">
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-              </div><!-- end row_2 -->
-              <div class="row" id="row_3">
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-              </div><!-- end row_3 -->
-              <div class="row" id="row_4">
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-                 <div class="col-sm-4">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                 </div>
-              </div><!-- end row_4 -->
             </div><!-- end template_2_widgets -->
          </div>
          <div class="tab-pane" id="tab3">
-            <div class="row" id="row_1">
-                <div class="col-sm-12">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
+            <div class="row" id="row1">
+               <div class="col-sm-12" id="continentChart3">
+                  <div id="continentChart31">
+
+                     <!-- Header -->
+                   <div id="header">
+                     <div class="widget-wrapper">
+                       <div class="row">
+                        <div class="col-10 widget-header-title">
+                           <span id="headerCaption" class="widget-header pull-left" >Arable land (hectares) aggregated by continent over the years data is present</span>
+                        </div>
+                        <div class="col-2 btn-group-xs window-ctrls pull-right" role="group" aria-label="..">
+                           <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-small" aria-hidden=true></span></button>
+                           <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-resize-full" aria-hidden=true></span></button>
+                           <button type="button" class="btn btn-default window-ctrl"><span class="glyphicon glyphicon-remove" aria-hidden=true></span></button>
+                        </div>
+                       </div>
+                     </div>
+                   </div>
+                   <!-- Bar Chart -->
+                   <div id="barChart">
+                     <!-- <script id="bar"></script> -->
+                   </div>
+
+                   <!-- Comments -->
+                   <div id ="mainComments">
+                     <p><strong>Comments:</strong></p>
+                     <textarea id="enterComments" rows="4" cols="80" placeholder="Add your comments..."></textarea>
+                     <div id ="comments"></div>
+                   </div>
+
+                 </div>
+               </div>
             </div>
-            <div class="row" id="row_1">
-                <div class="col-sm-12">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-            </div>
-            <div class="row" id="row_1">
-                <div class="col-sm-12">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-            </div>
-            <div class="row" id="row_1">
-                <div class="col-sm-12">
-                  <img src="http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg" alt="" />
-                </div>
-            </div>
+
          </div>
 
 
@@ -202,6 +211,8 @@
   <script src="bootstrap/js/bootstrap.js" charset="utf-8"></script>
   <script src="includes/js/handlebars.js" charset="utf-8"></script>
   <script src="includes/js/gdpContinentChart.js"></script>
+  <script src="includes/js/gdpStackedBarChart.js"></script>
+  <script src="includes/js/gdpPerCapitaBarChart.js"></script>
   <script src="includes/js/main.js" charset="utf-8"></script>
 
 </body>

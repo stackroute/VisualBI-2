@@ -1,16 +1,32 @@
 [
  {
-	"title": "GDP Per Capita (constant 2005 US$) Continent",
-	"chartJson": "includes/js/gdpContinentChart.js",
+    "title": "GDP GNI",
+   "chartJson": "includes/js/gdpStackedBarChart.js",
+   "d3Function": "gdpStackedBarChart",
 	"commentPath": "includes/json/comments1.json",
+   "tabId":"tab1",
   "rowId": "row1",
-  "colId": "col1"
+  "colId": "col1",
+  "widgetId": "continentChart1"
  },
  {
-	"title": "GDP Per Capita (constant 2005 US$) Continent",
-	"chartJson": "includes/js/gdpContinentChart.js",
-	"commentPath": "includes/json/comments1.json",
+   "title": "GDP GNI",
+   "chartJson": "includes/js/gdpStackedBarChart.js",
+   "d3Function": "gdpStackedBarChart",
+   "commentPath": "includes/json/comments1.json",
+   "tabId":"tab1",
   "rowId": "row1",
-  "colId": "col2"
+  "colId": "col2",
+  "widgetId": "continentChart2"
+ },
+ {
+   "title": "GDP GNI",
+   "chartJson": "includes/js/gdpStackedBarChart.js",
+   "d3Function": "gdpStackedBarChart",
+   "commentPath": "includes/json/comments1.json",
+   "tabId":"tab3",
+  "rowId": "row1",
+  "colId": "col1",
+  "widgetId": "continentChart3"
  }
 ]

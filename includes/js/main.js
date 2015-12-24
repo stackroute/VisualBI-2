@@ -53,16 +53,28 @@
 
                var title = json[i].title;
                var barSrc = json[i].chartJson;
+               var d3Function = json[i].d3Function;
+               console.log(d3Function);
                var commentPath = json[i].commentPath;
+               var tab ="#" + json[i].tabId;
                var row = "#" + json[i].rowId;
                var col = "#" + json[i].colId;
+               var widgetId = "#" + json[i].widgetId;
 
-               var setTo = row + " " + col;
-               arrComment[setTo] = commentPath;
-               $(setTo + ' #headerCaption').text(title);
+               var setTo = tab + " " + row + " " + col;
+               arrComment[widgetId] = commentPath;
+               $(widgetId + ' #headerCaption').text(title);
 
-               // $(setTo + ' #barChart #bar').attr("src", barSrc);
-               plotContinentChart(setTo + ' #barChart')
+               //console.log(barSrc);
+               //console.log($(widgetId).width());
+               //console.log("window " + $(window).width());
+               //console.log("document " + $(document).width());
+            //   console.log("client width " + document.getElementById(widgetId).clientWidth);
+
+
+               var x = d3Function + '("' + widgetId + '")';
+               eval(x);
+               //gdpStackedBarChart("#row1 #col2 #barChart");
                // $(setTo + ' #barChart').html()
 
 
@@ -75,7 +87,7 @@
                    for(j in jsonComment) {
                      var comment = jsonComment[j].split("at");
                      var p = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
-                     $(setTo + ' #comments').append(p);
+                     $(widgetId + ' #comments').append(p);
                    }
                  }
                });

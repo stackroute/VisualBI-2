@@ -1,4 +1,5 @@
 function plotContinentChart (chartContainer){
+   //console.log("called Continent");
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
        width = parseInt(d3.select(chartContainer).style('width'), 10) - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
@@ -22,7 +23,7 @@ function plotContinentChart (chartContainer){
        .orient("left")
        .tickFormat(d3.format("1s"));
 
-   var svg1 = d3.select(chartContainer).append("svg")
+   var svg1 = d3.select(chartContainer + " #barChart").append("svg")
        .attr("width", width + margin.left + margin.right)
        .attr("height", height + margin.top + margin.bottom)
      .append("g")
