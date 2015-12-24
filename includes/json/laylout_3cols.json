@@ -2,15 +2,15 @@
   "template": "bootstrap-row.hb",
   "columns": [4, 4, 4],
   "background": "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg",
-  "widget": ["widgetid1", "widgetid2"]
+  "widget": ["widgetid1", "widgetid2","widgetid3"]
 },{
   "template": "bootstrap-row.hb",
   "columns": [4, 4, 4],
   "background": "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg",
-  "widget": ["widgetid1", "widgetid2"]
+  "widget": ["widgetid1", "widgetid2","widgetid3"]
 },{
   "template": "bootstrap-row.hb",
   "columns": [6, 4, 2],
   "background": "http://www.keenthemes.com/preview/metronic/theme/assets/global/plugins/jcrop/demos/demo_files/image1.jpg",
-  "widget": ["widgetid1", "widgetid2"]
+  "widget": ["widgetid1", "widgetid2","widgetid3"]
 }]
