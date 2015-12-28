@@ -1,19 +1,19 @@
 [
 	{
-		"title": "Dashboard 2",
+		"title": "Dashboard 1",
 		"containerID": "dashboards",
 		"tabID":"tab1",
 		"htmlPage": "pages/dashboards.html"
 	},
-	
+
 	{
-		"title": "Dashboard 3",
+		"title": "Dashboard 2",
 		"containerID": "template4",
 		"tabID":"tab2",
 		"htmlPage": "template1.html"
 	},
 	{
-		"title": "Dashboard 1",
+		"title": "Dashboard 3",
 		"containerID": "template6",
 		"tabID":"tab3",
 		"htmlPage": "template1.html"
