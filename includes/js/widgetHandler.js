@@ -68,32 +68,32 @@ function widgetHandler() {
         eval(chartFunction);
 
         //create comment
-        var commentDiv = document.createElement('div');
-        commentDiv.id = "comment";
-        colDiv.appendChild(commentDiv);
+        // var commentDiv = document.createElement('div');
+        // commentDiv.id = "comment";
+        // colDiv.appendChild(commentDiv);
 
         //create comment text area
-        var commentText = document.createElement('textarea');
-        commentText.id="enterComments";
-        commentText.rows = 4;
-        commentText.cols = 80;
-        commentText.placeholder = "Add your comments...";
-        commentDiv.appendChild(commentText);
-
-        //add existing comments
-        $.ajax({
-          url: commentPath,
-          dataType: "text",
-          async:false,
-          success: function(dataComment) {
-            var jsonComment = $.parseJSON(dataComment);
-            for(j in jsonComment) {
-              var comment = jsonComment[j].split("at");
-              var p = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
-              $(setTo + ' #comment').append(p);
-            }
-          }
-        }); //end of comments ajax
+        // var commentText = document.createElement('textarea');
+        // commentText.id="enterComments";
+        // commentText.rows = 4;
+        // commentText.cols = 80;
+        // commentText.placeholder = "Add your comments...";
+        // commentDiv.appendChild(commentText);
+        //
+        // //add existing comments
+        // $.ajax({
+        //   url: commentPath,
+        //   dataType: "text",
+        //   async:false,
+        //   success: function(dataComment) {
+        //     var jsonComment = $.parseJSON(dataComment);
+        //     for(j in jsonComment) {
+        //       var comment = jsonComment[j].split("at");
+        //       var p = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
+        //       $(setTo + ' #comment').append(p);
+        //     }
+        //   }
+        // }); //end of comments ajax
       } // end of json loop
     } // end of success function
   }); // end of main ajax
