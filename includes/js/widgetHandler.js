@@ -73,7 +73,7 @@ function widgetHandler() {
         // create comment
         var commentDiv = document.createElement('div');
         commentDiv.id = "comment";
-        commentDiv.className = "col-sm-12";
+        commentDiv.className = "col-lg-12";
         colDiv.appendChild(commentDiv);
 
         // create comment text area
@@ -98,6 +98,7 @@ function widgetHandler() {
         commentText.style.width="100%";
         commentText.placeholder = "Add your comments...";
         commentDiv.appendChild(commentText);
+        $("textarea").css('overflow', 'hidden').autogrow();
 
       } // end of json loop
     } // end of success function
