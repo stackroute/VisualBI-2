@@ -55,25 +55,22 @@
         </div>
       </div>
     <!-- tabbable -->
-    <div class="row tabbable wrap">
-      <ul class="nav nav-tabs" id="dashboards">
-          <script id="dashbordsTemplate" type="template">
-             {{#each this}}
-             <li><a href="#{{tabID}}" data-toggle="tab">{{title}}</a></li>
-             {{/each}}
-          </script>
 
-      </ul>
+    <div class="row tabbable wrap" id="dashboards">
+      <script id="dashbordsTemplate" type="template">
+         <ul class="nav nav-tabs">
+            {{#each this}}
+            <li><a href="#{{tabID}}" data-toggle="tab">{{title}}</a></li>
+            {{/each}}
+         </ul>
 
       <div class="tab-content" id="dashboardsContent">
-         <script id="dashboardsContentTemplate" type="template">
-            {{#each this}}
-            <div class="tab-pane" id="{{tabID}}">
-            </div>
-            {{/each}}
-         </script>
-
+         {{#each this}}
+         <div class="tab-pane" id="{{tabID}}">
+         </div>
+         {{/each}}
       </div>
+      </script>
     </div>
   </div>
 
