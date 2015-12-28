@@ -7,16 +7,6 @@ Custom CSS
    background-color: black;
 }
 
-#dashboards.col-sm-6{
-  padding: 20px;
-}
-
-#dashboards img{
-  width: 100%;
-  margin: auto;
-  overflow: hidden;
-}
-
 #image{
   margin-top: -10px;
   border-radius: 15px;
@@ -35,15 +25,8 @@ Custom CSS
    width: 300px;
 }
 
-.tabbable {
-   margin: 0 10px;
-}
 .wrap {
    margin-top: 100px;
-}
-h1{
-  text-align: center;
-  color: #00008b;
 }
 
 .widget-body{
@@ -58,38 +41,17 @@ h1{
 .widget-wrapper{
   border-radius: 8px;
   background-color: #00b09a;
-  /*width:700px;*/
-  /*height: 200px;*/
   padding: 0px 20px;
 }
 .widget-items{
-  margin-left: 40px;
+  margin-left: 10px;
 }
 .window-ctrls{
   margin-left: 0px;
 }
-.widget-header-title{
-  /*display: inline;*/
-}
 
-/*.tab-pane {
-   width: 1500px;
-}*/
-.label{
-  background-color: transparent;
-}
-
-#mainComments {
-  margin-left: 20px;
-}
-
-#mainComments textarea {
-  font-size: 14px;
-}
-
-#mainComments p {
-  margin-top: 10px;
-  font-size: 12px;
+.widget-border {
+  border: 1px solid #A4A4A4;
 }
 
 /* --------------------------------------
