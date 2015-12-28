@@ -1,4 +1,3 @@
-
 function widgetHandler() {
   var arrComment = {};
   $.ajax({
@@ -32,7 +31,7 @@ function widgetHandler() {
 
         //create col
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-sm-' + colWidth + ' widget-border';
+        colDiv.className = 'col-lg-' + colWidth + ' widget-border';
         colDiv.id = widgetId;
         rowDiv.appendChild(colDiv);
 
@@ -67,33 +66,37 @@ function widgetHandler() {
         var chartFunction = chartRenderer + '("' + setTo + '", ' + newWidth + ')';
         eval(chartFunction);
 
-        //create comment
-        // var commentDiv = document.createElement('div');
-        // commentDiv.id = "comment";
-        // colDiv.appendChild(commentDiv);
+        var hrDiv = document.createElement('hr');
+        hrDiv.className="hr-prop";
+        colDiv.appendChild(hrDiv);
 
-        //create comment text area
-        // var commentText = document.createElement('textarea');
-        // commentText.id="enterComments";
-        // commentText.rows = 4;
+        // create comment
+        var commentDiv = document.createElement('div');
+        commentDiv.id = "comment";
+        colDiv.appendChild(commentDiv);
+
+        // create comment text area
+        var commentText = document.createElement('textarea');
+        commentText.id="enterComments";
+        commentText.rows = 4;
         commentText.cols = 30;
-        // commentText.placeholder = "Add your comments...";
-        // commentDiv.appendChild(commentText);
-        //
-        // //add existing comments
-        // $.ajax({
-        //   url: commentPath,
-        //   dataType: "text",
-        //   async:false,
-        //   success: function(dataComment) {
-        //     var jsonComment = $.parseJSON(dataComment);
-        //     for(j in jsonComment) {
-        //       var comment = jsonComment[j].split("at");
-        //       var p = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
-        //       $(setTo + ' #comment').append(p);
-        //     }
-        //   }
-        // }); //end of comments ajax
+        commentText.placeholder = "Add your comments...";
+        commentDiv.appendChild(commentText);
+
+        //add existing comments
+        $.ajax({
+          url: commentPath,
+          dataType: "text",
+          async:false,
+          success: function(dataComment) {
+            var jsonComment = $.parseJSON(dataComment);
+            for(j in jsonComment) {
+              var comment = jsonComment[j].split("at");
+              var p = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
+              $(setTo + ' #comment').append(p);
+            }
+          }
+        }); //end of comments ajax
       } // end of json loop
     } // end of success function
   }); // end of main ajax

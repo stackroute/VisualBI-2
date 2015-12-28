@@ -1,6 +1,6 @@
 function gdpPerCapitaBarChart(chartContainer, newWidth) {
 
-   var margin = {top: 20, right: 20, bottom: 100, left: 80},
+   var margin = {top: 10, right: 20, bottom: 100, left: 50},
        width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
 
