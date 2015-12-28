@@ -53,7 +53,7 @@ function widgetHandler() {
         chartDiv.id = "barChart";
         colDiv.appendChild(chartDiv);
 
-        var screenWidth = $(window).width();
+        var screenWidth = $(".container").width();
         var widgetWidth = $(setTo).width();
 
         if(widgetWidth > 100) {
