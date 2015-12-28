@@ -1,7 +1,7 @@
 [
   {
     "title": "GDP GNI",
-    "d3Function": "gdpStackedBarChart",
+    "chartRenderer": "gdpStackedBarChart",
     "commentPath": "includes/json/comments.json",
     "tabId":"tab1",
     "rowId": "row1",
@@ -10,7 +10,7 @@
   },
   {
     "title": "GDP Per Capita (constant 2005 US$) Continent",
-    "d3Function": "plotContinentChart",
+    "chartRenderer": "plotContinentChart",
     "commentPath": "includes/json/comments.json",
     "tabId":"tab1",
     "rowId": "row2",
@@ -19,7 +19,7 @@
   },
   {
     "title": "GDP GNI Per Capita",
-    "d3Function": "gdpPerCapitaBarChart",
+    "chartRenderer": "gdpPerCapitaBarChart",
     "commentPath": "includes/json/comments.json",
     "tabId":"tab1",
     "rowId": "row3",
@@ -28,7 +28,7 @@
   },
  {
    "title": "GDP GNI",
-   "d3Function": "gdpStackedBarChart",
+   "chartRenderer": "gdpStackedBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab2",
    "rowId": "row1",
@@ -37,7 +37,7 @@
  },
  {
    "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "d3Function": "plotContinentChart",
+   "chartRenderer": "plotContinentChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab2",
    "rowId": "row1",
@@ -46,7 +46,7 @@
  },
  {
    "title": "GDP GNI Per Capita",
-   "d3Function": "gdpPerCapitaBarChart",
+   "chartRenderer": "gdpPerCapitaBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab2",
    "rowId": "row2",
@@ -55,7 +55,7 @@
  },
  {
    "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "d3Function": "plotContinentChart",
+   "chartRenderer": "plotContinentChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab2",
    "rowId": "row2",
@@ -64,7 +64,7 @@
  },
  {
    "title": "GDP GNI",
-   "d3Function": "gdpStackedBarChart",
+   "chartRenderer": "gdpStackedBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row1",
@@ -73,7 +73,7 @@
  },
  {
    "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "d3Function": "plotContinentChart",
+   "chartRenderer": "plotContinentChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row1",
@@ -82,7 +82,7 @@
  },
  {
    "title": "GDP GNI Per Capita",
-   "d3Function": "gdpPerCapitaBarChart",
+   "chartRenderer": "gdpPerCapitaBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row1",
@@ -91,7 +91,7 @@
  },
  {
    "title": "GDP GNI",
-   "d3Function": "gdpStackedBarChart",
+   "chartRenderer": "gdpStackedBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row2",
@@ -100,7 +100,7 @@
  },
  {
    "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "d3Function": "plotContinentChart",
+   "chartRenderer": "plotContinentChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row2",
@@ -109,7 +109,7 @@
  },
  {
    "title": "GDP GNI Per Capita",
-   "d3Function": "gdpPerCapitaBarChart",
+   "chartRenderer": "gdpPerCapitaBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row2",

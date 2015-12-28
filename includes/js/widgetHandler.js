@@ -16,7 +16,7 @@ function widgetHandler() {
         var row = json[i].rowId;
         var colWidth = json[i].colWidth;
         var widgetId = json[i].widgetId;
-        var d3Function = json[i].d3Function;
+        var chartRenderer = json[i].chartRenderer;
 
         var setTo = "#" + widgetId;
         arrComment[widgetId] = commentPath;
@@ -54,18 +54,18 @@ function widgetHandler() {
         colDiv.appendChild(chartDiv);
 
         var screenWidth = $(window).width();
-        var colWidth = $(setTo).width();
+        var widgetWidth = $(setTo).width();
 
-        if(colWidth > 100) {
+        if(widgetWidth > 100) {
           var width = $(setTo).width();
           var parentWidth = $(setTo).offsetParent().width();
-          colWidth = (width * 100)/parentWidth;
+          widgetWidth = (width * 100)/parentWidth;
         }
 
-        var newWidth = (screenWidth * colWidth)/100;
+        var newWidth = (screenWidth * widgetWidth)/100;
 
-        var x = d3Function + '("' + setTo + '", ' + newWidth + ')';
-        eval(x);
+        var chartFunction = chartRenderer + '("' + setTo + '", ' + newWidth + ')';
+        eval(chartFunction);
 
         //create comment
         var commentDiv = document.createElement('div');
