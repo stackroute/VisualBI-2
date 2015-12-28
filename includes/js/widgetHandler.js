@@ -99,11 +99,11 @@ function widgetHandler() {
         //create comment text area
         var commentText = document.createElement('textarea');
         commentText.id="enterComments";
-        commentText.style.width="100%";
+        commentText.style.width="80%";
         commentText.placeholder = "Add your comments...";
-        commentDiv.appendChild(commentText);
+        //commentDiv.appendChild(commentText);
         $("textarea").css('overflow', 'hidden').autogrow();
-
+        colDiv.appendChild(commentText);
       } // end of json loop
     } // end of success function
   }); // end of main ajax
