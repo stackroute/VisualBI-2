@@ -35,9 +35,9 @@ function widgetHandler() {
         colDiv1.id = widgetId;
         rowDiv.appendChild(colDiv1);
 
-        var colDiv = document.createElement('div');
-        colDiv.className = 'widget-border';
-        colDiv1.appendChild(colDiv);
+         var colDiv = document.createElement('div');
+         colDiv.className = 'panel panel-primary';
+         colDiv1.appendChild(colDiv);
 
         //create header
         var headerDiv = document.createElement('div');
