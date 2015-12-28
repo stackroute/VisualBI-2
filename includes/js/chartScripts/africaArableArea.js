@@ -24,7 +24,7 @@ function plotArableChart(chartContainer) {
      .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   d3.json("../includes/json/Africa_arable_land_area.json",  function(error, data) {
+   d3.json("includes/json/chartData/Africa_arable_land_area.json",  function(error, data) {
      if (error) throw error;
 
      x.domain(data.map(function(d) { return d.Country; }));

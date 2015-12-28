@@ -1,21 +1,15 @@
 [
 	{
-		"title": "Dashboard 1",
-		"containerID": "dashboards",
-		"tabID":"tab1",
-		"htmlPage": "pages/dashboards.html"
+		"title": "1 Column Layout",
+		"tabID":"tab1"
 	},
 
 	{
-		"title": "Dashboard 2",
-		"containerID": "template4",
-		"tabID":"tab2",
-		"htmlPage": "template1.html"
+		"title": "2 Column Layout",
+		"tabID":"tab2"
 	},
 	{
-		"title": "Dashboard 3",
-		"containerID": "template6",
-		"tabID":"tab3",
-		"htmlPage": "template1.html"
+		"title": "3 Column Layout",
+		"tabID":"tab3"
 	}
 ]

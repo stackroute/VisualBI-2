@@ -2,19 +2,11 @@
 Custom CSS
 =============
 */
+body{
+  background-color:lightgrey;
+}
 .navbar{
-   /*background-image: url("/includes/images/back.jpg");*/
    background-color: black;
-}
-
-#dashboards.col-sm-6{
-  padding: 20px;
-}
-
-#dashboards img{
-  width: 100%;
-  margin: auto;
-  overflow: hidden;
 }
 
 #image{
@@ -35,62 +27,30 @@ Custom CSS
    width: 300px;
 }
 
-.tabbable {
-   margin: 0 10px;
-}
 .wrap {
    margin-top: 100px;
 }
-h1{
-  text-align: center;
-  color: #00008b;
+
+
+.widget-border {
+  border: 1px solid #333;
+  margin-right: 0px;
 }
 
-.widget-body{
-  background-color: #e3e3e3;
+#header {
+   text-align: center;
 }
-.widget-header{
-  text-align: left;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff;
-}
-.widget-wrapper{
-  border-radius: 8px;
-  background-color: #00b09a;
-  /*width:700px;*/
-  /*height: 200px;*/
-  padding: 0px 20px;
-}
-.widget-items{
-  margin-left: 40px;
-}
-.window-ctrls{
-  margin-left: 0px;
-}
-.widget-header-title{
-  /*display: inline;*/
+.hr-prop {
+  margin-left: -15px;
+  margin-right: -15px;
+  height: 0.5px;
+  background-color: #A4A4A4;
 }
 
-/*.tab-pane {
-   width: 1500px;
-}*/
-.label{
-  background-color: transparent;
+.nav-tabs {
+   margin-left: -13px;
 }
 
-#mainComments {
-  margin-left: 20px;
-}
-
-#mainComments textarea {
-  font-size: 14px;
-}
-
-#mainComments p {
-  margin-top: 10px;
-  font-size: 12px;
-}
 
 /* --------------------------------------
    Media Queries

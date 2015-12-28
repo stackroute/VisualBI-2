@@ -1,6 +1,6 @@
 function gdpStackedBarChart(chartContainer, newWidth) {
 
-   var margin = {top: 20, right: 20, bottom: 100, left: 80},
+   var margin = {top: 10, right: 20, bottom: 100, left: 50},
        width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
 
@@ -29,7 +29,7 @@ function gdpStackedBarChart(chartContainer, newWidth) {
      .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   d3.json("includes/json/gdpBarChart.json", function(error, data) {
+   d3.json("includes/json/chartData/gdpBarChart.json", function(error, data) {
      if (error) throw error;
 
      color.domain(d3.keys(data[0]).filter(function(key) { return key !== "country"; }));
@@ -59,9 +59,8 @@ function gdpStackedBarChart(chartContainer, newWidth) {
        .append("text")
          .attr("transform", "rotate(0)")
          .attr("y", -10)
-         .attr("dy", ".71em")
-         .style("text-anchor", "end")
-         .text("GdpGni");
+         .attr("dy", ".1em")
+         .style("text-anchor", "end");
 
      var country = svg2.selectAll(".country")
          .data(data)

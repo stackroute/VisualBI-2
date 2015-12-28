@@ -1,8 +1,7 @@
-
 function widgetHandler() {
   var arrComment = {};
   $.ajax({
-    url: "includes/json/widgetProp2.json",
+    url: "includes/json/widgets.json",
     dataType: "text",
     success: function(data) {
       var json = $.parseJSON(data);
@@ -11,18 +10,16 @@ function widgetHandler() {
       for(i in json) {
 
         var title = json[i].title;
-        var barSrc = json[i].chartJson;
         var commentPath = json[i].commentPath;
         var tab = json[i].tabId;
         var row = json[i].rowId;
         var colWidth = json[i].colWidth;
         var widgetId = json[i].widgetId;
-        var d3Function = json[i].d3Function;
+        var chartRenderer = json[i].chartRenderer;
 
         var setTo = "#" + widgetId;
         arrComment[widgetId] = commentPath;
 
-//        if (prevTab != tab || !document.getElementById(row)) {
         if($("#" + tab).find("#" + row).length == 0) {
           //create row
           var rowDiv = document.createElement('div');
@@ -34,7 +31,7 @@ function widgetHandler() {
 
         //create col
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-sm-' + colWidth;
+        colDiv.className = 'col-lg-' + colWidth + ' widget-border';
         colDiv.id = widgetId;
         rowDiv.appendChild(colDiv);
 
@@ -55,33 +52,31 @@ function widgetHandler() {
         chartDiv.id = "barChart";
         colDiv.appendChild(chartDiv);
 
-        var screenWidth = $(window).width();
-        var colWidth = $(setTo).width();
+        var screenWidth = $(".container").width();
+        var widgetWidth = $(setTo).width();
 
-        if(colWidth > 100) {
+        if(widgetWidth > 100) {
           var width = $(setTo).width();
           var parentWidth = $(setTo).offsetParent().width();
-          colWidth = (width * 100)/parentWidth;
+          widgetWidth = (width * 100)/parentWidth;
         }
 
-        var newWidth = (screenWidth * colWidth)/100;
+        var newWidth = (screenWidth * widgetWidth)/100;
 
-        var x = d3Function + '("' + setTo + '", ' + newWidth + ')';
-        eval(x);
+        var chartFunction = chartRenderer + '("' + setTo + '", ' + newWidth + ')';
+        eval(chartFunction);
 
-        //create comment
+        var hrDiv = document.createElement('hr');
+        hrDiv.className="hr-prop";
+        colDiv.appendChild(hrDiv);
+
+        // create comment
         var commentDiv = document.createElement('div');
         commentDiv.id = "comment";
+        commentDiv.className = "col-sm-12";
         colDiv.appendChild(commentDiv);
 
-        //create comment text area
-        var commentText = document.createElement('textarea');
-        commentText.id="enterComments";
-        commentText.rows = 4;
-        commentText.cols = 70;
-        commentText.placeholder = "Add your comments...";
-        commentDiv.appendChild(commentText);
-
+        // create comment text area
         //add existing comments
         $.ajax({
           url: commentPath,
@@ -96,6 +91,14 @@ function widgetHandler() {
             }
           }
         }); //end of comments ajax
+
+        //create comment text area
+        var commentText = document.createElement('textarea');
+        commentText.id="enterComments";
+        commentText.style.width="100%";
+        commentText.placeholder = "Add your comments...";
+        commentDiv.appendChild(commentText);
+
       } // end of json loop
     } // end of success function
   }); // end of main ajax
