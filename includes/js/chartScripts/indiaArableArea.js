@@ -24,7 +24,7 @@ var svg = d3.select("#barChart").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("../includes/json/Ind_arable_land_area.json",  function(error, data) {
+d3.json("includes/json/chartData/Ind_arable_land_area.json",  function(error, data) {
   if (error) throw error;
 
   x.domain(data.map(function(d) { return d.Year; }));

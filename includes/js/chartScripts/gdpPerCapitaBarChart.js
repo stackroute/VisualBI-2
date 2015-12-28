@@ -1,5 +1,5 @@
 function gdpPerCapitaBarChart(chartContainer, newWidth) {
-   
+
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
        width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
@@ -28,7 +28,7 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
      .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   d3.json("includes/json/gdpPerCapitaBarChart.json", function(error, data) {
+   d3.json("includes/json/chartData/gdpPerCapitaBarChart.json", function(error, data) {
      if (error) throw error;
 
      color.domain(d3.keys(data[0]).filter(function(key) { return key !== "country"; }));

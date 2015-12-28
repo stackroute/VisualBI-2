@@ -38,7 +38,7 @@ var yAxis = d3.svg.axis()
               .scale(y)
               .orient("left");
 
-d3.json("../includes/json/CommercialSum.json", function(error, data){
+d3.json("includes/json/chartData/CommercialSum.json", function(error, data){
 
   // data.sort(function(a,b){
   //   return(parseFloat(b.TotalProd)-parseFloat(a.TotalProd));
