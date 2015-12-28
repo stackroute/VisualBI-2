@@ -32,7 +32,7 @@ function widgetHandler() {
 
         //create col
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-sm-' + colWidth;
+        colDiv.className = 'col-lg-' + colWidth + ' widget-border';
         colDiv.id = widgetId;
         rowDiv.appendChild(colDiv);
 
@@ -66,6 +66,10 @@ function widgetHandler() {
 
         var chartFunction = chartRenderer + '("' + setTo + '", ' + newWidth + ')';
         eval(chartFunction);
+
+        var hrDiv = document.createElement('hr');
+        hrDiv.className="hr-prop";
+        colDiv.appendChild(hrDiv);
 
         //create comment
         var commentDiv = document.createElement('div');
