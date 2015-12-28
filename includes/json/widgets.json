@@ -72,8 +72,8 @@
    "widgetId": "tab3continentChart1"
  },
  {
-   "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "chartRenderer": "plotContinentChart",
+   "title": "GDP GNI",
+   "chartRenderer": "gdpStackedBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row1",
@@ -99,8 +99,8 @@
    "widgetId": "tab3continentChart4"
  },
  {
-   "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "chartRenderer": "plotContinentChart",
+   "title": "GDP GNI",
+   "chartRenderer": "gdpStackedBarChart",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row2",

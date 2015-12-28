@@ -1,4 +1,3 @@
-
 function widgetHandler() {
   var arrComment = {};
   $.ajax({
@@ -71,12 +70,13 @@ function widgetHandler() {
         hrDiv.className="hr-prop";
         colDiv.appendChild(hrDiv);
 
-        //create comment
+        // create comment
         var commentDiv = document.createElement('div');
         commentDiv.id = "comment";
         commentDiv.className = "col-sm-12";
         colDiv.appendChild(commentDiv);
 
+        // create comment text area
         //add existing comments
         $.ajax({
           url: commentPath,

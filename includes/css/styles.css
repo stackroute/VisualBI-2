@@ -3,7 +3,6 @@ Custom CSS
 =============
 */
 .navbar{
-   /*background-image: url("/includes/images/back.jpg");*/
    background-color: black;
 }
 
@@ -40,6 +39,8 @@ Custom CSS
   height: 0.5px;
   background-color: #A4A4A4;
 }
+
+
 
 /* --------------------------------------
    Media Queries
