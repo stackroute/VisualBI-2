@@ -30,10 +30,14 @@ function widgetHandler() {
         }
 
         //create col
+        var colDiv1 = document.createElement('div');
+        colDiv1.className = 'col-lg-' + colWidth;
+        colDiv1.id = widgetId;
+        rowDiv.appendChild(colDiv1);
+
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-lg-' + colWidth + ' widget-border';
-        colDiv.id = widgetId;
-        rowDiv.appendChild(colDiv);
+        colDiv.className = 'widget-border';
+        colDiv1.appendChild(colDiv);
 
         //create header
         var headerDiv = document.createElement('div');
