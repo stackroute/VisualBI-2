@@ -1,9 +1,8 @@
-function plotContinentChart (chartContainer, newWidth){
-   
+function gdpPerCapitaBarChart(chartContainer, newWidth) {
+
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
        width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
-
 
    var x = d3.scale.ordinal()
        .rangeRoundBands([0, width], .1);
@@ -23,16 +22,16 @@ function plotContinentChart (chartContainer, newWidth){
        .orient("left")
        .tickFormat(d3.format("1s"));
 
-   var svg1 = d3.select(chartContainer + " #barChart").append("svg")
+   var svg3 = d3.select(chartContainer + " #barChart").append("svg")
        .attr("width", width + margin.left + margin.right)
        .attr("height", height + margin.top + margin.bottom)
      .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   d3.json("includes/json/gdpContinent.json", function(error, data) {
+   d3.json("includes/json/chartData/gdpPerCapitaBarChart.json", function(error, data) {
      if (error) throw error;
 
-     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
+     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "country"; }));
 
      data.forEach(function(d) {
        var y0 = 0;
@@ -40,38 +39,36 @@ function plotContinentChart (chartContainer, newWidth){
        d.total = d.values[d.values.length - 1].y1;
      });
 
-   //  data.sort(function(a, b) { return b.total - a.total; });
+     data.sort(function(a, b) { return b.total - a.total; });
 
-     x.domain(data.map(function(d) { return d.year; }));
+     x.domain(data.map(function(d) { return d.country; }));
      y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
-     svg1.append("g")
+     svg3.append("g")
          .attr("class", "x axis")
          .attr("transform", "translate(0," + height + ")")
          .call(xAxis)
            .selectAll("text")
            .style("text-anchor", "end")
-           .attr("dx", "-.8em")
-           .attr("dy", "-.50em")
-           .attr("transform", "rotate(-90)");
+           .attr("transform", "rotate(-65)");
 
-     svg1.append("g")
+     svg3.append("g")
          .attr("class", "y axis")
          .call(yAxis)
        .append("text")
-         .attr("transform", "rotate(-90)")
-         .attr("y", 4)
+         .attr("transform", "rotate(0)")
+         .attr("y", -10)
          .attr("dy", ".71em")
          .style("text-anchor", "end")
-         .text("GDP per capita (constant 2005 US$)");
+         .text("GdpGni");
 
-     var year = svg1.selectAll(".year")
+     var country = svg3.selectAll(".country")
          .data(data)
        .enter().append("g")
          .attr("class", "g")
-         .attr("transform", function(d) { return "translate(" + x(d.year) + ",0)"; });
+         .attr("transform", function(d) { return "translate(" + x(d.country) + ",0)"; });
 
-     year.selectAll("rect")
+     country.selectAll("rect")
          .data(function(d) { return d.values; })
        .enter().append("rect")
          .attr("width", x.rangeBand())
@@ -79,11 +76,11 @@ function plotContinentChart (chartContainer, newWidth){
          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
          .style("fill", function(d) { return color(d.name); });
 
-     var legend = svg1.selectAll(".legend")
+     var legend = svg3.selectAll(".legend")
          .data(color.domain().slice().reverse())
        .enter().append("g")
          .attr("class", "legend")
-         .attr("transform", function(d, i) { return "translate(-1200," + i * 20 + ")"; });
+         .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
      legend.append("rect")
          .attr("x", width - 18)
@@ -99,6 +96,4 @@ function plotContinentChart (chartContainer, newWidth){
          .text(function(d) { return d; });
 
      });
-
-   //   return svg;
 }

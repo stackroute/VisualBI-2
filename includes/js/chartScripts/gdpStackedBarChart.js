@@ -1,5 +1,5 @@
-function gdpPerCapitaBarChart(chartContainer, newWidth) {
-   
+function gdpStackedBarChart(chartContainer, newWidth) {
+
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
        width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
@@ -22,13 +22,14 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
        .orient("left")
        .tickFormat(d3.format("1s"));
 
-   var svg3 = d3.select(chartContainer + " #barChart").append("svg")
+   var svg2 = d3.select(chartContainer + " #barChart").append("svg")
+      .attr('id',chartContainer)
        .attr("width", width + margin.left + margin.right)
        .attr("height", height + margin.top + margin.bottom)
      .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-   d3.json("includes/json/gdpPerCapitaBarChart.json", function(error, data) {
+   d3.json("includes/json/chartData/gdpBarChart.json", function(error, data) {
      if (error) throw error;
 
      color.domain(d3.keys(data[0]).filter(function(key) { return key !== "country"; }));
@@ -44,7 +45,7 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
      x.domain(data.map(function(d) { return d.country; }));
      y.domain([0, d3.max(data, function(d) { return d.total; })]);
 
-     svg3.append("g")
+     svg2.append("g")
          .attr("class", "x axis")
          .attr("transform", "translate(0," + height + ")")
          .call(xAxis)
@@ -52,7 +53,7 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
            .style("text-anchor", "end")
            .attr("transform", "rotate(-65)");
 
-     svg3.append("g")
+     svg2.append("g")
          .attr("class", "y axis")
          .call(yAxis)
        .append("text")
@@ -62,7 +63,7 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
          .style("text-anchor", "end")
          .text("GdpGni");
 
-     var country = svg3.selectAll(".country")
+     var country = svg2.selectAll(".country")
          .data(data)
        .enter().append("g")
          .attr("class", "g")
@@ -76,7 +77,7 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
          .style("fill", function(d) { return color(d.name); });
 
-     var legend = svg3.selectAll(".legend")
+     var legend = svg2.selectAll(".legend")
          .data(color.domain().slice().reverse())
        .enter().append("g")
          .attr("class", "legend")

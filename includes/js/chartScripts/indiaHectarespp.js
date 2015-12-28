@@ -1,7 +1,7 @@
-var margin = {top: 20, right: 20, bottom: 30, left: 80},
-    width = 1300 - margin.left - margin.right,
+var margin = {top: 20, right: 20, bottom: 30, left: 30},
+    width = 1600 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-function formatYaxis(d){return d/1000000;}
+
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], .1);
 
@@ -15,8 +15,7 @@ var xAxis = d3.svg.axis()
 var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left")
-    .ticks(10, "%")
-    .tickFormat(formatYaxis);
+    .ticks(5);
 
 var svg = d3.select("#barChart").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -24,11 +23,11 @@ var svg = d3.select("#barChart").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("../includes/json/Ind_arable_land_hectares.json", function(error, data) {
+d3.json("includes/json/chartData/Ind_arable_land_hectares_pp.json",  function(error, data) {
   if (error) throw error;
 
   x.domain(data.map(function(d) { return d.Year; }));
-  y.domain([156008000, d3.max(data, function(d) { return d.Value; })]);
+  y.domain([0.1, d3.max(data, function(d) { return d.Value; })]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -43,7 +42,7 @@ d3.json("../includes/json/Ind_arable_land_hectares.json", function(error, data) 
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Value");
+      .text("Hectares");
 
   svg.selectAll(".bar")
       .data(data)

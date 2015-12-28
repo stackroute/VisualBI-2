@@ -2,7 +2,7 @@
 function widgetHandler() {
   var arrComment = {};
   $.ajax({
-    url: "includes/json/widgetProp2.json",
+    url: "includes/json/widgets.json",
     dataType: "text",
     success: function(data) {
       var json = $.parseJSON(data);
@@ -11,7 +11,6 @@ function widgetHandler() {
       for(i in json) {
 
         var title = json[i].title;
-        var barSrc = json[i].chartJson;
         var commentPath = json[i].commentPath;
         var tab = json[i].tabId;
         var row = json[i].rowId;
@@ -22,7 +21,6 @@ function widgetHandler() {
         var setTo = "#" + widgetId;
         arrComment[widgetId] = commentPath;
 
-//        if (prevTab != tab || !document.getElementById(row)) {
         if($("#" + tab).find("#" + row).length == 0) {
           //create row
           var rowDiv = document.createElement('div');
