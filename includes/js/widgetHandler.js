@@ -32,7 +32,7 @@ function widgetHandler() {
 
         //create col
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-sm-' + colWidth + ' widget-border';
+        colDiv.className = 'col-lg-' + colWidth + ' widget-border';
         colDiv.id = widgetId;
         rowDiv.appendChild(colDiv);
 

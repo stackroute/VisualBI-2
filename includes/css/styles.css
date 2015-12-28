@@ -37,6 +37,8 @@ Custom CSS
 .hr-prop {
   margin-left: -15px;
   margin-right: -15px;
+  height: 1px;
+  background-color: #333;
 }
 
 /* --------------------------------------
