@@ -40,16 +40,11 @@ Custom CSS
 .wrap {
    margin-top: 100px;
 }
-h1{
+/*h1{
   text-align: center;
   color: #00008b;
-}
-#headerCaption{
-
-  text-align: center;
-}
-
-.widget-body{
+}*/
+/*.widget-body{
   background-color: #e3e3e3;
 }
 .widget-header{
@@ -60,10 +55,10 @@ h1{
 }
 .widget-wrapper{
   border-radius: 8px;
-  background-color: #00b09a;
+  background-color: #00b09a;*/
   /*width:700px;*/
   /*height: 200px;*/
-  padding: 0px 20px;
+  /*padding: 0px 20px;
 }
 .widget-items{
   margin-left: 40px;
@@ -71,14 +66,14 @@ h1{
 .window-ctrls{
   margin-left: 0px;
 }
-.widget-header-title{
+.widget-header-title{*/
   /*display: inline;*/
-}
+/*}*/
 
 /*.tab-pane {
    width: 1500px;
 }*/
-.label{
+/*.label{
   background-color: transparent;
 }
 
@@ -93,6 +88,11 @@ h1{
 #mainComments p {
   margin-top: 10px;
   font-size: 12px;
+}*/
+
+#header{
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* --------------------------------------
