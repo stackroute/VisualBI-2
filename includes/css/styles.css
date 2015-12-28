@@ -23,6 +23,9 @@ body{
 .nav .open a, .nav .open a:hover, .nav .open a:focus{
   background-color:#B22222;
 }
+.tabSpaceCustom{
+  margin-bottom: 15px !important;
+}
 #searchBox {
    width: 300px;
 }
