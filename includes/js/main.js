@@ -3,7 +3,7 @@
    var tabs = {
       init: function(){
          //Add dashbords tabs
-         return($.getJSON("../includes/json/dashboards.json",function(data) {
+         return($.getJSON("includes/json/dashboards.json",function(data) {
             var template = Handlebars.compile($('#dashbordsTemplate').html());
             var dashboards = $('#dashboards');
             dashboards.append(template(data));
@@ -99,7 +99,7 @@
    };
 
    tabs.init().done(function(){
-      chartLoader.plotGraphs();
+  //    chartLoader.plotGraphs();
    });
 
 })();

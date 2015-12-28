@@ -1,6 +1,6 @@
 [
  {
-    "title": "GDP GNI",
+    "title": "GDP GNI 1",
    "chartJson": "includes/js/gdpStackedBarChart.js",
    "d3Function": "gdpStackedBarChart",
 	"commentPath": "includes/json/comments1.json",
@@ -10,7 +10,7 @@
   "widgetId": "continentChart1"
  },
  {
-   "title": "GDP GNI",
+   "title": "GDP GNI 2",
    "chartJson": "includes/js/gdpStackedBarChart.js",
    "d3Function": "gdpStackedBarChart",
    "commentPath": "includes/json/comments1.json",
@@ -20,11 +20,11 @@
   "widgetId": "continentChart2"
  },
  {
-   "title": "GDP GNI",
+   "title": "GDP GNI 3",
    "chartJson": "includes/js/gdpStackedBarChart.js",
    "d3Function": "gdpStackedBarChart",
    "commentPath": "includes/json/comments1.json",
-   "tabId":"tab3",
+   "tabId":"tab2",
   "rowId": "row1",
   "colId": "col1",
   "widgetId": "continentChart3"
