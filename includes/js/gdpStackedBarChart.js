@@ -1,15 +1,9 @@
-function gdpStackedBarChart(chartContainer) {
-   //console.log(chartContainer);
+function gdpStackedBarChart(chartContainer, newWidth) {
 
-   var screenWidth = $(window).width();
-   var colWidth = $(chartContainer).width();
-
-   var newWidth = (screenWidth)/2;
-   console.log(screenWidth+" "+ colWidth+" "+newWidth);
+  console.log(chartContainer+" "+ newWidth);
 
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
        width = newWidth - margin.left - margin.right,
-       //width = 600 - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
 
    var x = d3.scale.ordinal()

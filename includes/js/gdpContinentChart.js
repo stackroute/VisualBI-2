@@ -1,7 +1,7 @@
-function plotContinentChart (chartContainer){
-   //console.log("called Continent");
+function plotContinentChart (chartContainer, newWidth){
+   
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
-       width = parseInt(d3.select(chartContainer).style('width'), 10) - margin.left - margin.right,
+       width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
 
 

@@ -54,7 +54,18 @@ function widgetHandler() {
         chartDiv.id = "barChart";
         colDiv.appendChild(chartDiv);
 
-        var x = d3Function + '("' + setTo + '")';
+        var screenWidth = $(window).width();
+        var colWidth = $(setTo).width();
+
+        if(colWidth > 100) {
+          var width = $(setTo).width();
+          var parentWidth = $(setTo).offsetParent().width();
+          colWidth = (width * 100)/parentWidth;
+        }
+
+        var newWidth = (screenWidth * colWidth)/100;
+
+        var x = d3Function + '("' + setTo + '", ' + newWidth + ')';
         eval(x);
 
         //create comment
