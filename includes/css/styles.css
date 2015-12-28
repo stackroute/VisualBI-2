@@ -37,6 +37,9 @@ body{
   margin-right: 0px;
 }
 
+#header {
+   text-align: center;
+}
 .hr-prop {
   margin-left: -15px;
   margin-right: -15px;
@@ -44,6 +47,9 @@ body{
   background-color: #A4A4A4;
 }
 
+.nav-tabs {
+   margin-left: -13px;
+}
 
 
 /* --------------------------------------
