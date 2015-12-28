@@ -39,15 +39,20 @@ function widgetHandler() {
          colDiv.className = 'panel panel-primary';
          colDiv1.appendChild(colDiv);
 
+         var colDiv2 = document.createElement('div');
+         colDiv2.className = 'panel-heading';
+         colDiv.appendChild(colDiv2);
+
+         //$(".panel-heading").append("GDP through Jquery")
         //create header
-        var headerDiv = document.createElement('div');
-        headerDiv.id = "header";
-        colDiv.appendChild(headerDiv);
+        // var headerDiv = document.createElement('div');
+        // headerDiv.id = "header";
+        // colDiv.appendChild(headerDiv);
 
         //create header title
         var headerSpan = document.createElement('span');
         headerSpan.id="headerCaption";
-        headerDiv.appendChild(headerSpan);
+        colDiv2.appendChild(headerSpan);
 
         $(setTo + ' #headerCaption').text(title);
 
