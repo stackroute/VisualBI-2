@@ -102,8 +102,8 @@ function widgetHandler() {
         commentText.style.width="80%";
         commentText.placeholder = "Add your comments...";
         //commentDiv.appendChild(commentText);
-        $("textarea").css('overflow', 'hidden').autogrow();
         colDiv.appendChild(commentText);
+        $("textarea").css('overflow', 'hidden').autogrow();
       } // end of json loop
     } // end of success function
   }); // end of main ajax
