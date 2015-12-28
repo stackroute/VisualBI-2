@@ -36,8 +36,8 @@
    "widgetId": "tab2continentChart1"
  },
  {
-   "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "chartRenderer": "plotContinentChart",
+   "title": "North Eastern Literacy",
+   "chartRenderer": "plotNorthEast",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab2",
    "rowId": "row1",
@@ -54,8 +54,8 @@
    "widgetId": "tab2continentChart3"
  },
  {
-   "title": "GDP Per Capita (constant 2005 US$) Continent",
-   "chartRenderer": "plotContinentChart",
+   "title": "North Eastern Literacy",
+   "chartRenderer": "plotNorthEast",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab2",
    "rowId": "row2",
@@ -72,8 +72,8 @@
    "widgetId": "tab3continentChart1"
  },
  {
-   "title": "GDP GNI",
-   "chartRenderer": "gdpStackedBarChart",
+   "title": "North Eastern Literacy",
+   "chartRenderer": "plotNorthEast",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row1",
@@ -99,8 +99,8 @@
    "widgetId": "tab3continentChart4"
  },
  {
-   "title": "GDP GNI",
-   "chartRenderer": "gdpStackedBarChart",
+   "title": "North Eastern Literacy",
+   "chartRenderer": "plotNorthEast",
    "commentPath": "includes/json/comments.json",
    "tabId":"tab3",
    "rowId": "row2",
