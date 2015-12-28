@@ -6,7 +6,7 @@
    "commentPath": "includes/json/comments1.json",
    "tabId":"tab1",
    "rowId": "row1",
-   "colId": "col1",
+   "colWidth": "6",
    "widgetId": "continentChart1"
  },
  {
@@ -16,7 +16,7 @@
    "commentPath": "includes/json/comments1.json",
    "tabId":"tab1",
    "rowId": "row1",
-   "colId": "col2",
+   "colWidth": "6",
    "widgetId": "continentChart2"
  },
  {
@@ -26,7 +26,7 @@
    "commentPath": "includes/json/comments1.json",
    "tabId":"tab2",
    "rowId": "row1",
-   "colId": "col1",
+   "colWidth": "12",
    "widgetId": "continentChart3"
  }
 ]

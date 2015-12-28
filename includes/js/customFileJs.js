@@ -15,7 +15,7 @@ function widgetHandler() {
         var commentPath = json[i].commentPath;
         var tab = json[i].tabId;
         var row = json[i].rowId;
-        var col = json[i].colId;
+        var colWidth = json[i].colWidth;
         var widgetId = json[i].widgetId;
         var d3Function = json[i].d3Function;
 
@@ -34,7 +34,7 @@ function widgetHandler() {
 
         //create col
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-sm-6';
+        colDiv.className = 'col-sm-' + colWidth;
         colDiv.id = widgetId;
         rowDiv.appendChild(colDiv);
 
