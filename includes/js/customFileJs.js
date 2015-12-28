@@ -22,7 +22,8 @@ function widgetHandler() {
         var setTo = "#" + widgetId;
         arrComment[widgetId] = commentPath;
 
-        if (prevTab != tab || !document.getElementById(row)) {
+//        if (prevTab != tab || !document.getElementById(row)) {
+        if($("#" + tab).find("#" + row).length == 0) {
           //create row
           var rowDiv = document.createElement('div');
           rowDiv.id = row;

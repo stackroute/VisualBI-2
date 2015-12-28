@@ -1,7 +1,5 @@
 function gdpStackedBarChart(chartContainer, newWidth) {
 
-  console.log(chartContainer+" "+ newWidth);
-
    var margin = {top: 20, right: 20, bottom: 100, left: 80},
        width = newWidth - margin.left - margin.right,
        height = 500 - margin.top - margin.bottom;
