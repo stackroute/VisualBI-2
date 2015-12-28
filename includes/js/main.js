@@ -7,11 +7,9 @@
             var template = Handlebars.compile($('#dashbordsTemplate').html());
             var dashboards = $('#dashboards');
             dashboards.append(template(data));
+            console.log(template(data));
             dashboards.find('li').first().addClass("active");
-            //Add tab contents
-            var contentTemplate = Handlebars.compile($('#dashboardsContentTemplate').html());
             var dashboardContents = $('#dashboardsContent');
-            dashboardContents.append(contentTemplate(data));
             dashboardContents.find('div').first().addClass("active");
          }))
       },
