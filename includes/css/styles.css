@@ -3,19 +3,18 @@ Custom CSS
 =============
 */
 .navbar{
-   /*background-image: url("/includes/images/back.jpg");*/
    background-color: black;
 }
 
-#dashboards.col-sm-6{
+/*#dashboards.col-sm-6{
   padding: 20px;
-}
+}*/
 
-#dashboards img{
+/*#dashboards img{
   width: 100%;
   margin: auto;
   overflow: hidden;
-}
+}*/
 
 #image{
   margin-top: -10px;
@@ -35,9 +34,9 @@ Custom CSS
    width: 300px;
 }
 
-.tabbable {
+/*.tabbable {
    margin: 0 10px;
-}
+}*/
 .wrap {
    margin-top: 100px;
 }
@@ -45,12 +44,16 @@ h1{
   text-align: center;
   color: #00008b;
 }
+#headerCaption{
+
+  text-align: center;
+}
 
 .widget-body{
   background-color: #e3e3e3;
 }
 .widget-header{
-  text-align: left;
+  text-align: center;
   font-size: 16px;
   font-weight: bold;
   color: #fff;

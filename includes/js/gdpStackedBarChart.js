@@ -60,8 +60,7 @@ function gdpStackedBarChart(chartContainer, newWidth) {
          .attr("transform", "rotate(0)")
          .attr("y", -10)
          .attr("dy", ".71em")
-         .style("text-anchor", "end")
-         .text("GdpGni");
+         .style("text-anchor", "end");
 
      var country = svg2.selectAll(".country")
          .data(data)
