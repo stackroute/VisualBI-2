@@ -66,15 +66,13 @@
       </ul>
 
       <div class="tab-content" id="dashboardsContent">
-         <div class="tab-pane active" id="tab1">
+         <script id="dashboardsContentTemplate" type="template">
+            {{#each this}}
+            <div class="tab-pane" id="{{tabID}}">
+            </div>
+            {{/each}}
+         </script>
 
-         </div>  <!-- end tab1 -->
-         <div class="tab-pane" id="tab2">
-
-         </div>  <!-- end tab2 -->
-         <div class="tab-pane" id="tab3">
-
-         </div>  <!-- end tab3 -->
       </div>
     </div>
   </div>
