@@ -70,15 +70,8 @@ function widgetHandler() {
         //create comment
         var commentDiv = document.createElement('div');
         commentDiv.id = "comment";
+        commentDiv.className = "col-sm-12";
         colDiv.appendChild(commentDiv);
-
-        //create comment text area
-        var commentText = document.createElement('textarea');
-        commentText.id="enterComments";
-        commentText.rows = 4;
-        commentText.cols = 80;
-        commentText.placeholder = "Add your comments...";
-        commentDiv.appendChild(commentText);
 
         //add existing comments
         $.ajax({
@@ -94,6 +87,14 @@ function widgetHandler() {
             }
           }
         }); //end of comments ajax
+
+        //create comment text area
+        var commentText = document.createElement('textarea');
+        commentText.id="enterComments";
+        commentText.style.width="100%";
+        commentText.placeholder = "Add your comments...";
+        commentDiv.appendChild(commentText);
+
       } // end of json loop
     } // end of success function
   }); // end of main ajax
