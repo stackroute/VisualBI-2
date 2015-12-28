@@ -65,9 +65,9 @@ d3.json("includes/json/chartData/northEast.json", function(error, nData) {
       .attr("transform","translate(0," + height + ")")
       .call(xAxis)
       .selectAll("text")
-      .attr("transform", "rotate(-60)")
+      .attr("transform", "rotate(-50)")
       .attr("dx", "0em")
-      .attr("dy", "0em")
+      .attr("dy", ".55em")
       .style("text-anchor", "end");
 
 
@@ -76,8 +76,8 @@ d3.json("includes/json/chartData/northEast.json", function(error, nData) {
       .call(yAxis)
       .append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
+      .attr("y", 1)
+      .attr("dy", ".21em")
       .style("text-anchor", "end")
       //.text("Literacy");
 

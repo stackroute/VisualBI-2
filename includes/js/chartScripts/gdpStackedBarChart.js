@@ -51,7 +51,9 @@ function gdpStackedBarChart(chartContainer, newWidth) {
          .call(xAxis)
            .selectAll("text")
            .style("text-anchor", "end")
-           .attr("transform", "rotate(-65)");
+           .attr("dx", "-0.5em")
+           .attr("dy", "0.2em")
+           .attr("transform", "rotate(-45)");
 
      svg2.append("g")
          .attr("class", "y axis")
