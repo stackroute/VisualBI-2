@@ -44,6 +44,8 @@ textarea{
 
 #header {
    text-align: center;
+   font-size: 30px;
+   font-family: sans-serif;
 }
 .hr-prop {
   /*margin-left: -15px;
