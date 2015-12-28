@@ -106,7 +106,7 @@
    "tabId":"tab3",
    "rowId": "row2",
    "colWidth": "4",
-   "widgetId": "tab3continentChart1"
+   "widgetId": "tab3continentChart4"
  },
  {
    "title": "GDP Per Capita (constant 2005 US$) Continent",
@@ -116,7 +116,7 @@
    "tabId":"tab3",
    "rowId": "row2",
    "colWidth": "4",
-   "widgetId": "tab3continentChart2"
+   "widgetId": "tab3continentChart5"
  },
  {
    "title": "GDP GNI Per Capita",
@@ -126,6 +126,6 @@
    "tabId":"tab3",
    "rowId": "row2",
    "colWidth": "4",
-   "widgetId": "tab3continentChart3"
+   "widgetId": "tab3continentChart6"
  }
 ]
