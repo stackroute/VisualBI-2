@@ -32,7 +32,7 @@ function widgetHandler() {
 
         //create col
         var colDiv = document.createElement('div');
-        colDiv.className = 'col-sm-' + colWidth;
+        colDiv.className = 'col-sm-' + colWidth + ' widget-border';
         colDiv.id = widgetId;
         rowDiv.appendChild(colDiv);
 
@@ -76,7 +76,7 @@ function widgetHandler() {
         // var commentText = document.createElement('textarea');
         // commentText.id="enterComments";
         // commentText.rows = 4;
-        // commentText.cols = 80;
+        commentText.cols = 30;
         // commentText.placeholder = "Add your comments...";
         // commentDiv.appendChild(commentText);
         //
