@@ -59,9 +59,8 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
          .attr("transform", "rotate(0)")
          .attr("y", -10)
          .attr("dy", ".71em")
-         .style("text-anchor", "end")
-         .text("GdpGni");
-
+         .style("text-anchor", "end");
+         
      var country = svg3.selectAll(".country")
          .data(data)
        .enter().append("g")
