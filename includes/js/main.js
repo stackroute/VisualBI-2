@@ -42,6 +42,8 @@
       }
    }
 
-   tabs.init();
+   tabs.init().done(function() {
+     widgetHandler();
+   });
 
 })();

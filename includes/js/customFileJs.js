@@ -1,4 +1,5 @@
-$(document).ready(function() {
+
+function widgetHandler() {
   var arrComment = {};
   $.ajax({
     url: "includes/json/widgetProp2.json",
@@ -86,4 +87,4 @@ $(document).ready(function() {
       } // end of json loop
     } // end of success function
   }); // end of main ajax
-}); // end of document
+} // end of function
