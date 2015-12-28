@@ -78,7 +78,7 @@ function widgetHandler() {
         var commentText = document.createElement('textarea');
         commentText.id="enterComments";
         commentText.rows = 4;
-        commentText.cols = 80;
+        commentText.cols = 70;
         commentText.placeholder = "Add your comments...";
         commentDiv.appendChild(commentText);
 
