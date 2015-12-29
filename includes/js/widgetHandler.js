@@ -5,7 +5,6 @@ function widgetHandler() {
     dataType: "text",
     success: function(data) {
       var json = $.parseJSON(data);
-      var prevTab = "";
 
       for(i in json) {
 
@@ -22,39 +21,21 @@ function widgetHandler() {
 
         if($("#" + tab).find("#" + row).length == 0) {
           //create row
-          var rowDiv = document.createElement('div');
-          rowDiv.id = row;
-          rowDiv.className = 'row';
-          document.getElementById(tab).appendChild(rowDiv);
-          prevTab = tab;
+          $("#" + tab).append('<div id = ' + row + ' class = row></div>');
         }
 
         //create col
-        var colDiv1 = document.createElement('div');
-        colDiv1.className = 'col-lg-' + colWidth;
-        colDiv1.id = widgetId;
-        rowDiv.appendChild(colDiv1);
+        $("#" + tab + ' #' + row).append('<div class = col-lg-' + colWidth + ' id = ' + widgetId + '></div>');
 
-        var colDiv = document.createElement('div');
-        colDiv.className = 'widget-border';
-        colDiv1.appendChild(colDiv);
+        $(setTo).append('<div class = widget-border></div>');
+
+        var subDiv = $('#' + widgetId + " .widget-border");
 
         //create header
-        var headerDiv = document.createElement('div');
-        headerDiv.id = "header";
-        colDiv.appendChild(headerDiv);
-
-        //create header title
-        var headerSpan = document.createElement('span');
-        headerSpan.id="headerCaption";
-        headerDiv.appendChild(headerSpan);
-
-        $(setTo + ' #headerCaption').text(title);
+        $(subDiv).append('<div id = header><span id = headerCaption> ' + title + '</span></div>');
 
         //create chart
-        var chartDiv = document.createElement('div');
-        chartDiv.id = "barChart";
-        colDiv.appendChild(chartDiv);
+        $(subDiv).append('<div id = barChart></div>');
 
         var screenWidth = $(".container").width();
         var widgetWidth = $(setTo).width();
@@ -70,17 +51,11 @@ function widgetHandler() {
         var chartFunction = chartRenderer + '("' + setTo + '", ' + newWidth + ')';
         eval(chartFunction);
 
-        var hrDiv = document.createElement('hr');
-        hrDiv.className="hr-prop";
-        colDiv.appendChild(hrDiv);
+        $(subDiv).append('<hr class = hr-prop>');
 
         // create comment
-        var commentDiv = document.createElement('div');
-        commentDiv.id = "comment";
-        commentDiv.className = "col-lg-12";
-        colDiv.appendChild(commentDiv);
+        $(subDiv).append('<div id = comment class = col-lg-12></div>');
 
-        // create comment text area
         //add existing comments
         $.ajax({
           url: commentPath,
@@ -97,12 +72,7 @@ function widgetHandler() {
         }); //end of comments ajax
 
         //create comment text area
-        var commentText = document.createElement('textarea');
-        commentText.id="enterComments";
-        commentText.style.width="80%";
-        commentText.placeholder = "Add your comments...";
-        //commentDiv.appendChild(commentText);
-        colDiv.appendChild(commentText);
+        $(setTo + ' #comment').append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
         $("textarea").css('overflow', 'hidden').autogrow();
       } // end of json loop
     } // end of success function
