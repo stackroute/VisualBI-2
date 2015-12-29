@@ -32,7 +32,7 @@ function widgetHandler() {
         var subDiv = $('#' + widgetId + " .widget-border");
 
         //create header
-        $(subDiv).append('<div id = header><span id = headerCaption> ' + title + '</span></div>');
+        $(subDiv).append('<div id = header><span id = headerCaption></span></div>').text(title);
 
         //create chart
         $(subDiv).append('<div id = barChart></div>');

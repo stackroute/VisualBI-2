@@ -1,15 +1,15 @@
 [
 	{
-		"title": "1 Column Layout",
+		"page-title": "1 Column Layout",
 		"tabID":"tab1"
 	},
 
 	{
-		"title": "2 Column Layout",
+		"page-title": "2 Column Layout",
 		"tabID":"tab2"
 	},
 	{
-		"title": "3 Column Layout",
+		"page-title": "3 Column Layout",
 		"tabID":"tab3"
 	}
 ]

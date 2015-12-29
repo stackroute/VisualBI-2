@@ -50,7 +50,9 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
          .call(xAxis)
            .selectAll("text")
            .style("text-anchor", "end")
-           .attr("transform", "rotate(-65)");
+           .attr("dx", "-0.5em")
+           .attr("dy", "0.2em")
+           .attr("transform", "rotate(-40)");
 
      svg3.append("g")
          .attr("class", "y axis")
@@ -60,7 +62,7 @@ function gdpPerCapitaBarChart(chartContainer, newWidth) {
          .attr("y", -10)
          .attr("dy", ".71em")
          .style("text-anchor", "end");
-         
+
      var country = svg3.selectAll(".country")
          .data(data)
        .enter().append("g")

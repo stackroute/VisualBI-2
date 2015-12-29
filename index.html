@@ -3,6 +3,7 @@
 <head>
 
    <link rel="stylesheet" href="bootstrap/css/bootstrap.css" charset="utf-8">
+   <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" href="includes/css/styles.css" charset="utf-8">
    <link rel="stylesheet" href="includes/css/bootstrap-glyphicons.css" charset="utf-8">
 
@@ -58,9 +59,9 @@
 
     <div class="row tabbable wrap" id="dashboards">
       <script id="dashbordsTemplate" type="template">
-         <ul class="nav nav-tabs">
+         <ul class="nav nav-tabs tabSpaceCustom">
             {{#each this}}
-            <li><a href="#{{tabID}}" data-toggle="tab">{{title}}</a></li>
+            <li><a href="#{{tabID}}" data-toggle="tab">{{page-title}}</a></li>
             {{/each}}
          </ul>
 
@@ -70,6 +71,9 @@
          </div>
          {{/each}}
       </div>
+
+
+
       </script>
     </div>
   </div>
