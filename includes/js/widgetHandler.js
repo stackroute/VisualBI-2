@@ -27,12 +27,12 @@ function widgetHandler() {
         //create col
         $("#" + tab + ' #' + row).append('<div class = col-lg-' + colWidth + ' id = ' + widgetId + '></div>');
 
-        $(setTo).append('<div class = widget-border></div>');
+        $(setTo).append('<div class = "panel panel-primary"></div>');
 
-        var subDiv = $('#' + widgetId + " .widget-border");
+        var subDiv = $('#' + widgetId + " .panel");
 
         //create header
-        $(subDiv).append('<div id = header><span id = headerCaption></span></div>').text(title);
+        $(subDiv).append('<div class = panel-heading id = header><span class = panel-heading id = headerCaption> ' + title + '</span></div>');
 
         //create chart
         $(subDiv).append('<div id = barChart></div>');
@@ -65,15 +65,15 @@ function widgetHandler() {
             var jsonComment = $.parseJSON(dataComment);
             for(j in jsonComment) {
               var comment = jsonComment[j].split("at");
-              var p = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
-              $(setTo + ' #comment').append(p);
+              var paragraph = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
+              $(setTo + ' #comment').append(paragraph);
             }
           }
         }); //end of comments ajax
 
         //create comment text area
-        $(setTo + ' #comment').append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
         $("textarea").css('overflow', 'hidden').autogrow();
+        $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
       } // end of json loop
     } // end of success function
   }); // end of main ajax
