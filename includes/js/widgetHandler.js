@@ -56,25 +56,41 @@ function widgetHandler() {
         // create comment
         $(subDiv).append('<div id = comment class = col-lg-12></div>');
 
-        //add existing comments
+      $(setTo).append('<div class= "modal" id =myModal><div class="modal-dialog"><div class="modal-content"><div class="modal-header" ><button class="close" data-dismiss="modal">X</button> <h4 class="modal-title">Users Comments</h4></div><div class=modal-body></div></div></div></div>');
+
+      //add existing comments
         $.ajax({
           url: commentPath,
           dataType: "text",
-          async:false,
+          async:true,
           success: function(dataComment) {
             var jsonComment = $.parseJSON(dataComment);
+            console.log(jsonComment);
             for(j in jsonComment) {
-              var comment = jsonComment[j].split("at");
-              var paragraph = "<p><strong>" + j + " :</strong> " + comment[0] + " - " + comment[1] + "</p>";
-              $(setTo + ' #comment').append(paragraph);
+             //console.log(jsonComment[j]);
+              //var comment = jsonComment[j].split("at");
+              var paragraph = "<p><strong>" + j + " :</strong> " + jsonComment[j] +"</p>";
+              //console.log(paragraph);
+              $(".modal-body").append(paragraph);
+
             }
+
           }
+
         }); //end of comments ajax
 
         //create comment text area
+
+
         $("textarea").css('overflow', 'hidden').autogrow();
         $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
+        $(subDiv).append('<a href="#myModal" role = "dialog" class = "btn btn-warning" data-toggle="modal"><span class="glyphicon glyphicon-hand-up"></span>Comments....</a>');
+
       } // end of json loop
     } // end of success function
   }); // end of main ajax
+
+
+
+
 } // end of function
