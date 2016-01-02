@@ -2,6 +2,7 @@
 logs
 *.log
 *.orig
+*.log.*
 
 # Runtime data
 pids

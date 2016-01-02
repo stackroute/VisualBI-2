@@ -1,0 +1,16 @@
+{
+  "name": "visualbi-2",
+  "version": "1.0.0",
+  "description": "Visual Bisuness tool",
+  "scripts": {
+    "start": "supervisor bin/server.js"
+  },
+  "author": "Team BI",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "ejs": "^2.3.4",
+    "express": "~4.13.1",
+    "jquery": "^2.1.4"
+  }
+}
