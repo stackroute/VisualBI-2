@@ -99,6 +99,4 @@ function plotContinentChart (chartContainer, newWidth){
          .text(function(d) { return d; });
 
      });
-
-   //   return svg;
 }

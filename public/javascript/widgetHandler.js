@@ -1,12 +1,16 @@
 function widgetHandler() {
   var arrComment = {};
-  debugger;
   $.ajax({
     url: "chartData/widgets",
     dataType: "text",
     success: function(data) {
       var json = $.parseJSON(data);
       var makeActiveTab = true;
+      var config = {
+         height: 300,
+         // colors: ['red', 'green', 'yellow', 'ping']
+      };
+      chartLoader.init(config)
       $('#dashboards').find('li').first().addClass('active');
       for(i in json) {
 
@@ -17,8 +21,8 @@ function widgetHandler() {
         var colWidth = json[i].colWidth;
         var widgetId = json[i].widgetId;
         var chartRenderer = json[i].chartRenderer;
-
-        var setTo = "#" + widgetId;
+        var dataUrl = json[i].dataPath;
+        var widgetContainer = "#" + widgetId;
         arrComment[widgetId] = commentPath;
 
         if($("#" + tab).find("#" + row).length == 0) {
@@ -33,7 +37,7 @@ function widgetHandler() {
         //create col
         $("#" + tab + ' #' + row).append('<div class = col-lg-' + colWidth + ' id = ' + widgetId + '></div>');
 
-        $(setTo).append('<div class = "panel panel-primary"></div>');
+        $(widgetContainer).append('<div class = "panel panel-primary"></div>');
 
         var subDiv = $('#' + widgetId + " .panel");
 
@@ -44,16 +48,18 @@ function widgetHandler() {
         $(subDiv).append('<div id = barChart></div>');
 
         var screenWidth = $(".container").width();
-        var widgetWidth = $(setTo).width();
+        var widgetWidth = $(widgetContainer).width();
 
         if(widgetWidth > 100) {
-          var width = $(setTo).width();
-          var parentWidth = $(setTo).offsetParent().width();
+          var width = $(widgetContainer).width();
+          var parentWidth = $(widgetContainer).offsetParent().width();
           widgetWidth = (width * 100)/parentWidth;
         }
 
-        var newWidth = (screenWidth * widgetWidth)/100;
-        var chartFunction = chartRenderer + '("' + setTo + '", ' + newWidth + ')';
+        var containerWidth = (screenWidth * widgetWidth)/100;
+        var chartFunction = "chartLoader" + "." + chartRenderer + '("' + widgetContainer + '", ' + containerWidth + ', "' + dataUrl + '")';
+
+      //   console.log(chartFunction);
         eval(chartFunction);
 
         $(subDiv).append('<hr class = hr-prop>');
@@ -61,7 +67,7 @@ function widgetHandler() {
         // create comment
         $(subDiv).append('<div id = comment class = col-lg-12></div>');
 
-      $(setTo).append('<div class= "modal" id =myModal><div class="modal-dialog"><div class="modal-content"><div class="modal-header" ><button class="close" data-dismiss="modal">X</button> <h4 class="modal-title">Users Comments</h4></div><div class=modal-body></div></div></div></div>');
+      $(widgetContainer).append('<div class= "modal" id =myModal><div class="modal-dialog"><div class="modal-content"><div class="modal-header" ><button class="close" data-dismiss="modal">X</button> <h4 class="modal-title">Users Comments</h4></div><div class=modal-body></div></div></div></div>');
 
       //add existing comments
         $.ajax({
