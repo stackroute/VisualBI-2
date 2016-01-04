@@ -2,7 +2,7 @@
   {
     "title": "GDP GNI",
     "chartRenderer": "gdpStackedBarChart",
-    "commentPath": "chartData/comments",
+    "commentPath": "comments/comment1",
     "dataPath":"chartData/gdpBarChart",
     "tabId":"tab1",
     "rowId": "row1",
@@ -12,7 +12,7 @@
   {
     "title": "GDP Per Capita (constant 2005 US$) Continent",
     "chartRenderer": "plotContinentChart",
-    "commentPath": "chartData/comments",
+    "commentPath": "comments/comment2",
     "dataPath":"chartData/gdpContinent",
     "tabId":"tab1",
     "rowId": "row2",
@@ -22,7 +22,7 @@
   {
     "title": "GDP GNI Per Capita",
     "chartRenderer": "gdpPerCapitaBarChart",
-    "commentPath": "chartData/comments",
+    "commentPath": "comments/comment1",
     "dataPath":"chartData/gdpPerCapitaBarChart",
     "tabId":"tab1",
     "rowId": "row3",
@@ -32,7 +32,7 @@
  {
    "title": "GDP GNI",
    "chartRenderer": "gdpStackedBarChart",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/gdpBarChart",
    "tabId":"tab2",
    "rowId": "row1",
@@ -42,7 +42,7 @@
  {
    "title": "North Eastern Literacy",
    "chartRenderer": "plotNorthEast",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/northEast",
    "tabId":"tab2",
    "rowId": "row1",
@@ -52,7 +52,7 @@
  {
    "title": "GDP GNI Per Capita",
    "chartRenderer": "gdpPerCapitaBarChart",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/gdpPerCapitaBarChart",
    "tabId":"tab2",
    "rowId": "row2",
@@ -62,7 +62,7 @@
  {
    "title": "North Eastern Literacy",
    "chartRenderer": "plotNorthEast",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/northEast",
    "tabId":"tab2",
    "rowId": "row2",
@@ -72,7 +72,7 @@
  {
    "title": "GDP GNI",
    "chartRenderer": "gdpStackedBarChart",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/gdpBarChart",
    "tabId":"tab3",
    "rowId": "row1",
@@ -82,7 +82,7 @@
  {
    "title": "North Eastern Literacy",
    "chartRenderer": "plotNorthEast",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/northEast",
    "tabId":"tab3",
    "rowId": "row1",
@@ -92,7 +92,7 @@
  {
    "title": "GDP GNI Per Capita",
    "chartRenderer": "gdpPerCapitaBarChart",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/gdpPerCapitaBarChart",
    "tabId":"tab3",
    "rowId": "row1",
@@ -102,7 +102,7 @@
  {
    "title": "GDP GNI",
    "chartRenderer": "gdpStackedBarChart",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/gdpBarChart",
    "tabId":"tab3",
    "rowId": "row2",
@@ -112,7 +112,7 @@
  {
    "title": "North Eastern Literacy",
    "chartRenderer": "plotNorthEast",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/northEast",
    "tabId":"tab3",
    "rowId": "row2",
@@ -122,7 +122,7 @@
  {
    "title": "GDP GNI Per Capita",
    "chartRenderer": "gdpPerCapitaBarChart",
-   "commentPath": "chartData/comments",
+   "commentPath": "comments/comment1",
    "dataPath":"chartData/gdpPerCapitaBarChart",
    "tabId":"tab3",
    "rowId": "row2",

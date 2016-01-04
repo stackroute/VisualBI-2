@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path')
 var routes = require('./routes/index.js');
 var chartData = require('./routes/chartData.js');
+var chartComments = require('./routes/chartComments.js');
 
 var app = express();
 
@@ -12,6 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/chartdata', chartData);
+app.use('/comments', chartComments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
