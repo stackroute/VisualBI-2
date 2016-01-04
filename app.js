@@ -10,8 +10,8 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/visualbi-2', routes);
-app.use('/visualbi-2/chartdata', chartData);
+app.use('/', routes);
+app.use('/chartdata', chartData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
