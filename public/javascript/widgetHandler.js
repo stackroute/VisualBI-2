@@ -1,7 +1,7 @@
-function widgetHandler(config) {
+function widgetHandler(widgetsConfig) {
   var arrComment = {};
   $.ajax({
-    url: config.widgetsUrl,
+    url: widgetsConfig.widgetsUrl,
     dataType: "text",
     success: function(data) {
       var json = $.parseJSON(data);
@@ -11,7 +11,7 @@ function widgetHandler(config) {
          // colors: ['red', 'green', 'yellow', 'ping']
       };
       chartLoader.init(config)
-      $(config.container).find('li').first().addClass('active');
+      $(widgetsConfig.container).find('li').first().addClass('active');
       for(i in json) {
 
         var title = json[i].title;
