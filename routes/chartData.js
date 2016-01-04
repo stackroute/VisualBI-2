@@ -3,6 +3,8 @@ var router = express.Router();
 var util = require('./utils');
 var path = require('path');
 
+
+
 router.get('/:chartType', function(req, res, next) {
    var chartType = req.params.chartType;
    // chartType = 'gdpContinent';

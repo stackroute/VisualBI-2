@@ -7,6 +7,7 @@ var utils = require('./utils');
 
 // Inedex page
 router.get('/', function(req, res, next) {
+   debugger;
    console.log('inside index');
    var data = utils.readFile(path.join(__dirname, '../public/data/dashboards.json'))
    var dashboards = JSON.parse(data);
