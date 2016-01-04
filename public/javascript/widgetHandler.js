@@ -8,6 +8,7 @@ function widgetHandler(widgetsConfig) {
       var makeActiveTab = true;
       var config = {
          height: 300,
+         enableLegend: false
          // colors: ['red', 'green', 'yellow', 'ping']
       };
       chartLoader.init(config)

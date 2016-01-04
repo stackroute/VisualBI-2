@@ -3,6 +3,7 @@ var margin = {top: 10, right: 20, bottom: 100, left: 50},
     height = 500 - margin.top - margin.bottom;
 
 var colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"];
+var enableLegend = true;
 
 var chartLoader = {
    init: function(config){
@@ -14,6 +15,7 @@ var chartLoader = {
       height = height - margin.top - margin.bottom;
       colors = config.colors || colors;
       url = config.url;
+      enableLegend = config.enableLegend;
    },
    gdpStackedBarChart: gdpStackedBarChart,
    plotContinentChart: plotContinentChart,
@@ -99,25 +101,26 @@ function plotContinentChart (chartContainer, containerWidth, jsonDataUrl){
          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
          .style("fill", function(d) { return color(d.name); });
 
-     var legend = svg1.selectAll(".legend")
-         .data(color.domain().slice().reverse())
-       .enter().append("g")
-         .attr("class", "legend")
-         .attr("transform", function(d, i) { return "translate(-1200," + i * 20 + ")"; });
+      if(enableLegend) {
+         var legend = svg1.selectAll(".legend")
+             .data(color.domain().slice().reverse())
+             .enter().append("g")
+             .attr("class", "legend")
+             .attr("transform", function(d, i) { return "translate(-1200," + i * 20 + ")"; });
 
-     legend.append("rect")
-         .attr("x", width - 18)
-         .attr("width", 18)
-         .attr("height", 18)
-         .style("fill", color);
+         legend.append("rect")
+             .attr("x", width - 18)
+             .attr("width", 18)
+             .attr("height", 18)
+             .style("fill", color);
 
-     legend.append("text")
-         .attr("x", width - 24)
-         .attr("y", 9)
-         .attr("dy", ".35em")
-         .style("text-anchor", "end")
-         .text(function(d) { return d; });
-
+         legend.append("text")
+             .attr("x", width - 24)
+             .attr("y", 9)
+             .attr("dy", ".35em")
+             .style("text-anchor", "end")
+             .text(function(d) { return d; });
+         }
      });
 }
 
@@ -198,24 +201,27 @@ function gdpStackedBarChart(chartContainer, containerWidth, jsonDataUrl) {
          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
          .style("fill", function(d) { return color(d.name); });
 
-     var legend = svg2.selectAll(".legend")
-         .data(color.domain().slice().reverse())
-       .enter().append("g")
-         .attr("class", "legend")
-         .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      if(enableLegend) {
+         var legend = svg2.selectAll(".legend")
+             .data(color.domain().slice().reverse())
+           .enter().append("g")
+             .attr("class", "legend")
+             .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-     legend.append("rect")
-         .attr("x", width - 18)
-         .attr("width", 18)
-         .attr("height", 18)
-         .style("fill", color);
+         legend.append("rect")
+             .attr("x", width - 18)
+             .attr("width", 18)
+             .attr("height", 18)
+             .style("fill", color);
 
-     legend.append("text")
-         .attr("x", width - 24)
-         .attr("y", 9)
-         .attr("dy", ".35em")
-         .style("text-anchor", "end")
-         .text(function(d) { return d; });
+         legend.append("text")
+             .attr("x", width - 24)
+             .attr("y", 9)
+             .attr("dy", ".35em")
+             .style("text-anchor", "end")
+             .text(function(d) { return d; });
+      }
+
 
      });
 }
@@ -298,24 +304,27 @@ function gdpPerCapitaBarChart(chartContainer, containerWidth, jsonDataUrl) {
          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
          .style("fill", function(d) { return color(d.name); });
 
-     var legend = svg3.selectAll(".legend")
-         .data(color.domain().slice().reverse())
-       .enter().append("g")
-         .attr("class", "legend")
-         .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      if(enableLegend) {
+         var legend = svg3.selectAll(".legend")
+             .data(color.domain().slice().reverse())
+           .enter().append("g")
+             .attr("class", "legend")
+             .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-     legend.append("rect")
-         .attr("x", width - 18)
-         .attr("width", 18)
-         .attr("height", 18)
-         .style("fill", color);
+         legend.append("rect")
+             .attr("x", width - 18)
+             .attr("width", 18)
+             .attr("height", 18)
+             .style("fill", color);
 
-     legend.append("text")
-         .attr("x", width - 24)
-         .attr("y", 9)
-         .attr("dy", ".35em")
-         .style("text-anchor", "end")
-         .text(function(d) { return d; });
+         legend.append("text")
+             .attr("x", width - 24)
+             .attr("y", 9)
+             .attr("dy", ".35em")
+             .style("text-anchor", "end")
+             .text(function(d) { return d; });
+      }
+
 
      });
 }
@@ -416,24 +425,27 @@ function plotNorthEast(chartContainer, containerWidth, jsonDataUrl){
          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
          .style("fill", function(d) { return color(d.name); });
 
-     var legend = svg10.selectAll(".legend")
-         .data(color.domain().slice().reverse())
-       .enter().append("g")
-         .attr("class", "legend")
-         .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+      if(enableLegend) {
+         var legend = svg10.selectAll(".legend")
+             .data(color.domain().slice().reverse())
+           .enter().append("g")
+             .attr("class", "legend")
+             .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
-     legend.append("rect")
-         .attr("x", width - 18)
-         .attr("width", 18)
-         .attr("height", 18)
-         .style("fill", color);
+         legend.append("rect")
+             .attr("x", width - 18)
+             .attr("width", 18)
+             .attr("height", 18)
+             .style("fill", color);
 
-     legend.append("text")
-         .attr("x", width - 24)
-         .attr("y", 9)
-         .attr("dy", ".25em")
-         .style("text-anchor", "end")
-         .text(function(d) { return d; });
+         legend.append("text")
+             .attr("x", width - 24)
+             .attr("y", 9)
+             .attr("dy", ".25em")
+             .style("text-anchor", "end")
+             .text(function(d) { return d; });
+      }
+
 
    });
 }
