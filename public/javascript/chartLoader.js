@@ -49,7 +49,6 @@ function plotContinentChart (chartContainer, containerWidth, jsonDataUrl){
        .attr("height", height + margin.top + margin.bottom)
      .append("g")
        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-       debugger;
    d3.json(jsonDataUrl, function(error, data) {
      if (error) throw error;
 

@@ -67,41 +67,33 @@ function widgetHandler(widgetsConfig) {
         // create comment
         $(subDiv).append('<div id = comment class = col-lg-12></div>');
 
-      $(widgetContainer).append('<div class= "modal" id =myModal><div class="modal-dialog"><div class="modal-content"><div class="modal-header" ><button class="close" data-dismiss="modal">X</button> <h4 class="modal-title">Users Comments</h4></div><div class=modal-body></div></div></div></div>');
-
-      //add existing comments
-        $.ajax({
-          url: commentPath,
-          dataType: "text",
-          async:true,
-          success: function(dataComment) {
-            var jsonComment = $.parseJSON(dataComment);
-            // console.log(jsonComment);
-            for(j in jsonComment) {
-             //console.log(jsonComment[j]);
-              //var comment = jsonComment[j].split("at");
-              var paragraph = "<p><strong>" + j + " :</strong> " + jsonComment[j] +"</p>";
-              //console.log(paragraph);
-              $(".modal-body").append(paragraph);
-
-            }
-
-          }
-
-        }); //end of comments ajax
-
-        //create comment text area
-
-
         $("textarea").css('overflow', 'hidden').autogrow();
         $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
-        $(subDiv).append('<a href="#myModal" role = "dialog" class = "btn btn-warning" data-toggle="modal"><span class="glyphicon glyphicon-hand-up"></span>Comments....</a>');
+        $(subDiv).append('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#commentsDialog" data-cPath="' + commentPath + '"><span class="glyphicon glyphicon-hand-up"></span>Comments....</button>');
 
       } // end of json loop
+
+      $('#commentsDialog').on('show.bs.modal', function(event){
+        console.log('inside show modal');
+        console.log(event);
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var commentPath = $(event.relatedTarget).attr('data-cPath');
+        var modal = $(this);
+        console.log(button);
+        //add existing comments
+        $.getJSON(commentPath, function(c) {
+           console.log(c);
+           var paragraphs = "";
+           for(j in c) {
+            //console.log(jsonComment[j]);
+             paragraphs += "<p><strong>" + j + " :</strong> " + c[j] +"</p>";
+           }
+           modal.find('#commentsText').html(paragraphs);
+        });
+
+      });
+
     } // end of success function
   }); // end of main ajax
-
-
-
 
 } // end of function
