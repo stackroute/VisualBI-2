@@ -85,7 +85,7 @@ function plotContinentChart (chartContainer, containerWidth, jsonDataUrl){
          .attr("y", 4)
          .attr("dy", ".71em")
          .style("text-anchor", "end")
-         .text("GDP per capita (constant 2005 US$)");
+         //.text("GDP per capita (constant 2005 US$)");
 
      var year = svg1.selectAll(".year")
          .data(data)
@@ -395,10 +395,10 @@ function plotNorthEast(chartContainer, containerWidth, jsonDataUrl){
          .attr("transform","translate(0," + height + ")")
          .call(xAxis)
          .selectAll("text")
-         .attr("transform", "rotate(-50)")
+         .attr("transform", "rotate(-30)")
          .attr("dx", "0em")
-         .attr("dy", ".55em")
-         .style("text-anchor", "end");
+         .attr("dy", ".85em")
+        .style("text-anchor", "end");
 
 
      svg10.append("g")
