@@ -27,7 +27,7 @@ WidgetSchema.statics.getComments = function(widgetId, callback) {
       "_id":0,
       "comments": 1
    }, function(err, data) {
-      callback(data["comments"]);
+      callback(data[0].comments);
    })
 }
 

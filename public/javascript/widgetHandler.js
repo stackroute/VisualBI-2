@@ -90,17 +90,14 @@ function widgetHandler(widgetsConfig) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var widgetId = $(event.relatedTarget).attr('data-widgetId');
         var modal = $(this);
-        console.log(widgetId);
       //   modal.find('#commentsText').html("<p>hello</p>");
         //add existing comments
         $.getJSON("comments/" + widgetId, function(comments) {
-           debugger;
-           console.log(comments);
            var paragraphs = "";
            for(j in comments) {
-             paragraphs += "<p><strong>" + j + " :</strong> " + comments[j].comment +"</p>";
+             paragraphs += "<p><strong>" + comments[j].userid + " :</strong> " + comments[j].comment +"</p>";
            }
-           //modal.find('#commentsText').html(paragraphs);
+           modal.find('#commentsText').html(paragraphs);
 
         });
 
