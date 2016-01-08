@@ -1,6 +1,5 @@
 function widgetHandler(widgetsConfig) {
 
-  var arrComment = {};
   $.ajax({
     url: widgetsConfig.userDashboard,
     dataType: "text",
@@ -36,7 +35,6 @@ function widgetHandler(widgetsConfig) {
                var title = details.title;
                var commentPath = details.comments;
                var widgetContainer = "#" + colId;
-               arrComment[colId] = details.comments;
 
                if($("#" + tab).find("#" + row).length == 0) {
                //  if(makeActiveTab) {
@@ -82,28 +80,28 @@ function widgetHandler(widgetsConfig) {
 
                $("textarea").css('overflow', 'hidden').autogrow();
                $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
-               $(subDiv).append('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#commentsDialog" data-cPath="' + commentPath + '"><span class="glyphicon glyphicon-hand-up"></span>Comments....</button>');
+               $(subDiv).append('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#commentsDialog" data-widgetId="' + widgetId + '"><span class="glyphicon glyphicon-hand-up"></span>Comments....</button>');
             })
          }
 
       });
 
       $('#commentsDialog').on('show.bs.modal', function(event){
-        console.log('inside show modal');
-        console.log(event);
         var button = $(event.relatedTarget) // Button that triggered the modal
-        var commentPath = $(event.relatedTarget).attr('data-cPath');
+        var widgetId = $(event.relatedTarget).attr('data-widgetId');
         var modal = $(this);
-        console.log(button);
+        console.log(widgetId);
+      //   modal.find('#commentsText').html("<p>hello</p>");
         //add existing comments
-        $.getJSON(commentPath, function(c) {
-           console.log(c);
+        $.getJSON("comments/" + widgetId, function(comments) {
+           debugger;
+           console.log(comments);
            var paragraphs = "";
-           for(j in c) {
-            //console.log(jsonComment[j]);
-             paragraphs += "<p><strong>" + j + " :</strong> " + c[j] +"</p>";
+           for(j in comments) {
+             paragraphs += "<p><strong>" + j + " :</strong> " + comments[j].comment +"</p>";
            }
-           modal.find('#commentsText').html(paragraphs);
+           //modal.find('#commentsText').html(paragraphs);
+
         });
 
       });

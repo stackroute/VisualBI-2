@@ -2,15 +2,13 @@ var express = require('express');
 var router = express.Router();
 var util = require('./utils');
 var path = require('path');
-var WidgetModel = require('../model/widget');
+var Widget = require('../model/widget');
 
 router.get('/:chartType', function(req, res, next) {
    // picks :chartType from the URL
    var chartType = req.params.chartType;
 
    if(chartType === "widgets") {
-
-      var Widget = new WidgetModel();
       Widget.getWidgets(function(data){
          res.send(data);
       });
