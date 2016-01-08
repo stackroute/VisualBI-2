@@ -3,7 +3,7 @@ var path = require('path');
 
 util = {
    readFile: function(path) {
-      console.log(path);
+      //console.log(path);
       var data = fs.readFileSync(path);
       return data.toString();
    }

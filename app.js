@@ -1,10 +1,21 @@
-var express = require('express');
-var path = require('path')
-var routes = require('./routes/index.js');
-var chartData = require('./routes/chartData.js');
-var chartComments = require('./routes/chartComments.js');
+var express = require('express'),
+    mongoose = require('mongoose'),
+    path = require('path'),
+    routes = require('./routes/index.js'),
+    chartData = require('./routes/chartData.js'),
+    chartComments = require('./routes/chartComments.js');
+
+var dbPath = "mongodb://localhost:27017/visualdb";
+mongoose.connect(dbPath);
+var db = mongoose.connection;
 
 var app = express();
+
+db.on('error', console.error);
+db.once('open', function() {
+   console.log('Connected to database successfully');
+
+});
 
 app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine', 'ejs');
