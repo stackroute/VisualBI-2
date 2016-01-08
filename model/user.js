@@ -21,9 +21,8 @@ var UserSchema = mongoose.Schema({
    }]
 }, {strict: false});
 
-UserSchema.methods.getDashboard = function getDashboard(emailId, callback) {
-   console.log('insite dashboard');
-   Users.find({
+UserSchema.methods.getDashboard = function (emailId, callback) {
+   this.model('User').find({
       'emailId': emailId
    })
    .select({
@@ -42,4 +41,5 @@ UserSchema.methods.getDashboard = function getDashboard(emailId, callback) {
       }
    });
 }
+
 module.exports = mongoose.model("User", UserSchema);
