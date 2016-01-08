@@ -12,4 +12,4 @@ var WidgetSchema = mongoose.Schema({
    }]
 }, {strict: false});
 
-module.exports = mongoose.model("widgets", WidgetSchema);
+module.exports = mongoose.model("Widget", WidgetSchema);
