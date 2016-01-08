@@ -36,7 +36,7 @@ function widgetHandler(widgetsConfig) {
                var title = details.title;
                var commentPath = details.comments;
                var widgetContainer = "#" + colId;
-               arrComment[colId] = commentPath;
+               arrComment[colId] = details.comments;
 
                if($("#" + tab).find("#" + row).length == 0) {
                //  if(makeActiveTab) {

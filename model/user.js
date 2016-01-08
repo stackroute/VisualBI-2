@@ -21,42 +21,27 @@ var UserSchema = mongoose.Schema({
    }]
 }, {strict: false});
 
-UserSchema.methods.getDashboard = function (emailId, callback) {
+UserSchema.statics.getDashboard = function (emailId, callback) {
    this.model('User').find({
       'emailId': emailId
-   })
-   .select({
+   }, {
       'dashboards': 1,
       '_id': 0
-   })
-   .exec(function(err, data){
-      for(i in data){
-         var ds = data[i].dashboards;
-         for(i in ds){
-            dashboards = ds[i].tabs;
-            callback(dashboards);
-         }
-      }
+   },function(err, data) {
+      callback(data[0].dashboards[0].tabs);
    });
 }
 
-UserSchema.methods.getTabs = function (emailId, callback) {
+UserSchema.statics.getTabs = function (emailId, callback) {
+
    this.model('User').find({
       'emailId': emailId
-   })
-   .select({
+   }, {
       'dashboards.tabs.tabTitle': 1,
       'dashboards.tabs.tabId': 1,
       '_id': 0
-   })
-   .exec(function(err, data){
-      for(i in data){
-         var ds = data[i].dashboards;
-         for(i in ds){
-            dashboards = ds[i].tabs;
-            callback(dashboards);
-         }
-      }
+   },function(err, data) {
+      callback(data[0].dashboards[0].tabs);
    });
 }
 
