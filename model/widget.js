@@ -12,4 +12,12 @@ var WidgetSchema = mongoose.Schema({
    }]
 }, {strict: false});
 
+WidgetSchema.methods.getWidgets = function(callback) {
+   this.model('Widget').find({}, {
+      "_id":0
+   }, function(err, data) {
+      callback(data);
+   })
+}
+
 module.exports = mongoose.model("Widget", WidgetSchema);

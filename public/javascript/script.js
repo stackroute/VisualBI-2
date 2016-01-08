@@ -1,6 +1,6 @@
 (function(){
    var config = {
-      widgetsUrl: "chartData/widgets",
+      userDashboard: "dashboards",
       container: "#dashboards"
    };
    widgetHandler(config);

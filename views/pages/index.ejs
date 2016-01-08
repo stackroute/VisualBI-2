@@ -13,13 +13,13 @@
           <div class="row tabbable wrap" id="dashboards">
              <ul class="nav nav-tabs tabSpaceCustom">
                <% dashboards.forEach(function(dashboard) { %>
-                  <li><a href="#<%= dashboard.tabID %>" data-toggle="tab"><%= dashboard.tabTitle %></a></li>
+                  <li><a href="#<%= dashboard.tabId %>" data-toggle="tab"><%= dashboard.tabTitle %></a></li>
                <% }); %>
              </ul>
 
              <div class="tab-content" id="dashboardsContent">
                 <% dashboards.forEach(function(dashboard) { %>
-                <div class="tab-pane" id="<%= dashboard.tabID %>">
+                <div class="tab-pane" id="<%= dashboard.tabId %>">
                 </div>
                 <% }); %>
              </div>

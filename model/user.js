@@ -26,6 +26,25 @@ UserSchema.methods.getDashboard = function (emailId, callback) {
       'emailId': emailId
    })
    .select({
+      'dashboards': 1,
+      '_id': 0
+   })
+   .exec(function(err, data){
+      for(i in data){
+         var ds = data[i].dashboards;
+         for(i in ds){
+            dashboards = ds[i].tabs;
+            callback(dashboards);
+         }
+      }
+   });
+}
+
+UserSchema.methods.getTabs = function (emailId, callback) {
+   this.model('User').find({
+      'emailId': emailId
+   })
+   .select({
       'dashboards.tabs.tabTitle': 1,
       'dashboards.tabs.tabId': 1,
       '_id': 0
@@ -35,7 +54,6 @@ UserSchema.methods.getDashboard = function (emailId, callback) {
          var ds = data[i].dashboards;
          for(i in ds){
             dashboards = ds[i].tabs;
-            console.log(dashboards);
             callback(dashboards);
          }
       }
