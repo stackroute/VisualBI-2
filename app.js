@@ -1,9 +1,10 @@
 var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
-    routes = require('./routes/index.js'),
-    chartData = require('./routes/chartData.js'),
-    chartComments = require('./routes/chartComments.js');
+    bodyParser = require('body-parser');
+    indexRoute = require('./routes/index.js'),
+    chartDataRoute = require('./routes/chartData.js'),
+    chartCommentRoute = require('./routes/chartComments.js');
 
 var dbPath = "mongodb://localhost:27017/visualdb";
 mongoose.connect(dbPath);
@@ -21,10 +22,14 @@ app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
+// instruct the app to use the `bodyParser()` middleware for all routes
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extented: true}));
 
-app.use('/', routes);
-app.use('/chartdata', chartData);
-app.use('/comments', chartComments);
+
+app.use('/', indexRoute);
+app.use('/chartdata', chartDataRoute);
+app.use('/comments', chartCommentRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
