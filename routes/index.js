@@ -46,6 +46,15 @@ router.get('/dashboards', function(req, res, next) {
    });
 });
 
+router.get('/toggle/:chartType', function(req, res, next) {
+   // picks :chartType from the URL
+   console.log(req.params.chartType);
+   var chartType = req.params.chartType;
+   console.log(chartType);
+   var username = userId || 'ashok.kumar6@wipro.com';
+   User.toggleTheme(username,chartType);
+});
+
 function isAuthenticated(req, res, next) {
     if (req.user)
         return next();
