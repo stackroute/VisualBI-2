@@ -12,8 +12,10 @@ var userId;
 router.get('/', function(req, res, next) {
    var username = userId || 'ashok.kumar6@wipro.com';
    User.getTabs(username, function(data){
+     console.log("display data " + data);
       res.render('index', {
-         dashboards: data
+         dashboards: data.dashboards[0].tabs,
+         theme: data.preferences[0].theme
       });
    });
 });

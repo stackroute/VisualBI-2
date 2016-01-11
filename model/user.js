@@ -28,7 +28,7 @@ UserSchema.statics.getDashboard = function (emailId, callback) {
       'dashboards': 1,
       '_id': 0
    },function(err, data) {
-      var tabs = [];
+      var tabs = {};
       if(data && data.length > 0 && data[0].dashboards.length > 0) {
          tabs = data[0].dashboards[0].tabs;
       }
@@ -42,13 +42,14 @@ UserSchema.statics.getTabs = function (emailId, callback) {
    this.model('User').find({
       'emailId': emailId
    }, {
+      'preferences.theme': 1,
       'dashboards.tabs.tabTitle': 1,
       'dashboards.tabs.tabId': 1,
       '_id': 0
    },function(err, data) {
       var tabs = [];
       if(data && data.length > 0 && data[0].dashboards.length > 0) {
-         tabs = data[0].dashboards[0].tabs;
+         tabs = data[0];
       }
       callback(tabs);
    });
