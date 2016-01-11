@@ -7,7 +7,7 @@ var express = require('express'),
     passport = require('./passport');
 
 // Inedex page
-router.get('/', isAuthenticated, function(req, res, next) {
+router.get('/', [isAuthenticated, nocache], function(req, res, next) {
    var username = req.user;
    User.getTabs(username, function(data){
       res.render('index', {
@@ -21,8 +21,7 @@ router.get('/login', function(req, res, next) {
    if(req.user) {
       res.redirect('/');
    } else {
-      res.render('login', {message: req.session.messages});
-      req.session.messages = null;
+      res.render('login', {message: req.flash('error')});
    }
 });
 
@@ -61,5 +60,12 @@ function isAuthenticated(req, res, next) {
 
     // IF A USER ISN'T LOGGED IN, THEN REDIRECT to login page
     res.redirect('/login');
+}
+
+function nocache(req, res, next) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next();
 }
 module.exports = router;
