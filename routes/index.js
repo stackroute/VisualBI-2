@@ -7,9 +7,10 @@ var express = require('express'),
     User = require('../model/user'),
     LocalStrategy = require('passport-local');
 
+var userId;
 // Inedex page
 router.get('/', function(req, res, next) {
-   var username = req.username || 'ashok.kumar6@wipro.com';
+   var username = userId || 'ashok.kumar6@wipro.com';
    User.getTabs(username, function(data){
       res.render('index', {
          dashboards: data
@@ -28,7 +29,6 @@ router.post('/login', function(req, res, next) {
    if(!username) {
       res.redirect('/login');
    } else {
-      req.username = username;
       User.findById(username, function(err, user){
          console.log(user);
          res.redirect('/')
@@ -39,7 +39,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/dashboards', function(req, res, next) {
-   var username = req.username || 'ashok.kumar6@wipro.com';
+   var username = userId || 'ashok.kumar6@wipro.com';
    User.getDashboard(username, function(data){
       res.send(data);
    });
