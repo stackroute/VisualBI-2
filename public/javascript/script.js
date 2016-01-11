@@ -11,9 +11,9 @@
      $('body').addClass(id);
 
      $.ajax({
-       url: "/toggle/dark",
+       url: "/toggle/light",  //changes the color
        dataType: "text",
-       chartType: "dark",
+       chartToggle: "light",    //changes the color
        success:function(data){
          alert("Ajax request successful");
        }
