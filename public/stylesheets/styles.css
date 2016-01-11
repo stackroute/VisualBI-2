@@ -5,6 +5,27 @@ Custom CSS
 body{
   /*background-color:grey;*/
 }
+
+/* dark layout theme */
+
+.dark {
+  background-color: grey;
+}
+
+.dark .nav-tabs a {
+  color: black;
+}
+
+/* light layout theme */
+
+.light {
+  background-color: white;
+}
+
+.light .nav-tabs a {
+  color : #337ab7;
+}
+
 .navbar{
    background-color: black;
 }
@@ -40,6 +61,12 @@ body{
 textarea{
   margin-left: 20px !important;
 }
+
+#commentBtn {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
 .widget-border {
   border: 1px solid #333;
   margin: 1px;

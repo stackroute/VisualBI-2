@@ -5,8 +5,9 @@
    };
    widgetHandler(config);
 
-   // $('#btnLogout').on('click', function(e) {
-   //    e.preventDefault();
-   //    $.ajax('logout')
-   // });
+   $('.theme a').click(function() {
+     var id = $(this).attr("id");
+     $('body').removeClass();
+     $('body').addClass(id);
+   });
 })();

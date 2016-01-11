@@ -79,8 +79,18 @@ function widgetHandler(widgetsConfig) {
                $(subDiv).append('<div id = comment class = col-lg-12></div>');
 
                $("textarea").css('overflow', 'hidden').autogrow();
-               $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:80%" ></textarea>');
-               $(subDiv).append('<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#commentsDialog" data-widgetId="' + widgetId + '"><span class="glyphicon glyphicon-hand-up"></span>Comments....</button>');
+
+               var textAreaWidth = 0;
+               if(colWidth > 8) {
+                 textAreaWidth = 80;
+               } else if(colWidth > 5) {
+                 textAreaWidth = 60;
+               } else {
+                 textAreaWidth = 40;
+               }
+
+               $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:' + textAreaWidth + '%" ></textarea>');
+               $(subDiv).append('<button id = commentBtn type="button" class="btn btn-warning" data-toggle="modal" data-target="#commentsDialog" data-widgetId="' + widgetId + '"><span class="glyphicon glyphicon-hand-up"></span>Comments....</button>');
             })
          }
 
