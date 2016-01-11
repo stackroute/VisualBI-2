@@ -40,6 +40,7 @@ router.post('/login', function(req, res, next) {
 router.get('/dashboards', function(req, res, next) {
    var username = userId || 'ashok.kumar6@wipro.com';
    User.getDashboard(username, function(data){
+     console.log(data);
       res.send(data);
    });
 });
