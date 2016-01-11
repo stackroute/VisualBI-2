@@ -3,7 +3,9 @@ var express = require('express'),
     path = require('path'),
     bodyParser = require('body-parser'),
     passport = require('./routes/passport'),
-    expressSession =require('express-session'),
+    expressSession = require('express-session'),
+    flash = require('connect-flash'),
+    cookieParser = require('cookie-parser');
     indexRoute = require('./routes/index.js'),
     chartDataRoute = require('./routes/chartData.js'),
     chartCommentRoute = require('./routes/chartComments.js');
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extented: true}));
+// app.use(cookieParser('keyboard cat'));
+app.use(flash());
 
 //initialize passort sessions
 app.use(expressSession({

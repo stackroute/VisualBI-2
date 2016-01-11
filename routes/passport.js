@@ -3,7 +3,6 @@ var passport = require('passport'),
     User = require('../model/user');
 
 passport.use(new LocalStrategy(function(username, password, done) {
-   console.log(username);
       User.findById(username, function(err, user) {
          if(!user)
             return done(null, false, {message: "The user doesn't exists"});

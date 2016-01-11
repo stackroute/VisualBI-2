@@ -10,7 +10,6 @@ var express = require('express'),
 router.get('/', isAuthenticated, function(req, res, next) {
    var username = req.user;
    User.getTabs(username, function(data){
-     console.log("display data " + data);
       res.render('index', {
          dashboards: data.dashboards[0].tabs,
          theme: data.preferences[0].theme
@@ -28,7 +27,6 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res){
-   console.log('inside logout');
    if(req.user)
       req.logOut();
    res.redirect('/login');
@@ -51,7 +49,7 @@ function isAuthenticated(req, res, next) {
     if (req.user)
         return next();
 
-    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT to login page
     res.redirect('/login');
 }
 module.exports = router;
