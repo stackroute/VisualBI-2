@@ -23,18 +23,17 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-   console.log('post request');
    var username = req.body.username,
       password = req.body.password;
-   if(!username) {
-      res.redirect('/login');
-   } else {
-      User.findById(username, function(err, user){
-         console.log(user);
-         res.redirect('/')
-      });
 
-   }
+   User.findById(username, function(err, user){
+      if(user) {
+         res.redirect('/')
+      } else {
+         res.redirect('/login');
+      }
+
+   });
 
 });
 
