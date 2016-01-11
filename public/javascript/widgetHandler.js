@@ -33,7 +33,7 @@ function widgetHandler(widgetsConfig) {
                var chartRenderer = details.chartRenderer;
                var dataUrl = details.url;
                var title = details.title;
-               var commentPath = details.comments;
+               var comments = details.comments;
                var widgetContainer = "#" + colId;
 
                if($("#" + tab).find("#" + row).length == 0) {
@@ -77,7 +77,6 @@ function widgetHandler(widgetsConfig) {
 
                // create comment
                $(subDiv).append('<div id = comment class = col-lg-12></div>');
-
                $("textarea").css('overflow', 'hidden').autogrow();
 
                var textAreaWidth = 0;
@@ -88,26 +87,44 @@ function widgetHandler(widgetsConfig) {
                } else {
                  textAreaWidth = 40;
                }
+               var len = comments.length-1;
+               for(var i=len-1; i<=len;i++) {
+                 var recentComment = "<strong>" + comments[i].userid + " : </strong>" + comments[i].comment + " <strong>at</strong> " + comments[i].datetime;
+                 $(subDiv).append('<p class = col-lg-12>' + recentComment + '</p>');
+               }
+               $(subDiv).append('<a id = modalLink data-toggle="modal" class="col-lg-12" href="#commentsDialog" data-widgetId="' + widgetId + '">more Comments....</a>');
 
                $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:' + textAreaWidth + '%" ></textarea>');
-               $(subDiv).append('<button id = commentBtn type="button" class="btn btn-warning" data-toggle="modal" data-target="#commentsDialog" data-widgetId="' + widgetId + '"><span class="glyphicon glyphicon-hand-up"></span>Comments....</button>');
+               $(subDiv).append('<button type="button" class="btn btn-warning" id="submitButton">Submit</button>')
+// type="button" class="btn btn-warning" <span class="glyphicon glyphicon-hand-up"></span>
             })
+
          }
+        //  $('#comment').append('<p>Hello</p>');
 
       });
+      $()
 
       $('#commentsDialog').on('show.bs.modal', function(event){
+        //$(this).find('#cd-timeline').reset();
+
         var button = $(event.relatedTarget) // Button that triggered the modal
         var widgetId = $(event.relatedTarget).attr('data-widgetId');
         var modal = $(this);
-      //   modal.find('#commentsText').html("<p>hello</p>");
-        //add existing comments
+        $('#cd-timeline').html("");
         $.getJSON("comments/" + widgetId, function(comments) {
            var paragraphs = "";
            for(j in comments) {
-             paragraphs += "<p><strong>" + comments[j].userid + " :</strong> " + comments[j].comment +"</p>";
-           }
-           modal.find('#commentsText').html(paragraphs);
+             var id = "comments" + j;
+             var subid = "sub" + id;
+             //<section id="cd-timeline" class="cd-container">
+
+            $("#cd-timeline").append('<div id = ' + id + ' class = cd-timeline-block></div>');
+            $("#" + id).append('<div id = ' + subid + ' class = cd-timeline-content></div>');
+            $("#" + subid).append('<h3>' + comments[j].userid + '</h3>');
+            $("#" + subid).append('<h5>' + comments[j].comment + '</h5>');
+            $("#" + subid).append('<span class="cd-date">' + comments[j].datetime + '</span>');
+          }
 
         });
 

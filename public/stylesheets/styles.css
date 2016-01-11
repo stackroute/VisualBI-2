@@ -55,14 +55,19 @@ body{
    margin-top: 100px;
 }
 
+.login-error {
+   color: red;
+   font-weight: bold;
+}
 /*.row{
   margin-bottom: 20px;
 }*/
 textarea{
-  margin-left: 20px !important;
+  margin-left: 15px !important;
+  margin-top: 10px;
 }
 
-#commentBtn {
+#submitButton {
   margin-bottom: 20px;
   margin-left: 10px;
 }
