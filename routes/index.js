@@ -1,11 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
-var path = require('path');
-var passport = require('passport');
-var utils = require('./utils');
-var User = require('../model/user');
-
+var express = require('express'),
+    router = express.Router(),
+    fs = require('fs'),
+    path = require('path'),
+    passport = require('passport'),
+    utils = require('./utils'),
+    User = require('../model/user'),
+    LocalStrategy = require('passport-local');
 
 // Inedex page
 router.get('/', function(req, res, next) {
@@ -29,7 +29,11 @@ router.post('/login', function(req, res, next) {
       res.redirect('/login');
    } else {
       req.username = username;
-      res.redirect('/')
+      User.findById(username, function(err, user){
+         console.log(user);
+         res.redirect('/')
+      });
+
    }
 
 });

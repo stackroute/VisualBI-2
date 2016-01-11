@@ -45,4 +45,14 @@ UserSchema.statics.getTabs = function (emailId, callback) {
    });
 }
 
+UserSchema.statics.findById = function(id, callback) {
+   this.model('User').findOne({"emailId" : id }, {
+      "_id": 0,
+      "pwd": 1,
+      "emailId": 1,
+      "name": 1}, function(err, data) {
+      callback(err, data);
+   })
+}
+
 module.exports = mongoose.model("User", UserSchema);
