@@ -66,7 +66,6 @@ function widgetHandler(widgetsConfig) {
                var containerWidth = (screenWidth * widgetWidth)/100;
                var chartFunction = "chartLoader" + "." + chartRenderer + '("' + widgetContainer + '", ' + containerWidth + ', "' + dataUrl + '")';
 
-              //console.log(chartFunction);
                eval(chartFunction);
 
                $(subDiv).append('<hr class = hr-prop>');
@@ -92,12 +91,9 @@ function widgetHandler(widgetsConfig) {
 
                $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:' + textAreaWidth + '%" ></textarea>');
                $(subDiv).append('<button type="button" class="btn btn-warning" id="submitButton">Submit</button>')
-// type="button" class="btn btn-warning" <span class="glyphicon glyphicon-hand-up"></span>
             })
 
          }
-        //  $('#comment').append('<p>Hello</p>');
-
       });
       $('#commentsDialog').on('show.bs.modal', function(event){
 
@@ -111,7 +107,6 @@ function widgetHandler(widgetsConfig) {
 
         $.getJSON("comments/" + widgetId, function(widgetData) {
             $('.modal-body #barChart').html("");
-          console.log(widgetData);
           var comments = widgetData.comments;
 
           var widgetContainer = ".modal-body";
@@ -124,8 +119,6 @@ function widgetHandler(widgetsConfig) {
 
           var containerWidth = screenWidth-50;//(screenWidth * widgetWidth)/100;
           var chartData = "chartLoader" + "." + chartRenderer + '("' + widgetContainer + '", ' + containerWidth + ', "' + dataUrl + '")';
-          console.log(chartData);
-         //console.log(chartFunction);
           eval(chartData);
            for(j in comments) {
              var id = "comments" + j;

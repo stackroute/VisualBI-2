@@ -26,7 +26,6 @@ WidgetSchema.statics.getWidgetDetail = function(widgetId, callback) {
    }, {
       "_id":0
    }, function(err, data) {
-     console.log(data);
       callback(data);
    })
 }
