@@ -14,28 +14,6 @@ html * {
   box-sizing: border-box;
 }
 
-/*body {
-  font-size: 100%;
-  font-family: "Droid Serif", serif;
-  color: #7f8c97;
-  background-color: #e9f0f5;
-}*/
-
-/*a {
-  color: #acb7c0;
-  text-decoration: none;
-  font-family: "Open Sans", sans-serif;
-}*/
-
-/*img {
-  max-width: 100%;
-}
-
-h1, h2 {
-  font-family: "Open Sans", sans-serif;
-  font-weight: bold;
-}*/
-
 /* --------------------------------
 
 Modules - reusable parts of our design
@@ -70,8 +48,8 @@ header h1 {
   font-size: 18px;
   font-size: 1.125rem;
 }*/
-/*@media only screen and (min-width: 1170px) {
-  header {
+@media only screen and (min-width: 600px) {
+  /*header {
     height: 300px;
     line-height: 300px;
   }
@@ -97,7 +75,8 @@ header h1 {
   width: 4px;
   background: black;
 }
-@media only screen and (min-width: 1170px) {
+}
+@media only screen and (min-width: 600px) {
   #cd-timeline {
     /*margin-top: 3em;*/
     /*margin-bottom: 3em;*/
@@ -123,7 +102,7 @@ header h1 {
 .cd-timeline-block:last-child {
   margin-bottom: 0;
 }
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 600px) {
   .cd-timeline-block {
     /*margin: 4em 0;*/
   }
@@ -163,7 +142,7 @@ header h1 {
 .cd-timeline-img.cd-location {
   background: #f0ca45;
 }*/
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 600px) {
 
   .cssanimations .cd-timeline-img.is-hidden {
     visibility: hidden;
@@ -300,7 +279,7 @@ header h1 {
     font-size: 0.875rem;
   }
 }
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 600px) {
   .cd-timeline-content {
     margin-left: 0;
     /*padding: 1.6em;*/
@@ -352,7 +331,7 @@ header h1 {
   }
 }
 
-@media only screen and (min-width: 1170px) {
+@media only screen and (min-width: 600px) {
   /* inverse bounce effect on even content blocks */
   .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
     -webkit-animation: cd-bounce-2-inverse 0.6s;
