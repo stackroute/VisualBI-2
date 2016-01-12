@@ -11,11 +11,10 @@
      $('body').addClass(id);
 
      $.ajax({
-       url: "/toggle/light",  //changes the color
+       url: "/toggle/" + id,  //changes the color
        dataType: "text",
-       chartToggle: "light",    //changes the color
+       userTheme: id,
        success:function(data){
-         alert("Ajax request successful");
        }
      });
    });

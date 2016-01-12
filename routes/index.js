@@ -45,13 +45,12 @@ router.get('/dashboards', function(req, res, next) {
    });
 });
 
-router.get('/toggle/:chartToggle', function(req, res, next) {
-   // picks :chartType from the URL
-   console.log(req.params.chartToggle);
-   var chartType = req.params.chartToggle;
-   console.log(chartToggle);
-   var username = userId || 'ashok.kumar6@wipro.com';
-   User.toggleTheme(username,chartToggle);
+router.get('/toggle/:userTheme', function(req, res, next) {
+   var userTheme = req.params.userTheme;
+   console.log("Theme " + userTheme);
+   //var username = userId || 'ashok.kumar6@wipro.com';
+   var username = 'ashok.kumar6@wipro.com';
+   User.setUserTheme(username,userTheme);
 });
 
 function isAuthenticated(req, res, next) {

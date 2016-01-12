@@ -65,9 +65,20 @@ UserSchema.statics.findById = function(id, callback) {
    })
 }
 
-UserSchema.statics.toggleTheme=function(id,newtheme){
- this.model('User').update({'emailId' : id},{preferences:{theme:newtheme} },function(err, newtheme) {});
-    console.log("New theme "+newtheme + " updated successfully in the database");
-  }
+UserSchema.statics.setUserTheme=function(id, userTheme){
+   console.log("Theme in setUserTheme " + userTheme);
+
+   this.model('User').update({
+     'emailId' : id
+   },{
+     $set: {
+       preferences:{
+         theme:userTheme
+       }
+     }
+   },function(err, userTheme) {
+   });
+   console.log("New theme "+userTheme + " updated successfully in the database");
+}
 
 module.exports = mongoose.model("User", UserSchema);
