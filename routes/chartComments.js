@@ -6,8 +6,8 @@ var Widget = require('../model/widget');
 
 router.get('/:widgetId', function(req, res, next) {
    var widgetId = req.params.widgetId;
-   Widget.getComments(widgetId, function(comments) {
-      res.send(comments);
+   Widget.getWidgetDetail(widgetId, function(data) {
+      res.send(data);
    });
 
 });

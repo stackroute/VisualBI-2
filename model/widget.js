@@ -20,14 +20,14 @@ WidgetSchema.statics.getWidgets = function(callback) {
    })
 }
 
-WidgetSchema.statics.getComments = function(widgetId, callback) {
-   this.model('Widget').find({
+WidgetSchema.statics.getWidgetDetail = function(widgetId, callback) {
+   this.model('Widget').findOne({
       "widgetId": widgetId
    }, {
-      "_id":0,
-      "comments": 1
+      "_id":0
    }, function(err, data) {
-      callback(data[0].comments);
+     console.log(data);
+      callback(data);
    })
 }
 

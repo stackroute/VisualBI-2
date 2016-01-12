@@ -4,7 +4,7 @@ function widgetHandler(widgetsConfig) {
     url: widgetsConfig.userDashboard,
     dataType: "text",
     success: function(data) {
-      var json = $.parseJSON(data);
+       json = $.parseJSON(data);
       // var makeActiveTab = true;
       var config = {
          height: 300,
@@ -15,7 +15,7 @@ function widgetHandler(widgetsConfig) {
       $(widgetsConfig.container).find('li').first().addClass('active');
       $('#dashboardsContent').find('div').first().addClass('active');
 
-      $.getJSON('chartData/widgets', function(widgets) {
+     $.getJSON('chartData/widgets', function(widgets) {
          //loop through users tabs
          // var dashboard = json[0];
          for(i in json) {
@@ -30,17 +30,13 @@ function widgetHandler(widgetsConfig) {
                colId = tab + row + "col" + index++;
                var colWidth = r.colWidth;
                var details = getWidgetDetail(widgets, widgetId);
-               var chartRenderer = details.chartRenderer;
-               var dataUrl = details.url;
+               chartRenderer = details.chartRenderer;
+               dataUrl = details.url;
                var title = details.title;
                var comments = details.comments;
-               var widgetContainer = "#" + colId;
+               widgetContainer = "#" + colId;
 
                if($("#" + tab).find("#" + row).length == 0) {
-               //  if(makeActiveTab) {
-               //     $("#" + tab).addClass('active');
-               //     makeActiveTab = false;
-               //  }
                  //create row
                  $("#" + tab).append('<div id = ' + row + ' class = row></div>');
                }
@@ -70,7 +66,7 @@ function widgetHandler(widgetsConfig) {
                var containerWidth = (screenWidth * widgetWidth)/100;
                var chartFunction = "chartLoader" + "." + chartRenderer + '("' + widgetContainer + '", ' + containerWidth + ', "' + dataUrl + '")';
 
-             //   console.log(chartFunction);
+              //console.log(chartFunction);
                eval(chartFunction);
 
                $(subDiv).append('<hr class = hr-prop>');
@@ -103,21 +99,37 @@ function widgetHandler(widgetsConfig) {
         //  $('#comment').append('<p>Hello</p>');
 
       });
-      $()
-
       $('#commentsDialog').on('show.bs.modal', function(event){
-        //$(this).find('#cd-timeline').reset();
 
+      //$(this).find('#cd-timeline').reset();
         var button = $(event.relatedTarget) // Button that triggered the modal
         var widgetId = $(event.relatedTarget).attr('data-widgetId');
         var modal = $(this);
+
         $('#cd-timeline').html("");
-        $.getJSON("comments/" + widgetId, function(comments) {
-           var paragraphs = "";
+
+
+        $.getJSON("comments/" + widgetId, function(widgetData) {
+            $('.modal-body #barChart').html("");
+          console.log(widgetData);
+          var comments = widgetData.comments;
+
+          var widgetContainer = ".modal-body";
+          var chartRenderer =widgetData.chartRenderer;
+          var dataUrl = widgetData.url;
+          var title = widgetData.title;
+          $('#modalTitle').html(title);
+
+           var screenWidth = $(".modal-dialog").width();
+
+          var containerWidth = screenWidth-50;//(screenWidth * widgetWidth)/100;
+          var chartData = "chartLoader" + "." + chartRenderer + '("' + widgetContainer + '", ' + containerWidth + ', "' + dataUrl + '")';
+          console.log(chartData);
+         //console.log(chartFunction);
+          eval(chartData);
            for(j in comments) {
              var id = "comments" + j;
              var subid = "sub" + id;
-             //<section id="cd-timeline" class="cd-container">
 
             $("#cd-timeline").append('<div id = ' + id + ' class = cd-timeline-block></div>');
             $("#" + id).append('<div id = ' + subid + ' class = cd-timeline-content></div>');
