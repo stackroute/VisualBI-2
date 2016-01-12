@@ -1,10 +1,11 @@
-var mongoose = require('mongoose');
+ var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
    name: String,
    emailId: String,
    pwd: String,
    preferences:[{
+      _id: false,
       theme:String,
       showLegend: Boolean
    }],
@@ -33,7 +34,6 @@ UserSchema.statics.getDashboard = function (emailId, callback) {
          tabs = data[0].dashboards[0].tabs;
       }
       callback(tabs);
-
    });
 }
 
@@ -63,6 +63,19 @@ UserSchema.statics.findById = function(id, callback) {
       "name": 1}, function(err, data) {
       callback(err, data);
    })
+}
+
+UserSchema.statics.setUserTheme=function(id, userTheme){
+   this.model('User').update({
+     'emailId' : id
+   },{
+     $set: {
+       preferences:{
+         theme:userTheme
+       }
+     }
+   },function(err, userTheme) {
+   });
 }
 
 module.exports = mongoose.model("User", UserSchema);

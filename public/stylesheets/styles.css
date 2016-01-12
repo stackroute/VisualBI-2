@@ -55,7 +55,9 @@ body{
    margin-top: 100px;
 }
 .modal{
-  overflow-x: scroll;
+.login-error {
+   color: red;
+   font-weight: bold;
 }
 /*.row{
   margin-bottom: 20px;

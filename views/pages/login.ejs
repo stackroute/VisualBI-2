@@ -12,12 +12,7 @@
          </div>
          <div class="row">
             <div class="col-sm-4 col-md-offset-4 login-form">
-               <p>
-                  <!-- display the error message here -->
-                  <% if (message) { %>
-                  <%= message %>
-                  <% } %>
-               </p>
+
                <div class="account-wall">
                   <img class="profile-img img-circle center-block"
                    src="images/login-page.png" alt="profile image" />
@@ -32,6 +27,12 @@
                            <input type="password" class="form-control" placeholder="Enter your password" aria-describedby="pwdLabel" name="password" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block login-input" id="btnSignin">Sign in</button>
+                        <p class="login-error">
+                           <!-- display the error message here -->
+                           <% if (message) { %>
+                           <%= message %>
+                           <% } %>
+                        </p>
                      </div>
                   </form>
 

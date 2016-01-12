@@ -9,5 +9,10 @@
      var id = $(this).attr("id");
      $('body').removeClass();
      $('body').addClass(id);
+
+     $.ajax({
+       url: "/toggle/" + id,  //changes the theme id
+       dataType: "text"
+     });
    });
 })();
