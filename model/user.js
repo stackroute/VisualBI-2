@@ -34,7 +34,6 @@ UserSchema.statics.getDashboard = function (emailId, callback) {
          tabs = data[0].dashboards[0].tabs;
       }
       callback(tabs);
-
    });
 }
 
@@ -67,8 +66,6 @@ UserSchema.statics.findById = function(id, callback) {
 }
 
 UserSchema.statics.setUserTheme=function(id, userTheme){
-   console.log("Theme in setUserTheme " + userTheme);
-
    this.model('User').update({
      'emailId' : id
    },{
@@ -79,7 +76,6 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
      }
    },function(err, userTheme) {
    });
-   console.log("New theme "+userTheme + " updated successfully in the database");
 }
 
 module.exports = mongoose.model("User", UserSchema);
