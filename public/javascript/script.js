@@ -12,9 +12,7 @@
 
      $.ajax({
        url: "/toggle/" + id,  //changes the theme id
-       dataType: "text",
-       success:function(data){
-       }
+       dataType: "text"
      });
    });
 })();
