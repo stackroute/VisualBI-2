@@ -13,7 +13,6 @@
      $.ajax({
        url: "/toggle/" + id,  //changes the theme id
        dataType: "text",
-       userTheme: id,
        success:function(data){
        }
      });

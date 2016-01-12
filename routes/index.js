@@ -47,7 +47,6 @@ router.get('/dashboards', function(req, res, next) {
 
 router.get('/toggle/:userTheme', function(req, res, next) {
    var userTheme = req.params.userTheme;
-   var chartType = req.params.chartToggle;
    User.setUserTheme(req.user.emailId, userTheme);
 });
 
