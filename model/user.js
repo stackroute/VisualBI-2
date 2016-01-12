@@ -5,6 +5,7 @@ var UserSchema = mongoose.Schema({
    emailId: String,
    pwd: String,
    preferences:[{
+      _id: false,
       theme:String,
       showLegend: Boolean
    }],
