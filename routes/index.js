@@ -9,10 +9,11 @@ var express = require('express'),
 // Inedex page
 router.get('/', [isAuthenticated, nocache], function(req, res, next) {
    var username = req.user;
-   User.getTabs(username, function(data){
+   User.getTabs(username.emailId, function(data){
       res.render('index', {
          dashboards: data.dashboards[0].tabs,
-         theme: data.preferences[0].theme
+         theme: data.preferences[0].theme,
+         name: username.name
       });
    });
 });
@@ -38,9 +39,8 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.get('/dashboards', function(req, res, next) {
-   var username = req.user || 'ashok.kumar6@wipro.com';
-   User.getDashboard(username, function(data){
-     console.log(data);
+   var username = req.user;
+   User.getDashboard(username.emailId, function(data){
       res.send(data);
    });
 });
@@ -48,9 +48,8 @@ router.get('/dashboards', function(req, res, next) {
 router.get('/toggle/:userTheme', function(req, res, next) {
    var userTheme = req.params.userTheme;
    console.log("Theme " + userTheme);
-   //var username = userId || 'ashok.kumar6@wipro.com';
-   var username = 'ashok.kumar6@wipro.com';
-   User.setUserTheme(username,userTheme);
+   var chartType = req.params.chartToggle;
+   User.toggleTheme(req.user.emailId, chartToggle);
 });
 
 function isAuthenticated(req, res, next) {
