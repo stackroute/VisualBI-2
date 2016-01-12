@@ -45,7 +45,7 @@ Modules - reusable parts of our design
   /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
   width: 90%;
   max-width: 1170px;
-  margin: 0 auto;
+  /*margin: 0 auto;*/
 }
 .cd-container::after {
   /* clearfix */
@@ -84,8 +84,8 @@ header h1 {
 #cd-timeline {
   position: relative;
   padding: 2em 0;
-  margin-top: 2em;
-  margin-bottom: 2em;
+  /*margin-top: 2em;*/
+  /*margin-bottom: 2em;*/
 }
 #cd-timeline::before {
   /* this is the vertical line */
@@ -95,12 +95,12 @@ header h1 {
   left: 18px;
   height: 100%;
   width: 4px;
-  background: #d7e4ed;
+  background: black;
 }
 @media only screen and (min-width: 1170px) {
   #cd-timeline {
-    margin-top: 3em;
-    margin-bottom: 3em;
+    /*margin-top: 3em;*/
+    /*margin-bottom: 3em;*/
   }
   #cd-timeline::before {
     left: 50%;
@@ -110,7 +110,7 @@ header h1 {
 
 .cd-timeline-block {
   position: relative;
-  margin: 2em 0;
+  /*margin: 2em 0;*/
 }
 .cd-timeline-block:after {
   content: "";
@@ -125,7 +125,7 @@ header h1 {
 }
 @media only screen and (min-width: 1170px) {
   .cd-timeline-block {
-    margin: 4em 0;
+    /*margin: 4em 0;*/
   }
   .cd-timeline-block:first-child {
     margin-top: 0;
@@ -243,7 +243,7 @@ header h1 {
 }
 .cd-timeline-content {
   position: relative;
-  margin-left: 60px;
+  /*margin-left: 60px;*/
   background: white;
   border-radius: 0.25em;
   padding: 1em;
@@ -259,7 +259,7 @@ header h1 {
 }
 .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
   font-size: 13px;
-  font-size: 0.8125rem;
+  font-size: 12px;
 }
 .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
   display: inline-block;
@@ -271,16 +271,17 @@ header h1 {
 .cd-timeline-content .cd-read-more {
   float: right;
   padding: .8em 1em;
-  background: #acb7c0;
+  background: black;
+  /*background: #acb7c0;*/
   color: white;
   border-radius: 0.25em;
 }
 .no-touch .cd-timeline-content .cd-read-more:hover {
-  background-color: #bac4cb;
+  background-color: black;
 }
 .cd-timeline-content .cd-date {
   float: left;
-  padding: .8em 0;
+  /*padding: .8em 0;*/
   opacity: .7;
 }
 .cd-timeline-content::before {
@@ -310,14 +311,14 @@ header h1 {
 @media only screen and (min-width: 1170px) {
   .cd-timeline-content {
     margin-left: 0;
-    padding: 1.6em;
+    /*padding: 1.6em;*/
     width: 45%;
   }
   .cd-timeline-content::before {
     top: 24px;
     left: 100%;
     border-color: transparent;
-    border-left-color: white;
+    border-left-color: black;
   }
   .cd-timeline-content .cd-read-more {
     float: left;
@@ -328,7 +329,7 @@ header h1 {
     left: 122%;
     top: 6px;
     font-size: 16px;
-    font-size: 1rem;
+    font-size: 13px;
   }
   .cd-timeline-block:nth-child(even) .cd-timeline-content {
     float: right;
