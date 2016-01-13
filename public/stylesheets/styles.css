@@ -101,6 +101,10 @@ textarea{
    padding: 20px;
    box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 2px 0px;
 }
+#commentsText{
+  overflow-x: hidden;
+  height:550px;
+}
 
 /* --------------------------------------
    Media Queries
