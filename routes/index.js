@@ -45,7 +45,7 @@ router.get('/dashboards', function(req, res, next) {
    });
 });
 
-router.get('/toggle/:userTheme', function(req, res, next) {
+router.get('/changeTheme/:userTheme', function(req, res, next) {
    var userTheme = req.params.userTheme;
    User.setUserTheme(req.user.emailId, userTheme);
 });

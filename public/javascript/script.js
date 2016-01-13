@@ -11,7 +11,7 @@
      $('body').addClass(id);
 
      $.ajax({
-       url: "/toggle/" + id,  //changes the theme id
+       url: "/changeTheme/" + id,  //changes the theme id
        dataType: "text"
      });
    });
