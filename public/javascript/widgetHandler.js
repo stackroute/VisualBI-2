@@ -87,7 +87,7 @@ function widgetHandler(widgetsConfig) {
                  var recentComment = "<strong>" + comments[i].userid + " : </strong>" + comments[i].comment + " <strong>at</strong> " + comments[i].datetime;
                  $(subDiv).append('<p class = col-lg-12>' + recentComment + '</p>');
                }
-               $(subDiv).append('<a id = modalLink data-toggle="modal" class="col-lg-12" href="#commentsDialog" data-widgetId="' + widgetId + '">more Comments....</a>');
+               $(subDiv).append('<a id = modalLink data-toggle="modal" class="col-lg-12 col-md-12" href="#commentsDialog" data-widgetId="' + widgetId + '">more Comments....</a>');
 
                $(subDiv).append('<textarea id = enterComments placeholder = "Add your comments... " style = "width:' + textAreaWidth + '%" ></textarea>');
                $(subDiv).append('<button type="button" class="btn btn-warning" id="submitButton">Submit</button>')
