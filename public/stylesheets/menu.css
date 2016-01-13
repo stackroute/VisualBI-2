@@ -171,7 +171,7 @@
   border: none;
   display: block;
   height: 32px;
-  margin-left: -65px;
+  margin-left: -55px;
   position: fixed;
   top: 20px;
   width: 32px;
@@ -333,4 +333,21 @@ body a:hover { color: #ffffff; }*/
 /* Large desktop */
 @media (min-width: 1200px) {
 
+}
+@media (min-width: 1005px) {
+
+.hamburger {
+  /*background: transparent;*/
+  background-color: grey;
+  border: none;
+  display: block;
+  height: 32px;
+  margin-left: -5px;
+  position: fixed;
+  top: 20px;
+  width: 32px;
+  z-index: 999;
+  margin-top: 30px;
+
+}
 }
