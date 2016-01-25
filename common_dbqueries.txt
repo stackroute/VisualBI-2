@@ -1,0 +1,34 @@
+update userid
+---------------------------------------------------------------
+db.users.update({"email":"ashok.kumar6@wipro.com"}, {$set: {"userid":ObjectId("56a11a224de3516e7c42c26e")}})
+
+db.users.find({"userid":ObjectId("56a11a224de3516e7c42c26e")}).pretty()
+ - ashok.kumar@wipro.com
+db.users.update({"userid":ObjectId("56a11a224de3516e7c42c26e")}, {$set:{"parameters":'{"tempkey":"hello"}'}})
+db.users.remove({"email":{$ne:"ashok.kumar6@wipro.com"}}, false, true)
+568df38e8aaf007e56689714
+
+=================widgets=============================================================================================
+db.widgets.update({"_id":ObjectId("568df38e8aaf007e56689714")}, {$set:{"parameters":{"url":"chartdata/gdpBarChart"}}})
+db.widgets.update({"_id":ObjectId("568df6fd8aaf007e56689717")}, {$set:{"parameters":{"url":"chartdata/gdpContinent"}}})
+db.widgets.update({"_id":ObjectId("568df7978aaf007e56689718")}, {$set:{"parameters":{"url":"chartdata/gdpPerCapitaBarChart"}}})
+db.widgets.find().pretty()
+db.widgetId.insert({"title":"Mdx data grid display","chartRenderer":"executeQueryService", "comments":[],"parameters":{"url":{}}})
+
+
+======================update new user ashok====================================
+db.users.insert({ "userid" : ObjectId("56a11a224de3516e7c42c26e"),"preferences" : { "theme" : "dark", "showLegend" : true }, "dashboards" : [ { "_id" : "dbdash1", "sharedWith" : [ "56a205563f8a5736206982c8" ], "tabs" : [ { "tabTitle" : "1 Column layout", "tabId" : "tab1", "rows" : [ { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df38e8aaf007e56689714") } ] }, { "columns" : [ { "colWidth" : "6", "widgetId" : ObjectId("568df6fd8aaf007e56689717") }, { "colWidth" : "6", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] }, { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df38e8aaf007e56689714") } ] } ] },{"tabTitle" : "Custom Layout", "tabId" : "tab2", "rows" : [ { "columns" : [ { "colWidth" : "4", "widgetId" : ObjectId("568df38e8aaf007e56689714") },{ "colWidth" : "4", "widgetId" : ObjectId("568df6fd8aaf007e56689717") },{ "colWidth" : "4", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] }, { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] }, { "columns" : [ { "colWidth" : "6", "widgetId" : ObjectId("568df38e8aaf007e56689714") },{ "colWidth" : "6", "widgetId" : ObjectId("568df7978aaf007e56689718") }  ] } ] } ] } ]})
+
+db.users.insert({ "userid" : ObjectId("56a20467ba51e8e81f1a35a4"),"preferences" : { "theme" : "dark", "showLegend" : true }, "dashboards" : [ { "_id" : "dbdash1", "sharedWith" : [ "56a205563f8a5736206982c8" ], "tabs" : [ { "tabTitle" : "Wave1 grid", "tabId" : "tab1", "rows" : [ { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("56a20902a375b2ea99a9b119") } ] }, { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df38e8aaf007e56689714") } ] } ] }, {"tabTitle" : "Wave1 mdx display", "tabId" : "tab2", "rows" : [ { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("56a20902a375b2ea99a9b119") } ] } ] } ] } ]})
+
+56a20902a375b2ea99a9b119 -- wave1 widgetId
+
+, "userid" : ObjectId("56a205563f8a5736206982c8"), "tabs" : [ { "tabTitle" : "Custom Layout", "tabId" : "tab2", "rows" : [ { "columns" : [ { "colWidth" : "4", "widgetId" : ObjectId("568df38e8aaf007e56689714") }, { "colWidth" : "4", "widgetId" : ObjectId("568df6fd8aaf007e56689717") }, { "colWidth" : "4", "widgetId" : ObjectId("56a20902a375b2ea99a9b119") } ] }, { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] }, { "columns" : [ { "colWidth" : "6", "widgetId" : ObjectId("568df38e8aaf007e56689714") }, { "colWidth" : "6", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] } ] }, {"tabTitle" : "Custom Layout", "tabId" : "tab2", "rows" : [ { "columns" : [ { "colWidth" : "4", "widgetId" : ObjectId("568df38e8aaf007e56689714") },{ "colWidth" : "4", "widgetId" : ObjectId("568df6fd8aaf007e56689717") },{ "colWidth" : "4", "widgetId" : ObjectId("56a20902a375b2ea99a9b119") } ] }, { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] }, { "columns" : [ { "colWidth" : "6", "widgetId" : ObjectId("568df38e8aaf007e56689714") },{ "colWidth" : "6", "widgetId" : ObjectId("568df7978aaf007e56689718") }  ] } ] } ] })
+
+
+
+"chartRenderer":"executeQueryService" 56a20902a375b2ea99a9b119
+db.users.update({"userid":ObjectId("56a11a224de3516e7c42c26e")}, {$unset:{"name":"", "email":"", "password":"","widgetId":"","parameters":""}})
+db.credentials.update({"_id":ObjectId("")})
+
+db.users.update({"userid":ObjectId("56a205563f8a5736206982c8")},{ $addToSet:{ tabs: {"tabTitle" : "Custom Layout", "tabId" : "tab2", "rows" : [ { "columns" : [ { "colWidth" : "4", "widgetId" : ObjectId("568df38e8aaf007e56689714") },{ "colWidth" : "4", "widgetId" : ObjectId("568df6fd8aaf007e56689717") },{ "colWidth" : "4", "widgetId" : ObjectId("56a20902a375b2ea99a9b119") } ] }, { "columns" : [ { "colWidth" : "12", "widgetId" : ObjectId("568df7978aaf007e56689718") } ] }, { "columns" : [ { "colWidth" : "6", "widgetId" : ObjectId("568df38e8aaf007e56689714") },{ "colWidth" : "6", "widgetId" : ObjectId("568df7978aaf007e56689718") }  ] } ] }}})
