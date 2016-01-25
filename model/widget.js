@@ -20,14 +20,14 @@ WidgetSchema.statics.getWidgets = function(callback) {
    })
 }
 
-WidgetSchema.statics.getWidgetDetail = function(widgetId, callback) {
+WidgetSchema.statics.getWidget = function (widgetId, callback) {
    this.model('Widget').findOne({
-      "widgetId": widgetId
+      'widgetId': widgetId
    }, {
-      "_id":0
-   }, function(err, data) {
+      '_id': 0
+   },function(err, data) {
       callback(data);
-   })
+   });
 }
 
 module.exports = mongoose.model("Widget", WidgetSchema);

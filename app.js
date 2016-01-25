@@ -5,13 +5,17 @@ var express = require('express'),
     passport = require('./routes/passport'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
-    cookieParser = require('cookie-parser');
-    indexRoute = require('./routes/index.js'),
-    chartDataRoute = require('./routes/chartData.js'),
-    chartCommentRoute = require('./routes/chartComments.js');
+    cookieParser = require('cookie-parser'),
+    indexRouter = require('./routes/indexRouter'),
+    userRouter = require('./routes/userRouter'),
+    widgetRouter = require('./routes/widgetRouter'),
+	 dashboardRouter = require('./routes/dashboardRouter'),
+    chartdataRouter = require('./routes/chartdataRouter'),
+    dbConfig = require('./config/db'),
+	 Credential = require('./model/credential'),
+	 gridRouter = require('./routes/girdRouter');
 
-var dbPath = "mongodb://localhost:27017/visualdb";
-mongoose.connect(dbPath);
+mongoose.connect(dbConfig.url);
 var db = mongoose.connection;
 
 var app = express();
@@ -22,7 +26,7 @@ db.once('open', function() {
 
 });
 
-app.set('views', path.join(__dirname, 'views/pages'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -34,8 +38,8 @@ app.use(flash());
 
 //initialize passort sessions
 app.use(expressSession({
-   secret: 'cookie_secret',
-   cookie: { maxAge: 60000 },
+   secret: 'tobo',
+   cookie: { maxAge: 360*5 },
    proxy: true,
    resave: true,
    saveUninitialized: true
@@ -44,9 +48,13 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', indexRoute);
-app.use('/chartdata', chartDataRoute);
-app.use('/comments', chartCommentRoute);
+
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+app.use('/dashboard', dashboardRouter);
+app.use('/widgets', widgetRouter);
+app.use('/chartdata', chartdataRouter);
+app.use('/execute', gridRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,6 +69,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if(app.get('env') === 'development') {
    app.use(function(err, req, res, next) {
+		console.log("in error handler", err)
       res.status(err.status || 500);
       res.render('error', {
          message: "err.message",
