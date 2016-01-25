@@ -13,7 +13,7 @@
 								<img src="/images/loading.gif" /> loading...	
 							</div>
 							
-							<chart-panel is-loading="isLoading" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+							<chart-panel column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 								<a class="btn pull-right" ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)"><img src="/images/fullscreen.png" alt="full screen"></a>
 							</chart-panel>
 						</div>

@@ -1,6 +1,6 @@
 angular.module('vbiApp')
 	.factory('plotContinentChart', [function(){
-		var margin = {top: 10, right: 20, bottom: 100, left: 50},
+		var margin = {top: 10, right: 50, bottom: 100, left: 50},
 		 width = 400 - margin.left - margin.right,
 		 height = 500 - margin.top - margin.bottom;
 
@@ -9,8 +9,8 @@ angular.module('vbiApp')
 		
 		var chartRenderer = function(chartContainer, parameters){
 			return new Promise(function(resolve, reject){
-				
-				var containerWidth = chartContainer.clientWidth, 
+				var containerWidth = parameters.width;
+//				var containerWidth = chartContainer.clientWidth, 
 					 jsonDataUrl = parameters.url;
 				if(parseInt(containerWidth) === 0)
 					containerWidth = 800;
