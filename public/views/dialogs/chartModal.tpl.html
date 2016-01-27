@@ -1,6 +1,9 @@
 <script type="text/ng-template" id="chartModal">
-  <div class="modal-header">
-		<h3 class="modal-title">{{ chartInfo.title }}</h3>
+ <div class="panel panel-primary">
+ 	<div class="modal-header panel-heading">
+		<h3 class="modal-title">{{ chartInfo.title }}
+		 	<button ng-click="hide()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h3>
   </div>
   <div class="modal-body">
 		<chart-panel column-width="12" parameters = "{{ chartInfo.parameters }}" chart-renderer-method = "{{ chartInfo.chartRendererMethod }}" ></chart-panel>
@@ -23,4 +26,6 @@
         </timeline-event>
     </timeline>
   </div>
+ </div>
+  
 </script>

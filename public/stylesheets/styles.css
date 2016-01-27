@@ -1,5 +1,32 @@
 /* Toggle Styles */
 
+body{
+	background-color:#f5f5f5;
+	margin-top:50px;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #f5f5f5;
+}
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
+}
+
+.navbar-brand{
+	margin: 0px 40px 0px 0px;
+	font-size: 2.2em;
+}
+
+.tab-content{
+	padding-top:5px;
+}
+
+.panel-footer{
+	background-color: white;
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -15,10 +42,10 @@
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    left: 150px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -150px;
     overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
@@ -28,7 +55,7 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 150px;
 }
 
 #page-content-wrapper {
@@ -41,7 +68,7 @@
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 150px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -93,6 +120,29 @@
    margin-top: 20px;
 }
 
+.glyph-fullscreen {
+	padding: 0;
+	color:white;
+	cursor: pointer;
+}
+
+
+.glyph-right-space{
+	margin-right: 3px;
+}
+
+
+.comment-slug a, a:visited{
+	color:darkslategray;
+	cursor: pointer;
+}
+
+.close{
+	opacity:1;
+}
+
+
+
 .login-form {
    margin-top: 50px;
    background: #f7f7f7;
@@ -103,33 +153,34 @@
 .tab-content > .tab-pane {
   display: block;
   height: 0;
-  overflow-y: hidden;
+  overflow: hidden;
+	
 }
 .tab-content > .active {
   display: block;
   height: auto;
 }
 
-
-/*Adding styles for widgets comment functionality [Arun,Yogesh 1/27/2016 13:03]*/
-
-.chatStub{
-    font-weight: bolder;
-    color: purple;
-}
-.chat-message{
-    font-weight:600;
-    font-family: 'Raleway',sans-serif;
-/*    color: #11578b;*/
-    color: #45789f;
-    text-transform:lowercase;
-    text-align: right;
+.close {
+	font-size: 30px;
+	margin-right: 10px;
+	color: white;
 }
 
-.chat-align-right,.chat-align-left{
-    padding: 10px;
-    text-align: left;   
+/* CSS for grid */
+table{
+  margin: auto;
 }
+table,  th,  td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+ th, td{
+  padding: 10px;
+}
+
 .chat-align-right{
     margin: 0px 260px 0px;
     background-color:aliceblue;
@@ -157,7 +208,7 @@
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        padding-left: 150px;
     }
 
     #wrapper.toggled {
@@ -165,7 +216,7 @@
     }
 
     #sidebar-wrapper {
-        width: 250px;
+        width: 150px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
