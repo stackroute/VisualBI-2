@@ -34,11 +34,24 @@ angular.module('vbiApp')
 				size: 'lg',
 				resolve: {
 					chartInfo: function(){
+                        var userComments=[];
+                        
+                        angular.forEach(comments, function(comment, key){
+                            
+                            userComments.push({
+                                userid: comment.userid,
+                                comment: comment.comment,
+                                badgeClass: 'warning',
+                                badgeIconClass: 'glyphicon-check',
+                                when: Date()
+                            });
+                        });
+       
 						return {
 							chartRendererMethod: chartRenderer,
 							parameters: parameters,
 							title: title,
-							comments: comments
+							comments: userComments,
 						};
 					}
 				}

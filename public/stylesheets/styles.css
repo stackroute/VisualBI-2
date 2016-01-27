@@ -110,6 +110,51 @@
   height: auto;
 }
 
+
+/*Adding styles for widgets comment functionality [Arun,Yogesh 1/27/2016 13:03]*/
+
+.chatStub{
+    font-weight: bolder;
+    color: purple;
+}
+.chat-message{
+    font-weight:600;
+    font-family: 'Raleway',sans-serif;
+/*    color: #11578b;*/
+    color: #45789f;
+    text-transform:lowercase;
+    text-align: right;
+}
+
+.chat-align-right,.chat-align-left{
+    padding: 10px;
+    text-align: left;   
+}
+.chat-align-right{
+    margin: 0px 260px 0px;
+    background-color:aliceblue;
+    border-radius: 8px;
+}
+
+.chat-align-left{
+    margin: 0px 10px 0px;
+    background-color:floralwhite;
+    border-radius: 8px;
+}
+
+.chat-time{
+    color: darkolivegreen;
+}
+
+.chat-sender{
+    color:chocolate;
+    font-style:italic;
+    font-weight: bold;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/*comments functionality styles end here*/
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 250px;

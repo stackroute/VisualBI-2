@@ -6,27 +6,21 @@
 		<chart-panel column-width="12" parameters = "{{ chartInfo.parameters }}" chart-renderer-method = "{{ chartInfo.chartRendererMethod }}" ></chart-panel>
   </div>
   <div class="modal-footer">
-
-<!--
-  		<div ng-repeat="comment in chartInfo.comments">
-  			<p><strong>{{ comment.userid}} : </strong> {{ comment.comment}}</p>
-  		</div>
--->
-        <!-- view -->
-  <timeline>
-    <timeline-event ng-repeat="event in events" side="right">
-      <timeline-badge class="{{event.badgeClass}}">
-        <i class="glyphicon {{event.badgeIconClass}}"></i>
-      </timeline-badge>
-      <timeline-panel class="{{event.badgeClass}}">
-        <timeline-heading>
-          <h4>{{event.title}}</h4>
-        </timeline-heading>
-        <p>{{event.content}}</p>
-      </timeline-panel>
-    </timeline-event>
-  </timeline>
-
-		<button class="btn btn-primary" type="button" ng-click="hide()">Close</button>
+      <timeline>
+        <timeline-event ng-repeat="comment in chartInfo.comments" side="">
+          <timeline-badge class="{{comment.badgeClass}}">
+            <i class="glyphicon {{comment.badgeIconClass}}"></i>
+          </timeline-badge>
+          <timeline-panel class="{{comment.badgeClass}}">
+            <timeline-heading>
+              <h4>{{comment.userid}}</h4>
+              <p ng-if="comment.when">
+                <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when}}</small>
+              </p>
+            </timeline-heading>
+            <p>{{comment.comment}}</p>
+          </timeline-panel>
+        </timeline-event>
+    </timeline>
   </div>
 </script>
