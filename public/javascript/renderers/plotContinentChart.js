@@ -2,7 +2,7 @@ angular.module('vbiApp')
 	.factory('plotContinentChart', [function(){
 		var margin = {top: 10, right: 50, bottom: 100, left: 50},
 		 width = 400 - margin.left - margin.right,
-		 height = 500 - margin.top - margin.bottom;
+		 height = 300 - margin.top - margin.bottom;
 
 		var colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"];
 		var enableLegend = true;
@@ -77,7 +77,7 @@ angular.module('vbiApp')
 						  .style("text-anchor", "end")
 						  .attr("dx", "-.8em")
 						  .attr("dy", "-.50em")
-						  .attr("transform", "rotate(-90)");
+				  		  .attr("transform", "rotate(-60)");
 
 				  svg1.append("g")
 						.attr("class", "y axis")
