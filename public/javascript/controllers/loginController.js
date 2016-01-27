@@ -1,14 +1,14 @@
 angular.module('vbiApp')
-    .controller('loginController', ['$rootScope', '$scope', '$location', 'userManager', '$cookies', function($rootScope, $scope, $location, userManager, $cookies) {
+    .controller('loginController', ['$rootScope', '$location', 'userManager', '$cookies', function($rootScope, $location, userManager, $cookies) {
 	 $rootScope.loggedInUser = {};
-    $scope.user = {
+    this.user = {
         email: "",
         password: ""
     };
                                     
-    $scope.errorMessage = "";
-    $scope.login = function() {
-		  userManager.login($scope.user, function(err, data) {
+    this.errorMessage = "";
+    this.login = function() {
+		  userManager.login(this.user, function(err, data) {
 				if(!err) {
 					
 					 //logged in successfully. load the dashboard
@@ -17,7 +17,7 @@ angular.module('vbiApp')
 					 var url = $location.url();
 					 $location.url(url + 'home');
 				} else {
-					 $scope.errorMessage = err;
+					 this.errorMessage = err;
 				}
 				
 		  });
