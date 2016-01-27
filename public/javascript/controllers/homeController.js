@@ -14,7 +14,7 @@ angular.module('vbiApp')
 					 }
 				}
 		 });
-		 
+
 		$scope.logout = function() {
 			userManager.logout()
 				.then(function() {
@@ -24,9 +24,9 @@ angular.module('vbiApp')
 				//even if any error redirect to home
 				$location.url('/');
 			});
-			
+
 		};
-		 
+
 		$scope.fullScreen = function(chartRenderer, parameters, title, comments) {
 			var modalConfig = {
 				templateUrl: 'chartModal',
@@ -35,18 +35,18 @@ angular.module('vbiApp')
 				resolve: {
 					chartInfo: function(){
                         var userComments=[];
-                        
+
                         angular.forEach(comments, function(comment, key){
-                            
+
                             userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
-                                badgeClass: 'warning',
-                                badgeIconClass: 'glyphicon-check',
+                                badgeClass: 'danger',
+                                badgeIconClass: 'glyphicon-user',
                                 when: Date()
                             });
                         });
-       
+
 						return {
 							chartRendererMethod: chartRenderer,
 							parameters: parameters,
@@ -58,9 +58,9 @@ angular.module('vbiApp')
 			};
 			$uibModal.open(modalConfig);
 		}
-		
+
 		$scope.toggleMenu = function(){
 			$scope.showMenu = !$scope.showMenu;
 		};
-		
+
 }]);

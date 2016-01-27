@@ -6,7 +6,7 @@
     </timeline-badge>
     <timeline-panel class="{{comment.badgeClass}}">
       <timeline-heading>
-        <h4>{{comment.userid}}</h4>
+        <h4>{{comment.userid | uppercase}}</h4>
         <p ng-if="comment.when">
           <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when}}</small>
         </p>
