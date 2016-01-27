@@ -42,6 +42,8 @@ angular.module('vbiApp')
 				var xAxis = d3.svg.axis()
 					 .scale(x)
 					 .orient("bottom");
+				
+				
 
 				var yAxis = d3.svg.axis()
 					 .scale(y)
@@ -68,6 +70,7 @@ angular.module('vbiApp')
 
 				  x.domain(data.map(function(d) { return d.year; }));
 				  y.domain([0, d3.max(data, function(d) { return d.total; })]);
+					xAxis.tickValues(d3.range(d3.min(data, function(d) { return d.year; }), d3.max(data, function(d) { return d.year; }), 4));
 
 				  svg1.append("g")
 						.attr("class", "x axis")
