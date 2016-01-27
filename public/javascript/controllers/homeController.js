@@ -3,7 +3,7 @@ angular.module('vbiApp')
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
-		 
+		 $scope.showMenu = true;
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
@@ -45,5 +45,9 @@ angular.module('vbiApp')
 			};
 			$uibModal.open(modalConfig);
 		}
+		
+		$scope.toggleMenu = function(){
+			$scope.showMenu = !$scope.showMenu;
+		};
 		
 }]);

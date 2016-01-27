@@ -1,29 +1,39 @@
-<header-directive></header-directive>
-<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
-<uib-tabset class="wrap">
-    <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
-       <div class = "row" ng-repeat = "row in tab.rows">
-			  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class = "panel-title">{{ col.widgetId.title }}</h3>
-						</div>
-						<div class="panel-body">
-							<div ng-show="isLoading">
-								<img src="/images/loading.gif" /> loading...	
-							</div>
-							
-							<chart-panel column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
-								<a class="btn pull-right" ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)"><img src="/images/fullscreen.png" alt="full screen"></a>
-							</chart-panel>
-						</div>
-						<div class="panel-footer">
-						   <p>Comments will go here</p>
-						   {{ col.widgetId.url }}
-						</div>
-					</div>
-			  </div>
-       </div>
-    </uib-tab>
-    <load></load>
-</uib-tabset>
+<div id="wrapper" ng-class="{'toggled': showMenu}">
+	<header-directive></header-directive>
+	<div id="page-content-wrapper">
+		<div class="container-fluid">
+			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle" ng-click="toggleMenu()">|||</a>
+			<span class="pull-right">Welcome <strong>{{ user.name }}</strong></span>
+			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
+				<uib-tabset class="wrap">
+					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
+						 <div class = "row" ng-repeat = "row in tab.rows">
+							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
+									<div class="panel panel-primary">
+										<div class="panel-heading">
+											<h3 class = "panel-title">{{ col.widgetId.title }}</h3>
+										</div>
+										<div class="panel-body">
+											<div ng-show="isLoading">
+												<img src="/images/loading.gif" /> loading...	
+											</div>
+
+											<chart-panel column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+												<a class="btn pull-right" ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)"><img src="/images/fullscreen.png" alt="full screen"></a>
+											</chart-panel>
+										</div>
+										<div class="panel-footer">
+											<p>Comments will go here</p>
+											{{ col.widgetId.url }}
+										</div>
+									</div>
+							  </div>
+						 </div>
+					 </uib-tab>
+					 <load></load>
+				</uib-tabset>
+		</div>
+	</div>	
+</div>
+
+

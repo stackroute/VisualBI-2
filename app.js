@@ -1,11 +1,14 @@
+//Third party modules
 var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
     bodyParser = require('body-parser'),
-    passport = require('./routes/passport'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
-    cookieParser = require('cookie-parser'),
+    cookieParser = require('cookie-parser');
+
+//custom modules
+var passport = require('./routes/passport'),
     indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
@@ -19,12 +22,6 @@ mongoose.connect(dbConfig.url);
 var db = mongoose.connection;
 
 var app = express();
-
-db.on('error', console.error);
-db.once('open', function() {
-   console.log('Connected to database successfully');
-
-});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
