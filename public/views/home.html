@@ -24,7 +24,14 @@
 										</div>
 										<div class="panel-footer">
 											<div class="comment-slug">
-												<a ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)"><span class="glyph-right-space glyphicon glyphicon-comment"></span>See comments from <span class="user-comments-meta"> Satish and 14 others</span> </a>
+												<a ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)">
+													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
+													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
+													<span ng-show="col.widgetId.comments.length > 0">
+														See comments from <span class="user-comments-meta"> {{lastCommentBy(col.widgetId.comments)}} and {{col.widgetId.comments.length}} others</span>	
+													</span>
+													 
+												</a>
 											</div>
 										</div>
 									</div>

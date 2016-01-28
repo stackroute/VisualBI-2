@@ -51,7 +51,7 @@ angular.module('vbiApp')
 							chartRendererMethod: chartRenderer,
 							parameters: parameters,
 							title: title,
-							comments: userComments,
+							comments: userComments
 						};
 					}
 				}
@@ -59,8 +59,8 @@ angular.module('vbiApp')
 			$uibModal.open(modalConfig);
 		}
 		
-		$scope.toggleMenu = function(){
-			$scope.showMenu = !$scope.showMenu;
+		$scope.lastCommentBy = function(comments){
+			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
 		
 }]);
