@@ -6,7 +6,7 @@
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
       			 <!-- <button type="button" ng-click = "createRow(tab.tabId)" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button> -->
-						 <div class = "row" ng-repeat = "row in tab.rows">
+						 <div class = "row" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
 										<div class="panel-heading">
@@ -19,7 +19,7 @@
 												<img src="/images/loading.gif" /> loading...
 											</div>
 
-											<chart-panel column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+											<chart-panel id="{{ col.widgetId._id }}-{{$index}}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 
 											</chart-panel>
 										</div>
