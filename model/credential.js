@@ -23,4 +23,18 @@ CredentialSchema.statics.registerUser =function(user) {
 	});
 };
 
+CredentialSchema.statics.getUserId = function(username, callback){
+  this.model('Credential')
+		.findOne({
+		'username': username
+	}, {
+		'_id': 1
+	}).exec(function(err, data) {
+			if(err){
+				console.log(err);
+			}
+			callback(data);
+	});
+};
+
 module.exports = mongoose.model("Credential", CredentialSchema);
