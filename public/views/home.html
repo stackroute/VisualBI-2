@@ -5,7 +5,7 @@
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
-      			 <button type="button" ng-click = "createRow(tab.tabId)" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
+      			 <!-- <button type="button" ng-click = "createRow(tab.tabId)" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button> -->
 						 <div class = "row" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
@@ -39,11 +39,11 @@
 							  </div>
 						 </div>
 					 </uib-tab>
-    			 <uib-tab ng-click="createTab()">
+    			 <!-- <uib-tab ng-click="createTab()">
 						 <uib-tab-heading class="ng-scope">
        					<i class="glyphicon glyphicon-plus"></i>
     				 </uib-tab-heading>
-					 </uib-tab>
+					 </uib-tab> -->
 					 <load></load>
 				</uib-tabset>
 		</div>
