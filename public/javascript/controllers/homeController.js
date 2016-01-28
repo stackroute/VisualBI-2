@@ -1,9 +1,9 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
-		 
+
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
@@ -14,7 +14,7 @@ angular.module('vbiApp')
 					 }
 				}
 		 });
-		 
+
 		$scope.logout = function() {
 			userManager.logout()
 				.then(function() {
@@ -24,9 +24,9 @@ angular.module('vbiApp')
 				//even if any error redirect to home
 				$location.url('/');
 			});
-			
+
 		};
-		 
+
 		$scope.fullScreen = function(chartRenderer, parameters, title, comments) {
 			var modalConfig = {
 				templateUrl: 'chartModal',
@@ -45,5 +45,33 @@ angular.module('vbiApp')
 			};
 			$uibModal.open(modalConfig);
 		}
-		
+
+    $scope.createTab = function() {
+      var tabCount = $scope.tabs.length;
+      var tabId = "tab" + (tabCount + 1);
+
+      var newTab = {
+        'tabId' : tabId,
+        'tabTitle' : "newtab",
+        'rows'  : [{
+            'columns' : [{
+                'colWidth': 12
+            }]
+        }]
+      };
+      $scope.tabs[tabCount] = newTab;
+    }
+
+    $scope.createRow = function(tabId) {
+      angular.forEach($scope.tabs, function(tab, key) {
+        if(tab.tabId == tabId) {
+          var newRow = {
+              'columns' : [{
+                  'colWidth': 12
+              }]
+          };
+          tab.rows.push(newRow);
+        }
+      });
+    }
 }]);

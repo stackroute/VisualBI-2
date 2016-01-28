@@ -59,9 +59,7 @@ body{
    color: red;
    font-weight: bold;
 }
-/*.row{
-  margin-bottom: 20px;
-}*/
+
 textarea{
   margin-left: 15px !important;
   margin-top: 10px;
@@ -114,6 +112,14 @@ textarea{
 .tab-content > .active {
   display: block;
   height: auto;
+}
+
+.row-btn {
+  margin: 10px 0px;
+}
+
+.row {
+  margin: 0px;
 }
 
 /* --------------------------------------
