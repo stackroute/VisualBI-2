@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -62,5 +62,32 @@ angular.module('vbiApp')
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
+    $scope.createTab = function() {
+      var tabCount = $scope.tabs.length;
+      var tabId = "tab" + (tabCount + 1);
 
+      var newTab = {
+        'tabId' : tabId,
+        'tabTitle' : "newtab",
+        'rows'  : [{
+            'columns' : [{
+                'colWidth': 12
+            }]
+        }]
+      };
+      $scope.tabs[tabCount] = newTab;
+    }
+
+    $scope.createRow = function(tabId) {
+      angular.forEach($scope.tabs, function(tab, key) {
+        if(tab.tabId == tabId) {
+          var newRow = {
+              'columns' : [{
+                  'colWidth': 12
+              }]
+          };
+          tab.rows.push(newRow);
+        }
+      });
+    }
 }]);

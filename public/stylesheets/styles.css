@@ -161,6 +161,14 @@ body{
   height: auto;
 }
 
+.row-btn {
+  margin: 10px 0px;
+}
+
+.row {
+  margin: 0px;
+}
+
 .close {
 	font-size: 30px;
 	margin-right: 10px;

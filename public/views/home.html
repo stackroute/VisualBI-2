@@ -5,6 +5,7 @@
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
+      			 <button type="button" ng-click = "createRow(tab.tabId)" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
 						 <div class = "row" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
@@ -15,11 +16,11 @@
 										</div>
 										<div class="panel-body">
 											<div ng-show="isLoading">
-												<img src="/images/loading.gif" /> loading...	
+												<img src="/images/loading.gif" /> loading...
 											</div>
 
 											<chart-panel column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
-												
+
 											</chart-panel>
 										</div>
 										<div class="panel-footer">
@@ -28,9 +29,9 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{lastCommentBy(col.widgetId.comments)}} and {{col.widgetId.comments.length}} others</span>	
+														See comments from <span class="user-comments-meta"> {{lastCommentBy(col.widgetId.comments)}} and {{col.widgetId.comments.length}} others</span>
 													</span>
-													 
+
 												</a>
 											</div>
 										</div>
@@ -38,10 +39,13 @@
 							  </div>
 						 </div>
 					 </uib-tab>
+    			 <uib-tab ng-click="createTab()">
+						 <uib-tab-heading class="ng-scope">
+       					<i class="glyphicon glyphicon-plus"></i>
+    				 </uib-tab-heading>
+					 </uib-tab>
 					 <load></load>
 				</uib-tabset>
 		</div>
-	</div>	
+	</div>
 </div>
-
-
