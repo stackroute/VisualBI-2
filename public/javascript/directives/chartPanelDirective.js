@@ -18,6 +18,7 @@ angular.module('vbiApp')
 			  var params;
 			  if(scope.parameters) {
 				  params = JSON.parse(scope.parameters);
+				  params.id = scope.chartId;
 				  //Fixing bootstrap 1% = 8.33333333 as mentioned in css, so calculating the width accordingly
 				  //code to be revisited if get the actual width at runtime.
 				  if(scope.columnWidth)
@@ -25,7 +26,7 @@ angular.module('vbiApp')
 					else
 						params.width = elements[0].clientWidth;
 			  }
-			  chartRenderer.plotChart(scope.chartRendererMethod, elements[0].childNodes[1], params);
+			  chartRenderer.plotChart(scope.chartRendererMethod, elements[0], params);
 		  }
 	  };
 }]);
