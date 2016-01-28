@@ -181,6 +181,14 @@ table,  th,  td{
   padding: 10px;
 }
 
+.section_result .level0 {
+	background-color: #AFD0BF;
+}
+
+.dataRow .level0{
+	background-color: lightgrey;
+}
+
 .chat-align-right{
     margin: 0px 260px 0px;
     background-color:aliceblue;
