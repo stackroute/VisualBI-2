@@ -8,7 +8,9 @@ angular.module('vbiApp')
 		  scope: {
 			  parameters: "@",
 			  chartRendererMethod : "@",
-			  columnWidth: "@"
+			  columnWidth: "@",
+			  chartId: "@",
+			  widgetId: "@"
 		  },
 		  
 		  link: function(scope, elements, attrs) {

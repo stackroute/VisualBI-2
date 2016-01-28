@@ -27,7 +27,7 @@ angular.module('vbiApp')
 
 		};
 
-		$scope.fullScreen = function(chartRenderer, parameters, title, comments) {
+		$scope.fullScreen = function(widget) {
 			var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
@@ -36,7 +36,7 @@ angular.module('vbiApp')
 					chartInfo: function(){
                         var userComments=[];
 
-                        angular.forEach(comments, function(comment, key){
+                        angular.forEach(widget.comments, function(comment, key){
 
                             userComments.push({
                                 userid: comment.userid,
@@ -48,10 +48,11 @@ angular.module('vbiApp')
                         });
 
 						return {
-							chartRendererMethod: chartRenderer,
-							parameters: parameters,
-							title: title,
-							comments: userComments
+							chartRendererMethod: widget.chartRenderer,
+							parameters: widget.parameters,
+							title: widget.title,
+							comments: userComments,
+							widgetId: widget._id
 						};
 					}
 				}
