@@ -1,7 +1,7 @@
-<div data-ng-controller="loginController">
+<div ng-controller="loginController as loginCtrl">
      <div class="row">
         <div class="col-sm-4 col-md-offset-5">
-           <h3>Visual BI</h3>
+           <h3 class="navbar-brand">Log in to slate</h3>
         </div>
      </div>
      <div class="row">
@@ -14,16 +14,16 @@
                  <div class="form-group">
                     <div class="input-group login-input">
                        <span class="input-group-addon glyphicon glyphicon-user" id="userLabel"></span>
-                       <input type="email" ng-model="user.email" class="form-control" placeholder="Enter your emaild" aria-describedby="userLabel" name="username" required>
+                       <input type="email" ng-model="loginCtrl.user.email" class="form-control" placeholder="Enter your emaild" aria-describedby="userLabel" name="username" required>
                     </div>
                     <div class="input-group login-input">
                        <span class=" input-group-addon glyphicon glyphicon-lock" id="pwdLabel"></span>
-                       <input type="password" ng-model="user.password" class="form-control" placeholder="Enter your password" aria-describedby="pwdLabel" name="password" required>
+                       <input type="password" ng-model="loginCtrl.user.password" class="form-control" placeholder="Enter your password" aria-describedby="pwdLabel" name="password" required>
                     </div>
-                    <button type="submit" ng-click="login()" ng-disabled="loginForm.$invalid" class="btn btn-primary btn-lg btn-block login-input" id="btnSignin">Sign in</button>
+                    <button type="submit" ng-click="loginCtrl.login()" ng-disabled="loginForm.$invalid" class="btn btn-primary btn-lg btn-block login-input" id="btnSignin">Sign in</button>
                     <p class="login-error">
                        <!-- display the error message here -->
-                       {{ errorMessage}}
+                       {{ loginCtrl.errorMessage}}
                     </p>
                  </div>
               </form>

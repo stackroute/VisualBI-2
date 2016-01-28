@@ -1,58 +1,114 @@
-/*
-Custom CSS
-=============
-*/
+/* Toggle Styles */
+
 body{
-  /*background-color:grey;*/
+	background-color:#f5f5f5;
+	margin-top:50px;
 }
 
-/* dark layout theme */
-
-.dark {
-  background-color: grey;
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #f5f5f5;
+}
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
 }
 
-.dark .nav-tabs a {
-  color: black;
+.navbar-brand{
+	margin: 0px 40px 0px 0px;
+	font-size: 2.2em;
 }
 
-/* light layout theme */
-
-.light {
-  background-color: white;
+.tab-content{
+	padding-top:5px;
 }
 
-.light .nav-tabs a {
-  color : #337ab7;
+.panel-footer{
+	background-color: white;
 }
 
-.navbar{
-   background-color: black;
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
-#image{
-  margin-top: -10px;
-  border-radius: 15px;
-}
-.nav .open a{
-  background-color: #B22222;
-  color:white;
-}
-.dropdown-toggle{
-   color: white;
-}
-.nav .open a, .nav .open a:hover, .nav .open a:focus{
-  background-color:#B22222;
-}
-.tabSpaceCustom{
-  margin-bottom: 15px !important;
-}
-#searchBox {
-   width: 300px;
+#wrapper.toggled {
+    padding-left: 250px;
 }
 
-.wrap {
-   margin-top: 100px;
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 150px;
+    width: 0;
+    height: 100%;
+    margin-left: -150px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 150px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+/* Sidebar Styles */
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
 }
 
 .login-error {
@@ -60,38 +116,32 @@ body{
    font-weight: bold;
 }
 
-textarea{
-  margin-left: 15px !important;
-  margin-top: 10px;
-}
-#modalHeader{
-  text-align: center;
-}
-#submitButton {
-  margin-bottom: 20px;
-  margin-left: 10px;
-}
-
-.widget-border {
-  border: 1px solid #333;
-  margin: 1px;
-}
-.panel-heading {
-   text-align: center;
-   font-size: 24px;
-   font-family: 'Bree Serif', serif;
-}
-.hr-prop {
-  height: 0.5px;
-  background-color: #A4A4A4;
-}
-.btn{
-  /*margin-bottom: 100px;*/
-  /*margin-left: 20px;*/
-}
 .login-input {
    margin-top: 20px;
 }
+
+.glyph-fullscreen {
+	padding: 0;
+	color:white;
+	cursor: pointer;
+}
+
+
+.glyph-right-space{
+	margin-right: 3px;
+}
+
+
+.comment-slug a, a:visited{
+	color:darkslategray;
+	cursor: pointer;
+}
+
+.close{
+	opacity:1;
+}
+
+
 
 .login-form {
    margin-top: 50px;
@@ -99,15 +149,12 @@ textarea{
    padding: 20px;
    box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 2px 0px;
 }
-#commentsText{
-  overflow-x: hidden;
-  height:550px;
-}
 
 .tab-content > .tab-pane {
   display: block;
   height: 0;
-  overflow-y: hidden;
+  overflow: hidden;
+	
 }
 .tab-content > .active {
   display: block;
@@ -122,23 +169,10 @@ textarea{
   margin: 0px;
 }
 
-/* --------------------------------------
-   Media Queries
-   -------------------------------------- */
-
-/* Portrait & landscape phone */
-@media (max-width: 480px) {
-
-}
-
-/* Landscape phone to portrait tablet */
-@media (max-width: 768px) {
-
-}
-
-/* Large desktop */
-@media (min-width: 1200px) {
-
+.close {
+	font-size: 30px;
+	margin-right: 10px;
+	color: white;
 }
 
 /* CSS for grid */
@@ -153,4 +187,57 @@ table,  th,  td{
 
  th, td{
   padding: 10px;
+}
+
+.chat-align-right{
+    margin: 0px 260px 0px;
+    background-color:aliceblue;
+    border-radius: 8px;
+}
+
+.chat-align-left{
+    margin: 0px 10px 0px;
+    background-color:floralwhite;
+    border-radius: 8px;
+}
+
+.chat-time{
+    color: darkolivegreen;
+}
+
+.chat-sender{
+    color:chocolate;
+    font-style:italic;
+    font-weight: bold;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/*comments functionality styles end here*/
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 150px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 150px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
 }

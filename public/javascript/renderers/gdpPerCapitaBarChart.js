@@ -1,8 +1,8 @@
 angular.module('vbiApp')
 	.factory('gdpPerCapitaBarChart', [function(){
-		var margin = {top: 10, right: 50, bottom: 100, left: 50},
+		var margin = {top: 10, right: 50, bottom: 80, left: 50},
 		 width = 400 - margin.left - margin.right,
-		 height = 500 - margin.top - margin.bottom;
+		 height = 300 - margin.top - margin.bottom;
 
 		var colors = ["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"];
 		var enableLegend = true;
@@ -78,7 +78,7 @@ angular.module('vbiApp')
 						  .style("text-anchor", "end")
 						  .attr("dx", "-0.5em")
 						  .attr("dy", "0.2em")
-						  .attr("transform", "rotate(-40)");
+						  .attr("transform", "rotate(-30)");
 
 				  svg3.append("g")
 						.attr("class", "y axis")

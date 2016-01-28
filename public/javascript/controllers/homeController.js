@@ -3,7 +3,7 @@ angular.module('vbiApp')
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
-
+		 $scope.showMenu = true;
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
@@ -34,11 +34,24 @@ angular.module('vbiApp')
 				size: 'lg',
 				resolve: {
 					chartInfo: function(){
+                        var userComments=[];
+
+                        angular.forEach(comments, function(comment, key){
+
+                            userComments.push({
+                                userid: comment.userid,
+                                comment: comment.comment,
+                                badgeClass: 'danger',
+                                badgeIconClass: 'glyphicon-user',
+                                when: Date()
+                            });
+                        });
+
 						return {
 							chartRendererMethod: chartRenderer,
 							parameters: parameters,
 							title: title,
-							comments: comments
+							comments: userComments
 						};
 					}
 				}
@@ -46,6 +59,9 @@ angular.module('vbiApp')
 			$uibModal.open(modalConfig);
 		}
 
+		$scope.lastCommentBy = function(comments){
+			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
+		};
     $scope.createTab = function() {
       var tabCount = $scope.tabs.length;
       var tabId = "tab" + (tabCount + 1);
