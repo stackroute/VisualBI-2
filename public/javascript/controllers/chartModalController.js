@@ -2,14 +2,15 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
     
     $scope.postComment=function(){
         console.log('Posting comment -> '+$scope.userComment);
+		console.log('Passed widget ID is '+chartInfo.widgetId);
         
         var parameters={userid:'ashok',
                         comment:$scope.userComment,
-                        widgetid:'568df7978aaf007e56689718'
+                        widgetid:chartInfo.widgetId
                  };
         
-        console.log($scope);
-        console.log($http);
+        //console.log($scope);
+        //console.log($http);
         console.log('Post section begins here!'+$rootScope.loggedInUser.authToken);
 		
 		$http({
@@ -23,7 +24,6 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
             console.log('Post successful');
             console.log(data);
         }, function errorCallback(response) {
-            //console.log(response);
         });
     };
 

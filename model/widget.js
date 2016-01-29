@@ -52,5 +52,21 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment){
                 console.log('Comment posted to Mongo successfully!')
 
    });
+	
+	   this.model('Widget').update({
+     '_id' : widgetId
+   },{
+     $set:{
+         lastaddedby : userid,
+		 countComments : 77
+     }
+   },function(err, userComment) {
+       if(err){
+                console.log('Comment meta update failure');
+                console.log(err);
+       }
+       else
+                console.log('Comment meta added for widget updated successfully!')
+   });
 }
 module.exports = mongoose.model("Widget", WidgetSchema);

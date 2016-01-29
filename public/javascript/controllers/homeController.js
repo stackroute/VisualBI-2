@@ -42,7 +42,7 @@ angular.module('vbiApp')
                                 userid: comment.userid,
                                 comment: comment.comment,
                                 badgeClass: 'danger',
-                                badgeIconClass: 'glyphicon-user',
+                                badgeIconClass: 'glyphicon-credit-card',
                                 when: Date()
                             });
                         });
