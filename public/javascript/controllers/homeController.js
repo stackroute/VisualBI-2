@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -14,7 +14,7 @@ angular.module('vbiApp')
 					 }
 				}
 		 });
-		 
+
 		$scope.logout = function() {
 			userManager.logout()
 				.then(function() {
@@ -24,10 +24,10 @@ angular.module('vbiApp')
 				//even if any error redirect to home
 				$location.url('/');
 			});
-			
+
 		};
-		 
-		$scope.fullScreen = function(chartRenderer, parameters, title, comments) {
+
+		$scope.fullScreen = function(widget) {
 			var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
@@ -35,32 +35,60 @@ angular.module('vbiApp')
 				resolve: {
 					chartInfo: function(){
                         var userComments=[];
-                        
-                        angular.forEach(comments, function(comment, key){
-                            
+
+                        angular.forEach(widget.comments, function(comment, key){
+
                             userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
-                                badgeClass: 'warning',
-                                badgeIconClass: 'glyphicon-check',
+                                badgeClass: 'danger',
+                                badgeIconClass: 'glyphicon-user',
                                 when: Date()
                             });
                         });
-       
+
 						return {
-							chartRendererMethod: chartRenderer,
-							parameters: parameters,
-							title: title,
+							chartRendererMethod: widget.chartRenderer,
+							parameters: widget.parameters,
+							title: widget.title,
 							comments: userComments,
+							widgetId: widget._id
 						};
 					}
 				}
 			};
 			$uibModal.open(modalConfig);
 		}
-		
-		$scope.toggleMenu = function(){
-			$scope.showMenu = !$scope.showMenu;
+
+		$scope.lastCommentBy = function(comments){
+			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
-		
+    $scope.createTab = function() {
+      var tabCount = $scope.tabs.length;
+      var tabId = "tab" + (tabCount + 1);
+
+      var newTab = {
+        'tabId' : tabId,
+        'tabTitle' : "newtab",
+        'rows'  : [{
+            'columns' : [{
+                'colWidth': 12
+            }]
+        }]
+      };
+      $scope.tabs[tabCount] = newTab;
+    }
+
+    $scope.createRow = function(tabId) {
+      angular.forEach($scope.tabs, function(tab, key) {
+        if(tab.tabId == tabId) {
+          var newRow = {
+              'columns' : [{
+                  'colWidth': 12
+              }]
+          };
+          tab.rows.push(newRow);
+        }
+      });
+    }
 }]);

@@ -28,15 +28,15 @@ var express = require('express'),
     res.send({resp:'Database updated'});
     
 });*/
-router.post('/:id',function(req,res,next){
+router.post('/',function(req,res,next){
     console.log('Routing comment post!');
 	console.log(req.body);
-    var userId = '56a11a224de3516e7c42c26e';
-    var widgetId = req.params.id;
+    
+
 	
 	console.log('Comment "'+req.body.comment+'" added to the widget.');
     
-	Widget.postComment(userId, widgetId, req.body.comment);
+	Widget.postComment(req.body.userid, req.body.widgetid, req.body.comment);
     res.send({resp:'Database updated'});
 });
 
