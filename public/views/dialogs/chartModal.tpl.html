@@ -18,7 +18,7 @@
             <timeline-heading>
               <h4>{{comment.userid}}</h4>
               <p ng-if="comment.when">
-                <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when}}</small>
+                <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when|date:"MM/dd/yyyy 'at' h:mma"}}</small>
               </p>
             </timeline-heading>
             <p>{{comment.comment}}</p>
@@ -26,6 +26,13 @@
         </timeline-event>
     </timeline>
   </div>
+    <p>{{userComment}}</p>
+   <div class="input-group">
+    <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
+    <span class="input-group-btn">
+      <button class="btn btn-success" rows="3" type="button" ng-click="postComment()">Post comment&nbsp<span class="glyphicon glyphicon-send"></span></button>
+    </span>
+   </div>
  </div>
   
 </script>
