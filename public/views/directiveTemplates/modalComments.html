@@ -2,9 +2,9 @@
   <!-- <input ng-model=collapse type=checkbox><i class = "glyphicon glyphicon-user"></i>Show Comments
   <div ng-show=collapse> -->
   <h4 class="panel-title">
-       <a data-toggle="collapse" href="#collapse1"><i class="glyphicon glyphicon-comment"></i></a>
+       <a data-toggle="collapse" data-target="#collapse1"><i class="glyphicon glyphicon-comment"></i></a>
   </h4>
-  <div id="collapse1" class="panel-collapse collapse">
+  <div id="collapse1" class="collapse in">
     <timeline>
       <timeline-event ng-repeat="comment in chartInfo.comments" side="">
         <timeline-badge class="{{comment.badgeClass}}">
@@ -22,6 +22,4 @@
       </timeline-event>
     </timeline>
   </div>
-
-
 </div>

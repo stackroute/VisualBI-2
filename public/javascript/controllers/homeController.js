@@ -41,8 +41,8 @@ angular.module('vbiApp')
                             userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
-                                badgeClass: 'danger',
-                                badgeIconClass: 'glyphicon-credit-card',
+                                badgeClass: comment.badgeClass,
+                                badgeIconClass: comment.badgeIconClass,
                                 when: Date()
                             });
                         });

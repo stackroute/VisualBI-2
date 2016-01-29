@@ -1,20 +1,23 @@
 angular.module('vbiApp').controller('chartModalController', function($rootScope,$scope,$http,$httpParamSerializer,$uibModalInstance, chartInfo) {
     
-	var commentType='glyphicon-check';
+	var commentType='glyphicon-check',commentCategory="info";
 	
 	$scope.registerCommentTypeFlag=function(){
-			console.log('Comment type selection : Flag');
+		console.log('Comment type selection : Flag');
 		commentType='glyphicon-flag';
+		commentCategory='danger';
 	}
 	
 	$scope.registerCommentTypeApprove=function(){
 			console.log('Comment type selection : Approve');
-		commentType='glyphicon-ok';
+		commentType='glyphicon-check';
+		commentCategory='info';
 	}
 	
 	$scope.registerCommentTypeWarning=function(){
 			console.log('Comment type selection : Warning');
 		commentType='glyphicon-exclamation-sign';
+		commentCategory='danger';
 	}
 					
     $scope.postComment=function(){
@@ -24,7 +27,8 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
         var parameters={userid:'ashok',
                         comment:$scope.userComment,
                         widgetid:chartInfo.widgetId,
-						commentType:commentType
+						commentType:commentType,
+						commentCategory:commentCategory
                  };
         
         console.log('Post section begins here!'+$rootScope.loggedInUser.authToken);

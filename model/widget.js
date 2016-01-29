@@ -32,7 +32,7 @@ WidgetSchema.statics.getWidget = function (widgetId, callback) {
    });
 }
 
-WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass){
+WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory){
     
     console.log('At db insert functionality');
 
@@ -45,7 +45,7 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
          comments:{userid : userid,
                    comment : userComment,
                    datetime : '5th Jan 2016',
-				   badgeClass : 'info',
+				   badgeClass : commentCategory,
 				   badgeIconClass:commentClass,
 				   _id:0
 				  }
