@@ -3,10 +3,9 @@ var mongoose = require('mongoose');
 var WidgetSchema = mongoose.Schema({
    title: String,
    chartRenderer: String,
-   widgetId: String,
    url: String,
    comments:[{
-      userId:String,
+      userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
       comment: String,
       datetime: {type:Date, default: Date.Now}
    }]
