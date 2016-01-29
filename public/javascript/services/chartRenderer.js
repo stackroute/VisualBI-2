@@ -4,6 +4,9 @@ angular.module('vbiApp')
 		this.plotChart = function(serviceName, chartContainer, parameter) {
 			return new Promise(function(resolve, reject) {
 				var chartRendererMethod = serviceName + '.render(chartContainer, parameter)';
+                console.log(chartRendererMethod);
+                //console.log(chartContainer);
+                //console.log(parameter);
 				eval(chartRendererMethod);
 			});
 		};

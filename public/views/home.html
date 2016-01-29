@@ -18,18 +18,17 @@
 											<div ng-show="isLoading">
 												<img src="/images/loading.gif" /> loading...
 											</div>
-
 											<chart-panel widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 
 											</chart-panel>
 										</div>
 										<div class="panel-footer">
 											<div class="comment-slug">
-												<a ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)">
+												<a ng-click="fullScreen(col.widgetId)">
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{lastCommentBy(col.widgetId.comments)}} and {{col.widgetId.comments.length}} others</span>
+														See comments from <span class="user-comments-meta"> {{col.widgetId.lastaddedby}} and {{col.widgetId.countComments}} others</span>
 													</span>
 
 												</a>
