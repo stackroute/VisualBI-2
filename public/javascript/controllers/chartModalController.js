@@ -1,16 +1,32 @@
 angular.module('vbiApp').controller('chartModalController', function($rootScope,$scope,$http,$httpParamSerializer,$uibModalInstance, chartInfo) {
     
+	var commentType='glyphicon-check';
+	
+	$scope.registerCommentTypeFlag=function(){
+			console.log('Comment type selection : Flag');
+		commentType='glyphicon-flag';
+	}
+	
+	$scope.registerCommentTypeApprove=function(){
+			console.log('Comment type selection : Approve');
+		commentType='glyphicon-ok';
+	}
+	
+	$scope.registerCommentTypeWarning=function(){
+			console.log('Comment type selection : Warning');
+		commentType='glyphicon-exclamation-sign';
+	}
+					
     $scope.postComment=function(){
-        console.log('Posting comment -> '+$scope.userComment);
+        console.log('Posting comment -> '+$scope.userComment+' '+commentType);
 		console.log('Passed widget ID is '+chartInfo.widgetId);
         
         var parameters={userid:'ashok',
                         comment:$scope.userComment,
-                        widgetid:chartInfo.widgetId
+                        widgetid:chartInfo.widgetId,
+						commentType:commentType
                  };
         
-        //console.log($scope);
-        //console.log($http);
         console.log('Post section begins here!'+$rootScope.loggedInUser.authToken);
 		
 		$http({

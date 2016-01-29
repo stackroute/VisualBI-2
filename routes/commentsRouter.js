@@ -10,7 +10,8 @@ router.post('/',function(req,res,next){
     
     console.log('Comment "'+req.body.comment+'" added to the widget.');
     
-	Widget.postComment(req.body.userid, req.body.widgetid, req.body.comment);
+	Widget.postComment(req.body.userid, req.body.widgetid, req.body.comment,req.body.commentType);
+	
     res.send({resp:'Database updated'});
 });
 

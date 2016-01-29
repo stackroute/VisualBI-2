@@ -198,31 +198,13 @@ table,  th,  td{
 	background-color: lightgrey;
 }
 
-.chat-align-right{
-    margin: 0px 260px 0px;
-    background-color:aliceblue;
-    border-radius: 8px;
+.comment-icon{
+	opacity: 20;
 }
 
-.chat-align-left{
-    margin: 0px 10px 0px;
-    background-color:floralwhite;
-    border-radius: 8px;
+.btn-fadedbtn{
+	color: #777;
 }
-
-.chat-time{
-    color: darkolivegreen;
-}
-
-.chat-sender{
-    color:chocolate;
-    font-style:italic;
-    font-weight: bold;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-/*comments functionality styles end here*/
-
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;

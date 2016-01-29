@@ -5,9 +5,12 @@ var WidgetSchema = mongoose.Schema({
    chartRenderer: String,
    url: String,
    comments:[{
+	  _id : false,
       userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
       comment: String,
-      datetime: String//{type:Date, default: Date.Now}
+      datetime: String,//{type:Date, default: Date.Now}
+	  badgeClass: String,
+	  badgeIconClass: String
    }]
 }, {strict: false});
 
@@ -29,7 +32,7 @@ WidgetSchema.statics.getWidget = function (widgetId, callback) {
    });
 }
 
-WidgetSchema.statics.postComment=function(userid,widgetId,userComment){
+WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass){
     
     console.log('At db insert functionality');
 
@@ -40,8 +43,12 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment){
    },{
      $push: {
          comments:{userid : userid,
-                    comment : userComment,
-                   datetime : '5th Jan 2016'}
+                   comment : userComment,
+                   datetime : '5th Jan 2016',
+				   badgeClass : 'info',
+				   badgeIconClass:commentClass,
+				   _id:0
+				  }
      }
    },function(err, userComment) {
        if(err){
