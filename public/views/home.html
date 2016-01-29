@@ -29,7 +29,7 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{lastCommentBy(col.widgetId.comments)}} and {{col.widgetId.comments.length}} others</span>
+														See comments from <span class="user-comments-meta"> {{col.widgetId.lastaddedby}} and {{col.widgetId.countComments}} others</span>
 													</span>
 
 												</a>
