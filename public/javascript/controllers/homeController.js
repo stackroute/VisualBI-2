@@ -61,8 +61,8 @@ angular.module('vbiApp')
 			$uibModal.open(modalConfig);
 		}
 		
-		$scope.showGraphColumn = function(containerId, graphMethod) {
-			chartRenderer.executeMethod('executeQueryService', graphMethod, [containerId]);
+		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
+			chartRenderer.executeMethod(redererService, graphMethod, [containerId]);
 		}
 
 		$scope.lastCommentBy = function(comments){
