@@ -1,9 +1,10 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer) {
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
+		 
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
@@ -58,6 +59,10 @@ angular.module('vbiApp')
 				}
 			};
 			$uibModal.open(modalConfig);
+		}
+		
+		$scope.showGraphColumn = function(containerId, graphMethod) {
+			chartRenderer.executeMethod('executeQueryService', graphMethod, [containerId]);
 		}
 
 		$scope.lastCommentBy = function(comments){

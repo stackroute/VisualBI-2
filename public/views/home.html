@@ -11,7 +11,22 @@
 									<div class="panel panel-primary">
 										<div class="panel-heading">
 											<h3 class = "panel-title">{{ col.widgetId.title }}
-											<a class="pull-right" ng-click="fullScreen(col.widgetId)"><span class="glyph-fullscreen glyphicon glyphicon-fullscreen"></span></a>
+											<a uib-tooltip="full screen" tooltip-placement="bottom" class="pull-right" ng-click="fullScreen(col.widgetId)"><i class="fa fa-arrows-alt glyph-title"></i>
+											</a>
+											<span class="pull-right" role="group" ng-show="col.widgetId.parameters.showGraphIcon">
+										  		<a uib-tooltip="pie graph" tooltip-placement="bottom" ng-click="showGraphColumn(tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showPieGraphColumn')"><i class="fa fa-pie-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="area graph" tooltip-placement="bottom" ng-click="showGraphColumn(tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showAreaGraphColumn')"><i class="fa fa-area-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="line graph" tooltip-placement="bottom" ng-click="showGraphColumn(tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showLineGraphColumn')"><i class="fa fa-line-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="bar graph" tooltip-placement="bottom" ng-click="showGraphColumn(tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showBarGraphColumn')"><i class="fa fa-bar-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  
+										  	
+											  
+											</span>
+											
 											</h3>
 										</div>
 										<div class="panel-body">
