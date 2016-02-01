@@ -29,11 +29,8 @@
 											
 											</h3>
 										</div>
-										<div class="panel-body">
-											<div ng-show="isLoading">
-												<img src="/images/loading.gif" /> loading...
-											</div>
-											<chart-panel widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+										<div class="panel-body widget-body">
+											<chart-panel widget-data="widgetData" widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 
 											</chart-panel>
 										</div>
