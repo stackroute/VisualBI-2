@@ -1,25 +1,16 @@
-angular.module('vbiApp').controller('chartModalController', function($rootScope,$scope,$http,$httpParamSerializer,$uibModalInstance, chartInfo) {
+angular.module('vbiApp').controller('chartModalController', function($rootScope,$scope,$http,$uibModalInstance, chartInfo) {
     
-	var commentType='glyphicon-check',commentCategory="info";
+	var commentType='glyphicon-check',commentCategory='info';
 	
-	$scope.registerCommentTypeFlag=function(){
-		console.log('Comment type selection : Flag');
-		commentType='glyphicon-flag';
-		commentCategory='danger';
+	$scope.registerCommentType=function(icon){
+		console.log('Comment type selection : '+icon);
+		commentType='glyphicon-'+icon;
+		
+		if(icon=='flag'||icon=='exclamation-sign'){	
+			commentCategory='danger';
+		}
 	}
 	
-	$scope.registerCommentTypeApprove=function(){
-			console.log('Comment type selection : Approve');
-		commentType='glyphicon-check';
-		commentCategory='info';
-	}
-	
-	$scope.registerCommentTypeWarning=function(){
-			console.log('Comment type selection : Warning');
-		commentType='glyphicon-exclamation-sign';
-		commentCategory='danger';
-	}
-					
     $scope.postComment=function(){
         console.log('Posting comment -> '+$scope.userComment+' '+commentType);
 		console.log('Passed widget ID is '+chartInfo.widgetId);
@@ -41,7 +32,7 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
                 'Content-Type': 'application/json'
             }
         }).success(function successCallback(data, status) {
-            console.log('Post successful');
+            console.log('Comment post request successful');
             console.log(data);
         }, function errorCallback(response) {
         });
