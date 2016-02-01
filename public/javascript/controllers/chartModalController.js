@@ -14,6 +14,12 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
 	}
 	
 //	function to write to comment entered by the user to the database and to add the comment to modal view
+            $scope.IsNotVisible = true;
+            $scope.ShowHide = function () {
+                $scope.IsVisible = $scope.IsVisible ? false : true;
+                $scope.IsNotVisible = $scope.IsVisible ?false : true;
+                
+            }
     $scope.postComment=function(){
 
 //		the payload for POST request to the server
@@ -39,8 +45,15 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
             //console.log(data);
         }, function errorCallback(response) {
         });
-		
-	
+        
+        chartInfo.comments.push({userid:'ashok',
+                            badgeClass:commentCategory,
+                            badgeIconClass:commentType,
+                            comment:$scope.userComment,
+                            when:Date()
+        });
+        $scope.userComment='';
+        commentType='glyphicon-check',commentCategory='info';
     };
 
     $scope.chartInfo = chartInfo;

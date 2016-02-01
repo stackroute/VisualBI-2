@@ -64,8 +64,8 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
      '_id' : widgetId
    },{
      $set:{
-         lastaddedby : userid,
-		 countComments : 77 //expectedchanges
+         lastCommentedBy : userid,
+		 commentsCounter : 77 //expectedchanges
      }
    },function(err, userComment) {
        if(err){
