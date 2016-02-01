@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', 'editManager', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log, editManager) {
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -69,25 +69,26 @@ angular.module('vbiApp')
       var newTab = {
         'tabId' : tabId,
         'tabTitle' : "newtab",
-        'rows'  : [{
-            'columns' : [{
-                'colWidth': 12
-            }]
-        }]
+        'rows'  : []
       };
       $scope.tabs[tabCount] = newTab;
     }
 
-    $scope.createRow = function(tabId) {
-      angular.forEach($scope.tabs, function(tab, key) {
-        if(tab.tabId == tabId) {
-          var newRow = {
-              'columns' : [{
-                  'colWidth': 12
-              }]
-          };
-          tab.rows.push(newRow);
-        }
-      });
+    // $scope.createRow = function(tabId) {
+    //   angular.forEach($scope.tabs, function(tab, key) {
+    //     if(tab.tabId == tabId) {
+    //       var newRow = {
+    //           'columns' : [{
+    //               'colWidth': 12
+    //           }]
+    //       };
+    //       tab.rows.push(newRow);
+    //     }
+    //   });
+    // }
+
+    $scope.gotoEditPage = function(tab) {
+      editManager.setTabDetails(tab);
+      $location.url('/edittab');
     }
 }]);

@@ -154,7 +154,7 @@ body{
   display: block;
   height: 0;
   overflow: hidden;
-	
+
 }
 .tab-content > .active {
   display: block;
@@ -162,7 +162,7 @@ body{
 }
 
 .row-btn {
-  margin: 10px 0px;
+  margin: 5px 5px;
 }
 
 .row {
@@ -211,6 +211,32 @@ table,  th,  td{
     font-weight: bold;
     font-family: 'Ubuntu', sans-serif;
 }
+
+#widget-library {
+	width: 300px;
+	height: 100%;
+	background:rgba(255,255,255,0.5);
+	overflow-y: scroll;
+	position: absolute;
+	z-index: 10;
+}
+
+#widget-library ul {
+	list-style-type: none;
+}
+
+#widget-library li {
+	margin-left: -30px;
+}
+
+#widget-library ul, .edit-row-container {
+	margin-top: 50px;
+}
+
+.widget-holder {
+	height: 200px;
+}
+
 
 /*comments functionality styles end here*/
 
