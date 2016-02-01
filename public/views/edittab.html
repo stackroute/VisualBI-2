@@ -1,0 +1,81 @@
+<div>
+	<header-directive></header-directive>
+	<div>
+		<aside class="pull-left" id="widget-library">
+			<!-- widget library comes here -->
+			<div>
+
+				<ul>
+					<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.title"
+										data-drag="true"
+										data-jqyoui-options="{revert: 'invalid', appendTo: 'body', helper: 'clone'}"
+										ng-model="widgetItems"
+										jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">
+						<a>
+							<chart-panel parameters = "{{ widget.parameters }}" chart-renderer-method = "{{ widget.chartRenderer }}" >
+
+							</chart-panel>
+							{{ widget.title }}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<div class="container">
+			<!-- placeholder comes here -->
+			<button type="button" ng-click="addRow()" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
+			<button type="button" ng-click="saveRow()" class="btn btn-primary row-btn pull-right">Save <span class="glyphicon glyphicon-floppy-save"></span></button>
+
+			<div class="edit-row-container" ng-repeat="tab in tabs">
+				<div class = "row" ng-repeat="row in tab.rows">
+					<div class = "col-sm-{{ col.colWidth }}" ng-repeat="col in row.columns">
+						<div class="panel panel-primary widget-holder" data-drop="true" ng-model="col.widgetId"
+																						jqyoui-droppable="{multiple:false, onDrop: ''}"
+
+																					>
+
+
+
+<!-- <p ng-repeat="colid in col.widgetId" ng-show="item.title" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}" > -->
+							{{col.widgetId.title}}
+						<!-- </p> -->
+						</div>
+			  	</div>
+			 	</div>
+			</div>
+
+			<div class = "modal fade" id = "columnSizeModal" tabindex = "-1" role = "dialog" aria-labelledby = "myModalLabel" aria-hidden = "true">
+				<div class = "modal-dialog">
+			  	<div class = "modal-content">
+			 			<div class = "modal-header">
+							<button type = "button" class = "close" data-dismiss = "modal" aria-hidden = "true">&times;</button>
+							<h4 class = "modal-title" id = "myModalLabel"> Share With Others </h4>
+						</div>
+
+	 					<div class="form-group">
+		 					<label for="usr">People</label>
+			 				<input type="text" class="form-control" id="usr" placeholder="Enter email-id">
+						</div>
+
+					 <div class="btn-group" uib-dropdown>
+		 			 		<button id="btn-append-to-single-button" type="button" class="btn btn-primary" uib-dropdown-toggle>
+			 					Access <span class="caret"></span></button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
+								<li role="menu2"><a href="#"><span class="glyphicon glyphicon-comment"></span>Can Comment</a></li>
+						 		<li role="menu3"><a href="#"><span class="glyphicon glyphicon-pencil"></span>Can Edit</a></li>
+						 		<li role="menu4"><a href="#"><span class="glyphicon glyphicon-eye-open"></span>Can View</a></li>
+							</ul>
+					 </div>
+
+			 		 <div class = "modal-footer">
+				 	 		<button type = "button" class = "btn btn-default" data-dismiss = "modal">Close </button>
+							<button type = "button" class = "btn btn-primary">Done </button>
+			 		 </div>
+
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+
+		</div>
+	</div>
+</div>
