@@ -49,4 +49,21 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
    });
 }
 
+UserSchema.statics.insertSharedWith = function(fromUserId,toUserId){
+  this.model('User').update({_id: mongoose.Types.ObjectId(fromUserId)},
+  {
+    $pushAll:
+    {
+      "dashboards.0.sharedWith":[toUserId]
+    }
+  },
+  {upsert:true},function(err){
+        if(err){
+                console.log(err);
+        }else{
+                console.log("Successfully added");
+        }
+});
+};
+
 module.exports = mongoose.model("User", UserSchema);

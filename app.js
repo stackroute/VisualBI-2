@@ -16,7 +16,11 @@ var passport = require('./routes/passport'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
 	 Credential = require('./model/credential'),
-	 gridRouter = require('./routes/girdRouter');
+	 gridRouter = require('./routes/girdRouter'),
+     commentsRouter=require('./routes/commentsRouter'),
+   getUserId  = require('./routes/getUserId');
+
+   
 
 mongoose.connect(dbConfig.url);
 var db = mongoose.connection;
@@ -50,8 +54,10 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
+app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
+app.use('/getUserId', getUserId);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

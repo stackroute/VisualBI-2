@@ -4,6 +4,7 @@ logs
 *.orig
 *.log.*
 .idea
+fb.html
 
 # Runtime data
 pids

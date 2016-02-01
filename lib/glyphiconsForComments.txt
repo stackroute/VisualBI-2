@@ -1,0 +1,11 @@
+
+glyphicon glyphicon-check [DEFAULT]
+glyphicon glyphicon-ok 
+glyphicon glyphicon-flag
+glyphicon glyphicon-tag
+glyphicon glyphicon-tags
+glyphicon glyphicon-star
+glyphicon-comment
+glyphicon-exclamation-sign
+glyphicon-hourglass
+

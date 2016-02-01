@@ -24,6 +24,15 @@ angular.module('vbiApp')
 						}).then(function(res) {
 						  return (res.data);
 						});
+          },
+
+           getUserId: function(username){
+                     return $http({
+                       method: 'GET',
+                       url: '/getUserId/' +username
+                     }).then(function(res){
+                       return (res);
+                     });
           }
         };
 

@@ -40,7 +40,19 @@ app.factory('executeQueryService', function($http, $rootScope) {
            reject(err);
          });
       //  });
-    }
+    },
+	  showPieGraphColumn: function(contianerId) {
+		  alert('pie - ' + contianerId);
+	  },
+	  showAreaGraphColumn: function(contianerId) {
+		  alert('area - ' + contianerId);
+	  },
+	  showLineGraphColumn: function(contianerId) {
+		  alert('line - ' + contianerId);
+	  },
+	  showBarGraphColumn: function(contianerId) {
+		  alert('bar - ' + contianerId);
+	  }
   };
 });
 var renderData =  function (container, data){

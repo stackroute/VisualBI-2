@@ -120,7 +120,7 @@ body{
    margin-top: 20px;
 }
 
-.glyph-fullscreen {
+.glyph-title {
 	padding: 0;
 	color:white;
 	cursor: pointer;
@@ -128,7 +128,7 @@ body{
 
 
 .glyph-right-space{
-	margin-right: 3px;
+	margin-right: 5px;
 }
 
 
@@ -189,27 +189,21 @@ table,  th,  td{
   padding: 10px;
 }
 
-.chat-align-right{
-    margin: 0px 260px 0px;
-    background-color:aliceblue;
-    border-radius: 8px;
+.section_result .level0 {
+	background-color: #F7B05B;
 }
 
-.chat-align-left{
-    margin: 0px 10px 0px;
-    background-color:floralwhite;
-    border-radius: 8px;
+.dataRow .level0{
+/*	//#D3D3D3*/
+	background-color: lightgrey;
 }
 
-.chat-time{
-    color: darkolivegreen;
+.comment-icon{
+	opacity: 20;
 }
 
-.chat-sender{
-    color:chocolate;
-    font-style:italic;
-    font-weight: bold;
-    font-family: 'Ubuntu', sans-serif;
+.btn-fadedbtn{
+	color: #777;
 }
 
 #widget-library {
@@ -236,9 +230,6 @@ table,  th,  td{
 .widget-holder {
 	height: 200px;
 }
-
-
-/*comments functionality styles end here*/
 
 @media(min-width:768px) {
     #wrapper {

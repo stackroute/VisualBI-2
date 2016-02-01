@@ -2,6 +2,7 @@ angular.module('vbiApp')
     .config(['$routeProvider', function($routeProvider) {
 
         $routeProvider
+
         .when('/', {
             templateUrl: 'views/login.html',
             controller: 'loginController'
@@ -13,9 +14,16 @@ angular.module('vbiApp')
         .when('/edittab', {
           templateUrl: 'views/edittab.html',
           controller: 'editController'
-        }).otherwise({
-        		//redirectTo: '/home'
-      });
+        })
+        .when('/share', {
+            templateUrl: 'views/shareDashboard.html',
+            controller: 'shareDashboardController'
+        })
+        .otherwise({
+        		redirectTo: '/home'
+        });
+
+
 
 }]).run(['$rootScope','$location', '$cookies', function($rootScope, $location, $cookies) {
 		//cookie name which will store authentication token
@@ -25,8 +33,12 @@ angular.module('vbiApp')
 		  var authToken = $cookies.get($rootScope.authToken);
 
 		  if(authToken) {
-				$rootScope.loggedInUser= JSON.parse(authToken);
-          //$location.path("/home");
+		  $rootScope.loggedInUser= JSON.parse(authToken);
+        var currentUrl = $location.url();
+        if(currentUrl == '/') {
+
+			 	$location.path("/home");
+        		}
 		  } else {
 			  $location.path("/");
 		  }

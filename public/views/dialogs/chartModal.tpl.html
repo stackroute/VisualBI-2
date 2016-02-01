@@ -8,9 +8,22 @@
   <div class="modal-body">
 		<chart-panel column-width="12" parameters = "{{ chartInfo.parameters }}" chart-renderer-method = "{{ chartInfo.chartRendererMethod }}" ></chart-panel>
   </div>
-
+    
       <modal-comments></modal-comments>
-  
- </div>
 
+    <p>{{userComment}}</p>
+
+   <div class="input-group">
+    <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
+	   	 <span class="input-group-btn">
+		  	<i class="glyphicon glyphicon-flag btn btn-fadedbtn" ng-click="registerCommentTypeFlag()"></i>
+			<i><span	class="glyphicon glyphicon-check  btn btn-fadedbtn comment-icon" ng-click="registerCommentTypeApprove()"></span></i>
+		  <i	class="glyphicon glyphicon-exclamation-sign  btn btn-fadedbtn" ng-click="registerCommentTypeWarning()"></i>
+
+      <button class="btn btn-success" rows="3" type="button" ng-click="postComment()">Post comment&nbsp
+
+	  </button>
+
+	  </span>
+   </div>
 </script>

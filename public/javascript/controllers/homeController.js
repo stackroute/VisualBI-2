@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', 'editManager', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log, editManager) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager) {
 		 $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -27,7 +27,7 @@ angular.module('vbiApp')
 
 		};
 
-		$scope.fullScreen = function(chartRenderer, parameters, title, comments) {
+		$scope.fullScreen = function(widget) {
 			var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
@@ -36,27 +36,32 @@ angular.module('vbiApp')
 					chartInfo: function(){
                         var userComments=[];
 
-                        angular.forEach(comments, function(comment, key){
+                        angular.forEach(widget.comments, function(comment, key){
 
                             userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
-                                badgeClass: 'danger',
-                                badgeIconClass: 'glyphicon-user',
+                                badgeClass: comment.badgeClass,
+                                badgeIconClass: comment.badgeIconClass,
                                 when: Date()
                             });
                         });
 
 						return {
-							chartRendererMethod: chartRenderer,
-							parameters: parameters,
-							title: title,
-							comments: userComments
+							chartRendererMethod: widget.chartRenderer,
+							parameters: widget.parameters,
+							title: widget.title,
+							comments: userComments,
+							widgetId: widget._id
 						};
 					}
 				}
 			};
 			$uibModal.open(modalConfig);
+		}
+
+		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
+			chartRenderer.executeMethod(redererService, graphMethod, [containerId]);
 		}
 
 		$scope.lastCommentBy = function(comments){

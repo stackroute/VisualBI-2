@@ -5,12 +5,12 @@ angular.module('vbiApp')
         email: "",
         password: ""
     };
-                                    
+
     this.errorMessage = "";
     this.login = function() {
 		  userManager.login(this.user, function(err, data) {
 				if(!err) {
-					
+
 					 //logged in successfully. load the dashboard
 					$rootScope.loggedInUser = data;
 					$cookies.put($rootScope.authToken, JSON.stringify($rootScope.loggedInUser));
@@ -19,9 +19,9 @@ angular.module('vbiApp')
 				} else {
 					 this.errorMessage = err;
 				}
-				
+
 		  });
     };
-                                    
-    
+
+
 }]);
