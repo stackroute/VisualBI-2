@@ -6,16 +6,16 @@
       </div>
     </div>
 
-    <div class="modal-body">
+    <div class="modal-body" id="shareBody">
 
-    <div class="input-group input-group-lg">
+    <div class="input-group input-group-lg" id ="input-group">
      <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
       </span>
       <input class="form-control" type="text" placeholder="Email address">
       </div>
 
-      <div ng-controller="shareCtrl" class="access">
+      <div ng-controller="shareCtrl" class="permission">
         <select ng-model="selectedItem" ng-options="c as (c.name) for c in containers" class="dropdown-height">
           <option value="">Access</option>
 
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-        <div class="share-btn">
+        <div class="share-btn" id="sharebutton">
           <button type = "button" class = "btn btn-primary">Done </button>
           <button class="btn btn-warning" ng-click="closeModal()">Cancel</button>
         </div>

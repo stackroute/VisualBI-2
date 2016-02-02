@@ -160,7 +160,7 @@ body{
   display: block;
   height: 0;
   overflow: hidden;
-	
+
 }
 .tab-content > .active {
   display: block;
@@ -243,4 +243,32 @@ table,  th,  td{
         position: relative;
         margin-right: 0;
     }
+}
+
+/* Share Modal  Styles*/
+
+#input-group{
+	width:380px;
+}
+
+.permission{
+	position: absolute;
+	right:10px;
+  top:19px;
+}
+
+.dropdown-height{
+	height:41px;
+	left:30px;
+}
+
+
+#sharebutton{
+font-size: 11px;
+margin-top: 85px;
+}
+
+#shareBody{
+  width:580px;
+  height: 200px;
 }
