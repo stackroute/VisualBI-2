@@ -23,10 +23,15 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
                 $scope.IsNotVisible = $scope.IsVisible ?false : true;
                 
             }
+            
+            
+           
+    
+    
     $scope.postComment=function(){
 
 //		the payload for POST request to the server
-		var parameters={userid:'ashok', //expectedchanges
+		var parameters={userid:'Nishant', //expectedchanges
                         comment:$scope.userComment,
                         widgetid:chartInfo.widgetId,
 						commentType:commentType,
@@ -44,12 +49,11 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
                 'Content-Type': 'application/json'
             }
         }).success(function successCallback(data, status) {
-            //console.log('Comment post request successful');
-            //console.log(data);
+            
         }, function errorCallback(response) {
         });
         
-        chartInfo.comments.push({userid:'ashok',
+        chartInfo.comments.push({userid:'Nishant',
                             badgeClass:commentCategory,
                             badgeIconClass:commentType,
                             comment:$scope.userComment,

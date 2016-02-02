@@ -30,7 +30,8 @@ angular.module('vbiApp')
 			});
 
 		};
-
+        
+         
 		$scope.fullScreen = function(widget) {
 			var modalConfig = {
 				templateUrl: 'chartModal',

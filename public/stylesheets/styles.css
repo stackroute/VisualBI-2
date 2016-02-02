@@ -211,6 +211,12 @@ table,  th,  td{
 .btn-fadedbtn{
 	color: #777;
 }
+
+/*css for comment toggle in modal*/
+.commentDisplayToggle{
+    font-size: 12px !important;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;
