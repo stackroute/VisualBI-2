@@ -1,6 +1,6 @@
 angular.module('vbiApp').controller('chartModalController', function($rootScope,$scope,$http,$uibModalInstance, chartInfo) {
     //	set the default comment icon as check icon and color to blue(info)
-	var commentType='glyphicon-check',commentCategory='info'; 
+	var commentType='glyphicon-check',commentCategory='primary'; 
 	
 	//	function to set the comment icon class and color
 	$scope.registerCommentType=function(icon){
@@ -8,12 +8,12 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
 		commentType='glyphicon-'+icon;
 		
 		//other than glyphicon-check, set the comment icon color to blue
-		if(icon=='flag'||icon=='exclamation-sign'){	
-			commentCategory='primary';
+/*		if(icon=='flag'||icon=='glyphicon-bookmark'){	
+			commentCategory='danger';
 		}
 		else{
 			commentCategory='success';
-		}
+		}*/
 	}
 	
 //	function to write to comment entered by the user to the database and to add the comment to modal view
@@ -60,7 +60,7 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
                             when:Date()
         });
         $scope.userComment='';
-        commentType='glyphicon-check',commentCategory='info';
+        commentType='glyphicon-check',commentCategory='primary';
     };
 
     $scope.chartInfo = chartInfo;
