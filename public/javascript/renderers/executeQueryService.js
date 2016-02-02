@@ -38,15 +38,14 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showPieGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  
+		  	
 			 if((tableContainer.find("."+"miniPieGraph"+"").length) === 0){
 				  tableContainer.find("#row0").prev().append("<td class="+"miniPieGraph"+"><span class='graphIcon'>"+"</span></td>");
 
 				  for(var index in graphArray) {
 					 if(parseInt(index) !== graphArray.length-1){
 						  var dataset = graphArray;
-						  $rootScope.graphArray = graphArray;
-						  tableContainer.find("#row"+index).append($compile("<td class="+"miniPieGraph"+"><minipie-graph index-passed="+index+" "+"my-set="+'graphArray'+"></minipie-graph></td>")(scope));
+						  tableContainer.find("#row"+index).append($compile("<td class="+"miniPieGraph"+"><minipie-graph index-passed="+index + " widget-uid=" + table_container +"></minipie-graph></td>")(scope));
 					 }
 				  }
 				}
@@ -64,8 +63,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 				for(var index in graphArray) {
 				  if(parseInt(index) !== graphArray.length-1) {
 						var dataset = graphArray;
-						$rootScope.graphArray = graphArray;
-						tableContainer.find("#row"+index).append($compile("<td class="+"miniAreaGraph"+"><miniarea-graph index-passed="+index+" "+"my-set="+'graphArray'+"></miniarea-graph></td>")(scope));
+						tableContainer.find("#row"+index).append($compile("<td class="+"miniAreaGraph"+"><miniarea-graph index-passed="+index + " widget-uid=" + table_container +"></miniarea-graph></td>")(scope));
 					}
 			 	}
 		  } else {
@@ -81,8 +79,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 
 				for(var index in graphArray) {
 				  if(parseInt(index) !== graphArray.length-1) {
-						$rootScope.graphArray = graphArray;
-						tableContainer.find("#row"+index).append($compile("<td class="+"miniLineGraph"+"><miniline-graph index-passed="+index+" "+"my-set="+'graphArray'+"></miniline-graph></td>")(scope));
+						tableContainer.find("#row"+index).append($compile("<td class="+"miniLineGraph"+"><miniline-graph index-passed="+ index + " widget-uid=" + table_container +"></miniline-graph></td>")(scope));
 					}
 			 	}
 			 }
@@ -93,14 +90,12 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showBarGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  
 		  if((tableContainer.find("."+"miniBarGraph"+"").length) === 0){
 				tableContainer.find("#row0").prev().append("<td class="+"miniBarGraph"+"><span class='graphIcon'>"+"</span></td>");
 
 				for(var index in graphArray) {
 				  if(parseInt(index) !== graphArray.length-1) {
-            		$rootScope.graphArray = graphArray;
-						tableContainer.find("#row"+index).append($compile("<td class="+"miniBarGraph"+"><minibar-graph index-passed="+index+" "+"my-set="+'graphArray'+"></minibar-graph></td>")(scope));
+					  tableContainer.find("#row"+index).append($compile("<td class="+"miniBarGraph"+"><minibar-graph index-passed="+index+ " widget-uid=" + table_container +"></minibar-graph></td>")(scope));
 					}
 			 	}
 			 }

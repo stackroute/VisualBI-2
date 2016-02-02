@@ -69,16 +69,33 @@ angular.module('vbiApp')
 		}
 		
 		//Show Modal Bar Graph in Modal Window
-		$scope.openModalBarGraph = function(indexPassed) {
+		$scope.openModalBarGraph = function(indexPassed, widgetUid) {
 		  var modalInstance = $uibModal.open({
 			 templateUrl : 'modalBarGraph.html',
 			 controller : 'ModalGraphController',
 			 indexPassed : indexPassed,
 			 resolve : {
 				graphData : function() {
-				  return $rootScope.graphArray;
+				  return $scope.widgetData[widgetUid];
 				},
 
+				index : function() {
+				  return indexPassed;
+				}
+			 }
+		  });
+		};
+		 
+		 //Show Line Modal Graph
+		$scope.openModalGraph = function(template, indexPassed, widgetUid) {
+		  var modalInstance = $uibModal.open({
+			 templateUrl : template,
+			 controller : "ModalGraphController",
+			 indexPassed : indexPassed,
+			 resolve : {
+				graphData : function(){
+				  return $scope.widgetData[widgetUid];
+				},
 				index : function() {
 				  return indexPassed;
 				}
