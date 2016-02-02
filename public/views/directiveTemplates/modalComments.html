@@ -1,8 +1,13 @@
 <div class="modal-footer">
-  <!-- <input ng-model=collapse type=checkbox><i class = "glyphicon glyphicon-user"></i>Show Comments
-  <div ng-show=collapse> -->
+ 
+    <!--code for toggling the show comment option--->
   <h4 class="panel-title">
-       <a data-toggle="collapse" data-target="#collapse1"><i class="glyphicon glyphicon-comment"></i></a>
+      <span ng-show="chartInfo.comments.length > 0">
+       <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
+           <span class="commentDisplayToggle" ng-show = "IsVisible">Show Comments</span>
+           <span class="commentDisplayToggle" ng-show = "IsNotVisible">Hide Comments</span>    
+      </a>
+      </span>
   </h4>
   <div id="collapse1" class="collapse in">
     <timeline>

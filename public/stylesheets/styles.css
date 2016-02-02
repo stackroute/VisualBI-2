@@ -111,6 +111,12 @@ body{
     background: none;
 }
 
+.widget-body {
+/*
+    overflow-x: scroll;
+    height: 500px;
+*/
+}
 .login-error {
    color: red;
    font-weight: bold;
@@ -120,7 +126,7 @@ body{
    margin-top: 20px;
 }
 
-.glyph-fullscreen {
+.glyph-title {
 	padding: 0;
 	color:white;
 	cursor: pointer;
@@ -128,7 +134,7 @@ body{
 
 
 .glyph-right-space{
-	margin-right: 3px;
+	margin-right: 5px;
 }
 
 
@@ -166,7 +172,7 @@ body{
 }
 
 .row {
-  margin: 0px;
+/*  margin: 0px;*/
 }
 
 .close {
@@ -205,6 +211,12 @@ table,  th,  td{
 .btn-fadedbtn{
 	color: #777;
 }
+
+/*css for comment toggle in modal*/
+.commentDisplayToggle{
+    font-size: 12px !important;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;

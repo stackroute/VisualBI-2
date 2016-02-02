@@ -14,14 +14,26 @@
 									<div class="panel panel-primary">
 										<div class="panel-heading">
 											<h3 class = "panel-title">{{ col.widgetId.title }}
-											<a class="pull-right" ng-click="fullScreen(col.widgetId)"><span class="glyph-fullscreen glyphicon glyphicon-fullscreen"></span></a>
+											<a uib-tooltip="full screen" tooltip-placement="bottom" class="pull-right" ng-click="fullScreen(col.widgetId)"><i class="fa fa-arrows-alt glyph-title"></i>
+											</a>
+											<span class="pull-right" role="group" ng-show="col.widgetId.parameters.showGraphIcon">
+										  		<a uib-tooltip="pie graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showPieGraphColumn')"><i class="fa fa-pie-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="area graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showAreaGraphColumn')"><i class="fa fa-area-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="line graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showLineGraphColumn')"><i class="fa fa-line-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="bar graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showBarGraphColumn')"><i class="fa fa-bar-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  
+										  	
+											  
+											</span>
+											
 											</h3>
 										</div>
-										<div class="panel-body">
-											<div ng-show="isLoading">
-												<img src="/images/loading.gif" /> loading...
-											</div>
-											<chart-panel widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+										<div class="panel-body widget-body">
+											<chart-panel widget-data="widgetData" widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 
 											</chart-panel>
 										</div>
@@ -31,7 +43,7 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{col.widgetId.lastaddedby}} and {{col.widgetId.countComments}} others</span>
+														See comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and {{col.widgetId.commentsCounter}} others</span>
 													</span>
 
 												</a>

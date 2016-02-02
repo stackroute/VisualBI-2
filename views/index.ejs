@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="vbiApp">
    <head>
-      <link rel="stylesheet" href='/bootstrap/css/bootstrap.css' charset="utf-8">
+      <link rel="stylesheet" href='/bootstrap/css/bootstrap.min.css' charset="utf-8">
       <link rel="stylesheet" href="/stylesheets/styles.css" charset="utf-8">
       <link rel="stylesheet" href="/stylesheets/bootstrap-glyphicons.css" charset="utf-8">
       <link rel="stylesheet" href="stylesheets/angular-timeline.css"/>
+      <link rel="stylesheet" href="stylesheets/font-awesome.min.css"/>
    </head>
    <body>
       <div ng-view>
+
 	 	</div>
       <script src="/javascript/lib/jquery.min.js" charset="utf-8"></script>
+      <script src="/bootstrap/js/bootstrap.min.js" charset="utf-8"></script>
       <script src="/javascript/lib/d3.min.js" charset="utf-8"></script>
       <script src="/javascript/lib/angular.min.js" charset="utf-8"></script>
       <script src="/javascript/lib/angular-route.min.js" charset="utf-8"></script>
@@ -25,8 +28,10 @@
       <script src="/javascript/controllers/shareDashboardController.js"></script>
       <script src="/javascript/controllers/shareModalCtrl.js"></script>
       <script src="/javascript/controllers/chartModalController.js"></script>
+      <script src="/javascript/controllers/modalGraphController.js"></script>
       <script src="/javascript/services/userManager.js"></script>
       <script src="/javascript/services/chartRenderer.js"></script>
+      <script src="/javascript/services/graphservice.js"></script>
       <script src="/javascript/renderers/plotContinentChart.js"></script>
       <script src="/javascript/renderers/gdpPerCapitaBarChart.js"></script>
       <script src="/javascript/renderers/gdpStackedBarChart.js"></script>
@@ -35,5 +40,7 @@
       <script src="/javascript/directives/headerDirectives.js"></script>
       <script src="/javascript/directives/chartPanelDirective.js"></script>
       <script src="/javascript/directives/modalComments.js"></script>
+      <script src="/javascript/directives/graphDirectives.js"></script>
+
    </body>
 </html>
