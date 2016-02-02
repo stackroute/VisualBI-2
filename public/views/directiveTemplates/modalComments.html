@@ -15,14 +15,15 @@
         <timeline-badge class="displayImage">
         </timeline-badge>
         <timeline-panel class="{{comment.badgeClass}}">
+			<i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}"></i>
           <timeline-heading>
             <h4>{{comment.userid | uppercase}}</h4>
             <p ng-if="comment.when">
-              <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when}}</small>
+              <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-			<p>	  <i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}"></i>&nbsp{{comment.comment}}</p>
-			<span class="glyphicon glyphicon-trash timeline-ui-delete-btn" uib-tooltip="Delete"></span>
+			<p>	  {{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
+
         </timeline-panel>
       </timeline-event>
     </timeline>
