@@ -1,16 +1,13 @@
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer) {
-    '$cookies','$timeout', '$uibModal', '$log',
-    function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
-
      $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
-		 //data for every widget will put here. It is required to give more functionality like 
+		 //data for every widget will put here. It is required to give more functionality like
 		 // line, bar or area chart in mdx grid
 		 $scope.widgetData = {};
-		 
+
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
@@ -34,7 +31,7 @@ angular.module('vbiApp')
 			});
 
 		};
-        
+
          /*share Dashboard Modal*/
     $scope.shareModalClick = function() {
       var shareConfig ={
@@ -82,11 +79,11 @@ angular.module('vbiApp')
 			$uibModal.open(modalConfig);
 
 		}
-		
+
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
 			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
-		
+
 		//Show Modal Bar Graph in Modal Window
 		$scope.openModalBarGraph = function(indexPassed) {
 		  var modalInstance = $uibModal.open({
