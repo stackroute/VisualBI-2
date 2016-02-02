@@ -1,9 +1,13 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', '$log', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
-		 $scope.user = $rootScope.loggedInUser;
+    .controller('homeController', ['$rootScope','$scope', 'userManager', '$location',
+    '$cookies','$timeout', '$uibModal', '$log',
+    function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, $log) {
+
+     $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
+
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
@@ -14,6 +18,7 @@ angular.module('vbiApp')
 					 }
 				}
 		 });
+
 
 		$scope.logout = function() {
 			userManager.logout()
@@ -27,6 +32,20 @@ angular.module('vbiApp')
 
 		};
 
+         /*share Dashboard Modal*/
+    $scope.shareModalClick = function() {
+      var shareConfig ={
+        templateUrl: 'shareModal',
+        controller: function($scope, $uibModalInstance) {
+              $scope.closeModal = function() {
+                $uibModalInstance.close();
+              };
+            }
+      };
+      $uibModal.open(shareConfig);
+    }
+
+
 		$scope.fullScreen = function(widget) {
 			var modalConfig = {
 				templateUrl: 'chartModal',
@@ -35,9 +54,7 @@ angular.module('vbiApp')
 				resolve: {
 					chartInfo: function(){
                         var userComments=[];
-
                         angular.forEach(widget.comments, function(comment, key){
-
                             userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
@@ -58,7 +75,10 @@ angular.module('vbiApp')
 				}
 			};
 			$uibModal.open(modalConfig);
+
 		}
+
+
 
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
