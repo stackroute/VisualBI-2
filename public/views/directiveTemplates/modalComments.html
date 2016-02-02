@@ -10,8 +10,7 @@
   <div id="collapse1" class="collapse in">
     <timeline>
       <timeline-event ng-repeat="comment in chartInfo.comments" side="">
-        <timeline-badge class="{{comment.badgeClass}}">
-          <i class="glyphicon {{comment.badgeIconClass}}"></i>
+        <timeline-badge class="displayImage">
         </timeline-badge>
         <timeline-panel class="{{comment.badgeClass}}">
           <timeline-heading>
@@ -20,7 +19,7 @@
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when}}</small>
             </p>
           </timeline-heading>
-          <p>{{comment.comment}}</p>
+			<p>	  <i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}"></i>&nbsp{{comment.comment}}</p>
         </timeline-panel>
       </timeline-event>
     </timeline>

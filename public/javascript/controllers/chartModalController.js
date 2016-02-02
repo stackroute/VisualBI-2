@@ -9,7 +9,10 @@ angular.module('vbiApp').controller('chartModalController', function($rootScope,
 		
 		//other than glyphicon-check, set the comment icon color to blue
 		if(icon=='flag'||icon=='exclamation-sign'){	
-			commentCategory='danger';
+			commentCategory='primary';
+		}
+		else{
+			commentCategory='success';
 		}
 	}
 	
