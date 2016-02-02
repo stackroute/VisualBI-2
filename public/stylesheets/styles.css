@@ -111,6 +111,12 @@ body{
     background: none;
 }
 
+.widget-body {
+/*
+    overflow-x: scroll;
+    height: 500px;
+*/
+}
 .login-error {
    color: red;
    font-weight: bold;
@@ -166,7 +172,7 @@ body{
 }
 
 .row {
-  margin: 0px;
+/*  margin: 0px;*/
 }
 
 .close {

@@ -10,7 +10,8 @@ angular.module('vbiApp')
 			  chartRendererMethod : "@",
 			  columnWidth: "@",
 			  chartId: "@",
-			  widgetId: "@"
+			  widgetId: "@",
+			  widgetData: "="
 		  },
 		  
 		  link: function(scope, elements, attrs) {
@@ -26,7 +27,12 @@ angular.module('vbiApp')
 					else
 						params.width = elements[0].clientWidth;
 			  }
-			  chartRenderer.plotChart(scope.chartRendererMethod, elements[0], params);
+			  chartRenderer.plotChart(scope.chartRendererMethod, elements[0], params)
+				  .then(function(data) {
+				  		//sync data with controller scope. this data will help to make other behaviours
+				  		scope.widgetData[scope.chartId] = data;
+				  		
+			  });
 		  }
 	  };
 }]);

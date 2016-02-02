@@ -4,6 +4,9 @@ angular.module('vbiApp')
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
+		 //data for every widget will put here. It is required to give more functionality like 
+		 // line, bar or area chart in mdx grid
+		 $scope.widgetData = {};
 		 
 		 userManager.getDashboard($rootScope.loggedInUser.authToken)
 			 .then(function(dashboards) {
@@ -63,8 +66,26 @@ angular.module('vbiApp')
 		}
 		
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
-			chartRenderer.executeMethod(redererService, graphMethod, [containerId]);
+			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
+		
+		//Show Modal Bar Graph in Modal Window
+		$scope.openModalBarGraph = function(indexPassed) {
+		  var modalInstance = $uibModal.open({
+			 templateUrl : 'modalBarGraph.html',
+			 controller : 'ModalGraphController',
+			 indexPassed : indexPassed,
+			 resolve : {
+				graphData : function() {
+				  return $rootScope.graphArray;
+				},
+
+				index : function() {
+				  return indexPassed;
+				}
+			 }
+		  });
+		};
 
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
