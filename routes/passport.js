@@ -6,4 +6,5 @@ var passport = require('passport'),
 passport.use(new LocalStrategy(Credential.authenticate()));
 passport.serializeUser(Credential.serializeUser());
 passport.deserializeUser(Credential.deserializeUser());
+console.log("deserialized");
 module.exports = passport;

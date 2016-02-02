@@ -5,6 +5,10 @@ var express = require('express'),
     Widget = require('../model/widget');
 
 router.post('/',function(req,res,next){
+	
+	var a = req.isAuthenticated();
+	console.log(a);
+	console.log("added now ", req.session);
     console.log('Routing comment post!');
 	console.log(req.body);
     

@@ -4,7 +4,7 @@ var app = angular.module("vbiApp");
 app.factory('GraphService', function($compile,$rootScope){
 	return {
 		//Render MiniBarGraph to be displayed in the table
-		renderMiniBarGraph : function(dataset,container,index) {
+		renderMiniBarGraph : function(dataset,container,index, widgetUid) {
 			var dataToPass = dataset;
 			function getMaxValue(dataset) {
 				var result = 0;
@@ -31,7 +31,7 @@ app.factory('GraphService', function($compile,$rootScope){
 			//Create SVG element
 			var svg = d3.select(container)
 						.append("div")
-						.attr("ng-click", "openModalBarGraph("+index+")")
+						.attr("ng-click", "openModalGraph('modalBarGraph.html', "+index+", '"+ widgetUid +"')")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
@@ -170,7 +170,7 @@ app.factory('GraphService', function($compile,$rootScope){
    		},//end of renderModalGraph
 
    		//render miniLine Graph
-   		renderMiniLineGraph : function(dataset,container,index) {
+   		renderMiniLineGraph : function(dataset,container,index, widgetUid) {
    			function getMaxValue(dataset) {
 				var result = 0;
 				for(var index in dataset) {
@@ -188,7 +188,7 @@ app.factory('GraphService', function($compile,$rootScope){
 
    			var svg = d3.select(container)
    						.append("div")
-   						.attr("ng-click","openModalLineGraph("+index+")")
+   						.attr("ng-click","openModalGraph('modalLineGraph.html', "+index+", '"+ widgetUid +"')")
    						.append("svg")
    						.attr("width",width)
    						.attr("height",height);
@@ -270,7 +270,7 @@ app.factory('GraphService', function($compile,$rootScope){
    				.attr("d",line);
    		},//end of render ModalLineGraph
 
-   		renderMiniAreaGraph : function(dataset,container,index) {
+   		renderMiniAreaGraph : function(dataset,container,index, widgetUid) {
    			function getMaxValue(dataset) {
 				var result = 0;
 				for(var index in dataset) {
@@ -288,7 +288,7 @@ app.factory('GraphService', function($compile,$rootScope){
 
    			var svg = d3.select(container)
    						.append("div")
-   						.attr("ng-click","openModalAreaGraph("+index+")")
+   						.attr("ng-click","openModalGraph('modalAreaGraph.html', "+index+", '"+ widgetUid +"')")
    						.append("svg")
    						.attr("width",width)
    						.attr("height",height);
@@ -368,7 +368,7 @@ app.factory('GraphService', function($compile,$rootScope){
    				.attr("d",area);
    			}, //end of render modal area graph
 
-   			renderMiniPieGraph : function(dataset,container,index) {
+   			renderMiniPieGraph : function(dataset,container,index, widgetUid) {
    				var width = (dataset.length*6)+((dataset.length-1)*2);
    				var height = (width*9)/16;
    				var radius = Math.min(width, height) / 2;
@@ -377,8 +377,8 @@ app.factory('GraphService', function($compile,$rootScope){
    				var color = d3.scale.category20b();
 
    				var svg = d3.select(container)
-   							.append("div")
-   							.attr("ng-click","openModalPieGraph("+index+")")
+							.append("div")
+							.attr("ng-click","openModalGraph('modalPieGraph.html', "+index+", '"+ widgetUid +"')")
   							.append('svg')
   							.attr('width', width)
 						  	.attr('height', height)

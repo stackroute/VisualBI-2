@@ -1,11 +1,14 @@
 <div id="wrapper" ng-class="{'toggled': showMenu}">
 	<header-directive></header-directive>
+	<div ng-include="'views/dialogs/shareModal.tpl.html'"></div>
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
+    <button type=button class="btn btn-warning pull-right">Shared with me<span class="glyphicon glyphicon-share"></span></button>
+
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
-      			 <!-- <button type="button" ng-click = "createRow(tab.tabId)" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button> -->
+						 <button type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 						 <div class = "row" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
@@ -57,6 +60,7 @@
 					 </uib-tab> -->
 					 <load></load>
 				</uib-tabset>
+			</div>
 		</div>
 	</div>
 </div>

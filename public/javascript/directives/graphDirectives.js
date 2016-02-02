@@ -22,13 +22,14 @@ angular.module("vbiApp").directive("minibarGraph", function(GraphService,$compil
 	return {
 		restrict : "E",
 		scope : {
-			data: "=mySet",
+			widgetUid: "@widgetUid",
 			index : "=indexPassed"
+			
 		},
 		link : function(scope,element,attr) {
 			var idx = parseInt(scope.index);
-			var dataset = scope.data;
-			GraphService.renderMiniBarGraph(dataset[idx],element[0],idx);
+			var dataset = scope.$parent.widgetData[scope.widgetUid];
+			GraphService.renderMiniBarGraph(dataset[idx],element[0],idx, scope.widgetUid);
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}
@@ -39,13 +40,13 @@ angular.module("vbiApp").directive("minilineGraph", function(GraphService,$compi
 	return {
 		restrict : "E",
 		scope : {
-			data: "=mySet",
+			widgetUid: "@widgetUid",
 			index : "=indexPassed"
 		},
 		link : function(scope,element,attr) {
 			var idx = parseInt(scope.index);
-			var dataset = scope.data;
-			GraphService.renderMiniLineGraph(dataset[idx],element[0],idx);
+			var dataset = scope.$parent.widgetData[scope.widgetUid];
+			GraphService.renderMiniLineGraph(dataset[idx],element[0],idx, scope.widgetUid);
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}
@@ -72,13 +73,13 @@ angular.module("vbiApp").directive("miniareaGraph", function(GraphService,$compi
 	return {
 		restrict : "E",
 		scope : {
-			data : "=mySet",
+			widgetUid: "@widgetUid",
 			index : "=indexPassed"
 		},
 		link : function(scope,element,attr) {
 			var idx = parseInt(scope.index);
-			var dataset = scope.data;
-			GraphService.renderMiniAreaGraph(dataset[idx],element[0],idx);
+			var dataset = scope.$parent.widgetData[scope.widgetUid];
+			GraphService.renderMiniAreaGraph(dataset[idx],element[0],idx, scope.widgetUid);
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}
@@ -105,13 +106,13 @@ angular.module("vbiApp").directive("minipieGraph", function(GraphService,$compil
 	return {
 		restrict : "E",
 		scope : {
-			data : "=mySet",
-			index : "=indexPassed"
+			widgetUid: "@widgetUid",
+			index : "=indexPassed",
 		},
 		link : function(scope,element,attr) {
 			var idx = parseInt(scope.index);
-			var dataset = scope.data;
-			GraphService.renderMiniPieGraph(dataset[idx],element[0],idx);
+			var dataset = scope.$parent.widgetData[scope.widgetUid];
+			GraphService.renderMiniPieGraph(dataset[idx],element[0],idx, scope.widgetUid);
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}

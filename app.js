@@ -8,8 +8,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser');
 
 //custom modules
-var passport = require('./routes/passport'),
-    indexRouter = require('./routes/indexRouter'),
+var indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
 	 dashboardRouter = require('./routes/dashboardRouter'),
@@ -17,8 +16,8 @@ var passport = require('./routes/passport'),
     dbConfig = require('./config/db'),
 	 Credential = require('./model/credential'),
 	 gridRouter = require('./routes/girdRouter'),
-     commentsRouter=require('./routes/commentsRouter'),
-   getUserId  = require('./routes/getUserId');
+    commentsRouter=require('./routes/commentsRouter'),
+    getUserId  = require('./routes/getUserId');
 
    
 
@@ -32,9 +31,10 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 // instruct the app to use the `bodyParser()` middleware for all routes
+app.use(cookieParser('tobo'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extented: true}));
-// app.use(cookieParser('keyboard cat'));
 app.use(flash());
 
 //initialize passort sessions
@@ -42,10 +42,10 @@ app.use(expressSession({
    secret: 'tobo',
    cookie: { maxAge: 360*5 },
    proxy: true,
-   resave: true,
+   resave: false,
    saveUninitialized: true
 }));
-
+var passport = require('./routes/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
