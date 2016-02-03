@@ -6,13 +6,8 @@ var express = require('express'),
 
 router.post('/',function(req,res,next){
 	
-	var a = req.isAuthenticated();
-	console.log(a);
-	console.log("added now ", req.session);
-    console.log('Routing comment post!');
-	console.log(req.body);
-    
-    console.log('Comment "'+req.body.comment+'" added to the widget.');
+	console.log("User authenticated: ", req.isAuthenticated());
+	console.log("Current User : ", req.user);
     
 	Widget.postComment(req.body.userid, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
 	

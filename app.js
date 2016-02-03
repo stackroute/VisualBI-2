@@ -5,7 +5,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser'),
+	 passport = require('passport'),
+	 LocalStrategy = require('passport-local').Strategy;
 
 //custom modules
 var indexRouter = require('./routes/indexRouter'),
@@ -21,8 +23,7 @@ var indexRouter = require('./routes/indexRouter'),
 
    
 
-mongoose.connect(dbConfig.url);
-var db = mongoose.connection;
+
 
 var app = express();
 
@@ -34,21 +35,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser('tobo'));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extented: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
 //initialize passort sessions
 app.use(expressSession({
-   secret: 'tobo',
-   cookie: { maxAge: 360*5 },
+   secret: 'keyboard cat',
+   cookie: { maxAge: 3600000 },
    proxy: true,
    resave: false,
-   saveUninitialized: true
+   saveUninitialized: false
 }));
-var passport = require('./routes/passport');
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(Credential.authenticate()));
+passport.serializeUser(Credential.serializeUser());
+passport.deserializeUser(Credential.deserializeUser());
 
+mongoose.connect(dbConfig.url);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);

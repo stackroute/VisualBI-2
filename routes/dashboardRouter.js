@@ -1,16 +1,27 @@
 var express = require('express'),
     router = express.Router(),
-    User = require('../model/user');
+    User = require('../model/user'),
+	 utils = require('./utils');
 
+
+router.get('/', function(req, res, next) {
+	 var userid = req.user._id; //it contains _id value of user whose dashboard to be fetched
+	 if(userid) {
+		  User.getDashboard(userid, function(data){
+				res.json(data);
+		  });
+	 } else
+		  res.json({});
+});
 
 router.get('/:id', function(req, res, next) {
-    var userid = req.params.id; //it contains _id value of credentials
+	var userid = req.user._id; //it contains _id value of credentials
 	
-    if(userid) {
+   if(userid) {
         User.getDashboard(userid, function(data){
             res.json(data);
         });
-    } else
+   } else
         res.json({});
 });
 

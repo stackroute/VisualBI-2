@@ -86,12 +86,12 @@ app.factory('GraphService', function($compile,$rootScope){
 						.scale(y)
 						.orient("left");
 
-			var tip = d3.tip()
-  						.attr('class', 'd3-tip')
-  						.offset([-10, 0])
-  						.html(function(d) {
-    						return "<strong>Frequency:</strong> <span style='color:red'>" + d.value + "</span>";
-  						})
+//			var tip = d3.tip()
+//  						.attr('class', 'd3-tip')
+//  						.offset([-10, 0])
+//  						.html(function(d) {
+//    						return "<strong>Frequency:</strong> <span style='color:red'>" + d.value + "</span>";
+//  						})
 
 			var svg = d3.select(container)
 						.append('svg')
@@ -100,7 +100,7 @@ app.factory('GraphService', function($compile,$rootScope){
 						.append('g')
 						.attr("transform","translate("+margin.left+","+margin.top+")");
 
-			svg.call(tip);
+//			svg.call(tip);
 			//Add Axes
 			svg.append('g')
 				.attr("class","x axis")
