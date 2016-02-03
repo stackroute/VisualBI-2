@@ -8,11 +8,12 @@ angular.module('vbiApp')
 		 // line, bar or area chart in mdx grid
 		 $scope.widgetData = {};
 
-		 userManager.getDashboard($rootScope.loggedInUser.authToken)
+		 userManager.getDashboard()
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
 			if(dashboards && dashboards.length > 0) {
 				var dashboard = dashboards[0];
+        $rootScope.currentDashboard = dashboard._id;
 					 if(dashboard.tabs && dashboard.tabs.length > 0) {
 								$scope.tabs = dashboard.tabs;
 					 }
@@ -101,7 +102,7 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-		 
+
 		 //Show Line Modal Graph
 		$scope.openModalGraph = function(template, indexPassed, widgetUid) {
 		  var modalInstance = $uibModal.open({
@@ -151,3 +152,16 @@ angular.module('vbiApp')
       });
     }
 }]);
+angular.module("vbiApp").controller("shareCtrl",function($scope){
+    $scope.containers = [{
+          name: 'Can Edit'
+        }, {
+          name: 'Can Comment'
+        }, {
+          name: 'Can View'
+        }];
+
+        $scope.select = function(container) {
+        $scope.selectedItem = container;
+      };
+});

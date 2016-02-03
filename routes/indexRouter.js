@@ -22,7 +22,7 @@ router.get('/logout', function(req, res, next) {
 
 router.post('/login', passport.authenticate('local'),function(req, res){
 	//authenticated successfully, send the authentication token
-	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "name": req.user.name}));
+	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "name": req.user.name}), { expires: new Date(Date.now() + 900000)});
 	res.send("success");
 });
 
