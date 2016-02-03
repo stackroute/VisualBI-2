@@ -1,9 +1,9 @@
 <script type="text/ng-template" id="chartModal">
  <div class="panel panel-primary">
  	<div class="modal-header panel-heading">
-		<h3 class="modal-title">{{ chartInfo.title }}
+		<h4 class="modal-title">{{ chartInfo.title }}
 		 	<button ng-click="hide()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		 </h3>
+		 </h4>
   </div>
   <div class="modal-body">
 		<chart-panel column-width="12" parameters = "{{ chartInfo.parameters }}" chart-renderer-method = "{{ chartInfo.chartRendererMethod }}" ></chart-panel>

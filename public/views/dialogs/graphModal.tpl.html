@@ -1,10 +1,11 @@
  <!-- Modal Bar Graph -->
  <script type="text/ng-template" id="modalBarGraph.html">
-	<div>
-	  <div class="modal-header">
-		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}</h4>
-
-	  </div>
+	<div class="panel panel-primary">
+  		<div class="modal-header panel-heading">
+			<h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+				<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</h4>
+  		</div>
 	  <div class="modal-body">
 		 <modalbar-graph index-passed="index" graph-array="graphArray"></modalbar-graph>
 	  </div>
@@ -17,9 +18,11 @@
 </script>
 <!-- Modal Line Graph -->
  <script type="text/ng-template" id="modalLineGraph.html">
-	<div>
-	  <div class="modal-header">
-		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}</h4>
+	<div class="panel panel-primary">
+	  <div class="modal-header panel-heading">
+		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+		 	<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
 	  </div>
 	  <div class="modal-body">
 		 <modalline-graph index-passed="index" graph-array="graphArray"></modalline-graph>
@@ -33,9 +36,11 @@
 
  <!-- Modal Area Graph -->
  <script type="text/ng-template" id="modalAreaGraph.html">
-	<div>
-	  <div class="modal-header">
-		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}</h4>
+	<div class="panel panel-primary">
+	  <div class="modal-header panel-heading">
+		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+		 	<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
 	  </div>
 	  <div class="modal-body">
 		 <modalarea-graph index-passed="index" graph-array="graphArray"></modalarea-graph>
@@ -49,9 +54,11 @@
 
  <!-- Modal Pie Graph -->
  <script type="text/ng-template" id="modalPieGraph.html">
-	<div>
-	  <div class="modal-header">
-		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}</h4>
+	<div class="panel panel-primary">
+	  <div class="modal-header panel-heading">
+		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+		 	<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
 	  </div>
 	  <div class="modal-body" style="text-align:center">
 		 <modalpie-graph index-passed="index" graph-array="graphArray"></modalpie-graph>
