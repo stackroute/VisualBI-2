@@ -19,6 +19,7 @@ var indexRouter = require('./routes/indexRouter'),
 	 Credential = require('./model/credential'),
 	 gridRouter = require('./routes/girdRouter'),
     commentsRouter=require('./routes/commentsRouter'),
+    registerRouter = require('./routes/userRouter')
     getUserId  = require('./routes/getUserId');
 
    
@@ -62,6 +63,7 @@ app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
 app.use('/getUserId', getUserId);
+app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

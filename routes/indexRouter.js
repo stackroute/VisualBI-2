@@ -24,7 +24,7 @@ router.post('/login', passport.authenticate('local'),function(req, res){
 	res.json({"authToken": req.user._id, "name": req.user.name});
 });
 
-function restisterUser (req, res, next) {
+function registerUser (req, res, next) {
 	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {
 		console.log("added");
 		next();

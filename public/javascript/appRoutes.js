@@ -7,6 +7,12 @@ angular.module('vbiApp')
             templateUrl: 'views/login.html',
             controller: 'loginController'
         })
+        
+        .when('/register', {
+            templateUrl: 'views/register.html',
+            controller: 'registerController'
+            controllerAs:'vm'
+        })
 
         .when('/home', {
             templateUrl: 'views/home.html',
