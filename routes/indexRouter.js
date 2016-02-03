@@ -21,19 +21,8 @@ router.get('/logout', function(req, res, next) {
 
 router.post('/login', passport.authenticate('local'),function(req, res){
 	//authenticated successfully, send the authentication token
-	req.session.save(function (err) {
-	  if (err) {
-			return next(err);
-	  }
-		console.log('session saved');
-	  res.json({"authToken": req.user._id, "name": req.user.name});
-    });
+	res.json({"authToken": req.user._id, "name": req.user.name});
 });
-
-function isAuthenticated(req,res,next){
-	 if(req.isAuthenticated()) return next();
-	 res.redirect('/');
-}
 
 function restisterUser (req, res, next) {
 	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {

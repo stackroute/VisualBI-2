@@ -41,7 +41,7 @@ app.use(flash());
 //initialize passort sessions
 app.use(expressSession({
    secret: 'keyboard cat',
-   cookie: { maxAge: 360*5 },
+   cookie: { maxAge: 3600000 },
    proxy: true,
    resave: false,
    saveUninitialized: false
