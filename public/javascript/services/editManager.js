@@ -1,11 +1,18 @@
 angular.module('vbiApp').service('editManager', function() {
 
-  var tabDetails = [];
+  var tabDetails;
+  var tabIndex;
 
-  var setTabDetails = function(tab) {
-    tabDetails.pop();
-    tabDetails.push(tab);
+  var setTabDetails = function(tabs, index) {
+//    tabDetails.pop();
+//    tabDetails.push(tabs);
+  tabDetails = tabs;
+    tabIndex = index;
   };
+
+  var getTabIndex = function() {
+    return tabIndex;
+  }
 
   var getTabDetails = function() {
     return tabDetails;
@@ -13,6 +20,7 @@ angular.module('vbiApp').service('editManager', function() {
 
   return {
     setTabDetails: setTabDetails,
-    getTabDetails: getTabDetails
+    getTabDetails: getTabDetails,
+    getTabIndex: getTabIndex
   };
 });

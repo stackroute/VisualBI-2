@@ -1,7 +1,34 @@
-angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', function($scope, widgetManager, $log, editManager){
+angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', '$http', '$uibModal', '$location', function($scope, widgetManager, $log, editManager, $http, $uibModal, $location){
   var tabClasses;
+  var maxWidth = 12;
 
-  $scope.tabs = editManager.getTabDetails();
+  $scope.getAllTabs = editManager.getTabDetails();
+  $scope.tabIndex = editManager.getTabIndex();
+  $scope.tabs = [];
+  $scope.tabs.push($scope.getAllTabs[$scope.tabIndex]);
+
+  console.log($scope.tabs[0]);
+
+  $scope.resetPlaceHolder = function(rowId, remainingWidth) {
+    var i = $scope.tabs[0].rows[rowId].columns.length;
+    while (i--) {
+      var column = $scope.tabs[0].rows[rowId].columns[i];
+      remainingWidth -= column.colWidth
+    }
+
+    if(remainingWidth > 1) {
+
+        var addColumn = {
+            'colWidth': remainingWidth
+          };
+
+        $scope.tabs[0].rows[rowId].columns.push(addColumn);
+    }
+  };
+
+  angular.forEach($scope.tabs[0].rows, function(row, rowIndex) {
+    $scope.resetPlaceHolder(rowIndex, maxWidth);
+  });
 
   widgetManager.getWidget()
     .then(function(widgets) {
@@ -34,11 +61,7 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
   function addNewRow() {
     var newRow = {
         'columns' : [{
-            'colWidth': 4
-        },{
-            'colWidth': 4
-        },{
-            'colWidth': 4
+            'colWidth': maxWidth
         }]
     };
     $scope.tabs[0].rows.push(newRow);
@@ -62,10 +85,120 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
       });
     });
 
-    $log.log($scope.tabs);
+    $scope.getAllTabs[$scope.tabIndex] = $scope.tabs[0];
+
+    var params={userid:'56a11a224de3516e7c42c26e',
+                tabs: $scope.getAllTabs
+             };
+
+    $http({
+        url: "/user/savetab",
+        method: "POST",
+        data: params,
+        headers : {
+            'Content-Type': 'application/json'
+        }
+    }).success(function successCallback(data, status) {
+        console.log('Post successful');
+        $location.url('/');
+    }, function errorCallback(response) {
+        console.log('Post failed');
+    });
   }
 
-  $scope.plotWidget = function() {
+  $scope.widthModal = function(event, ui, rowId, colId, colWidth) {
+    var widthModalConfig = {
+      templateUrl: 'customWidth',
+      controller: 'widthController',
+      resolve: {
+        widthConfig: function() {
+          console.log(colWidth);
+          return {
+            rowIndex: rowId,
+            colIndex: colId,
+            columnWidth: colWidth
+          };
+        }
+      }
+    };
+    $uibModal.open(widthModalConfig);
+  }
 
+  $scope.setWidgetWidth = function(rowId, colId, width, columnCurWidth) {
+
+    var remainingWidth = maxWidth;
+    if(width > maxWidth) {
+      width = maxWidth;
+    }
+
+    $scope.tabs[0].rows[rowId].columns[colId].colWidth = parseInt(width);
+
+    if(width <= columnCurWidth) {
+      $scope.resetPlaceHolder(rowId, remainingWidth)
+    } else {
+      $scope.resizeWidgetWidth(rowId, colId);
+    }
+  }
+
+  $scope.removeWidget = function(rowIndex, colIndex) {
+    $scope.tabs[0].rows[rowIndex].columns[colIndex].widgetId = "";
+  }
+
+  $scope.resizeWidgetWidth = function(rowId, colId) {
+    var len = $scope.tabs[0].rows[rowId].columns.length;
+    var usedWidth = 0, i=0, newWidth=0, newRowId = rowId;
+    var removePosition = [];
+    while (i<len) {
+      var column = $scope.tabs[0].rows[rowId].columns[i];
+      if(column.hasOwnProperty('widgetId')) {
+        usedWidth += parseInt(column.colWidth);
+
+        if(usedWidth > maxWidth) {
+
+          usedWidth -= parseInt(column.colWidth);
+
+          if(newWidth == 0) {
+            newRowId += 1;
+            var newRow = {
+                'columns' : [column]
+            };
+
+            $scope.tabs[0].rows.splice(newRowId, 0, newRow);
+          } else {
+            $scope.tabs[0].rows[newRowId].columns.push(column);
+          }
+          removePosition.push(i);
+          newWidth += parseInt(column.colWidth);
+
+          if(newWidth > maxWidth)
+            newWidth = 0;
+        }
+      }
+      i++;
+    }
+
+    console.log(removePosition);
+    var removeLen = removePosition.length;
+    for(var i=removeLen-1; i>=0; i--) {
+      console.log(removePosition[i]);
+      $scope.tabs[0].rows[rowId].columns.splice(removePosition[i], 1);
+    }
+
+    console.log($scope.tabs[0].rows);
   }
 }]);
+
+angular.module('vbiApp')
+    .controller('widthController', ['$scope','$controller','$uibModalInstance', 'widthConfig', function($scope, $controller, $uibModalInstance, widthConfig) {
+      var editCtrl = $scope.$new();
+      $controller('editController',{$scope:editCtrl});
+
+      $scope.setWidgetWidth = function(width) {
+        $uibModalInstance.close();
+        editCtrl.setWidgetWidth(widthConfig.rowIndex, widthConfig.colIndex, width, widthConfig.columnWidth);
+      }
+      $scope.closeModal = function() {
+        $uibModalInstance.close();
+      }
+      $scope.widthConfig = widthConfig;
+    }]);

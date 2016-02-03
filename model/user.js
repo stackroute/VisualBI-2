@@ -66,4 +66,24 @@ UserSchema.statics.insertSharedWith = function(fromUserId,toUserId){
 });
 };
 
+UserSchema.statics.saveTab = function(userid, savetabs) {
+  console.log("reached user savetab");
+  console.log(userid);
+  console.log(savetabs);
+
+  this.model('User').update({
+    'userid': userid
+  },{
+    $set: {
+      dashboards:{
+        tabs:savetabs
+      }
+    }
+  },function(err, userTheme) {
+    console.log("Error " + err);
+  });
+
+
+}
+
 module.exports = mongoose.model("User", UserSchema);

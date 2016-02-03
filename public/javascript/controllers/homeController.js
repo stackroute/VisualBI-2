@@ -67,33 +67,82 @@ angular.module('vbiApp')
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
-    $scope.createTab = function() {
+
+    $scope.createTab = function(tab) {
+
       var tabCount = $scope.tabs.length;
-      var tabId = "tab" + (tabCount + 1);
+
+      var newCount = 0;
+
+      if(tabCount > 0) {
+        var curCount = tabCount - 1;
+        newCount = $scope.tabs[curCount].tabId.toString().split('tab')[1];
+      }
+
+      var tabId = "tab" + (parseInt(newCount) + 1);
 
       var newTab = {
         'tabId' : tabId,
-        'tabTitle' : "newtab",
+        'tabTitle' : tab,
         'rows'  : []
       };
       $scope.tabs[tabCount] = newTab;
+      $scope.gotoEditPage($scope.tabs, tabCount);
     }
 
-    // $scope.createRow = function(tabId) {
-    //   angular.forEach($scope.tabs, function(tab, key) {
-    //     if(tab.tabId == tabId) {
-    //       var newRow = {
-    //           'columns' : [{
-    //               'colWidth': 12
-    //           }]
-    //       };
-    //       tab.rows.push(newRow);
-    //     }
-    //   });
-    // }
-
-    $scope.gotoEditPage = function(tab) {
-      editManager.setTabDetails(tab);
+    $scope.gotoEditPage = function(tabs, index) {
+      editManager.setTabDetails(tabs, index);
       $location.url('/edittab');
     }
+
+    $scope.titleModal = function() {
+      var titleModalConfig = {
+        templateUrl: 'customWidget',
+        controller: 'titleController'
+      };
+      $uibModal.open(titleModalConfig);
+    }
+
+    $scope.removeTab = function(tabId) {
+
+      var len = $scope.tabs.length;
+      while(len--) {
+        if(tabId == $scope.tabs[len].tabId) {
+          $scope.tabs.splice(len, 1);
+          break;
+        }
+      }
+
+      var params={userid:'56a11a224de3516e7c42c26e',
+                  tabs: $scope.tabs
+               };
+
+      $http({
+          url: "/user/savetab",
+          method: "POST",
+          data: params,
+          headers : {
+              'Content-Type': 'application/json'
+          }
+      }).success(function successCallback(data, status) {
+          console.log('Post successful');
+          $location.url('/');
+      }, function errorCallback(response) {
+          console.log('Post failed');
+      });
+
+    }
 }]);
+
+angular.module('vbiApp')
+    .controller('titleController', ['$scope','$controller','$uibModalInstance', function($scope, $controller, $uibModalInstance) {
+      var homeCtrl = $scope.$new();
+      $controller('homeController',{$scope:homeCtrl});
+      $scope.createNewTab = function(tab) {
+        $uibModalInstance.close();
+        homeCtrl.createTab(tab);
+      }
+      $scope.closeModal = function() {
+        $uibModalInstance.close();
+      }
+    }]);

@@ -1,6 +1,7 @@
 <div>
 	<header-directive></header-directive>
 	<div>
+		<div ng-include="'views/dialogs/customWidgetWidth.html'"></div>
 		<aside class="pull-left" id="widget-library">
 			<!-- widget library comes here -->
 			<div>
@@ -26,19 +27,19 @@
 			<button type="button" ng-click="addRow()" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
 			<button type="button" ng-click="saveRow()" class="btn btn-primary row-btn pull-right">Save <span class="glyphicon glyphicon-floppy-save"></span></button>
 
-			<div class="edit-row-container" ng-repeat="tab in tabs">
-				<div class = "row" ng-repeat="row in tab.rows">
-					<div class = "col-sm-{{ col.colWidth }}" ng-repeat="col in row.columns">
-						<div class="panel panel-primary widget-holder" data-drop="true" ng-model="col.widgetId"
-																						jqyoui-droppable="{multiple:false, onDrop: ''}"
+			<div class="edit-row-container" ng-repeat="tab in tabs" >
+				<div class = "row" ng-repeat="row in tab.rows" ng-init="rowIndex = $index">
+					<div class = "col-sm-{{ col.colWidth }}" ng-repeat="col in row.columns" ng-init="colIndex = $index">
 
-																					>
-
-
-
-<!-- <p ng-repeat="colid in col.widgetId" ng-show="item.title" data-drag="{{item.drag}}" data-jqyoui-options="{revert: 'invalid'}" ng-model="list1" jqyoui-draggable="{index: {{$index}},animate:true}" > -->
+						<div class="panel panel-primary widget-holder" data-drop="true" data-drag="true" ng-model="col.widgetId"
+																						jqyoui-droppable="{index: {{$index}}, multiple:false, onDrop: 'widthModal(rowIndex, colIndex, col.colWidth)'}"
+																						jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}"
+																						data-jqyoui-options="{revert: 'invalid'}" data-direction="{{col.jqyouiDirection}}"	>
+						<button ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">_</span></button>
+						<button ng-click="removeWidget(rowIndex, colIndex)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+						<p>
 							{{col.widgetId.title}}
-						<!-- </p> -->
+						</p>
 						</div>
 			  	</div>
 			 	</div>
