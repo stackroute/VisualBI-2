@@ -17,8 +17,13 @@ angular.module('vbiApp')
             templateUrl: 'views/shareDashboard.html',
             controller: 'shareDashboardController'
         })
-
-			.otherwise({
+		
+	    .when('/settings', {
+            templateUrl: 'views/settings.html',
+            controller: 'SettingsController'
+        })
+		
+	   .otherwise({
         		redirectTo: '/home'
       });
 

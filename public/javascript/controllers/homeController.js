@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer',function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer,commentPusher) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -65,7 +65,7 @@ angular.module('vbiApp')
                                 when: Date()
                             });
                         });
-
+						
 						return {
 							chartRendererMethod: widget.chartRenderer,
 							parameters: widget.parameters,
