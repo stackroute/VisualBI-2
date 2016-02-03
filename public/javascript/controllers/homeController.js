@@ -13,6 +13,7 @@ angular.module('vbiApp')
 			// Make additional dashboard. Assuming that there is only one dashboard now
 			if(dashboards && dashboards.length > 0) {
 				var dashboard = dashboards[0];
+        $rootScope.currentDashboard = dashboard._id;
 					 if(dashboard.tabs && dashboard.tabs.length > 0) {
 								$scope.tabs = dashboard.tabs;
 					 }
