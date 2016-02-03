@@ -26,14 +26,30 @@ angular.module('vbiApp')
 						});
           },
 
-           getUserId: function(username){
-                     return $http({
-                       method: 'GET',
-                       url: '/getUserId/' +username
-                     }).then(function(res){
-                       return (res);
+           getUserId: function(userName,currentDashboard){
+                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard});
+                     return $http.post('/getUserId', parms)
+                     .then(function(res){
+                       return (res.data);
                      });
-            }
+            },
+
+            shareDashboard: function(userNames,currentDashboard){
+              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard});
+                      return $http.post(' /getUserId/shareDashboard', parms)
+                      .then(function(res){
+                        return (res);
+                      });
+             },
+
+             loadEmails: function($query) {
+                 return $http.post('/getUserList', { cache: true}).then(function(response) {
+                   var emails = response.data;
+                   return emails.filter(function(email) {
+                     return email.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
+                   });
+                 });
+               }
         };
 
     }]);

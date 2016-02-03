@@ -2,8 +2,25 @@
   <div class="col-md-6 col-md-offset-3">
     <h4>Share the current dashboard</h4>
     <div class="form-group">
-      Enter the user_id:  <input type="text" ng-model="shareWithUsername" name="name" value="" placeholder="Enter userId">
+      Enter the user_id:
+      <tags-input ng-model="tags"
+                  key-property="_id"
+                  display-property="username"
+                  on-tag-added="tagAdded($tag)"
+                  addFromAutocompleteOnly=true
+                  replace-spaces-with-dashes="false">
+        <auto-complete source="loadEmails($query)"
+                       min-length="0"
+                       load-on-focus="true"
+                       load-on-empty="true"
+                       max-results-to-show="5"
+
+        ></auto-complete>
+      </tags-input>
+
     </div>
-    <input type="submit" name="name" value="submit" ng-click="insertSharedDashboard()">
+    <input type="submit" name="name" value="submit" ng-click="shareDashboard()">
   </div>
+  <a href="#">sajdssadsad</a>
+  <input type="submit" name="name" value="submit" ng-click="getSharedDashboard()">
 </div>

@@ -22,6 +22,4 @@ angular.module('vbiApp')
 
 		  });
     };
-
-
 }]);

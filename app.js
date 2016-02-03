@@ -17,8 +17,8 @@ var passport = require('./routes/passport'),
     dbConfig = require('./config/db'),
 	 Credential = require('./model/credential'),
 	 gridRouter = require('./routes/girdRouter');
-   getUserId  = require('./routes/getUserId');
-   
+   getUserId  = require('./routes/userId');
+   getUserList = require('./routes/userList');
 mongoose.connect(dbConfig.url);
 var db = mongoose.connection;
 
@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extented: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(cookieParser('keyboard cat'));
 app.use(flash());
 
@@ -54,7 +54,7 @@ app.use('/widgets', widgetRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
 app.use('/getUserId', getUserId);
-
+app.use('/getUserList', getUserList);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
    var err = new Error('Not found');
