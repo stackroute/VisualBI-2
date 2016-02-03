@@ -8,7 +8,7 @@ angular.module('vbiApp')
 		 // line, bar or area chart in mdx grid
 		 $scope.widgetData = {};
 
-		 userManager.getDashboard($rootScope.loggedInUser.authToken)
+		 userManager.getDashboard()
 			 .then(function(dashboards) {
 			// Make additional dashboard. Assuming that there is only one dashboard now
 			if(dashboards && dashboards.length > 0) {
