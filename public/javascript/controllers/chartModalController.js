@@ -41,13 +41,8 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				$scope.$digest();
 			
 		});
-      
 
     };
-		$scope.updateCommentsModel=function(user){
-
-			
-		};
 			
     $scope.chartInfo = chartInfo;
 	
