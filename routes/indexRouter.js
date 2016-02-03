@@ -24,15 +24,29 @@ router.post('/login', passport.authenticate('local'),function(req, res){
 	res.json({"authToken": req.user._id, "name": req.user.name});
 });
 
-function registerUser (req, res, next) {
-	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {
-		console.log("added");
-		next();
-	});
+
+
+
+router.post('/register',function(req,res,next){
+	
+	console.log("Username: ", req.body.username);
+	console.log("Current User : ", req.body.password);
+    
+	Credential.registerUser(req.body.username, req.body.password);
+	
+    res.send({resp:'Registration Done'});
+});
+
+
+//function registerUser (req, res, next) {
+//	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {
+//		console.log("added");
+//		next();
+//	});
 
 //        passport.authenticate('local')(req, res, function () {
 //          res.redirect('/');
 //        });
 	
-}
+//}
 module.exports = router;

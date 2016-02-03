@@ -1,16 +1,16 @@
 (function () {
     'use strict';
-angular.module('app').factory('UserService', UserService);
+angular.module('vbiApp').factory('UserService', UserService);
  
-    UserService.$inject = ['$timeout', '$filter', '$q'];
-    function UserService($timeout, $filter, $q) {
+    UserService.$inject = ['$timeout', '$filter', '$q', '$http'];
+    function UserService($timeout, $filter, $q, $http) {
  
         var service = {};
         
         service.GetAll = GetAll;
         service.GetById = GetById;
         service.GetByUsername = GetByUsername;
-        service.Create = Create;
+        service.register = register;
         
         return service;
         
@@ -49,31 +49,48 @@ angular.module('app').factory('UserService', UserService);
             localStorage.users = JSON.stringify(users);
         }
         
-          function Create(user) {
-            var deferred = $q.defer();
+          function register(user,done) {
+            //var deferred = $q.defer();
+              console.log("inside registeration service");
+//               register: function(user, done) {
+				  $http.post('/register', {username:user.username, password:user.password})
+				  	.success(function (data, status, headers, config) {
+                      console.log("Sending data to server:");
+					  done(null, data);
+                      console.log(data);
+                     // deferred.resolve({ success: true });
+
+				  }).error(function (data, status, header, config) {
+					  error = "Failed to send Data";
+					  done(error, data);
+                      //deferred.resolve({ success: false });
+				  });
+                   
+			  }
  
             // simulate api call with $timeout
-            $timeout(function () {
-                GetByUsername(user.username)
-                    .then(function (duplicateUser) {
-                        if (duplicateUser !== null) {
-                            deferred.resolve({ success: false, message: 'Username "' + user.username + '" is already taken' });
-                        } else {
-                            var users = getUsers();
+//            $timeout(function () {
+//                GetByUsername(user.username)
+//                    .then(function (duplicateUser) {
+//                        if (duplicateUser !== null) {
+//                            deferred.resolve({ success: false, message: 'Username "' + user.username + '" is already taken' });
+//                        } else {
+//                            var users = getUsers();
+// 
+//                            // assign id
+//                            var lastUser = users[users.length - 1] || { id: 0 };
+//                            user.id = lastUser.id + 1;
+// 
+//                            // save to local storage
+//                            users.push(user);
+//                            setUsers(users);
+// 
+//                            deferred.resolve({ success: true });
+//                        }
+//                    });
+//            }, 1000);
  
-                            // assign id
-                            var lastUser = users[users.length - 1] || { id: 0 };
-                            user.id = lastUser.id + 1;
- 
-                            // save to local storage
-                            users.push(user);
-                            setUsers(users);
- 
-                            deferred.resolve({ success: true });
-                        }
-                    });
-            }, 1000);
- 
-            return deferred.promise;
+            //return deferred.promise;
         }
+    
 })();
