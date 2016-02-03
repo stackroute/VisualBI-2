@@ -16,7 +16,7 @@ angular.module('vbiApp')
 			  logout: function(user, done) {
 				  return $http.get('/logout');
 			  },
-
+			  //returns the dashboard of a user
            getDashboard: function(userid) {
 				  return $http({
 					  method: 'GET',
@@ -25,14 +25,23 @@ angular.module('vbiApp')
 						  return (res.data);
 						});
           },
+			  //returns dashboard of current loggedin user
+			 getDashboard: function() {
+				  return $http({
+					  method: 'GET',
+					  url: '/dashboard'
+						}).then(function(res) {
+						  return (res.data);
+						});
+          },
 
-           getUserId: function(username){
-                     return $http({
-                       method: 'GET',
-                       url: '/getUserId/' +username
-                     }).then(function(res){
-                       return (res);
-                     });
+			 getUserId: function(username){
+							return $http({
+							  method: 'GET',
+							  url: '/getUserId/' +username
+							}).then(function(res){
+							  return (res);
+							});
           }
         };
 

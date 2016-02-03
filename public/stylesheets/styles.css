@@ -111,6 +111,12 @@ body{
     background: none;
 }
 
+.widget-body {
+/*
+    overflow-x: scroll;
+    height: 500px;
+*/
+}
 .login-error {
    color: red;
    font-weight: bold;
@@ -166,7 +172,7 @@ body{
 }
 
 .row {
-  margin: 0px;
+/*  margin: 0px;*/
 }
 
 .close {
@@ -204,6 +210,11 @@ table,  th,  td{
 
 .btn-fadedbtn{
 	color: #777;
+}
+
+/*css for comment toggle in modal*/
+.commentDisplayToggle{
+    font-size: 12px !important;
 }
 
 #widget-library {
@@ -257,4 +268,32 @@ table,  th,  td{
         position: relative;
         margin-right: 0;
     }
+}
+
+/* Share Modal  Styles*/
+
+#input-group{
+	width:380px;
+}
+
+.permission{
+	position: absolute;
+	right:10px;
+  top:19px;
+}
+
+.dropdown-height{
+	height:41px;
+	left:30px;
+}
+
+
+#sharebutton{
+font-size: 11px;
+margin-top: 85px;
+}
+
+#shareBody{
+  width:580px;
+  height: 200px;
 }

@@ -1,29 +1,22 @@
 <script type="text/ng-template" id="chartModal">
  <div class="panel panel-primary">
  	<div class="modal-header panel-heading">
-		<h3 class="modal-title">{{ chartInfo.title }}
+		<h4 class="modal-title">{{ chartInfo.title }}
 		 	<button ng-click="hide()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		 </h3>
+		 </h4>
   </div>
   <div class="modal-body">
 		<chart-panel column-width="12" parameters = "{{ chartInfo.parameters }}" chart-renderer-method = "{{ chartInfo.chartRendererMethod }}" ></chart-panel>
   </div>
-    
-      <modal-comments></modal-comments>
 
-    <p>{{userComment}}</p>
-
+ <modal-comments></modal-comments>
    <div class="input-group">
     <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
 	   	 <span class="input-group-btn">
-		  	<i class="glyphicon glyphicon-flag btn btn-fadedbtn" ng-click="registerCommentTypeFlag()"></i>
-			<i><span	class="glyphicon glyphicon-check  btn btn-fadedbtn comment-icon" ng-click="registerCommentTypeApprove()"></span></i>
-		  <i	class="glyphicon glyphicon-exclamation-sign  btn btn-fadedbtn" ng-click="registerCommentTypeWarning()"></i>
-
-      <button class="btn btn-success" rows="3" type="button" ng-click="postComment()">Post comment&nbsp
-
-	  </button>
-
+		  	<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')" uib-tooltip="Flag this comment"></i>
+			<i><span	class="glyphicon glyphicon-check timeline-comment-primary btn comment-icon" ng-click="registerCommentType('check')" uib-tooltip="Agree"></span></i>
+		  <i	class="glyphicon glyphicon-bookmark  btn timeline-comment-primary btn-faded" ng-click="registerCommentType('bookmark')" uib-tooltip="Add link"></i>
+      <button class="btn btn-success" rows="3" type="button" ng-click="postComment()" >Post comment&nbsp</button>
 	  </span>
    </div>
 </script>

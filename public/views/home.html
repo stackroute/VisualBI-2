@@ -1,11 +1,16 @@
 <div id="wrapper" ng-class="{'toggled': showMenu}">
 	<header-directive></header-directive>
+	<div ng-include="'views/dialogs/shareModal.tpl.html'"></div>
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
+			<div ng-include="'views/dialogs/graphModal.tpl.html'"></div>
 			<div ng-include="'views/dialogs/customWidgetModal.html'"></div>
+    <button type=button class="btn btn-warning pull-right">Shared with me<span class="glyphicon glyphicon-share"></span></button>
+
 				<uib-tabset class="wrap">
 					 <!-- <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs" > -->
+						 <button type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 					 <uib-tab id="{{ tab.tabId }}" ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
 						 <uib-tab-heading class="ng-scope">
 							 {{tab.tabTitle}}
@@ -34,11 +39,8 @@
 
 											</h3>
 										</div>
-										<div class="panel-body">
-											<div ng-show="isLoading">
-												<img src="/images/loading.gif" /> loading...
-											</div>
-											<chart-panel widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+										<div class="panel-body widget-body">
+											<chart-panel widget-data="widgetData" widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 
 											</chart-panel>
 										</div>
@@ -48,7 +50,7 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{col.widgetId.lastaddedby}} and {{col.widgetId.countComments}} others</span>
+														See comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and {{col.widgetId.commentsCounter}} others</span>
 													</span>
 
 												</a>
@@ -64,6 +66,7 @@
     				 </uib-tab-heading>
 					 </uib-tab>
 				</uib-tabset>
+			</div>
 		</div>
 	</div>
 </div>

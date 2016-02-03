@@ -1,12 +1,6 @@
-parameters = {
-			 	catalog: "SampleData",
-				connId: "56a217eca375b2ea99a9b11b",
-				dataSource: "Pentaho",
-				statement: "select non empty (({[Department].[Department].members} * {[Measures].[Actual]})) on columns, non empty ({[Region].[Region].members}) on rows from [Quadrant Analysis]"
-		 };
 
 var app = angular.module('vbiApp');
-app.factory('executeQueryService', function($http, $rootScope) {
+app.factory('executeQueryService', function($http, $rootScope, $compile) {
   return {
     render: function (containerDiv, parameters) {
      var container = angular.element(containerDiv);
@@ -22,12 +16,12 @@ app.factory('executeQueryService', function($http, $rootScope) {
           data: parameters
         };
        return new Promise (function(resolve, reject){
-         console.log(req);
-         console.log(container);
+//         console.log(req);
+//         console.log(container);
          $http(req).then(function(data){
-           console.log("got data");
+//           console.log("got data");
            var graphArray = renderData(container, data.data);
-                  console.log(graphArray);
+//                  console.log(graphArray);
                   if(graphArray !== undefined){
                     resolve(graphArray);
                   }
@@ -41,17 +35,73 @@ app.factory('executeQueryService', function($http, $rootScope) {
          });
       //  });
     },
-	  showPieGraphColumn: function(contianerId) {
-		  alert('pie - ' + contianerId);
+	  showPieGraphColumn: function(table_container, scope) {
+		  var graphArray = scope.widgetData[table_container];
+		  var tableContainer = angular.element(document.getElementById(table_container));
+		  	
+			 if((tableContainer.find("."+"miniPieGraph"+"").length) === 0){
+				  tableContainer.find("#row0").prev().append("<td class="+"miniPieGraph"+"><span class='graphIcon'>"+"</span></td>");
+
+				  for(var index in graphArray) {
+					 if(parseInt(index) !== graphArray.length-1){
+						  var dataset = graphArray;
+						  tableContainer.find("#row"+index).append($compile("<td class="+"miniPieGraph"+"><minipie-graph index-passed="+index + " widget-uid=" + table_container +"></minipie-graph></td>")(scope));
+					 }
+				  }
+				}
+				else {
+				  tableContainer.find("."+"miniPieGraph"+"").toggle();
+				}
 	  },
-	  showAreaGraphColumn: function(contianerId) {
-		  alert('area - ' + contianerId);
+	  showAreaGraphColumn: function(table_container, scope) {
+		  var graphArray = scope.widgetData[table_container];
+		  var tableContainer = angular.element(document.getElementById(table_container));
+		  
+		  if((tableContainer.find("."+"miniAreaGraph"+"").length) === 0){
+				tableContainer.find("#row0").prev().append("<td class="+"miniAreaGraph"+"><span class='graphIcon'>"+"</span></td>");
+
+				for(var index in graphArray) {
+				  if(parseInt(index) !== graphArray.length-1) {
+						var dataset = graphArray;
+						tableContainer.find("#row"+index).append($compile("<td class="+"miniAreaGraph"+"><miniarea-graph index-passed="+index + " widget-uid=" + table_container +"></miniarea-graph></td>")(scope));
+					}
+			 	}
+		  } else {
+				tableContainer.find("."+"miniAreaGraph"+"").toggle();
+		  }
 	  },
-	  showLineGraphColumn: function(contianerId) {
-		  alert('line - ' + contianerId);
+	  showLineGraphColumn: function(table_container, scope) {
+		  var graphArray = scope.widgetData[table_container];
+		  var tableContainer = angular.element(document.getElementById(table_container));
+		  
+		  if((tableContainer.find("."+"miniLineGraph"+"").length) === 0){
+				tableContainer.find("#row0").prev().append("<td class="+"miniLineGraph"+"><span class='graphIcon'>"+"</span></td>");
+
+				for(var index in graphArray) {
+				  if(parseInt(index) !== graphArray.length-1) {
+						tableContainer.find("#row"+index).append($compile("<td class="+"miniLineGraph"+"><miniline-graph index-passed="+ index + " widget-uid=" + table_container +"></miniline-graph></td>")(scope));
+					}
+			 	}
+			 }
+			 else {
+				tableContainer.find("."+"miniLineGraph"+"").toggle();
+			 }
 	  },
-	  showBarGraphColumn: function(contianerId) {
-		  alert('bar - ' + contianerId);
+	  showBarGraphColumn: function(table_container, scope) {
+		  var graphArray = scope.widgetData[table_container];
+		  var tableContainer = angular.element(document.getElementById(table_container));
+		  if((tableContainer.find("."+"miniBarGraph"+"").length) === 0){
+				tableContainer.find("#row0").prev().append("<td class="+"miniBarGraph"+"><span class='graphIcon'>"+"</span></td>");
+
+				for(var index in graphArray) {
+				  if(parseInt(index) !== graphArray.length-1) {
+					  tableContainer.find("#row"+index).append($compile("<td class="+"miniBarGraph"+"><minibar-graph index-passed="+index+ " widget-uid=" + table_container +"></minibar-graph></td>")(scope));
+					}
+			 	}
+			 }
+			 else {
+				tableContainer.find("."+"miniBarGraph"+"").toggle();
+			 }
 	  }
   };
 });
@@ -78,8 +128,8 @@ var renderData =  function (container, data){
       axis1 = axis[1],
       axis0Child = {},
       axis1Child = {};
-  console.log(axis0);
-  console.log(axis1);
+//  console.log(axis0);
+//  console.log(axis1);
   /************* Function for graphKey *****************/
   var axis0Names = [];
   for (var index0 in axis0){

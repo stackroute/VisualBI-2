@@ -25,16 +25,46 @@
       border-radius: 0.25em;
       padding: 0.8em 1em;
       margin: 0; }
-  .timeline li timeline-badge.primary {
-    background-color: #2e6da4 !important; }
+
+  .timeline li timeline-badge.displayImage {
+/*    background-color: #2e6da4 !important;*/
+	background-image: url('../images/profile.jpg');	
+}
+
+.timeline-ui-delete-btn{
+	font-size: 12px;
+}
+  .timeline-comment-danger {
+   color: #d9534f !important;
+}
+
+  .timeline-comment-success {
+    color: #1b9c24 !important;
+}
+
+  .timeline-comment-warning {
+    color: #f0ad4e !important;
+}
+
+.timeline-comment-primary {
+   color: #337AB7 !important;
+}
+
+  .timeline-badge-primary {
+    color: rgb(138,137,166) !important;
+}
   .timeline li timeline-badge.success {
     background-color: #3f903f !important; }
   .timeline li timeline-badge.warning {
     background-color: #f0ad4e !important; }
   .timeline li timeline-badge.danger {
     background-color: #d9534f !important; }
+
   .timeline li timeline-badge.info {
+	height: 35px;
+	width: 35px;
     background-color: #5bc0de !important; }
+
   .timeline li .timeline-title {
     margin-top: 0; }
   .timeline li timeline-panel > * {

@@ -1,23 +1,29 @@
 <div class="modal-footer">
-  <!-- <input ng-model=collapse type=checkbox><i class = "glyphicon glyphicon-user"></i>Show Comments
-  <div ng-show=collapse> -->
+ 
+    <!--code for toggling the show comment option--->
   <h4 class="panel-title">
-       <a data-toggle="collapse" data-target="#collapse1"><i class="glyphicon glyphicon-comment"></i></a>
+      <span ng-show="chartInfo.comments.length > 0">
+       <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
+           <span class="commentDisplayToggle" ng-show = "IsVisible">Show Comments</span>
+           <span class="commentDisplayToggle" ng-show = "IsNotVisible">Hide Comments</span>    
+      </a>
+      </span>
   </h4>
   <div id="collapse1" class="collapse in">
     <timeline>
       <timeline-event ng-repeat="comment in chartInfo.comments" side="">
-        <timeline-badge class="{{comment.badgeClass}}">
-          <i class="glyphicon {{comment.badgeIconClass}}"></i>
+        <timeline-badge class="displayImage">
         </timeline-badge>
         <timeline-panel class="{{comment.badgeClass}}">
+			<i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}"></i>
           <timeline-heading>
             <h4>{{comment.userid | uppercase}}</h4>
             <p ng-if="comment.when">
-              <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when}}</small>
+              <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-          <p>{{comment.comment}}</p>
+			<p>	  {{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
+
         </timeline-panel>
       </timeline-event>
     </timeline>
