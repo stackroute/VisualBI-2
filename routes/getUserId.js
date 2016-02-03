@@ -6,7 +6,7 @@ var express = require('express'),
 
 router.get('/:username', function(req, res, next) {
     var username = req.params.username; //it contains username value of dashboard to be shared with.
-    console.log(username);
+    //console.log(username);
     //console.log(req.user._id);
     if(username) {
         credential.getUserId(username, function(touserId){
