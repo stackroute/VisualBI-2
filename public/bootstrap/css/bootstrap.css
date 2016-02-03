@@ -3616,7 +3616,7 @@ tbody.collapse.in {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 990;
+  z-index: 1040;
 }
 .pull-right > .dropdown-menu {
   right: 0;
@@ -3830,7 +3830,7 @@ tbody.collapse.in {
   position: relative;
   z-index: 2;
   float: left;
-  width: 100%;
+  
   margin-bottom: 0;
 }
 .input-group .form-control:focus {
@@ -5875,7 +5875,7 @@ button.close {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1050;
+  z-index: -1;
   display: none;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;

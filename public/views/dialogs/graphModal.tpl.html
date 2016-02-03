@@ -1,0 +1,71 @@
+ <!-- Modal Bar Graph -->
+ <script type="text/ng-template" id="modalBarGraph.html">
+	<div class="panel panel-primary">
+  		<div class="modal-header panel-heading">
+			<h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+				<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</h4>
+  		</div>
+	  <div class="modal-body">
+		 <modalbar-graph index-passed="index" graph-array="graphArray"></modalbar-graph>
+	  </div>
+	  <div class="modal-footer">
+		 <div class="pull-left"><label id="barGraphLabel">Sort values</label><input type="checkbox"/></div>
+		 <button class="btn btn-primary" ng-click="ok()">OK</button>
+		 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	  </div>
+	</div>
+</script>
+<!-- Modal Line Graph -->
+ <script type="text/ng-template" id="modalLineGraph.html">
+	<div class="panel panel-primary">
+	  <div class="modal-header panel-heading">
+		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+		 	<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
+	  </div>
+	  <div class="modal-body">
+		 <modalline-graph index-passed="index" graph-array="graphArray"></modalline-graph>
+	  </div>
+	  <div class="modal-footer">
+		 <button class="btn btn-primary" ng-click="ok()">OK</button>
+		 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	  </div>
+	</div>
+ </script>
+
+ <!-- Modal Area Graph -->
+ <script type="text/ng-template" id="modalAreaGraph.html">
+	<div class="panel panel-primary">
+	  <div class="modal-header panel-heading">
+		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+		 	<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
+	  </div>
+	  <div class="modal-body">
+		 <modalarea-graph index-passed="index" graph-array="graphArray"></modalarea-graph>
+	  </div>
+	  <div class="modal-footer">
+		 <button class="btn btn-primary" ng-click="ok()">OK</button>
+		 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	  </div>
+	</div>
+ </script>
+
+ <!-- Modal Pie Graph -->
+ <script type="text/ng-template" id="modalPieGraph.html">
+	<div class="panel panel-primary">
+	  <div class="modal-header panel-heading">
+		 <h4 class="modal-title">{{graphArray[graphArray.length-1][index]}}
+		 	<button ng-click="cancel()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
+	  </div>
+	  <div class="modal-body" style="text-align:center">
+		 <modalpie-graph index-passed="index" graph-array="graphArray"></modalpie-graph>
+	  </div>
+	  <div class="modal-footer">
+		 <button class="btn btn-primary" ng-click="ok()">OK</button>
+		 <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+	  </div>
+	</div>
+ </script>

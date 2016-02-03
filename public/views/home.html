@@ -1,35 +1,50 @@
 <div id="wrapper" ng-class="{'toggled': showMenu}">
 	<header-directive></header-directive>
+	<div ng-include="'views/dialogs/shareModal.tpl.html'"></div>
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
+			<div ng-include="'views/dialogs/graphModal.tpl.html'"></div>
+    <button type=button class="btn btn-warning pull-right">Shared with me<span class="glyphicon glyphicon-share"></span></button>
+
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
-      			 <button type="button" ng-click = "createRow(tab.tabId)" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
-						 <div class = "row" ng-repeat = "row in tab.rows">
+						 <button type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
+						 <div class = "row" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
 										<div class="panel-heading">
 											<h3 class = "panel-title">{{ col.widgetId.title }}
-											<a class="pull-right" ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)"><span class="glyph-fullscreen glyphicon glyphicon-fullscreen"></span></a>
+											<a uib-tooltip="full screen" tooltip-placement="bottom" class="pull-right" ng-click="fullScreen(col.widgetId)"><i class="fa fa-arrows-alt glyph-title"></i>
+											</a>
+											<span class="pull-right" role="group" ng-show="col.widgetId.parameters.showGraphIcon">
+										  		<a uib-tooltip="pie graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showPieGraphColumn')"><i class="fa fa-pie-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="area graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showAreaGraphColumn')"><i class="fa fa-area-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="line graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showLineGraphColumn')"><i class="fa fa-line-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  		<a uib-tooltip="bar graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showBarGraphColumn')"><i class="fa fa-bar-chart glyph-title glyph-right-space"></i>
+										  		</a>
+										  
+										  	
+											  
+											</span>
+											
 											</h3>
 										</div>
-										<div class="panel-body">
-											<div ng-show="isLoading">
-												<img src="/images/loading.gif" /> loading...
-											</div>
-
-											<chart-panel column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
+										<div class="panel-body widget-body">
+											<chart-panel widget-data="widgetData" widget-id="{{ col.widgetId._id }}" chart-id="{{ tab.tabId }}row{{ $parent.$index }}{{ col.widgetId._id }}{{ $index }}" column-width = "{{ col.colWidth }}" parameters = "{{ col.widgetId.parameters }}" chart-renderer-method = "{{ col.widgetId.chartRenderer }}" >
 
 											</chart-panel>
 										</div>
 										<div class="panel-footer">
 											<div class="comment-slug">
-												<a ng-click="fullScreen(col.widgetId.chartRenderer, col.widgetId.parameters, col.widgetId.title, col.widgetId.comments)">
+												<a ng-click="fullScreen(col.widgetId)">
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{lastCommentBy(col.widgetId.comments)}} and {{col.widgetId.comments.length}} others</span>
+														See comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and {{col.widgetId.commentsCounter}} others</span>
 													</span>
 
 												</a>
@@ -39,13 +54,14 @@
 							  </div>
 						 </div>
 					 </uib-tab>
-    			 <uib-tab ng-click="createTab()">
+    			 <!-- <uib-tab ng-click="createTab()">
 						 <uib-tab-heading class="ng-scope">
        					<i class="glyphicon glyphicon-plus"></i>
     				 </uib-tab-heading>
-					 </uib-tab>
+					 </uib-tab> -->
 					 <load></load>
 				</uib-tabset>
+			</div>
 		</div>
 	</div>
 </div>

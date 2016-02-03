@@ -111,6 +111,12 @@ body{
     background: none;
 }
 
+.widget-body {
+/*
+    overflow-x: scroll;
+    height: 500px;
+*/
+}
 .login-error {
    color: red;
    font-weight: bold;
@@ -120,7 +126,7 @@ body{
    margin-top: 20px;
 }
 
-.glyph-fullscreen {
+.glyph-title {
 	padding: 0;
 	color:white;
 	cursor: pointer;
@@ -128,7 +134,7 @@ body{
 
 
 .glyph-right-space{
-	margin-right: 3px;
+	margin-right: 5px;
 }
 
 
@@ -154,7 +160,7 @@ body{
   display: block;
   height: 0;
   overflow: hidden;
-	
+
 }
 .tab-content > .active {
   display: block;
@@ -166,7 +172,7 @@ body{
 }
 
 .row {
-  margin: 0px;
+/*  margin: 0px;*/
 }
 
 .close {
@@ -189,30 +195,27 @@ table,  th,  td{
   padding: 10px;
 }
 
-.chat-align-right{
-    margin: 0px 260px 0px;
-    background-color:aliceblue;
-    border-radius: 8px;
+.section_result .level0 {
+	background-color: #F7B05B;
 }
 
-.chat-align-left{
-    margin: 0px 10px 0px;
-    background-color:floralwhite;
-    border-radius: 8px;
+.dataRow .level0{
+/*	//#D3D3D3*/
+	background-color: lightgrey;
 }
 
-.chat-time{
-    color: darkolivegreen;
+.comment-icon{
+	opacity: 20;
 }
 
-.chat-sender{
-    color:chocolate;
-    font-style:italic;
-    font-weight: bold;
-    font-family: 'Ubuntu', sans-serif;
+.btn-fadedbtn{
+	color: #777;
 }
 
-/*comments functionality styles end here*/
+/*css for comment toggle in modal*/
+.commentDisplayToggle{
+    font-size: 12px !important;
+}
 
 @media(min-width:768px) {
     #wrapper {
@@ -240,4 +243,32 @@ table,  th,  td{
         position: relative;
         margin-right: 0;
     }
+}
+
+/* Share Modal  Styles*/
+
+#input-group{
+	width:380px;
+}
+
+.permission{
+	position: absolute;
+	right:10px;
+  top:19px;
+}
+
+.dropdown-height{
+	height:41px;
+	left:30px;
+}
+
+
+#sharebutton{
+font-size: 11px;
+margin-top: 85px;
+}
+
+#shareBody{
+  width:580px;
+  height: 200px;
 }

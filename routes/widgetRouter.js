@@ -7,7 +7,7 @@ var express = require('express'),
 
 //Get the widgets
 router.get('/', function(req, res, next) {
-    
+    console.log('Root Route');
     Widget.getWidgets(function(data){
          res.send(data);
       });
@@ -33,7 +33,6 @@ router.get('/data/:id', function(req, res, next) {
          res.send(data);
       });
 });
-
 
 //router.get('/:chartType', function(req, res, next) {
 //   // picks :chartType from the URL

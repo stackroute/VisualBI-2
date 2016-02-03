@@ -30,17 +30,13 @@ angular.module('vbiApp')
 		  var authToken = $cookies.get($rootScope.authToken);
 
 		  if(authToken) {
-        var currentUrl = $location.url();
-        if(currentUrl == '/') {
-				      $rootScope.loggedInUser= JSON.parse(authToken);
-			  	    $location.path("/home");
-        } else {
-          $location.path(currentUrl);
-        }
+			  $rootScope.loggedInUser= JSON.parse(authToken);
+			  var currentUrl = $location.url();
+			  if(currentUrl == '/') {
+				  $location.path("/home");
+			  } 
 		  } else {
 			  $location.path("/");
 		  }
-
-
 	  });
 }]);

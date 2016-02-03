@@ -5,22 +5,25 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
-    cookieParser = require('cookie-parser');
+    cookieParser = require('cookie-parser'),
+	 passport = require('passport'),
+	 LocalStrategy = require('passport-local').Strategy;
 
 //custom modules
-var passport = require('./routes/passport'),
-    indexRouter = require('./routes/indexRouter'),
+var indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
 	 dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
 	 Credential = require('./model/credential'),
-	 gridRouter = require('./routes/girdRouter');
+	 gridRouter = require('./routes/girdRouter'),
+    commentsRouter=require('./routes/commentsRouter'),
    getUserId  = require('./routes/userId');
    getUserList = require('./routes/userList');
-mongoose.connect(dbConfig.url);
-var db = mongoose.connection;
+   
+
+
 
 var app = express();
 
@@ -29,28 +32,33 @@ app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 // instruct the app to use the `bodyParser()` middleware for all routes
+app.use(cookieParser('tobo'));
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cookieParser('keyboard cat'));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
 //initialize passort sessions
 app.use(expressSession({
-   secret: 'tobo',
-   cookie: { maxAge: 360*5 },
+   secret: 'keyboard cat',
+   cookie: { maxAge: 3600000 },
    proxy: true,
-   resave: true,
-   saveUninitialized: true
+   resave: false,
+   saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(new LocalStrategy(Credential.authenticate()));
+passport.serializeUser(Credential.serializeUser());
+passport.deserializeUser(Credential.deserializeUser());
 
+mongoose.connect(dbConfig.url);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
+app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
 app.use('/getUserId', getUserId);

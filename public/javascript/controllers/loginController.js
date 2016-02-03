@@ -10,12 +10,8 @@ angular.module('vbiApp')
     this.login = function() {
 		  userManager.login(this.user, function(err, data) {
 				if(!err) {
-
-					 //logged in successfully. load the dashboard
-					$rootScope.loggedInUser = data;
-					$cookies.put($rootScope.authToken, JSON.stringify($rootScope.loggedInUser));
-					 var url = $location.url();
-					 $location.url(url + 'home');
+					$rootScope.loggedInUser = JSON.parse($cookies.get($rootScope.authToken));
+					$location.url($location.url() + 'home');
 				} else {
 					 this.errorMessage = err;
 				}
