@@ -13,6 +13,7 @@ router.get('/',function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
+	res.clearCookie('authToken');
 	req.logout();
   	req.session.destroy();
 	console.log("logged out successfully");
@@ -21,7 +22,8 @@ router.get('/logout', function(req, res, next) {
 
 router.post('/login', passport.authenticate('local'),function(req, res){
 	//authenticated successfully, send the authentication token
-	res.json({"authToken": req.user._id, "name": req.user.name});
+	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "name": req.user.name}));
+	res.send("success");
 });
 
 function restisterUser (req, res, next) {
