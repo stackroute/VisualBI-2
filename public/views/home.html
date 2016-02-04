@@ -14,7 +14,8 @@
 					 <uib-tab id="{{ tab.tabId }}" ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
 						 <uib-tab-heading class="ng-scope">
 							 {{tab.tabTitle}}
-							 <i ng-click="removeTab(tab.tabId)" class="glyphicon glyphicon-remove"></i>
+							 <!-- <i ng-click="removeTab(tab.tabId, $event)" class="close"></i> -->
+							 <i ng-click="removeTab(tab.tabId, $event)" type="button" class="close"><span aria-hidden="true">&times;</span></i>
 						 </uib-tab-heading>
 
 						 <button type="button" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary row-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span></button>

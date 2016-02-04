@@ -24,7 +24,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/savetab', function(req, res, next) {
-  User.saveTab(req.body.userid, req.body.tabs);
+  User.saveTab(req.user._id, req.body.tabs);
   res.send({resp:"Tabs updated successfully"});
 });
 

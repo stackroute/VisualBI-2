@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -100,7 +100,7 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-		 
+
 		 //Show Line Modal Graph
 		$scope.openModalGraph = function(template, indexPassed, widgetUid) {
 		  var modalInstance = $uibModal.open({
@@ -159,32 +159,40 @@ angular.module('vbiApp')
 
     $scope.removeTab = function(tabId) {
 
-      var len = $scope.tabs.length;
-      while(len--) {
-        if(tabId == $scope.tabs[len].tabId) {
-          $scope.tabs.splice(len, 1);
-          break;
-        }
-      }
-
-      var params={userid:'56a11a224de3516e7c42c26e',
-                  tabs: $scope.tabs
-               };
-
-      $http({
-          url: "/user/savetab",
-          method: "POST",
-          data: params,
-          headers : {
-              'Content-Type': 'application/json'
+      var confirm = $mdDialog.confirm()
+            .title('Would you like to overwrite your widget?')
+            .ariaLabel('Widget Confirmation')
+            .targetEvent(event)
+            .ok('Yes')
+            .cancel('No');
+      $mdDialog.show(confirm).then(function() {
+        var len = $scope.tabs.length;
+        while(len--) {
+          if(tabId == $scope.tabs[len].tabId) {
+            $scope.tabs.splice(len, 1);
+            break;
           }
-      }).success(function successCallback(data, status) {
-          console.log('Post successful');
-          $location.url('/');
-      }, function errorCallback(response) {
-          console.log('Post failed');
-      });
+        }
 
+        var params={
+                    tabs: $scope.tabs
+                 };
+
+        $http({
+            url: "/user/savetab",
+            method: "POST",
+            data: params,
+            headers : {
+                'Content-Type': 'application/json'
+            }
+        }).success(function successCallback(data, status) {
+            console.log('Post successful');
+            $location.url('/');
+        }, function errorCallback(response) {
+            console.log('Post failed');
+        });
+      }, function() {
+      });
     }
 }]);
 

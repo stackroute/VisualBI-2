@@ -1,13 +1,13 @@
-angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', '$http', '$uibModal', '$location', function($scope, widgetManager, $log, editManager, $http, $uibModal, $location){
+angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', '$http', '$uibModal', '$location', '$window', '$mdDialog', function($scope, widgetManager, $log, editManager, $http, $uibModal, $location, $window, $mdDialog){
   var tabClasses;
   var maxWidth = 12;
+
+  $scope.tempWidgetId = [];
 
   $scope.getAllTabs = editManager.getTabDetails();
   $scope.tabIndex = editManager.getTabIndex();
   $scope.tabs = [];
   $scope.tabs.push($scope.getAllTabs[$scope.tabIndex]);
-
-  console.log($scope.tabs[0]);
 
   $scope.resetPlaceHolder = function(rowId, remainingWidth) {
     var i = $scope.tabs[0].rows[rowId].columns.length;
@@ -87,7 +87,7 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
 
     $scope.getAllTabs[$scope.tabIndex] = $scope.tabs[0];
 
-    var params={userid:'56a11a224de3516e7c42c26e',
+    var params={
                 tabs: $scope.getAllTabs
              };
 
@@ -106,17 +106,43 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
     });
   }
 
-  $scope.widthModal = function(event, ui, rowId, colId, colWidth) {
+  $scope.widthModal = function(event, ui, rowId, colId, colWidth, widgetId) {
+
+    var col = $scope.tabs[0].rows[rowId].columns[colId];
+
+    if(col.hasOwnProperty('widgetId')) {
+      console.log("has widget");
+
+      var confirm = $mdDialog.confirm()
+            .title('Would you like to overwrite your widget?')
+            .ariaLabel('Widget Confirmation')
+            .targetEvent(event)
+            .ok('Yes')
+            .cancel('No');
+      $mdDialog.show(confirm).then(function() {
+        setWidgetProps(rowId, colId, colWidth, widgetId);
+      }, function() {
+      });
+    } else {
+      console.log("has no widget");
+      setWidgetProps(rowId, colId, colWidth, widgetId);
+    }
+
+  }
+
+  setWidgetProps = function(rowId, colId, colWidth, widgetId) {
+    $scope.tabs[0].rows[rowId].columns[colId].widgetId = $scope.tempWidgetId[0];
+
     var widthModalConfig = {
       templateUrl: 'customWidth',
       controller: 'widthController',
       resolve: {
         widthConfig: function() {
-          console.log(colWidth);
           return {
             rowIndex: rowId,
             colIndex: colId,
-            columnWidth: colWidth
+            columnWidth: colWidth,
+            userData: colWidth
           };
         }
       }
@@ -127,7 +153,7 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
   $scope.setWidgetWidth = function(rowId, colId, width, columnCurWidth) {
 
     var remainingWidth = maxWidth;
-    if(width > maxWidth) {
+    if(width > maxWidth || width == 0 || width == "") {
       width = maxWidth;
     }
 
@@ -141,7 +167,10 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
   }
 
   $scope.removeWidget = function(rowIndex, colIndex) {
-    $scope.tabs[0].rows[rowIndex].columns[colIndex].widgetId = "";
+    var newColumn = {
+      'colWidth': colWidth
+    };
+    $scope.tabs[0].rows[rowIndex].columns.splice(colIndex, 1, newColumn);
   }
 
   $scope.resizeWidgetWidth = function(rowId, colId) {

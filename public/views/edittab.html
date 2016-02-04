@@ -31,15 +31,15 @@
 				<div class = "row" ng-repeat="row in tab.rows" ng-init="rowIndex = $index">
 					<div class = "col-sm-{{ col.colWidth }}" ng-repeat="col in row.columns" ng-init="colIndex = $index">
 
-						<div class="panel panel-primary widget-holder" data-drop="true" data-drag="true" ng-model="col.widgetId"
-																						jqyoui-droppable="{index: {{$index}}, multiple:false, onDrop: 'widthModal(rowIndex, colIndex, col.colWidth)'}"
-																						jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}"
+						<div class="panel panel-primary widget-holder" data-drop="true" data-drag="true" ng-model="tempWidgetId"
+																						jqyoui-droppable="{index:{{$index}}, multiple:false, onDrop: 'widthModal(rowIndex, colIndex, col.colWidth, col.widgetId)'}"
+																						jqyoui-draggable="{index:{{$index}}, animate:true}"
 																						data-jqyoui-options="{revert: 'invalid'}" data-direction="{{col.jqyouiDirection}}"	>
-						<button ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">_</span></button>
-						<button ng-click="removeWidget(rowIndex, colIndex)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
-						<p>
-							{{col.widgetId.title}}
-						</p>
+							<button ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">_</span></button>
+							<button ng-click="removeWidget(rowIndex, colIndex)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+							<p>
+								{{col.widgetId.title}}
+							</p>
 						</div>
 			  	</div>
 			 	</div>
