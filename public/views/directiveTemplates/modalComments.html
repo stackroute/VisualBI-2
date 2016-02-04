@@ -15,9 +15,9 @@
         <timeline-badge class="displayImage">
         </timeline-badge>
         <timeline-panel class="{{comment.badgeClass}}">
-			<i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}"></i>
+			<i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}" ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
           <timeline-heading>
-            <h4>{{comment.userid | uppercase}}</h4>
+            <h4>{{comment.userid | uppercase}}&nbsp;</h4>
             <p ng-if="comment.when">
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
