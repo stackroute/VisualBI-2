@@ -26,13 +26,13 @@ angular.module('vbiApp')
 						});
           },
 			  //returns dashboard of current loggedin user
-			 getDashboard: function() {
+			 getData: function() {
 				  return $http({
 					  method: 'GET',
 					  url: '/dashboard'
-						}).then(function(res) {
+					}).then(function(res) {
 						  return (res.data);
-						});
+					});
           },
 
            getUserId: function(userName,currentDashboard){

@@ -7,6 +7,11 @@ angular.module('vbiApp')
             templateUrl: 'views/login.html',
             controller: 'loginController'
         })
+        
+        .when('/register', {
+            templateUrl: 'views/register.html',
+            controller: 'RegisterController'
+        })
 
         .when('/home', {
             templateUrl: 'views/home.html',
@@ -28,15 +33,16 @@ angular.module('vbiApp')
 
 	  $rootScope.$on('$routeChangeStart', function(event, next, current) {
 		  var authToken = $cookies.get($rootScope.authToken);
-
+		  var currentUrl = $location.url();
+		  
 		  if(authToken) {
 			  $rootScope.loggedInUser= JSON.parse(authToken);
-			  var currentUrl = $location.url();
 			  if(currentUrl == '/') {
 				  $location.path("/home");
 			  }
-		  } else {
-			  $location.path("/");
-		  }
+		  } 
+//		  else {
+//			  $location.path("/");
+//		  }
 	  });
 }]);

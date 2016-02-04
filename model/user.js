@@ -37,15 +37,16 @@ UserSchema.statics.getDashboard = function (userid, callback) {
 	});
 }
 
-UserSchema.statics.getDashboardTitle = function (userid, callback) {
+UserSchema.statics.getData = function (userid, callback) {
 	this.model('User')
 		.findOne({
 		'userid': mongoose.Types.ObjectId(userid)
 	}, {
-		'dashboards._id': 1
+		'_id': 0,
+	}).populate('dashboards.tabs.rows.columns.widgetId')
+		.exec(function(err, data) {
+			callback(data);
 	});
-  console.log(dashboards._id);
-
 }
 
 UserSchema.statics.setUserTheme=function(id, userTheme){

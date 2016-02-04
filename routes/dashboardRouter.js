@@ -7,7 +7,7 @@ var express = require('express'),
 router.get('/', function(req, res, next) {
 	 var userid = req.user._id; //it contains _id value of user whose dashboard to be fetched
 	 if(userid) {
-		  User.getDashboard(userid, function(data){
+		  User.getData(userid, function(data){
 				res.json(data);
 		  });
 	 } else
