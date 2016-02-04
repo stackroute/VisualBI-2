@@ -3,12 +3,12 @@ var express = require('express'),
     User = require('../model/user'),
     Credential = require('../model/credential');
 
-    var currentUserId = "56a601d8a375b2ea99a9b121"; // req.user._id || instead of objectId
-    var currentUserName = "ashok.kumar@wipro.com";
-
 router.post('/shareDashboard',function(req, res, next){
   var currentDashboard = req.body.currentDashboard;
   var userNames = req.body.userNames;
+  var currentUserId = req.user._id;
+  var currentUserName = req.user.name;
+  var permission = "edit" ;//req.body.permission;
 
   var usernameProcessed = 0
 
@@ -19,7 +19,7 @@ router.post('/shareDashboard',function(req, res, next){
           res.send(credentialObj.username+"'s document not present");
       }else{
         console.log(userObj._id);
-        User.shareDashboard(currentUserName,currentDashboard,userObj._id,function(result){
+        User.shareDashboard(currentUserId,currentUserName,currentDashboard,userObj._id,permission,function(result){
           console.log("result "+result);
         });
         usernameProcessed++;
@@ -33,6 +33,7 @@ router.post('/shareDashboard',function(req, res, next){
 router.post('/', function(req, res, next) {
     var userName = req.body.userName;
     var currentDashboard = req.body.currentDashboard;
+    var currentUserName = req.user.name;
 
     if(userName) {
       Credential.getCredentialId(userName, function(credentialId){

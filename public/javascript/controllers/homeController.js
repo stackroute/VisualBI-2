@@ -1,6 +1,7 @@
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer',function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer,commentPusher) {
      $scope.user = $rootScope.loggedInUser;
+		 $scope.canShare = true;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
@@ -33,8 +34,30 @@ angular.module('vbiApp')
 			});
 
 		};
+		 
+		$scope.showCurrentUserDashboard = function(){
+			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
+				var dashboard = $scope.currentUserData.dashboards[0];
+				$rootScope.currentDashboard = dashboard._id;
+				$scope.tabs = dashboard.tabs;
+				$scope.canShare = true;
+			}
+		};
+		 
+		$scope.showSharedDashboard = function(userid, dashboardId){
+			//userid = who has shared the dashboard
+//			userid = "56a205563f8a5736206982c8";
+			
+			userManager.getDashboard(userid, dashboardId)
+				.then(function(sharedDashboard) {
+					if(sharedDashboard) {
+						$scope.tabs = sharedDashboard.tabs;
+						$scope.canShare = false;
+					}
+			});
+		};
 
-         /*share Dashboard Modal*/
+  //        /*share Dashboard Modal*/
     $scope.shareModalClick = function() {
       var shareConfig ={
         templateUrl: 'shareModal',
@@ -43,9 +66,10 @@ angular.module('vbiApp')
                 $uibModalInstance.close();
               };
             }
-      };
+          };
       $uibModal.open(shareConfig);
-    }
+
+  }
 
 
 		$scope.fullScreen = function(widget) {
@@ -67,7 +91,7 @@ angular.module('vbiApp')
                                 when: Date()
                             });
                         });
-						
+
 						return {
 							chartRendererMethod: widget.chartRenderer,
 							parameters: widget.parameters,
@@ -153,16 +177,3 @@ angular.module('vbiApp')
       });
     }
 }]);
-angular.module("vbiApp").controller("shareCtrl",function($scope){
-    $scope.containers = [{
-          name: 'Can Edit'
-        }, {
-          name: 'Can Comment'
-        }, {
-          name: 'Can View'
-        }];
-
-        $scope.select = function(container) {
-        $scope.selectedItem = container;
-      };
-});

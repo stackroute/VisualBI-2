@@ -22,7 +22,7 @@ var UserSchema = mongoose.Schema({
    }]
 }, {strict: false});
 
-UserSchema.statics.getDashboard = function (userid, callback) {
+UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	this.model('User')
 		.findOne({
 		'userid': mongoose.Types.ObjectId(userid)
@@ -31,8 +31,8 @@ UserSchema.statics.getDashboard = function (userid, callback) {
 	}).populate('dashboards.tabs.rows.columns.widgetId')
 		.exec(function(err, data) {
 			var d={};
-			if(data && data.dashboards)
-					d = data.dashboards;
+			if(!err && data && data.dashboards && data.dashboards.length > 0)
+				d = data.dashboards[0];
 			callback(d);
 	});
 }
@@ -73,17 +73,17 @@ UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,cal
 	});
 }
 
-UserSchema.statics.shareDashboard = function(currentusername,currentDashboard,userId,callback){
+UserSchema.statics.shareDashboard = function(currentUserId,currentusername,currentDashboard,shareWithUserId,permission,callback){
   console.log(currentusername);
   console.log(currentDashboard);
-  console.log("userId"+mongoose.Types.ObjectId(userId));
-  this.model('User').update({'_id':mongoose.Types.ObjectId(userId)},
+  console.log("userId"+mongoose.Types.ObjectId(shareWithUserId));
+  this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId)},
   {$addToSet:{"sharedDashboards":
-      {
-                                   "username" : currentusername,
-                                   "dashboardId": currentDashboard,
-                                   "permission": "edit"
-                                 }
+      { "userid" : currentUserId,
+        "username" : currentusername,
+        "dashboardId": currentDashboard,
+        "permission": permission
+      }
     }
   },
   function(err,data){
