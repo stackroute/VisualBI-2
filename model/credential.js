@@ -8,6 +8,9 @@ var mongoose = require('mongoose'),
 var CredentialSchema = mongoose.Schema({
    username: String,
    name: String,
+	firstName: String,
+	lastName: String,
+	imagePath: String,
 	time: {type: Date, default: Date.now}
 }, {strict: false});
 
