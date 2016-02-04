@@ -14,4 +14,21 @@ router.post('/',function(req,res,next){
 		res.send({resp:'error',msg:'Authentication failure'});
 });
 
+router.get('/:widgetId',function(req,res,next){
+	Widget.getCommenters(req.params.widgetId,function(data){
+		res.send(data);
+	});
+
+});
+
+router.post('/updateCommenterInfo',function(req,res,next){
+	
+	Widget.updateCommenterDetails(req.body.widgetId, req.body.userid,function(resp){
+		res.send({resp:'success',user:req.user.name});
+	});
+});
+
+
+
 module.exports=router;
+

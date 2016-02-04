@@ -5,7 +5,8 @@ var express = require('express'),
     utils = require('./utils'),
     User = require('../model/user'),
     passport = require('passport'),
-	 Credential = require('../model/credential');
+	Credential = require('../model/credential');
+    Widget = require('../model/widget');
 
 // Login page
 router.get('/',function(req, res, next) {
@@ -38,6 +39,7 @@ router.post('/register',function(req,res,next){
 	
     res.send({resp:'Registration Done'});
 });
+
 
 
 //function registerUser (req, res, next) {

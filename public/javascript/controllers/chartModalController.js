@@ -14,7 +14,6 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 			$scope.IsNotVisible = $scope.IsVisible ?false : true;
 
 		}
-           
 
         $scope.postComment=function(updateCommentsModel){
 		
@@ -34,15 +33,36 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 					comment:newComment,
 					when:Date()
 				});
-			
+				
 				$scope.userComment='';
 			    commentType='glyphicon-check',commentCategory='primary';
-				
 				$scope.$digest();
+				
+				userManager.getCommenters(chartInfo.widgetId).then(function(data){
+					console.log('Got the damn commenters');
+					console.log(data);
+					//console.log(data.data[0].commenters);
+					var insertIndc=true;
+						angular.forEach(data.data[0].commenters,function(commenter,key){
+								if(user==commenter.commenter){
+									insertIndc=false;									
+								}
+							});
+					if(!insertIndc){
+						console.log('User already present');
+					}
+					else{
+						console.log('Inserting new commenter info');
+						
+						userManager.insertNewCommenterInfo(chartInfo.widgetId,user).then(function(data){
+							console.log('Commenter details added successfully');
+						});
+					}
+				});
 			
 		});
-
-    };
+			
+ };
 			
     $scope.chartInfo = chartInfo;
 	
