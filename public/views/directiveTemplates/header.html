@@ -17,8 +17,13 @@
         <li class="active"><a href="#">Studio <span class="sr-only">(current)</span></a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="#">Share</a></li>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li class="dropdown-submenu">
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ user.name}}'s Dashboard</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href ="">dbDash1</a></li>
+              </ul>
+            </li>
             <li><a href="#/shareWithMe">Shared with me</a></li>
             <li><a href="#">Approve</a></li>
             <li role="separator" class="divider"></li>
