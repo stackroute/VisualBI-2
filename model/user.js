@@ -37,6 +37,18 @@ UserSchema.statics.getDashboard = function (userid, callback) {
 	});
 }
 
+UserSchema.statics.getData = function (userid, callback) {
+	this.model('User')
+		.findOne({
+		'userid': mongoose.Types.ObjectId(userid)
+	}, {
+		'_id': 0,
+	}).populate('dashboards.tabs.rows.columns.widgetId')
+		.exec(function(err, data) {
+			callback(data);
+	});
+}
+
 UserSchema.statics.setUserTheme=function(id, userTheme){
    this.model('User').update({
      'email' : id
