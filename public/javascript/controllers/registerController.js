@@ -14,16 +14,13 @@
         function register() {
             console.log("inside register");
             vm.dataLoading = true;
-            UserService.register(vm.user,function(){})
-//            .then(function (response) {
-//                    if (response.success) {
-//                        console.log('Registration successful & Data in user', user.password);
-//                        //$location.path('/login');
-//                    } else {
-//                        console.log("Error");
-//                        vm.dataLoading = false;
-//                    }
-//                });
+            UserService.register(vm.user)
+            .then(function (response) {
+                    
+                        console.log('Registration successful for user & Data in user', response);
+                        //$location.path('/login');
+                     
+                });
         }
     }
  
