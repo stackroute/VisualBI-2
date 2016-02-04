@@ -1,6 +1,7 @@
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer',function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer,commentPusher) {
      $scope.user = $rootScope.loggedInUser;
+		 $scope.canShare = true;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
@@ -38,20 +39,20 @@ angular.module('vbiApp')
 			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
 				var dashboard = $scope.currentUserData.dashboards[0];
 				$rootScope.currentDashboard = dashboard._id;
-					 if(dashboard.tabs && dashboard.tabs.length > 0) {
-						$scope.tabs = dashboard.tabs;
-				 }
+				$scope.tabs = dashboard.tabs;
+				$scope.canShare = true;
 			}
 		};
 		 
 		$scope.showSharedDashboard = function(userid, dashboardId){
 			//userid = who has shared the dashboard
-			userid = "56a205563f8a5736206982c8";
+//			userid = "56a205563f8a5736206982c8";
 			
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
 						$scope.tabs = sharedDashboard.tabs;
+						$scope.canShare = false;
 					}
 			});
 		};

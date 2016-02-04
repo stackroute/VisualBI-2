@@ -6,7 +6,7 @@
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
 			<div ng-include="'views/dialogs/graphModal.tpl.html'"></div>
     <!-- <button type=button class="btn btn-warning pull-right">Shared with me<span class="glyphicon glyphicon-share"></span></button> -->
-		<button type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
+		<button ng-show="canShare" type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
 						 <div class = "row" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
