@@ -16,7 +16,7 @@ angular.module('vbiApp')
 			  logout: function(user, done) {
 				  return $http.get('/logout');
 			  },
-
+			  //returns the dashboard of a user
            getDashboard: function(userid) {
 				  return $http({
 					  method: 'GET',
@@ -25,15 +25,72 @@ angular.module('vbiApp')
 						  return (res.data);
 						});
           },
+			  //returns dashboard of current loggedin user
+			 getData: function() {
+				  return $http({
+					  method: 'GET',
+					  url: '/dashboard'
+					}).then(function(res) {
+						  return (res.data);
+					});
+          },
 
-           getUserId: function(username){
-                     return $http({
-                       method: 'GET',
-                       url: '/getUserId/' +username
-                     }).then(function(res){
-                       return (res);
+           getUserId: function(userName,currentDashboard){
+                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard});
+                     return $http.post('/getUserId', parms)
+                     .then(function(res){
+                       return (res.data);
                      });
-            }
+            },
+
+            shareDashboard: function(userNames,currentDashboard){
+              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard});
+                      return $http.post(' /getUserId/shareDashboard', parms)
+                      .then(function(res){
+                        return (res);
+                      });
+             },
+
+             loadEmails: function($query) {
+                 return $http.post('/getUserList', { cache: true}).then(function(response) {
+                   var emails = response.data;
+                   return emails.filter(function(email) {
+                     return email.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
+                   });
+                 });
+               },
+				pushComment: function(parameters) {
+
+				return new Promise (function(resolve, reject){
+
+				var currentUser='';
+
+						//POST request to Mongo to write the comment to the database, with parameters object as payload
+						$http({
+							url: "/addcomment",
+							method: "POST",
+							data: parameters,
+							headers : {
+								'Content-Type': 'application/json'
+							}
+						}).success(function successCallback(data, status) {
+							if(data.resp=='success'){
+								resolve(data.user);
+							}
+							else
+								{
+									alert(data.resp+' could not post the comment. Please log out and log in again.');
+									reject("Error. comment not posted")
+								}
+
+						}, function errorCallback(err) {
+
+						});
+
+				},function(err){
+					reject(err);
+				});
+				}
         };
 
     }]);

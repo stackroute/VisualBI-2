@@ -1,6 +1,9 @@
 var mongoose = require('mongoose'),
 	 passportLocal = require('passport-local'),
 	 passportLocalMongoose = require('passport-local-mongoose');
+   mongoose = require('mongoose');
+	 // set Promise provider to bluebird
+	 mongoose.Promise = require('bluebird');
 
 var CredentialSchema = mongoose.Schema({
    username: String,
@@ -27,7 +30,7 @@ CredentialSchema.statics.registerUser =function(username,password) {
    });
 };
 
-CredentialSchema.statics.getUserId = function(username, callback){
+CredentialSchema.statics.getCredentialId = function(username, callback){
   this.model('Credential')
 		.findOne({
 		'username': username
@@ -41,4 +44,11 @@ CredentialSchema.statics.getUserId = function(username, callback){
 	});
 };
 
+CredentialSchema.statics.getUsers = function(callback){
+	this.model('Credential')
+			.find({},{'username':1}).exec(function(err,data){
+				if(!err)
+					callback(data);
+			})
+}
 module.exports = mongoose.model("Credential", CredentialSchema);

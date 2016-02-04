@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer',function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer,commentPusher) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.isLoading = false;
 		 $scope.tabs = [];
@@ -7,17 +7,19 @@ angular.module('vbiApp')
 		 //data for every widget will put here. It is required to give more functionality like
 		 // line, bar or area chart in mdx grid
 		 $scope.widgetData = {};
-
-		 userManager.getDashboard($rootScope.loggedInUser.authToken)
-			 .then(function(dashboards) {
-			// Make additional dashboard. Assuming that there is only one dashboard now
-			if(dashboards && dashboards.length > 0) {
-				var dashboard = dashboards[0];
-					 if(dashboard.tabs && dashboard.tabs.length > 0) {
-								$scope.tabs = dashboard.tabs;
-					 }
-				}
-		 });
+		 $scope.currentUserData = {};
+		 userManager.getData()
+			 .then(function(userData) {
+			 	$scope.currentUserData = userData;
+				// Make additional dashboard. Assuming that there is only one dashboard now
+				if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
+					var dashboard = $scope.currentUserData.dashboards[0];
+			  		$rootScope.currentDashboard = dashboard._id;
+						 if(dashboard.tabs && dashboard.tabs.length > 0) {
+									$scope.tabs = dashboard.tabs;
+						 }
+					}
+		 	});
 
 
 		$scope.logout = function() {
@@ -65,7 +67,7 @@ angular.module('vbiApp')
                                 when: Date()
                             });
                         });
-
+						
 						return {
 							chartRendererMethod: widget.chartRenderer,
 							parameters: widget.parameters,
@@ -101,7 +103,7 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-		 
+
 		 //Show Line Modal Graph
 		$scope.openModalGraph = function(template, indexPassed, widgetUid) {
 		  var modalInstance = $uibModal.open({
@@ -151,3 +153,16 @@ angular.module('vbiApp')
       });
     }
 }]);
+angular.module("vbiApp").controller("shareCtrl",function($scope){
+    $scope.containers = [{
+          name: 'Can Edit'
+        }, {
+          name: 'Can Comment'
+        }, {
+          name: 'Can View'
+        }];
+
+        $scope.select = function(container) {
+        $scope.selectedItem = container;
+      };
+});

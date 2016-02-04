@@ -30,7 +30,8 @@ angular.module('vbiApp')
 			  chartRenderer.plotChart(scope.chartRendererMethod, elements[0], params)
 				  .then(function(data) {
 				  		//sync data with controller scope. this data will help to make other behaviours
-				  		scope.widgetData[scope.chartId] = data;
+				  		if(scope.widgetData)
+				  			scope.widgetData[scope.chartId] = data;
 				  		
 			  });
 		  }
