@@ -6,16 +6,29 @@
       </div>
     </div>
 
-    <div class="modal-body" id="shareBody">
+    <div class="modal-body" id="shareBody" ng-controller ="shareDashboardController" >
 
     <div class="input-group input-group-lg" id ="input-group">
      <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
       </span>
-      <input class="form-control" type="text" placeholder="Email address">
-      </div>
+      <tags-input ng-model="tags"
+                  key-property="_id"
+                  display-property="username"
+                  on-tag-added="tagAdded($tag)"
+                  addFromAutocompleteOnly=true
+                  placeholder="User email"
+                  replace-spaces-with-dashes="false">
+        <auto-complete source="loadEmails($query)"
+                       min-length="0"
+                       load-on-focus="true"
+                       load-on-empty="true"
+                       max-results-to-show="5">
+        </auto-complete>
+      </tags-input>
+    </div>
 
-      <div ng-controller="shareCtrl" class="permission">
+      <div class="permission">
         <select ng-model="selectedItem" ng-options="c as (c.name) for c in containers" class="dropdown-height">
           <option value="">Access</option>
 
@@ -28,9 +41,10 @@
           </div>
         </div>
       </div>
-        <div class="share-btn" id="sharebutton">
-          <button type = "button" class = "btn btn-primary">Done </button>
-          <button class="btn btn-warning" ng-click="closeModal()">Cancel</button>
-        </div>
+
+      <div class="share-btn" id="sharebutton">
+        <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>
+        <button class="btn btn-warning" ng-click="closeModal()">Cancel</button>
+      </div>
     </div>
 </script>

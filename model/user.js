@@ -73,17 +73,17 @@ UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,cal
 	});
 }
 
-UserSchema.statics.shareDashboard = function(currentusername,currentDashboard,userId,callback){
+UserSchema.statics.shareDashboard = function(currentUserId,currentusername,currentDashboard,shareWithUserId,permission,callback){
   console.log(currentusername);
   console.log(currentDashboard);
-  console.log("userId"+mongoose.Types.ObjectId(userId));
-  this.model('User').update({'_id':mongoose.Types.ObjectId(userId)},
+  console.log("userId"+mongoose.Types.ObjectId(shareWithUserId));
+  this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId)},
   {$addToSet:{"sharedDashboards":
-      {
-                                   "username" : currentusername,
-                                   "dashboardId": currentDashboard,
-                                   "permission": "edit"
-                                 }
+      { "userid" : currentUserId,
+        "username" : currentusername,
+        "dashboardId": currentDashboard,
+        "permission": permission
+      }
     }
   },
   function(err,data){

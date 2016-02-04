@@ -1,5 +1,20 @@
 angular.module('vbiApp')
-    .controller('shareDashboardController',['$rootScope','$scope','userManager','$http',function($rootScope,$scope,userManager,$http){
+    .controller('shareDashboardController',['$rootScope','$scope','$uibModal','userManager','$http',function($rootScope,$scope,$uibModal,userManager,$http){
+
+
+//       /*share Dashboard Modal*/
+//  $scope.shareModalClick = function() {
+//    var shareConfig ={
+//      templateUrl: 'shareModal',
+//      controller: function($scope, $uibModalInstance) {
+//            $scope.closeModal = function() {
+//              $uibModalInstance.close();
+//            };
+//          }
+//        };
+//    $uibModal.open(shareConfig);
+//
+// }
 
       $scope.tags = [];
       $scope.tagAdded = function(tag) {
@@ -17,29 +32,40 @@ angular.module('vbiApp')
         console.log($scope.userNames);
         userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard)
         .then(function(userId){
-          console.log(userId);
-        })
-      }
+          alert(userId);
 
-      // $scope.sharedDashboard =function(){
-      //   userManager.sharedDashboard().
-      //   then(function(res){
-      //     console.log(res);
-      //   })
-      // }
-      //
-      // $scope.userList = function(){
-      //   console.log($scope.shareWithUsername);
-      //   userManager.getUserList($scope.shareWithUsername)
-      //   .then(function(users){
-      //     console.log(users);
-      //   })
-      // }
-      //
+        })
+
+      }
       $scope.loadEmails = function($query) {
         return userManager.loadEmails($query)
                .then(function(data){
                  return data;
                })
       }
+
+      $scope.containers = [{
+            name: 'Can Edit'
+          }, {
+            name: 'Can Comment'
+          }, {
+            name: 'Can View'
+          }];
+
+          $scope.select = function(container) {
+          $scope.selectedItem = container;
+        };
     }]);
+    // angular.module("vbiApp").controller("shareCtrl",function($scope){
+    //     $scope.containers = [{
+    //           name: 'Can Edit'
+    //         }, {
+    //           name: 'Can Comment'
+    //         }, {
+    //           name: 'Can View'
+    //         }];
+    //
+    //         $scope.select = function(container) {
+    //         $scope.selectedItem = container;
+    //       };
+    // });

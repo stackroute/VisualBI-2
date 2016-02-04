@@ -18,16 +18,11 @@ angular.module('vbiApp')
             controller: 'homeController'
         })
 
-        .when('/share', {
-            templateUrl: 'views/shareDashboard.html',
-            controller: 'shareDashboardController'
-        })
-		
 	    .when('/settings', {
             templateUrl: 'views/settings.html',
             controller: 'SettingsController'
         })
-		
+
 	   .otherwise({
         		redirectTo: '/home'
       });
@@ -44,7 +39,7 @@ angular.module('vbiApp')
 			  $rootScope.loggedInUser= JSON.parse(authToken);
 			  if(currentUrl == '/') {
 				  $location.path("/home");
-			  } 
+			  }
 		  } 
 //		  else {
 //			  $location.path("/");

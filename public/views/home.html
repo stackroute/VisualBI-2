@@ -5,11 +5,10 @@
 		<div class="container-fluid">
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
 			<div ng-include="'views/dialogs/graphModal.tpl.html'"></div>
-    <button type=button class="btn btn-warning pull-right">Shared with me<span class="glyphicon glyphicon-share"></span></button>
-
+    <!-- <button type=button class="btn btn-warning pull-right">Shared with me<span class="glyphicon glyphicon-share"></span></button> -->
+		<button type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs">
-						 <button type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 						 <div class = "row" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
@@ -26,11 +25,11 @@
 										  		</a>
 										  		<a uib-tooltip="bar graph" tooltip-placement="bottom" ng-click="showGraphColumn(col.widgetId.chartRenderer, tab.tabId+'row'+ $parent.$index + col.widgetId._id + $index, 'showBarGraphColumn')"><i class="fa fa-bar-chart glyph-title glyph-right-space"></i>
 										  		</a>
-										  
-										  	
-											  
+
+
+
 											</span>
-											
+
 											</h3>
 										</div>
 										<div class="panel-body widget-body">
