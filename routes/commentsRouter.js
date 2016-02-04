@@ -6,12 +6,12 @@ var express = require('express'),
 
 router.post('/',function(req,res,next){
 	
-	console.log("User authenticated: ", req.isAuthenticated());
-	console.log("Current User : ", req.user);
-    
-	Widget.postComment(req.body.userid, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-	
-    res.send({resp:'Database updated'});
+	if(req.isAuthenticated()){
+		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
+		res.send({resp:'success',user:req.user.name});
+	}
+	else
+		res.send({resp:'error',msg:'Authentication failure'});
 });
 
 module.exports=router;

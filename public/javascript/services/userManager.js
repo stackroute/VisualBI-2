@@ -58,7 +58,39 @@ angular.module('vbiApp')
                      return email.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
                    });
                  });
-               }
+               },
+				pushComment: function(parameters) {
+
+				return new Promise (function(resolve, reject){
+
+				var currentUser='';
+
+						//POST request to Mongo to write the comment to the database, with parameters object as payload
+						$http({
+							url: "/addcomment",
+							method: "POST",
+							data: parameters,
+							headers : {
+								'Content-Type': 'application/json'
+							}
+						}).success(function successCallback(data, status) {
+							if(data.resp=='success'){
+								resolve(data.user);
+							}
+							else
+								{
+									alert(data.resp+' could not post the comment. Please log out and log in again.');
+									reject("Error. comment not posted")
+								}
+
+						}, function errorCallback(err) {
+
+						});
+
+				},function(err){
+					reject(err);
+				});
+				}
         };
 
     }]);
