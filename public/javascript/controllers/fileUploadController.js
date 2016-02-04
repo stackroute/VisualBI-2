@@ -1,20 +1,12 @@
-(function () {
-    'use strict';
- 
-    angular.module('vbiApp').controller('RegisterController', RegisterController);
- 
-    RegisterController.$inject = ['UserService','Upload','$window','$location', '$rootScope','$scope'];
-    
-    function RegisterController(UserService,Upload,$window,$location, $rootScope, $scope) {
-       
+angular.module('vbiApp')
+    .controller('MyCtrl',['Upload','$window',function(Upload,$window){
         var vm = this;
-        console.log(vm.form);
-        
         vm.submit = function(){ //function to call on form submit
-            if (vm.file) { //check if from is valid
+            if (vm.upload_form.file.$valid && vm.file) { //check if from is valid
                 vm.upload(vm.file); //call upload function
             }
         };
+    
         
         vm.upload = function (file) {
             Upload.upload({
@@ -36,17 +28,4 @@
                 vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
             });
         };
-        
-        console.log("Callllllllleddddd")
-        vm.register = function () {
-            console.log("inside register");
-            vm.dataLoading = true;
-            UserService.register(vm.user)
-            .then(function (response) {
-                        console.log('Registration successful for user & Data in user', response);
-                     });
-        };
-        
-  
-    }
-})();
+    }]);
