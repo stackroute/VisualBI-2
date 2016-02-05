@@ -20,9 +20,7 @@ var WidgetSchema = mongoose.Schema({
 }, {strict: false});
      
 WidgetSchema.statics.getWidgets = function(callback) {
-   this.model('Widget').find({}, {
-      "_id":0
-   }, function(err, data) {
+   this.model('Widget').find({}, function(err, data) {
       callback(data);
    })
 }

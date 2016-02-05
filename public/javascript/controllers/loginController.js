@@ -1,11 +1,12 @@
 angular.module('vbiApp')
-    .controller('loginController', ['$rootScope', '$location', 'userManager', '$cookies', function($rootScope, $location, userManager, $cookies) {
+    .controller('loginController', ['$rootScope', '$location', 'userManager', '$cookies', '$scope', function($rootScope, $location, userManager, $cookies, $scope) {
 	 $rootScope.loggedInUser = {};
     this.user = {
         email: "",
         password: ""
     };
-
+	
+	 var self = this;
     this.errorMessage = "";
     this.login = function() {
 		  userManager.login(this.user, function(err, data) {
@@ -13,9 +14,14 @@ angular.module('vbiApp')
 					$rootScope.loggedInUser = JSON.parse($cookies.get($rootScope.authToken));
 					$location.url($location.url() + 'home');
 				} else {
-					 this.errorMessage = err;
+					 self.errorMessage = err;
 				}
 
 		  });
-    };
-}]);
+	 };
+	
+	$scope.$watch(function() {
+		return self.user.password;}, function(newValue) {
+		self.errorMessage = "";
+	})
+}])

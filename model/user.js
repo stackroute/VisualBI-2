@@ -96,6 +96,26 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
   });
 }
 
+UserSchema.statics.saveTab = function(userid, savetabs) {
+  console.log("reached user savetab");
+  console.log(userid);
+  console.log(savetabs);
+
+  this.model('User').update({
+    'userid': userid
+  },{
+    $set: {
+      dashboards:{
+        tabs:savetabs
+      }
+    }
+  },function(err, userTheme) {
+    console.log("Error " + err);
+  });
+
+
+}
+
 UserSchema.statics.sharedDashboards = function(currentSessionUserId,currentDashboard,userId){
   this.model('User')
     .findOne({

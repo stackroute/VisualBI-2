@@ -7,7 +7,6 @@ angular.module('vbiApp')
             templateUrl: 'views/login.html',
             controller: 'loginController'
         })
-        
         .when('/register', {
             templateUrl: 'views/register.html',
             controller: 'RegisterController'
@@ -17,15 +16,19 @@ angular.module('vbiApp')
             templateUrl: 'views/home.html',
             controller: 'homeController'
         })
-
+        .when('/edittab', {
+          templateUrl: 'views/edittab.html',
+          controller: 'editController'
+        })
 	    .when('/settings', {
             templateUrl: 'views/settings.html',
             controller: 'SettingsController'
         })
-
-	   .otherwise({
+        .otherwise({
         		redirectTo: '/home'
-      });
+        });
+
+
 
 }]).run(['$rootScope','$location', '$cookies', function($rootScope, $location, $cookies) {
 		//cookie name which will store authentication token
@@ -38,8 +41,9 @@ angular.module('vbiApp')
 		  if(authToken) {
 			  $rootScope.loggedInUser= JSON.parse(authToken);
 			  if(currentUrl == '/') {
+
 				  $location.path("/home");
-			  }
+        		}
 		  } 
 		  else if(currentUrl == '/home') {
 			  $location.path("/");
