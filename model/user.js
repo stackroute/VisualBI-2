@@ -19,8 +19,19 @@ var UserSchema = mongoose.Schema({
 				}]
          }]
       }]
-   }]
+   }],
+	sharedDashboards:[{
+		userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
+		username: String,
+		dashboardid: String,
+		permission: String
+	}]
 }, {strict: false});
+
+UserSchema.statics.addUser = function(userid, dashboardId, done) {
+	
+	
+}
 
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	this.model('User')
