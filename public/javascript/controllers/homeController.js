@@ -34,7 +34,7 @@ angular.module('vbiApp')
 			});
 
 		};
-		 
+
 		$scope.showCurrentUserDashboard = function(){
 			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
 				var dashboard = $scope.currentUserData.dashboards[0];
@@ -43,11 +43,11 @@ angular.module('vbiApp')
 				$scope.canShare = true;
 			}
 		};
-		 
+
 		$scope.showSharedDashboard = function(userid, dashboardId){
 			//userid = who has shared the dashboard
 //			userid = "56a205563f8a5736206982c8";
-			
+
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
@@ -187,8 +187,8 @@ angular.module('vbiApp')
     $scope.removeTab = function(tabId) {
 
       var confirm = $mdDialog.confirm()
-            .title('Would you like to overwrite your widget?')
-            .ariaLabel('Widget Confirmation')
+            .title('Would you like to delete the tab?')
+            .ariaLabel('Tab Confirmation')
             .targetEvent(event)
             .ok('Yes')
             .cancel('No');
