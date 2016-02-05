@@ -2,7 +2,8 @@ angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, commentPusher) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
-		 $scope.isLoading = false;
+		 $scope.canShare = true;
+		 $scope.canEdit = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
 		 //data for every widget will put here. It is required to give more functionality like
@@ -41,6 +42,7 @@ angular.module('vbiApp')
 				$rootScope.currentDashboard = dashboard._id;
 				$scope.tabs = dashboard.tabs;
 				$scope.canShare = true;
+				$scope.canEdit = true;
 			}
 		};
 
@@ -53,6 +55,7 @@ angular.module('vbiApp')
 					if(sharedDashboard) {
 						$scope.tabs = sharedDashboard.tabs;
 						$scope.canShare = false;
+						$scope.canEdit = false;
 					}
 			});
 		};
@@ -97,7 +100,8 @@ angular.module('vbiApp')
 							parameters: widget.parameters,
 							title: widget.title,
 							comments: userComments,
-							widgetId: widget._id
+							widgetId: widget._id,
+							canComment: $scope.canEdit
 						};
 					}
 				}
