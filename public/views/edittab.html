@@ -36,7 +36,7 @@
 																						jqyoui-draggable="{index:{{$index}}, animate:true}"
 																						data-jqyoui-options="{revert: 'invalid'}" data-direction="{{col.jqyouiDirection}}"	>
 							<button ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">_</span></button>
-							<button ng-click="removeWidget(rowIndex, colIndex)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+							<button ng-click="removeWidget(rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
 							<p>
 								{{col.widgetId.title}}
 							</p>
