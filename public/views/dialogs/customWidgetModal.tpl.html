@@ -1,0 +1,14 @@
+<script type="text/ng-template" id="customWidget">
+ <div class="panel panel-primary">
+ 	<div class="modal-header panel-heading">
+		<h4 class="modal-title">Enter tab title
+		 	<button ng-click="closeModal()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 </h4>
+  </div>
+  <div class="modal-body">
+    <div class="input-group">
+      <input type="text" class="form-control" id="userTitle" name="userData" ng-model="userData" placeholder="Enter tab title">
+      <button class="btn btn-success modal-btn" type="button" ng-click="setTabTitle(userData)">Set Title</button>
+    </div>
+  </div>
+</script>
