@@ -10,7 +10,7 @@
 		<button ng-show="canShare" type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 				<uib-tabset class="wrap">
 					 <!-- <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs" > -->
-					 <uib-tab id="{{ tab.tabId }}" ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
+					 <uib-tab id="{{ tab.tabId }}" ng-dblclick="titleModal(2, $index)"  ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
 						 <uib-tab-heading class="ng-scope">
 							 {{tab.tabTitle}}
 							 <!-- <i ng-click="removeTab(tab.tabId, $event)" class="close"></i> -->
@@ -50,7 +50,7 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and {{col.widgetId.commentsCounter}} others</span>
+														See {{col.widgetId.commentsCounter}} comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and  {{col.widgetId.commentersCounter-1}} others</span>
 													</span>
 
 												</a>
@@ -60,7 +60,7 @@
 							  </div>
 						 </div>
 					 </uib-tab>
-    			 <uib-tab ng-click="titleModal()" active="false">
+    			 <uib-tab ng-click="titleModal(1, -1)" active="false">
 						 <uib-tab-heading class="ng-scope">
        					<i class="glyphicon glyphicon-plus"></i>
     				 </uib-tab-heading>

@@ -90,8 +90,50 @@ angular.module('vbiApp')
 				},function(err){
 					reject(err);
 				});
-          }
-        };
+				},
+			getCommenters :	function(widgetId){
+				
+						return new Promise (function(resolve, reject){
+							
+						console.log(widgetId);
+						//POST request to Mongo to write the comment to the database, with parameters object as payload
+						$http.get('/addcomment/'+widgetId).then(function successCallback(data, status) {
+							resolve(data);
+						}, function errorCallback(err) {
+							reject(err);
+						}); //http ends here
+					}); // Promise ends here
 
+			   },
+			insertNewCommenterInfo : function(widgetId,userid){
+									 return new Promise(function(resolve,reject){
+										//POST request to Mongo to write the comment to the database, with parameters object as payload
+										$http({
+											url: "/addcomment/updateCommenterInfo",
+											method: "POST",
+											data: {widgetId:widgetId,userid:userid},
+											headers : {
+												'Content-Type': 'application/json'
+											}
+										}).success(function successCallback(data, status) {
+											if(data.resp=='success'){
+												resolve(data.user);
+											}
+											else
+												{
+													reject("Error posting to Mongo...")
+												}
 
-    }]);
+										}, function errorCallback(err) {
+
+										});
+
+									 },function(err){
+										 return(err);
+									 });
+			}
+			
+		};
+	}]);
+
+         

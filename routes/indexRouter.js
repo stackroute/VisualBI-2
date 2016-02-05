@@ -47,6 +47,7 @@ router.post('/register',function(req,res,next){
 			}
 		});
 
+
 //	  passport.authenticate('local')(req, res, function () {
 //		 res.redirect('/');
 //	  });
