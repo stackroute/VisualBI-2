@@ -59,7 +59,7 @@ angular.module('vbiApp').factory('UserService', UserService);
 				  }).success(function (data, status, headers, config) {
 					 	return(data);
 				  }).error(function (data, status, header, config) {
-					  retutn(data.error);
+					  return(data);
 				  });             
  
         }
