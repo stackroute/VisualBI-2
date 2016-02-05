@@ -40,8 +40,8 @@
             regCtrl.dataLoading = true;
             UserService.register(regCtrl.user)
             .then(function (response) {
-					console.log('Registration successful for user & Data in user', response);
-					$location.path('/');
+					alert('user registered successfully');
+					$location.path('/home');
 				}).catch(function(err){
 						alert('Failed to add user - ' + err.message);
 					}
