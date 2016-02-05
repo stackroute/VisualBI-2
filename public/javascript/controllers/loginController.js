@@ -24,6 +24,6 @@ angular.module('vbiApp')
 	$scope.$watch(function() {
 		return self.user.password;}, function(newValue) {
 		self.errorMessage = "";
-		$scope.registerUserMessage = $rootScope.registerUserMessage = "";
+//		$scope.registerUserMessage = $rootScope.registerUserMessage = "";
 	})
 }])
