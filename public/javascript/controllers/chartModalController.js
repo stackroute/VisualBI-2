@@ -1,4 +1,4 @@
-angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo', '$route', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route){
+angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route){
 		//	set the default comment icon as check icon and color to blue(info)
 		var commentType='glyphicon-check',commentCategory='primary',loggedInUser=''; 
 
@@ -39,30 +39,22 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				$scope.$digest();
 				
 				userManager.getCommenters(chartInfo.widgetId).then(function(data){
-					console.log('Got the damn commenters');
-					console.log(data);
-					//console.log(data.data[0].commenters);
+					
 					var insertIndc=true;
 						angular.forEach(data.data[0].commenters,function(commenter,key){
 								if(user==commenter.commenter){
 									insertIndc=false;									
 								}
 							});
-					if(!insertIndc){
-						console.log('User already present');
-					}
-					else{
-							console.log('Inserting new commenter info');
-						
-							userManager.insertNewCommenterInfo(chartInfo.widgetId,user).then(function(data){
-								console.log('Commenter details added successfully');
+					if(insertIndc){
+                        userManager.insertNewCommenterInfo(chartInfo.widgetId,user).then(function(data){
+							
 						});
 					}
 				});
 			
 		});
 		  $route.reload(); //refreshes the background page
-			
  };
 			
     $scope.chartInfo = chartInfo;

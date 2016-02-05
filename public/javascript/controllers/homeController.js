@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, commentPusher) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
 		 $scope.canShare = true;
@@ -175,15 +175,29 @@ angular.module('vbiApp')
       $scope.gotoEditPage($scope.tabs, tabCount);
     }
 
+    $scope.renameTab = function(newTitle, tabIndex) {
+      $scope.tabs[tabIndex].tabTitle = newTitle;
+      saveTabsToServer();
+      $route.reload();
+    }
+
     $scope.gotoEditPage = function(tabs, index) {
       editManager.setTabDetails(tabs, index);
       $location.url('/edittab');
     }
 
-    $scope.titleModal = function() {
+    $scope.titleModal = function(value, index) {
       var titleModalConfig = {
         templateUrl: 'customWidget',
-        controller: 'titleController'
+        controller: 'titleController',
+        resolve: {
+					tabTitle: function(){
+						return {
+              setType: value,
+              tabIndex: index
+						};
+					}
+        }
       };
       $uibModal.open(titleModalConfig);
     }
@@ -205,36 +219,61 @@ angular.module('vbiApp')
           }
         }
 
-        var params={
-                    tabs: $scope.tabs
-                 };
+        saveTabsToServer();
 
-        $http({
-            url: "/user/savetab",
-            method: "POST",
-            data: params,
-            headers : {
-                'Content-Type': 'application/json'
-            }
-        }).success(function successCallback(data, status) {
-            console.log('Post successful');
-            $location.url('/');
-        }, function errorCallback(response) {
-            console.log('Post failed');
-        });
       }, function() {
       });
     }
-}]);
+
+    saveTabsToServer = function() {
+      var params={
+                  tabs: $scope.tabs
+               };
+
+      $http({
+          url: "/user/savetab",
+          method: "POST",
+          data: params,
+          headers : {
+              'Content-Type': 'application/json'
+          }
+      }).success(function successCallback(data, status) {
+          console.log('Post successful');
+          $location.url('/');
+
+      }, function errorCallback(response) {
+          console.log('Post failed');
+      });
+    }
+}]).directive('showonhoverparent',
+   function() {
+      return {
+         link : function(scope, element, attrs) {
+            element.parent().bind('mouseenter', function() {
+                element.show();
+            });
+            element.parent().bind('mouseleave', function() {
+                 element.hide();
+            });
+       }
+   };
+});
+;
 
 angular.module('vbiApp')
-    .controller('titleController', ['$scope','$controller','$uibModalInstance', function($scope, $controller, $uibModalInstance) {
+    .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {
       var homeCtrl = $scope.$new();
       $controller('homeController',{$scope:homeCtrl});
-      $scope.createNewTab = function(tab) {
+
+      $scope.setTabTitle = function(title) {
         $uibModalInstance.close();
-        homeCtrl.createTab(tab);
+        if(tabTitle.setType == 1) {
+          homeCtrl.createTab(title);
+        } else {
+          homeCtrl.renameTab(title, tabTitle.tabIndex)
+        }
       }
+
       $scope.closeModal = function() {
         $uibModalInstance.close();
       }

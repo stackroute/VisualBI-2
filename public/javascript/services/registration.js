@@ -53,19 +53,18 @@ angular.module('vbiApp').factory('UserService', UserService);
            return new Promise (function(resolve, reject){
               console.log("inside registeration service");
 //               register: function(user, done) {
-				  $http.post('/register', {username:user.username, password:user.password})
-				  	.success(function (data, status, headers, config) {
-                      console.log("Sending data to server:");
-					  
-                      console.log(data);
-                      resolve(user);
- 
+				  $http.post('/register', {
+					  username:user.username, 
+					  password:user.password,
+					  firstName: user.firstName,
+					  lastName: user.lastName,
+					  imagePath: user.imagePath
+				  }).success(function (data, status, headers, config) {
+                      
+					 	resolve(user);
 
 				  }).error(function (data, status, header, config) {
-					  error = "Failed to send Data";
-					  //done(error, data);
-                      reject(error);
-                      //deferred.resolve({ success: false });
+					  reject(data.error);
 				  });
                
                    
