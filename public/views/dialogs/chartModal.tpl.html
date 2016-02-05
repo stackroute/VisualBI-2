@@ -10,7 +10,7 @@
   </div>
 
  <modal-comments></modal-comments>
-   <div class="input-group">
+   <div class="input-group" ng-show="chartInfo.canComment">
     <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
 	   	 <span class="input-group-btn">
 		  	<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')" uib-tooltip="Flag this comment"></i>
@@ -19,4 +19,5 @@
       <button class="btn btn-success" rows="3" type="button" ng-click="postComment()" >Post comment&nbsp</button>
 	  </span>
    </div>
+	 {{pattern}}
 </script>

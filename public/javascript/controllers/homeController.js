@@ -1,8 +1,9 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer',function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer,commentPusher) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
-		 $scope.isLoading = false;
+		 $scope.canShare = true;
+		 $scope.canEdit = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
 		 //data for every widget will put here. It is required to give more functionality like
@@ -41,23 +42,22 @@ angular.module('vbiApp')
 				$rootScope.currentDashboard = dashboard._id;
 				$scope.tabs = dashboard.tabs;
 				$scope.canShare = true;
+				$scope.canEdit = true;
 			}
 		};
 
 		$scope.showSharedDashboard = function(userid, dashboardId){
-			//userid = who has shared the dashboard
-//			userid = "56a205563f8a5736206982c8";
-
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
 						$scope.tabs = sharedDashboard.tabs;
 						$scope.canShare = false;
+						$scope.canEdit = false;
 					}
 			});
 		};
 
-  //        /*share Dashboard Modal*/
+        /*share Dashboard Modal*/
     $scope.shareDashboardModal = function(sharedWith) {
       var shareConfig = {
         templateUrl: 'shareModal',
@@ -70,7 +70,6 @@ angular.module('vbiApp')
       };
       $uibModal.open(shareConfig);
   }
-
 
 		$scope.fullScreen = function(widget) {
 			var modalConfig = {
@@ -97,7 +96,8 @@ angular.module('vbiApp')
 							parameters: widget.parameters,
 							title: widget.title,
 							comments: userComments,
-							widgetId: widget._id
+							widgetId: widget._id,
+							canComment: $scope.canEdit
 						};
 					}
 				}
@@ -148,32 +148,127 @@ angular.module('vbiApp')
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
-    $scope.createTab = function() {
+
+    $scope.createTab = function(tab) {
+
       var tabCount = $scope.tabs.length;
-      var tabId = "tab" + (tabCount + 1);
+
+      var newCount = 0;
+
+      if(tabCount > 0) {
+        var curCount = tabCount - 1;
+        newCount = $scope.tabs[curCount].tabId.toString().split('tab')[1];
+      }
+
+      var tabId = "tab" + (parseInt(newCount) + 1);
 
       var newTab = {
         'tabId' : tabId,
-        'tabTitle' : "newtab",
-        'rows'  : [{
-            'columns' : [{
-                'colWidth': 12
-            }]
-        }]
+        'tabTitle' : tab,
+        'rows'  : []
       };
       $scope.tabs[tabCount] = newTab;
+      $scope.gotoEditPage($scope.tabs, tabCount);
     }
 
-    $scope.createRow = function(tabId) {
-      angular.forEach($scope.tabs, function(tab, key) {
-        if(tab.tabId == tabId) {
-          var newRow = {
-              'columns' : [{
-                  'colWidth': 12
-              }]
-          };
-          tab.rows.push(newRow);
+    $scope.renameTab = function(newTitle, tabIndex) {
+      $scope.tabs[tabIndex].tabTitle = newTitle;
+      saveTabsToServer();
+      $route.reload();
+    }
+
+    $scope.gotoEditPage = function(tabs, index) {
+      editManager.setTabDetails(tabs, index);
+      $location.url('/edittab');
+    }
+
+    $scope.titleModal = function(value, index) {
+      var titleModalConfig = {
+        templateUrl: 'customWidget',
+        controller: 'titleController',
+        resolve: {
+					tabTitle: function(){
+						return {
+              setType: value,
+              tabIndex: index
+						};
+					}
         }
+      };
+      $uibModal.open(titleModalConfig);
+    }
+
+    $scope.removeTab = function(tabId) {
+
+      var confirm = $mdDialog.confirm()
+            .title('Would you like to delete the tab?')
+            .ariaLabel('Tab Confirmation')
+            .targetEvent(event)
+            .ok('Yes')
+            .cancel('No');
+      $mdDialog.show(confirm).then(function() {
+        var len = $scope.tabs.length;
+        while(len--) {
+          if(tabId == $scope.tabs[len].tabId) {
+            $scope.tabs.splice(len, 1);
+            break;
+          }
+        }
+
+        saveTabsToServer();
+
+      }, function() {
       });
     }
-}]);
+
+    saveTabsToServer = function() {
+      var params={
+                  tabs: $scope.tabs
+               };
+
+      $http({
+          url: "/user/savetab",
+          method: "POST",
+          data: params,
+          headers : {
+              'Content-Type': 'application/json'
+          }
+      }).success(function successCallback(data, status) {
+          $location.url('/');
+
+      }, function errorCallback(response) {
+      });
+    }
+}]).directive('showonhoverparent',
+   function() {
+      return {
+         link : function(scope, element, attrs) {
+            element.parent().bind('mouseenter', function() {
+                element.show();
+            });
+            element.parent().bind('mouseleave', function() {
+                 element.hide();
+            });
+       }
+   };
+});
+;
+
+angular.module('vbiApp')
+    .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {
+      var homeCtrl = $scope.$new();
+      $controller('homeController',{$scope:homeCtrl});
+
+      $scope.setTabTitle = function(title) {
+        $uibModalInstance.close();
+        if(tabTitle.setType == 1) {
+          homeCtrl.createTab(title);
+        } else {
+          homeCtrl.renameTab(title, tabTitle.tabIndex)
+        }
+      }
+
+      $scope.closeModal = function() {
+        $uibModalInstance.close();
+      }
+    }]);

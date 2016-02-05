@@ -23,4 +23,9 @@ router.get('/:id', function(req, res, next) {
         res.json({});
 });
 
+router.post('/savetab', function(req, res, next) {
+  User.saveTab(req.user._id, req.body.tabs);
+  res.send({resp:"Tabs updated successfully"});
+});
+
 module.exports = router;

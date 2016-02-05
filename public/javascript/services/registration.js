@@ -50,30 +50,17 @@ angular.module('vbiApp').factory('UserService', UserService);
         }
         
           function register(user) {
-           return new Promise (function(resolve, reject){
-              console.log("inside registeration service");
-//               register: function(user, done) {
-				  $http.post('/register', {username:user.username, password:user.password})
-				  	.success(function (data, status, headers, config) {
-                      console.log("Sending data to server:");
-					  
-                      console.log(data);
-                      resolve(user);
- 
-
+           return $http.post('/register', {
+					  username:user.username, 
+					  password:user.password,
+					  firstName: user.firstName,
+					  lastName: user.lastName,
+					  imagePath: "test path"
+				  }).success(function (data, status, headers, config) {
+					 	return(data);
 				  }).error(function (data, status, header, config) {
-					  error = "Failed to send Data";
-					  //done(error, data);
-                      reject(error);
-                      //deferred.resolve({ success: false });
-				  });
-               
-                   
-			  },function(err){
-               reject(err);
-           });
-                               
- 
+					  retutn(data.error);
+				  });             
  
         }
     }

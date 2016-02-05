@@ -145,6 +145,7 @@ body{
 
 .close{
 	opacity:1;
+	font-size:20px;
 }
 
 
@@ -168,19 +169,26 @@ body{
 }
 
 .row-btn {
-  margin: 10px 0px;
+  margin: 5px 5px;
 }
 
 .row {
 /*  margin: 0px;*/
 }
 
-.close {
+/*.close {
 	font-size: 30px;
 	margin-right: 10px;
 	color: white;
+}*/
+.row-style{
+	margin-top:40px;
 }
 
+.hide-button{
+	display: none;
+	/*margin-left:10px;*/
+}
 /* CSS for grid */
 table{
   margin: auto;
@@ -217,6 +225,34 @@ table,  th,  td{
     font-size: 12px !important;
 }
 
+#widget-library {
+	width: 300px;
+	height: 100%;
+	background:rgba(255,255,255,0.5);
+	position: absolute;
+	z-index: 10;
+}
+
+#widget-library ul {
+	list-style-type: none;
+}
+
+#widget-library li {
+	margin-left: -30px;
+}
+
+#widget-library ul, .edit-row-container {
+	margin-top: 50px;
+}
+
+.widget-holder {
+	height: 200px;
+}
+
+.modal-btn {
+	margin-top: 20px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;
@@ -239,6 +275,8 @@ table,  th,  td{
         position: relative;
     }
 
+
+
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
@@ -254,12 +292,13 @@ table,  th,  td{
 .permission{
 	position: absolute;
 	right:10px;
-  top:19px;
+  top:22px;
 }
 
 .dropdown-height{
 	height:41px;
-	left:30px;
+	left:25px;
+	down:10px;
 }
 
 
@@ -269,5 +308,18 @@ margin-top: 85px;
 }
 
 #shareBody{
-  width:580px;
+  width:600px;
+}
+
+.input-group-addon{
+	height:38px;
+}
+
+#shareTag{
+	/*width: 350px;
+	height: 46px;*/
+}
+
+#ShareModalCloseBtn{
+	margin-top: -22px;
 }

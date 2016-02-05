@@ -1,9 +1,9 @@
   <script type="text/ng-template" id="shareModal">
 
-    <div class="panel panel-primary">
+    <div class="panel-primary">
       <div class="panel-heading">
       <h4 class = "modal-title" id = "shareModalLabel"> Share With Others </h4>
-      </div>
+      <button ng-click="closeModal()" type="button" class="close" aria-label="Close" id ="ShareModalCloseBtn"><span aria-hidden="true">&times;</span></button></div>
     </div>
 
     <div class="modal-body" id="shareBody">
@@ -12,14 +12,14 @@
      <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
       </span>
-      <tags-input ng-model="tags"
+      <tags-input ng-model="tags" id = "shareTag"
                   key-property="_id"
                   display-property="username"
                   on-tag-added="tagAdded($tag)"
                   addFromAutocompleteOnly=true
                   placeholder="User email"
                   replace-spaces-with-dashes="false">
-        <auto-complete source="loadEmails($query)"
+           <auto-complete source="loadEmails($query)"
                        min-length="0"
                        load-on-focus="true"
                        load-on-empty="true"
@@ -40,7 +40,7 @@
       </div>
       <div class="share-btn" id="sharebutton">
         <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>
-        <button class="btn btn-warning" ng-click="closeModal()">Cancel</button>
+        <button class="btn btn-warning" ng-click="closeModal()">Close</button>
       </div>
     </div>
 </script>

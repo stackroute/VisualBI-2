@@ -16,7 +16,7 @@ angular.module('vbiApp')
 			  logout: function(user, done) {
 				  return $http.get('/logout');
 			  },
-			  //returns the dashboard of a user
+			    //returns the dashboard of a user
            getDashboard: function(userid, dashboardId) {
 				  return $http({
 					  method: 'GET',
@@ -26,7 +26,7 @@ angular.module('vbiApp')
 						});
           },
 			  //returns dashboard of current loggedin user
-			 getData: function() {
+			  getData: function() {
 				  return $http({
 					  method: 'GET',
 					  url: '/dashboard'
@@ -37,9 +37,9 @@ angular.module('vbiApp')
 
            getUserId: function(userName,currentDashboard,permission){
                      var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard, permission:permission || "Access"});
-                     return $http.post('/getUserId', parms)
-                     .then(function(res){
-                       return (res.data);
+                   return $http.post('/getUserId', parms)
+                   .then(function(res){
+                   return (res.data);
                      });
             },
 
@@ -91,7 +91,48 @@ angular.module('vbiApp')
 				},function(err){
 					reject(err);
 				});
-				}
-        };
+				},
+			getCommenters :	function(widgetId){
 
-    }]);
+						return new Promise (function(resolve, reject){
+
+
+						//POST request to Mongo to write the comment to the database, with parameters object as payload
+						$http.get('/addcomment/'+widgetId).then(function successCallback(data, status) {
+							resolve(data);
+						}, function errorCallback(err) {
+							reject(err);
+						}); //http ends here
+					}); // Promise ends here
+
+			   },
+			insertNewCommenterInfo : function(widgetId,userid){
+									 return new Promise(function(resolve,reject){
+										//POST request to Mongo to write the comment to the database, with parameters object as payload
+										$http({
+											url: "/addcomment/updateCommenterInfo",
+											method: "POST",
+											data: {widgetId:widgetId,userid:userid},
+											headers : {
+												'Content-Type': 'application/json'
+											}
+										}).success(function successCallback(data, status) {
+											if(data.resp=='success'){
+												resolve(data.user);
+											}
+											else
+												{
+													reject("Error posting to Mongo...")
+												}
+
+										}, function errorCallback(err) {
+
+										});
+
+									 },function(err){
+										 return(err);
+									 });
+			}
+
+		};
+	}]);

@@ -18,9 +18,9 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dashboard <span class="caret"></span></a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a ng-click="showCurrentUserDashboard()">mine</a></li>
+              <li><a ng-click="showCurrentUserDashboard()">Mine</a></li>
               <li class="dropdown-submenu" ng-show="currentUserData.sharedDashboards && currentUserData.sharedDashboards.length > 0">
-              		<a tabindex="-1">shared with me</a>
+              		<a tabindex="-1">Shared with me</a>
               		 <ul class="dropdown-menu">
                   	<li><a ng-click="showSharedDashboard(dashboard.userid)" ng-repeat="dashboard in currentUserData.sharedDashboards">{{ dashboard.username}}</a></li>
 					    </ul>

@@ -1,7 +1,6 @@
 angular.module('vbiApp')
     .controller('shareDashboardController', ['$rootScope','$scope','$uibModal','userManager','$http', '$uibModalInstance','sharedDashboards',
     function($rootScope, $scope, $uibModal, userManager, $http, $uibModalInstance, sharedDashboards){
-
       $scope.validUserNames = []; $scope.tags = [];
       $scope.tagAdded = function(tag) {
           userManager.getUserId(tag.username,$rootScope.currentDashboard,$scope.permission)
@@ -20,7 +19,6 @@ angular.module('vbiApp')
       });
 
 
-
       //remove loop assaign usernames directly to scope
       $scope.shareDashboard = function(){
         $scope.userNames = $scope.tags;
@@ -28,7 +26,6 @@ angular.module('vbiApp')
         .then(function(userId){
 
         })
-
       }
       $scope.loadEmails = function($query) {
         return userManager.loadEmails($query)
@@ -48,7 +45,6 @@ angular.module('vbiApp')
           }, {
             name: 'Can View'
           }];
-
       $scope.changedPermission = function(permission) {
       $scope.permission = permission.name;
       };

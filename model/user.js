@@ -19,8 +19,19 @@ var UserSchema = mongoose.Schema({
 				}]
          }]
       }]
-   }]
+   }],
+	sharedDashboards:[{
+		userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
+		username: String,
+		dashboardid: String,
+		permission: String
+	}]
 }, {strict: false});
+
+UserSchema.statics.addUser = function(userid, dashboardId, done) {
+	
+	
+}
 
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	this.model('User')
@@ -75,7 +86,7 @@ UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,per
 }
 
 UserSchema.statics.shareDashboard = function(currentUserId,currentusername,currentDashboard,shareWithUserId,permission,callback){
-  console.log("per "+permission);
+
   this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId)},
   {$addToSet:{"sharedDashboards":
       { "userid" : currentUserId,
@@ -93,6 +104,26 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
           callback(true);
         }
   });
+}
+
+UserSchema.statics.saveTab = function(userid, savetabs) {
+  console.log("reached user savetab");
+  console.log(userid);
+  console.log(savetabs);
+
+  this.model('User').update({
+    'userid': userid
+  },{
+    $set: {
+      dashboards:{
+        tabs:savetabs
+      }
+    }
+  },function(err, userTheme) {
+    console.log("Error " + err);
+  });
+
+
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDashboard){
