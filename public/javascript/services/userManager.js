@@ -95,7 +95,7 @@ angular.module('vbiApp')
 				
 						return new Promise (function(resolve, reject){
 							
-						console.log(widgetId);
+						
 						//POST request to Mongo to write the comment to the database, with parameters object as payload
 						$http.get('/addcomment/'+widgetId).then(function successCallback(data, status) {
 							resolve(data);
