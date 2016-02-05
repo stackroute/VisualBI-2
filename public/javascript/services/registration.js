@@ -61,9 +61,9 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  imagePath: "test path"
 				  })
 				  	.success(function (data, status, headers, config) {
-                      console.log("Sending data to server:");
+                     
 					  
-                      console.log(data);
+                      
                       resolve(user);
  
 
