@@ -7,16 +7,15 @@
     
     function RegisterController(UserService,Upload,$window,$location, $rootScope, $scope) {
        
-        var vm = this;
-        console.log(vm.form);
+        var regCtrl = this;
         
-        vm.submit = function(){ //function to call on form submit
-            if (vm.file) { //check if from is valid
-                vm.upload(vm.file); //call upload function
+        regCtrl.submit = function(){ //function to call on form submit
+            if (regCtrl.file) { //check if from is valid
+                regCtrl.upload(regCtrl.file); //call upload function
             }
         };
         
-        vm.upload = function (file) {
+        regCtrl.upload = function (file) {
             Upload.upload({
                 url: 'http://localhost:8080/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
@@ -27,21 +26,19 @@
                     $window.alert('an error occured');
                 }
             }, function (resp) { //catch error
-                console.log('Error status: ' + resp.status);
+                
                 $window.alert('Error status: ' + resp.status);
             }, function (evt) { 
-                console.log(evt);
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                vm.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
+                regCtrl.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
             });
         };
         
-        console.log("Callllllllleddddd")
-        vm.register = function () {
-            console.log("inside register");
-            vm.dataLoading = true;
-            UserService.register(vm.user)
+        
+        regCtrl.register = function () {
+            
+            regCtrl.dataLoading = true;
+            UserService.register(regCtrl.user)
             .then(function (response) {
 					console.log('Registration successful for user & Data in user', response);
 					$location.path('/');

@@ -60,6 +60,7 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  lastName: user.lastName,
 					  imagePath: "test path"
 				  }).success(function (data, status, headers, config) {
+                      
 					 	resolve(user);
 
 				  }).error(function (data, status, header, config) {
