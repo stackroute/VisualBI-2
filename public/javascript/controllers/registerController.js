@@ -43,10 +43,11 @@
             vm.dataLoading = true;
             UserService.register(vm.user)
             .then(function (response) {
-                        console.log('Registration successful for user & Data in user', response);
-                     });
-        };
-        
-  
+					console.log('Registration successful for user & Data in user', response);
+					$location.path('/');
+				}).catch(function(err){
+						alert('Failed to add user - ' + err.message);
+					}
+			)}
     }
 })();

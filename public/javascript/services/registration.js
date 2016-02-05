@@ -59,19 +59,11 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  firstName: user.firstName,
 					  lastName: user.lastName,
 					  imagePath: "test path"
-				  })
-				  	.success(function (data, status, headers, config) {
-                      console.log("Sending data to server:");
-					  
-                      console.log(data);
-                      resolve(user);
- 
+				  }).success(function (data, status, headers, config) {
+					 	resolve(user);
 
 				  }).error(function (data, status, header, config) {
-					  error = "Failed to send Data";
-					  //done(error, data);
-                      reject(error);
-                      //deferred.resolve({ success: false });
+					  reject(data.error);
 				  });
                
                    
