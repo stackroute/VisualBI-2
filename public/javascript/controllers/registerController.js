@@ -21,6 +21,8 @@
                 url: 'http://localhost:8080/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
+				console.log('Register controller');//expectedchanges
+				console.log(resp.data);
                 if(resp.data.error_code === 0){ //validate success
                     $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
                 } else {
@@ -37,7 +39,6 @@
             });
         };
         
-        console.log("Callllllllleddddd")
         vm.register = function () {
             console.log("inside register");
             vm.dataLoading = true;

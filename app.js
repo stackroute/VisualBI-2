@@ -48,7 +48,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
         },
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
         }
     });
 
@@ -62,8 +62,9 @@ app.post('/upload', function(req, res) {
                  res.json({error_code:1,err_desc:err});
                  return;
             }
-             res.json({error_code:0,err_desc:null});
-        })    
+			 console.log(req);
+             res.json({error_code:0,err_desc:null,destination:req.file.destination,file:req.file.filename});
+        });   
     });
 
 //initialize passort sessions
