@@ -14,7 +14,9 @@ var WidgetSchema = mongoose.Schema({
       datetime:{type:Date, default: Date.Now},
 	  badgeClass: String,
 	  badgeIconClass: String
-   }]
+   }],
+  commenters:[{commenter:String}],
+  commentersCounter : Number
 }, {strict: false});
      
 WidgetSchema.statics.getWidgets = function(callback) {
@@ -32,7 +34,39 @@ WidgetSchema.statics.getWidget = function (widgetId, callback) {
       callback(data);
    });
 }
-            
+
+WidgetSchema.statics.getCommenters = function(widgetId,callback) {
+   this.model('Widget').find({
+	   '_id': widgetId
+   }, {
+      '_id': 0,
+	   commenters: []
+   },function(err, data) {
+     callback(data);
+   });
+}
+
+
+WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
+	
+   this.model('Widget').update({
+     '_id' : widgetId
+   },{$push:{
+         commenters : {commenter:userid}
+     }
+   },function(err) {
+       if(err){   
+                console.log(err);
+       }        
+   });
+	
+   
+   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
+       if(err){  
+                console.log(err);
+       }
+   });
+}
 
 WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory){
    this.model('Widget').update({
@@ -65,7 +99,7 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
        }        
    });
     
-            
+   
    this.model('Widget').update({'_id' : widgetId},{$inc : { commentsCounter : 1 }},function(err, userComment) {
        if(err){  
                 console.log(err);

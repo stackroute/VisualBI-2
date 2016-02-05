@@ -17,7 +17,7 @@
 							 <i ng-click="removeTab(tab.tabId, $event)" type="button" class="close"><span aria-hidden="true">&times;</span></i>
 						 </uib-tab-heading>
 
-						 <button type="button" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary row-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span></button>
+						 <button type="button" ng-show="canEdit" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary row-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span></button>
 						 <div class = "row" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
@@ -50,7 +50,7 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and {{col.widgetId.commentsCounter}} others</span>
+														See {{col.widgetId.commentsCounter}} comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and  {{col.widgetId.commentersCounter-1}} others</span>
 													</span>
 
 												</a>
