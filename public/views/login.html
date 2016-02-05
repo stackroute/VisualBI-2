@@ -29,7 +29,7 @@
               </form>
 
               <a href="#register">Create new account</a>
-<!--               <div ng-view></div>-->
+               <div ng-show="registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ registerUserMessage }}</div>
            </div>
         </div>
 
