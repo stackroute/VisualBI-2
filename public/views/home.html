@@ -10,14 +10,14 @@
 		<button ng-show="canShare" type=button class="btn btn-warning pull-right share-modal" ng-click="shareModalClick()">Share<span class="glyphicon glyphicon-share"></span></button>
 				<uib-tabset class="wrap">
 					 <!-- <uib-tab id="{{ tab.tabId }}" heading = "{{ tab.tabTitle }}" ng-repeat= "tab in tabs" > -->
-					 <uib-tab id="{{ tab.tabId }}" class="tab-link-style" ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
+					 <uib-tab id="{{ tab.tabId }}" ng-dblclick="titleModal(2, $index)"  ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
 						 <uib-tab-heading class="ng-scope">
 							 {{tab.tabTitle}}
 							 <!-- <i ng-click="removeTab(tab.tabId, $event)" class="close"></i> -->
 							 <i ng-click="removeTab(tab.tabId, $event)" type="button" class="close hide-button" showonhoverparent><span aria-hidden="true">&times;</span></i>
 						 </uib-tab-heading>
 
-						 <button type="button" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary row-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span></button>
+						 <button type="button" ng-show="canEdit" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary row-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span></button>
 						 <div class = "row row-style" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">
@@ -50,9 +50,23 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														See comments from <span class="user-comments-meta"> {{col.widgetId.lastCommentedBy}} and {{col.widgetId.commentsCounter}} others</span>
-													</span>
-
+                                                        See {{col.widgetId.commentsCounter}}
+                                                        <span class="user-comments-meta">
+                                                        <span ng-show="col.widgetId.comments.length == 1">comment from</span>
+                                                        <span ng-show="col.widgetId.comments.length> 1">comments from </span>
+                                                        {{col.widgetId.lastCommentedBy}}
+                                                        </span>
+                                                        <span class="user-comments-meta"> 
+                                                        <span ng-show="col.widgetId.commentersCounter-1 > 0">
+                                                        and
+                                                        {{col.widgetId.commentersCounter-1}}
+                                                        <span class="user-comments-meta">
+                                                        <span ng-show="col.widgetId.commentersCounter-1 == 1">other</span>
+                                                        <span ng-show="col.widgetId.commentersCounter-1 > 1">others</span>
+                                                        </span>
+                                                            </span>
+                                                        </span>
+                                                    </span>    
 												</a>
 											</div>
 										</div>
@@ -60,7 +74,7 @@
 							  </div>
 						 </div>
 					 </uib-tab>
-    			 <uib-tab ng-click="titleModal()" active="false">
+    			 <uib-tab ng-click="titleModal(1, -1)" active="false">
 						 <uib-tab-heading class="ng-scope">
        					<i class="glyphicon glyphicon-plus"></i>
     				 </uib-tab-heading>
