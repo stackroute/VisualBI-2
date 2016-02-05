@@ -34,7 +34,7 @@ angular.module('vbiApp')
 			});
 
 		};
-		 
+
 		$scope.showCurrentUserDashboard = function(){
 			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
 				var dashboard = $scope.currentUserData.dashboards[0];
@@ -43,11 +43,11 @@ angular.module('vbiApp')
 				$scope.canShare = true;
 			}
 		};
-		 
+
 		$scope.showSharedDashboard = function(userid, dashboardId){
 			//userid = who has shared the dashboard
 //			userid = "56a205563f8a5736206982c8";
-			
+
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
@@ -58,17 +58,17 @@ angular.module('vbiApp')
 		};
 
   //        /*share Dashboard Modal*/
-    $scope.shareModalClick = function() {
-      var shareConfig ={
+    $scope.shareDashboardModal = function(sharedWith) {
+      var shareConfig = {
         templateUrl: 'shareModal',
-        controller: function($scope, $uibModalInstance) {
-              $scope.closeModal = function() {
-                $uibModalInstance.close();
-              };
-            }
-          };
+        controller: 'shareDashboardController',
+        resolve: {
+          sharedDashboards: function(){
+            return sharedWith;
+          }
+        }
+      };
       $uibModal.open(shareConfig);
-
   }
 
 
