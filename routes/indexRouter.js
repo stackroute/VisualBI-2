@@ -5,7 +5,8 @@ var express = require('express'),
     utils = require('./utils'),
     User = require('../model/user'),
     passport = require('passport'),
-	 Credential = require('../model/credential');
+	 Credential = require('../model/credential'),
+	 dbUtils = require('../model/dbUtils');
 
 // Login page
 router.get('/',function(req, res, next) {
@@ -26,29 +27,42 @@ router.post('/login', passport.authenticate('local'),function(req, res){
 	res.send("success");
 });
 
-
-
-
 router.post('/register',function(req,res,next){
-	
-	console.log("Username: ", req.body.username);
-	console.log("Current User : ", req.body.password);
-    
-	Credential.registerUser(req.body.username, req.body.password);
-	
-    res.send({resp:'Registration Done'});
+	if(!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
+		res.send('failed');
+	} else {
+		dbUtils.registerUser({
+			username: req.body.username,
+			password: req.body.password,
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			imagePath: req.body.imagePath
+			
+		}, function(err, user) {
+			if(err){
+				res.status(500).send({ error: err });
+			}
+			else {
+				res.status(200).send('success');
+			}
+		});
+
+//	  passport.authenticate('local')(req, res, function () {
+//		 res.redirect('/');
+//	  });
+	}
 });
 
 
-//function registerUser (req, res, next) {
-//	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {
-//		console.log("added");
-//		next();
-//	});
+function registerUser (req, res, next) {
+	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {
+		console.log("added");
+		next();
+	});
 
-//        passport.authenticate('local')(req, res, function () {
-//          res.redirect('/');
-//        });
+  passport.authenticate('local')(req, res, function () {
+	 res.redirect('/');
+  });
 	
-//}
+}
 module.exports = router;
