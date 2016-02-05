@@ -145,6 +145,7 @@ body{
 
 .close{
 	opacity:1;
+	font-size:20px;
 }
 
 
@@ -175,11 +176,38 @@ body{
 /*  margin: 0px;*/
 }
 
-.close {
+/*.close {
 	font-size: 30px;
 	margin-right: 10px;
 	color: white;
+}*/
+.row-style{
+	margin-top:40px;
 }
+
+.hide-button{
+	display: none;
+	/*margin-left:10px;*/
+}
+
+/*.hide-button {
+    float: right;
+    margin-top: -13px;
+    font-size: 11px;
+    font-family: helvetica;
+    color: grey;
+    display: none;
+}
+
+.hide-button a{
+    text-decoration: none;
+    color:gray;
+}
+
+.hide-button a:hover {
+    text-decoration: underline;
+    color:gray;
+}*/
 
 /* CSS for grid */
 table{
@@ -221,7 +249,6 @@ table,  th,  td{
 	width: 300px;
 	height: 100%;
 	background:rgba(255,255,255,0.5);
-	overflow-y: scroll;
 	position: absolute;
 	z-index: 10;
 }
