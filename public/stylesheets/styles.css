@@ -264,6 +264,8 @@ table,  th,  td{
         position: relative;
     }
 
+
+
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
@@ -276,7 +278,7 @@ table,  th,  td{
 	width:380px;
 }
 
-.permission{
+.access{
 	position: absolute;
 	right:10px;
   top:19px;
@@ -284,7 +286,8 @@ table,  th,  td{
 
 .dropdown-height{
 	height:41px;
-	left:30px;
+	left:25px;
+	down:10px;
 }
 
 
@@ -294,5 +297,18 @@ margin-top: 85px;
 }
 
 #shareBody{
-  width:580px;
+  width:600px;
+}
+
+.input-group-addon{
+	height:38px;
+}
+
+#shareTag{
+	width: 350px;
+	height: 46px;
+}
+
+#ShareModalCloseBtn{
+	margin-top: -22px;
 }
