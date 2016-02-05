@@ -2,9 +2,11 @@
 	<header-directive></header-directive>
 	<div>
 		<div ng-include="'views/dialogs/customWidgetWidth.html'"></div>
-		<aside class="pull-left" id="widget-library">
+		<div class="panel panel-primary pull-left" id="widget-library">
+			<div class="panel-heading">widget Library </div>
+		<!-- <aside class="pull-left" id="widget-library"> -->
 			<!-- widget library comes here -->
-			<div>
+			<div class="panel-body">
 
 				<ul>
 					<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.title"
@@ -13,15 +15,21 @@
 										ng-model="widgetItems"
 										jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">
 						<a>
-							<chart-panel parameters = "{{ widget.parameters }}" chart-renderer-method = "{{ widget.chartRenderer }}" >
+							<div class="panel panel-info">
+								<div class="panel-heading">{{ widget.title }}
+									<!-- <div class="panel-body">
+										<chart-panel parameters = "{{ widget.parameters }}" chart-renderer-method = "{{ widget.chartRenderer }}" >
 
-							</chart-panel>
-							{{ widget.title }}
+										</chart-panel>
+									</div> -->
+								</div>
+							</div>
 						</a>
 					</li>
 				</ul>
 			</div>
-		</aside>
+		<!-- </aside> -->
+	</div>
 		<div class="container">
 			<!-- placeholder comes here -->
 			<button type="button" ng-click="addRow()" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
@@ -35,8 +43,8 @@
 																						jqyoui-droppable="{index:{{$index}}, multiple:false, beforeDrop: 'beforeDrop(col.widgetId)', onDrop: 'widthModal(rowIndex, colIndex, col.colWidth)'}"
 																						jqyoui-draggable="{index:{{$index}}, animate:true}"
 																						data-jqyoui-options="{revert: 'invalid'}" data-direction="{{col.jqyouiDirection}}"	>
-							<button ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">_</span></button>
-							<button ng-click="removeWidget(rowIndex, colIndex, col.colWidth)" type="button" class="close"><span aria-hidden="true">&times;</span></button>
+						<button class="pull-right" ng-click="removeWidget(rowIndex, colIndex,col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-remove resize-icon"></span></button>
+						<button  class="pull-right" ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-resize-horizontal resize-icon"></span></button>
 							<p>
 								{{col.widgetId.title}}
 							</p>
