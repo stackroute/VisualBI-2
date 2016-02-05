@@ -1,6 +1,7 @@
 angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', '$http', '$uibModal', '$location', '$window', '$mdDialog', '$q', function($scope, widgetManager, $log, editManager, $http, $uibModal, $location, $window, $mdDialog, $q){
   var tabClasses;
   var maxWidth = 12;
+  draggerId = 0;
 
   $scope.tempId = [];
   $scope.getAllTabs = editManager.getTabDetails();
@@ -98,10 +99,8 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
             'Content-Type': 'application/json'
         }
     }).success(function successCallback(data, status) {
-        console.log('Post successful');
         $location.url('/');
     }, function errorCallback(response) {
-        console.log('Post failed');
     });
   }
 
@@ -124,25 +123,35 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
     $uibModal.open(widthModalConfig);
   }
 
+  $scope.startDrag = function(event, ui, value) {
+    draggerId = value;
+  }
+
   $scope.beforeDrop = function(event, ui, widgetId) {
 
-    var modalInstance = $uibModal.open({
-      templateUrl: 'overwritePopup',
-      controller: function ($scope, $uibModalInstance) {
-        $scope.ok = function () {
-          console.log("ok");
-          $uibModalInstance.close();
-        };
-        $scope.cancel = function () {
-          console.log("cancel");
-          $uibModalInstance.dismiss('cancel');
-        };
+    if(typeof widgetId === 'undefined' || draggerId === 2) {
+      return new Promise(function(resolve, reject){
+        resolve('success');
+      });
+    } else {
+      var modalInstance = $uibModal.open({
+        templateUrl: 'overwritePopup',
+        controller: function ($scope, $uibModalInstance) {
+          $scope.ok = function () {
+            $uibModalInstance.close();
+          };
+          $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+          };
 
-      }
-    });
-    console.log(modalInstance.result);
-    return modalInstance.result;
+        }
+      });
+      return modalInstance.result;
+    }
+
+
   };
+
   //
   // $scope.beforeDrop1 = function(event, ui, widgetId) {
   //   var deferred = $q.defer();
@@ -233,15 +242,10 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
       }
       i++;
     }
-
-    console.log(removePosition);
     var removeLen = removePosition.length;
     for(var i=removeLen-1; i>=0; i--) {
-      console.log(removePosition[i]);
       $scope.tabs[0].rows[rowId].columns.splice(removePosition[i], 1);
     }
-
-    console.log($scope.tabs[0].rows);
   }
 }]);
 
