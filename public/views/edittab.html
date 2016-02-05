@@ -5,10 +5,8 @@
 		<div ng-include="'views/dialogs/overwritePopup.tpl.html'"></div>
 		<div class="panel panel-primary pull-left" id="widget-library">
 			<div class="panel-heading">widget Library </div>
-		<!-- <aside class="pull-left" id="widget-library"> -->
 			<!-- widget library comes here -->
 			<div class="panel-body">
-
 				<ul>
 					<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.title"
 										data-drag="true"
@@ -18,11 +16,6 @@
 						<a>
 							<div class="panel panel-info">
 								<div class="panel-heading">{{ widget.title }}
-									<!-- <div class="panel-body">
-										<chart-panel parameters = "{{ widget.parameters }}" chart-renderer-method = "{{ widget.chartRenderer }}" >
-
-										</chart-panel>
-									</div> -->
 								</div>
 							</div>
 						</a>

@@ -47,9 +47,6 @@ angular.module('vbiApp')
 		};
 
 		$scope.showSharedDashboard = function(userid, dashboardId){
-			//userid = who has shared the dashboard
-//			userid = "56a205563f8a5736206982c8";
-
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
@@ -60,20 +57,18 @@ angular.module('vbiApp')
 			});
 		};
 
-  //        /*share Dashboard Modal*/
+        /*share Dashboard Modal*/
     $scope.shareModalClick = function() {
       var shareConfig ={
         templateUrl: 'shareModal',
         controller: function($scope, $uibModalInstance) {
-              $scope.closeModal = function() {
-                $uibModalInstance.close();
+    $scope.closeModal = function() {
+      $uibModalInstance.close();
               };
             }
           };
       $uibModal.open(shareConfig);
-
   }
-
 
 		$scope.fullScreen = function(widget) {
 			var modalConfig = {
