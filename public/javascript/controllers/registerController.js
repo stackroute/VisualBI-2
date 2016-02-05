@@ -41,7 +41,7 @@
             UserService.register(regCtrl.user)
             .then(function (response) {
 					alert('user registered successfully');
-					$location.path('/home');
+					$location.path("/");
 				}).catch(function(err){
 						alert('Failed to add user - ' + err.message);
 					}

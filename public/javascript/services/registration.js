@@ -50,29 +50,17 @@ angular.module('vbiApp').factory('UserService', UserService);
         }
         
           function register(user) {
-           return new Promise (function(resolve, reject){
-              console.log("inside registeration service");
-//               register: function(user, done) {
-				  $http.post('/register', {
+           return $http.post('/register', {
 					  username:user.username, 
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
 					  imagePath: "test path"
 				  }).success(function (data, status, headers, config) {
-                      
-					 	resolve(user);
-
+					 	return(data);
 				  }).error(function (data, status, header, config) {
-					  reject(data.error);
-				  });
-               
-                   
-			  },function(err){
-               reject(err);
-           });
-                               
- 
+					  retutn(data.error);
+				  });             
  
         }
     }
