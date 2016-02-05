@@ -9,7 +9,7 @@ angular.module('vbiApp')
         })
         .when('/register', {
             templateUrl: 'views/register.html',
-            controller: 'RegisterController'
+            controller: 'registerController'
         })
 
         .when('/home', {

@@ -62,7 +62,6 @@ app.post('/upload', function(req, res) {
                  res.json({error_code:1,err_desc:err});
                  return;
             }
-			 console.log(req);
              res.json({error_code:0,err_desc:null,destination:req.file.destination,file:req.file.filename});
         });   
     });

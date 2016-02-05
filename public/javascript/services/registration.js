@@ -51,8 +51,6 @@ angular.module('vbiApp').factory('UserService', UserService);
         
           function register(user) {
            return new Promise (function(resolve, reject){
-              console.log("inside registeration service");
-//               register: function(user, done) {
 				  $http.post('/register', {
 					  username:user.username, 
 					  password:user.password,

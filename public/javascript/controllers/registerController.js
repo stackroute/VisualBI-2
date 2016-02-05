@@ -1,13 +1,7 @@
-(function () {
-    'use strict';
- 
-    angular.module('vbiApp').controller('RegisterController', RegisterController);
- 
-    RegisterController.$inject = ['UserService','Upload','$window','$location', '$rootScope','$scope'];
-    
-    function RegisterController(UserService,Upload,$window,$location, $rootScope, $scope) {
+ angular.module('vbiApp').controller('registerController',['UserService','Upload','$window','$location', '$rootScope','$scope',function(UserService,Upload,$window,$location, $rootScope, $scope) {
        
         var regCtrl = this;
+	 	var imagePath='';
         
         regCtrl.submit = function(){ //function to call on form submit
             if (regCtrl.file) { //check if from is valid
@@ -17,19 +11,17 @@
         
         regCtrl.upload = function (file) {
             Upload.upload({
-                url: 'http://localhost:8080/upload', //webAPI exposed to upload the file
+                url: '/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
-				console.log('Register controller');//expectedchanges
-				console.log(resp.data);
-                if(resp.data.error_code === 0){ //validate success
-                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+				imagePath=resp.data.destination+resp.data.file;
+				
+				if(resp.data.error_code === 0){ //validate success
+                    $window.alert(resp.config.data.file.name + ' uploaded successfully');
                 } else {
                     $window.alert('an error occured');
                 }
             }, function (resp) { //catch error
-                
-                console.log('Error status: ' + resp.status);
                 $window.alert('Error status: ' + resp.status);
             }, function (evt) { 
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -41,6 +33,8 @@
         regCtrl.register = function () {
             
             regCtrl.dataLoading = true;
+			regCtrl.user.imagePath=imagePath;
+			
             UserService.register(regCtrl.user)
             .then(function (response) {
 					alert('user registered successfully');
@@ -49,5 +43,4 @@
 						alert('Failed to add user - ' + err.message);
 					}
 			)}
-    }
-})();
+    }]);
