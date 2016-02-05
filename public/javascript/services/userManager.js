@@ -90,7 +90,6 @@ angular.module('vbiApp')
 				},function(err){
 					reject(err);
 				});
-<<<<<<< HEAD
 				},
 			getCommenters :	function(widgetId){
 				
@@ -136,10 +135,5 @@ angular.module('vbiApp')
 			
 		};
 	}]);
-=======
-          }
-        };
 
-
-    }]);
->>>>>>> c198e0de201053a99f12c00856fde701a414948d
+         
