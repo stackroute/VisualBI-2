@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, commentPusher) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
 		 $scope.canShare = true;
@@ -178,6 +178,7 @@ angular.module('vbiApp')
     $scope.renameTab = function(newTitle, tabIndex) {
       $scope.tabs[tabIndex].tabTitle = newTitle;
       saveTabsToServer();
+      $route.reload();
     }
 
     $scope.gotoEditPage = function(tabs, index) {

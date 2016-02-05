@@ -125,19 +125,39 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
   }
 
   $scope.beforeDrop = function(event, ui, widgetId) {
-    var deferred = $q.defer();
-    var res = true;
 
-    if(typeof widgetId !== "undefined") {
-      res = confirm('Are you sure you want to overwrite the widget???');
-    }
-    if (res) {
-      deferred.resolve();
-    } else {
-      deferred.reject();
-    }
-    return deferred.promise;
+    var modalInstance = $uibModal.open({
+      templateUrl: 'overwritePopup',
+      controller: function ($scope, $uibModalInstance) {
+        $scope.ok = function () {
+          console.log("ok");
+          $uibModalInstance.close();
+        };
+        $scope.cancel = function () {
+          console.log("cancel");
+          $uibModalInstance.dismiss('cancel');
+        };
+
+      }
+    });
+    console.log(modalInstance.result);
+    return modalInstance.result;
   };
+  //
+  // $scope.beforeDrop1 = function(event, ui, widgetId) {
+  //   var deferred = $q.defer();
+  //   var res = true;
+  //
+  //   if(typeof widgetId !== "undefined") {
+  //     res = confirm('Are you sure you want to overwrite the widget???');
+  //   }
+  //   if (res) {
+  //     deferred.resolve();
+  //   } else {
+  //     deferred.reject();
+  //   }
+  //   return deferred.promise;
+  // };
 
   setWidgetProps = function(rowId, colId, colWidth, widgetId) {
 
