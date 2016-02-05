@@ -245,7 +245,20 @@ angular.module('vbiApp')
           console.log('Post failed');
       });
     }
-}]);
+}]).directive('showonhoverparent',
+   function() {
+      return {
+         link : function(scope, element, attrs) {
+            element.parent().bind('mouseenter', function() {
+                element.show();
+            });
+            element.parent().bind('mouseleave', function() {
+                 element.hide();
+            });
+       }
+   };
+});
+;
 
 angular.module('vbiApp')
     .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {

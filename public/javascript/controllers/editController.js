@@ -194,7 +194,7 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
     }
   }
 
-  $scope.removeWidget = function(rowIndex, colIndex, colWidth) {
+  $scope.removeWidget = function(rowIndex, colIndex,colWidth) {
     var newColumn = {
       'colWidth': colWidth
     };

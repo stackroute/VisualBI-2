@@ -1,8 +1,6 @@
-   <div class="col-md-6 col-md-offset-3">  
+<div class="col-md-6 col-md-offset-3">  
     <h2>Register</h2>
-    
-     
-      <div ng-controller="RegisterController as vm">
+ <div ng-controller="RegisterController as vm">
     <form name="form" role="form" novalidate>
         <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
             <label for="username">First name</label>
@@ -25,31 +23,20 @@
            <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
            <span ng-show="!form.password.$error.required && (form.password.$error.minlength || form.password.$error.maxlength) && form.password.$dirty" class="help-block">Passwords must be between 8 and 20 characters.</span>
         </div>
-         <div class="form-group" ng-class="{ 'has-error': form.file.$error.maxSize && form.file.$error.required }">
-        <input type="file" ngf-select ng-model="vm.file" name="file" class="form-control"   ngf-pattern="'image/*'"
-        accept="image/*" ngf-max-size="2MB" />
-        Image thumbnail: <img style="width:100px;" ngf-thumbnail="vm.file"/>
+        <div class="form-group" ng-class="{ 'has-error': form.file.$error.maxSize && form.file.$error.required }">
+          <input type="file" ngf-select ng-model="vm.file" name="file" class="form-control"   ngf-pattern="'image/*'"
+            accept="image/*" ngf-max-size="2MB" />
+          Image thumbnail: <img style="width:100px;" ngf-thumbnail="vm.file"/>
             <i ng-show="form.file.$error.required">*required</i><br>
             <i ng-show="form.file.$error.maxSize">File too large 
             {{vm.file.size / 1000000|number:1}}MB: max 2M</i>
             <button ng-click="vm.submit()">Upload</button>
             <p>{{vm.progress}}</p>
-        
         </div>
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" ng-click="vm.register()">Register</button>
-            
-
             <a href="#/login" class="btn btn-link">Cancel</a>
         </div>
-    </form>
-    
-    </div>        
+    </form> 
+  </div>    
 </div>
-    
-    
-    
-     
-
-
-<!--ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/"-->

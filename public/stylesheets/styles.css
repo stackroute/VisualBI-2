@@ -145,6 +145,7 @@ body{
 
 .close{
 	opacity:1;
+	font-size:20px;
 }
 
 
@@ -175,12 +176,19 @@ body{
 /*  margin: 0px;*/
 }
 
-.close {
+/*.close {
 	font-size: 30px;
 	margin-right: 10px;
 	color: white;
+}*/
+.row-style{
+	margin-top:40px;
 }
 
+.hide-button{
+	display: none;
+	/*margin-left:10px;*/
+}
 /* CSS for grid */
 table{
   margin: auto;
@@ -221,7 +229,6 @@ table,  th,  td{
 	width: 300px;
 	height: 100%;
 	background:rgba(255,255,255,0.5);
-	overflow-y: scroll;
 	position: absolute;
 	z-index: 10;
 }
@@ -264,6 +271,8 @@ table,  th,  td{
         position: relative;
     }
 
+
+
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
@@ -276,7 +285,7 @@ table,  th,  td{
 	width:380px;
 }
 
-.permission{
+.access{
 	position: absolute;
 	right:10px;
   top:19px;
@@ -284,7 +293,8 @@ table,  th,  td{
 
 .dropdown-height{
 	height:41px;
-	left:30px;
+	left:25px;
+	down:10px;
 }
 
 
@@ -294,5 +304,18 @@ margin-top: 85px;
 }
 
 #shareBody{
-  width:580px;
+  width:600px;
+}
+
+.input-group-addon{
+	height:38px;
+}
+
+#shareTag{
+	width: 350px;
+	height: 46px;
+}
+
+#ShareModalCloseBtn{
+	margin-top: -22px;
 }
