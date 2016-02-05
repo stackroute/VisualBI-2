@@ -14,11 +14,11 @@ router.get('/', function(req, res, next) {
 		  res.json({});
 });
 
-router.get('/:id', function(req, res, next) {
-	var userid = req.user._id; //it contains _id value of credentials
-	
+router.get('/:userid/:dashboardId', function(req, res, next) {
+	var userid = req.params.userid; //it contains _id value of credentials
+	var dashId = req.params.dashboardId;
    if(userid) {
-        User.getDashboard(userid, function(data){
+        User.getDashboard(userid, dashId, function(data){
             res.json(data);
         });
    } else

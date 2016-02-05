@@ -3,6 +3,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
     bodyParser = require('body-parser'),
+    multer = require('multer'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
@@ -13,14 +14,14 @@ var express = require('express'),
 var indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
-	 dashboardRouter = require('./routes/dashboardRouter'),
+    dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
-	 Credential = require('./model/credential'),
-	 gridRouter = require('./routes/girdRouter'),
+    Credential = require('./model/credential'),
+    gridRouter = require('./routes/girdRouter'),
     commentsRouter=require('./routes/commentsRouter'),
-   getUserId  = require('./routes/userId');
-   getUserList = require('./routes/userList');
+    getUserId  = require('./routes/userId');
+    getUserList = require('./routes/userList');
    
 
 
@@ -30,6 +31,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 app.use(express.static(path.join(__dirname, 'public')));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(cookieParser('tobo'));
@@ -37,6 +39,32 @@ app.use(cookieParser('tobo'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
+
+
+
+var storage = multer.diskStorage({ //multers disk storage settings
+        destination: function (req, file, cb) {
+            cb(null, 'public/images/')
+        },
+        filename: function (req, file, cb) {
+            var datetimestamp = Date.now();
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
+        }
+    });
+
+ var upload = multer({ //multer settings
+                    storage: storage
+                }).single('file');
+
+app.post('/upload', function(req, res) {
+        upload(req,res,function(err){
+            if(err){
+                 res.json({error_code:1,err_desc:err});
+                 return;
+            }
+             res.json({error_code:0,err_desc:null});
+        })    
+    });
 
 //initialize passort sessions
 app.use(expressSession({

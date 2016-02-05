@@ -45,8 +45,8 @@ angular.module('vbiApp')
 				  $location.path("/home");
         		}
 		  } 
-//		  else {
-//			  $location.path("/");
-//		  }
+		  else if(currentUrl == '/home') {
+			  $location.path("/");
+		  }
 	  });
 }]);
