@@ -238,11 +238,9 @@ angular.module('vbiApp')
               'Content-Type': 'application/json'
           }
       }).success(function successCallback(data, status) {
-          console.log('Post successful');
           $location.url('/');
 
       }, function errorCallback(response) {
-          console.log('Post failed');
       });
     }
 }]).directive('showonhoverparent',

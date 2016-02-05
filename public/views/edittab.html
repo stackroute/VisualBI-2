@@ -1,7 +1,7 @@
 <div>
 	<header-directive></header-directive>
 	<div>
-		<div ng-include="'views/dialogs/customWidgetWidth.html'"></div>
+		<div ng-include="'views/dialogs/customWidgetWidth.tpl.html'"></div>
 		<div ng-include="'views/dialogs/overwritePopup.tpl.html'"></div>
 		<div class="panel panel-primary pull-left" id="widget-library">
 			<div class="panel-heading">widget Library </div>
@@ -14,7 +14,7 @@
 										data-drag="true"
 										data-jqyoui-options="{revert: 'invalid', appendTo: 'body', helper: 'clone'}"
 										ng-model="widgetItems"
-										jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep'}">
+										jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startDrag(1)'}">
 						<a>
 							<div class="panel panel-info">
 								<div class="panel-heading">{{ widget.title }}
@@ -42,7 +42,7 @@
 
 						<div class="panel panel-primary widget-holder" data-drop="true" data-drag="true" ng-model="col.widgetId"
 																						jqyoui-droppable="{index:{{$index}}, multiple:false, beforeDrop: 'beforeDrop(col.widgetId)', onDrop: 'widthModal(rowIndex, colIndex, col.colWidth)'}"
-																						jqyoui-draggable="{index:{{$index}}, animate:true}"
+																						jqyoui-draggable="{index:{{$index}}, animate:true, onStart: 'startDrag(2)'}"
 																						data-jqyoui-options="{revert: 'invalid'}" data-direction="{{col.jqyouiDirection}}"	>
 						<button class="pull-right" ng-click="removeWidget(rowIndex, colIndex,col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-remove resize-icon"></span></button>
 						<button  class="pull-right" ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-resize-horizontal resize-icon"></span></button>
