@@ -1,9 +1,8 @@
-angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', '$http', '$uibModal', '$location', '$window', '$mdDialog', function($scope, widgetManager, $log, editManager, $http, $uibModal, $location, $window, $mdDialog){
+angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager', '$log', 'editManager', '$http', '$uibModal', '$location', '$window', '$mdDialog', '$q', function($scope, widgetManager, $log, editManager, $http, $uibModal, $location, $window, $mdDialog, $q){
   var tabClasses;
   var maxWidth = 12;
 
-  $scope.tempWidgetId = [];
-
+  $scope.tempId = [];
   $scope.getAllTabs = editManager.getTabDetails();
   $scope.tabIndex = editManager.getTabIndex();
   $scope.tabs = [];
@@ -106,32 +105,41 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
     });
   }
 
-  $scope.widthModal = function(event, ui, rowId, colId, colWidth, widgetId) {
+  $scope.widthModal = function(event, ui, rowId, colId, colWidth) {
 
-    var col = $scope.tabs[0].rows[rowId].columns[colId];
-
-    if(col.hasOwnProperty('widgetId')) {
-      console.log("has widget");
-
-      var confirm = $mdDialog.confirm()
-            .title('Would you like to overwrite your widget?')
-            .ariaLabel('Widget Confirmation')
-            .targetEvent(event)
-            .ok('Yes')
-            .cancel('No');
-      $mdDialog.show(confirm).then(function() {
-        setWidgetProps(rowId, colId, colWidth, widgetId);
-      }, function() {
-      });
-    } else {
-      console.log("has no widget");
-      setWidgetProps(rowId, colId, colWidth, widgetId);
-    }
-
+    var widthModalConfig = {
+      templateUrl: 'customWidth',
+      controller: 'widthController',
+      resolve: {
+        widthConfig: function() {
+          return {
+            rowIndex: rowId,
+            colIndex: colId,
+            columnWidth: colWidth,
+            userData: colWidth
+          };
+        }
+      }
+    };
+    $uibModal.open(widthModalConfig);
   }
 
+  $scope.beforeDrop = function(event, ui, widgetId) {
+    var deferred = $q.defer();
+    var res = true;
+
+    if(typeof widgetId !== "undefined") {
+      res = confirm('Are you sure you want to overwrite the widget???');
+    }
+    if (res) {
+      deferred.resolve();
+    } else {
+      deferred.reject();
+    }
+    return deferred.promise;
+  };
+
   setWidgetProps = function(rowId, colId, colWidth, widgetId) {
-    $scope.tabs[0].rows[rowId].columns[colId].widgetId = $scope.tempWidgetId[0];
 
     var widthModalConfig = {
       templateUrl: 'customWidth',
