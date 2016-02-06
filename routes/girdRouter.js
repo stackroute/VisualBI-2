@@ -2,7 +2,7 @@ var express = require('express'),
     mongoose  = require('mongoose');
 
 var xmla   =  require("../lib/Xmla.js"),
-    Connections = require("../model/connections");
+    Connections = require("../config/db").connectionModel;
 
 var router = express.Router(),
     Xmla   =  xmla.Xmla;
@@ -11,7 +11,7 @@ var router = express.Router(),
 router.post('/', function(req, res) {
   // console.log(req.body.mdxQuery);
   // console.log("inside route/execute");
-  
+
       var statement  = req.body.statement,
           connId   = req.body.connId,
           properties = {};

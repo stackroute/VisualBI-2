@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    user = require('../model/user'),
-    credential = require('../model/credential');
+    user = require('../config/db').userModel,
+    credential = require('../config/db').credentialModel;
 
 
 router.get('/:username', function(req, res, next) {

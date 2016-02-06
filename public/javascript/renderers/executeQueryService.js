@@ -4,6 +4,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
   return {
     render: function (containerDiv, parameters) {
      var container = angular.element(containerDiv);
+     console.log(parameters.catalog);
 		 parameters = {
 			 	catalog: "SampleData",
 				connId: "56a217eca375b2ea99a9b11b",
@@ -38,7 +39,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showPieGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  	
+
 			 if((tableContainer.find("."+"miniPieGraph"+"").length) === 0){
 				  tableContainer.find("#row0").prev().append("<td class="+"miniPieGraph"+"><span class='graphIcon'>"+"</span></td>");
 
@@ -56,7 +57,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showAreaGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  
+
 		  if((tableContainer.find("."+"miniAreaGraph"+"").length) === 0){
 				tableContainer.find("#row0").prev().append("<td class="+"miniAreaGraph"+"><span class='graphIcon'>"+"</span></td>");
 
@@ -73,7 +74,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showLineGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  
+
 		  if((tableContainer.find("."+"miniLineGraph"+"").length) === 0){
 				tableContainer.find("#row0").prev().append("<td class="+"miniLineGraph"+"><span class='graphIcon'>"+"</span></td>");
 

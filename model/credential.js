@@ -26,7 +26,7 @@ CredentialSchema.statics.registerUser =function(username,password) {
      },
    function(err, data) {
        if(err){
-                
+
                 console.log(err);
        }
         console.log("Registration updated in db");
@@ -54,4 +54,5 @@ CredentialSchema.statics.getUsers = function(callback){
 					callback(data);
 			})
 }
-module.exports = mongoose.model("Credential", CredentialSchema);
+// mongoose.model("Credential", CredentialSchema);
+module.exports = CredentialSchema;

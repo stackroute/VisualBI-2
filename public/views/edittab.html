@@ -8,14 +8,14 @@
 			<!-- widget library comes here -->
 			<div class="panel-body">
 				<ul>
-					<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.title"
+					<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.widgetName"
 										data-drag="true"
 										data-jqyoui-options="{revert: 'invalid', appendTo: 'body', helper: 'clone'}"
 										ng-model="widgetItems"
 										jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startDrag(1)'}">
 						<a>
 							<div class="panel panel-info">
-								<div class="panel-heading">{{ widget.title }}
+								<div class="panel-heading">{{ widget.widgetName }}
 								</div>
 							</div>
 						</a>
@@ -40,7 +40,7 @@
 						<button class="pull-right" ng-click="removeWidget(rowIndex, colIndex,col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-remove resize-icon"></span></button>
 						<button  class="pull-right" ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-resize-horizontal resize-icon"></span></button>
 							<p>
-								{{col.widgetId.title}}
+								{{col.widgetId.widgetName}}
 							</p>
 						</div>
 			  	</div>

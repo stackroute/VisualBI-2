@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'),
-	 User = require('../model/user'),
-	 Credential = require('../model/credential');
+	 User = require('../config/db').userModel,
+	 Credential = require('../config/db').credentialModel;
 
 this.registerUser = function (user, done) {
 	Credential.register({
-		username : user.username, 
-		name: user.firstName + ' ' + user.lastName, 
+		username : user.username,
+		name: user.firstName + ' ' + user.lastName,
 		imagePath: user.imagePath}, user.password, function(err, account) {
 		if(err) {
 			done(err, 'failed')

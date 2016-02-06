@@ -29,8 +29,8 @@ var UserSchema = mongoose.Schema({
 }, {strict: false});
 
 UserSchema.statics.addUser = function(userid, dashboardId, done) {
-	
-	
+
+
 }
 
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
@@ -116,12 +116,12 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
     'userid': userid
   },{
     $set: {
-      dashboards:{
+      dashboards:[{
         tabs:savetabs
-      }
+      }]
     }
-  },function(err, userTheme) {
-    console.log("Error " + err);
+  },function(err, data) {
+    console.log("Data " + data);
   });
 
 
@@ -152,4 +152,5 @@ UserSchema.statics.getUserId =function(credentialId,callback){
       callback(data);
 	});
 }
-module.exports = mongoose.model("User", UserSchema);
+// mongoose.model("User", UserSchema);
+module.exports = UserSchema;

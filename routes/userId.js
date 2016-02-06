@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    User = require('../model/user'),
-    Credential = require('../model/credential');
+    User = require('../config/db').userModel,
+    Credential = require('../config/db').credentialModel;
 
 router.post('/shareDashboard',function(req, res, next){
   var currentDashboard = req.body.currentDashboard;

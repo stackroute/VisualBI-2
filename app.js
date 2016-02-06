@@ -14,15 +14,16 @@ var express = require('express'),
 var indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
+    widgetWave1Router = require('./routes/widgetWave1Router'),
     dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
-    Credential = require('./model/credential'),
+    Credential = require('./config/db').credentialModel,
     gridRouter = require('./routes/girdRouter'),
     commentsRouter=require('./routes/commentsRouter'),
     getUserId  = require('./routes/userId');
     getUserList = require('./routes/userList');
-   
+
 
 
 
@@ -63,7 +64,7 @@ app.post('/upload', function(req, res) {
                  return;
             }
              res.json({error_code:0,err_desc:null});
-        })    
+        })
     });
 
 //initialize passort sessions
@@ -80,12 +81,12 @@ passport.use(new LocalStrategy(Credential.authenticate()));
 passport.serializeUser(Credential.serializeUser());
 passport.deserializeUser(Credential.deserializeUser());
 
-mongoose.connect(dbConfig.url);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
+app.use('/widgetsWave1', widgetWave1Router);
 app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
