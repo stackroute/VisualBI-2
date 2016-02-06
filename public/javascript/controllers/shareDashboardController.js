@@ -26,12 +26,14 @@ angular.module('vbiApp')
         .then(function(userId){
 
         })
+        $location.url('/edittab');
       }
       $scope.loadEmails = function($query) {
         return userManager.loadEmails($query)
                .then(function(data){
                  return data;
                })
+
       }
 
       $scope.closeModal = function() {
@@ -44,7 +46,9 @@ angular.module('vbiApp')
             name: 'Can Comment'
           }, {
             name: 'Can View'
+
           }];
+          $scope.selectedItem = $scope.containers[2];
       $scope.changedPermission = function(permission) {
       $scope.permission = permission.name;
       };
