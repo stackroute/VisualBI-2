@@ -289,7 +289,7 @@ table,  th,  td{
 	width:380px;
 }
 
-.access{
+.permission{
 	position: absolute;
 	right:10px;
   top:22px;
@@ -316,8 +316,8 @@ margin-top: 85px;
 }
 
 #shareTag{
-	width: 350px;
-	height: 46px;
+	/*width: 350px;
+	height: 46px;*/
 }
 
 #ShareModalCloseBtn{

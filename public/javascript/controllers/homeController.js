@@ -57,15 +57,16 @@ angular.module('vbiApp')
 		};
 
         /*share Dashboard Modal*/
-    $scope.shareModalClick = function() {
-      var shareConfig ={
+    $scope.shareDashboardModal = function(sharedWith) {
+      var shareConfig = {
         templateUrl: 'shareModal',
-        controller: function($scope, $uibModalInstance) {
-    $scope.closeModal = function() {
-      $uibModalInstance.close();
-              };
-            }
-          };
+        controller: 'shareDashboardController',
+        resolve: {
+          sharedDashboards: function(){
+            return sharedWith;
+          }
+        }
+      };
       $uibModal.open(shareConfig);
   }
 

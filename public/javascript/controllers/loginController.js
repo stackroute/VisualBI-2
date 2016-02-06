@@ -1,5 +1,6 @@
 angular.module('vbiApp')
     .controller('loginController', ['$rootScope', '$location', 'userManager', '$cookies', '$scope', function($rootScope, $location, userManager, $cookies, $scope) {
+	 $scope.registerUserMessage = $rootScope.registerUserMessage;
 	 $rootScope.loggedInUser = {};
     this.user = {
         email: "",
@@ -23,5 +24,6 @@ angular.module('vbiApp')
 	$scope.$watch(function() {
 		return self.user.password;}, function(newValue) {
 		self.errorMessage = "";
+//		$scope.registerUserMessage = $rootScope.registerUserMessage = "";
 	})
 }])
