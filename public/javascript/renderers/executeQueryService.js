@@ -4,13 +4,12 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
   return {
     render: function (containerDiv, parameters) {
      var container = angular.element(containerDiv);
-     console.log(parameters.catalog);
-		 parameters = {
-			 	catalog: "SampleData",
-				connId: "56a217eca375b2ea99a9b11b",
-				dataSource: "Pentaho",
-				statement: "select non empty (({[Department].[Department].members} * {[Measures].[Actual]})) on columns, non empty ({[Region].[Region].members}) on rows from [Quadrant Analysis]"
-		 };
+//		 parameters = {
+//			 	catalog: "SampleData",
+//				connId: "56a217eca375b2ea99a9b11b",
+//				dataSource: "Pentaho",
+//				statement: "select non empty (({[Department].[Department].members} * {[Measures].[Actual]})) on columns, non empty ({[Region].[Region].members}) on rows from [Quadrant Analysis]"
+//		 };
        var req = {
           method: 'POST',
           url: '/execute',

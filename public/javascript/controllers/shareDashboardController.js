@@ -1,21 +1,29 @@
 angular.module('vbiApp')
-    .controller('shareDashboardController',['$rootScope','$scope','$uibModal','userManager','$http',function($rootScope,$scope,$uibModal,userManager,$http){
-      $scope.tags = [];
+    .controller('shareDashboardController', ['$rootScope','$scope','$uibModal','userManager','$http', '$uibModalInstance','sharedDashboards',
+    function($rootScope, $scope, $uibModal, userManager, $http, $uibModalInstance, sharedDashboards){
+      $scope.validUserNames = []; $scope.tags = [];
       $scope.tagAdded = function(tag) {
-          console.log('Tag added: ', tag.username);
-          userManager.getUserId(tag.username,$rootScope.currentDashboard)
+          userManager.getUserId(tag.username,$rootScope.currentDashboard,$scope.permission)
           .then(function(result){
-            console.log(result);
+            if(result == true)
+              // {$scope.validUserNames.push(tag.username);
+              $scope.shareErrMessage = "can be shared";
+            else {
+              $scope.shareErrMessage = result;
+            }
           })
       };
+
+      sharedDashboards.forEach(function(userObj){
+        $scope.validUserNames.push(userObj.username);
+      });
+
 
       //remove loop assaign usernames directly to scope
       $scope.shareDashboard = function(){
         $scope.userNames = $scope.tags;
-        console.log($scope.userNames);
-        userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard)
+        userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.permission)
         .then(function(userId){
-          alert(userId);
 
         })
       }
@@ -26,6 +34,10 @@ angular.module('vbiApp')
                })
       }
 
+      $scope.closeModal = function() {
+        $uibModalInstance.close();
+      };
+
       $scope.containers = [{
             name: 'Can Edit'
           }, {
@@ -33,7 +45,8 @@ angular.module('vbiApp')
           }, {
             name: 'Can View'
           }];
-      $scope.select = function(container) {
-      $scope.selectedItem = container;
-        };
+      $scope.changedPermission = function(permission) {
+      $scope.permission = permission.name;
+      };
+
     }]);

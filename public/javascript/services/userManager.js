@@ -35,16 +35,17 @@ angular.module('vbiApp')
 					});
           },
 
-        getUserId: function(userName,currentDashboard){
-                   var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard});
+           getUserId: function(userName,currentDashboard,permission){
+                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard, permission:permission || "Access"});
                    return $http.post('/getUserId', parms)
                    .then(function(res){
                    return (res.data);
                      });
             },
 
-            shareDashboard: function(userNames,currentDashboard){
-              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard});
+            shareDashboard: function(userNames,currentDashboard,permission){
+              console.log(permission || "Access");
+              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission || "Access"});
                       return $http.post(' /getUserId/shareDashboard', parms)
                       .then(function(res){
                         return (res);

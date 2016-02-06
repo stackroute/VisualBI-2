@@ -7,10 +7,9 @@ router.post('/shareDashboard',function(req, res, next){
   var currentDashboard = req.body.currentDashboard;
   var userNames = req.body.userNames;
   var currentUserId = req.user._id;
-  var currentUserName = req.user.name;
-  var permission = "edit" ;//req.body.permission;
-
-  var usernameProcessed = 0
+  var currentUserName = req.user.username;
+  var permission = req.body.permission;
+  var usernameProcessed = 0;
 
   userNames.forEach(function(credentialObj){
     User.getUserId(credentialObj._id,function(userObj){
@@ -18,13 +17,12 @@ router.post('/shareDashboard',function(req, res, next){
         {
           res.send(credentialObj.username+"'s document not present");
       }else{
-        console.log(userObj._id);
         User.shareDashboard(currentUserId,currentUserName,currentDashboard,userObj._id,permission,function(result){
-          console.log("result "+result);
+          User.sharedDashboards(currentUserId,credentialObj.username,currentDashboard);
         });
         usernameProcessed++;
         if(userNames.length==usernameProcessed)
-          res.send("inserted");
+          res.send(true);
       }
 
     });
@@ -34,7 +32,7 @@ router.post('/', function(req, res, next) {
     var userName = req.body.userName;
     var currentDashboard = req.body.currentDashboard;
     var currentUserName = req.user.name;
-
+    var permission = req.body.permission;
     if(userName) {
       Credential.getCredentialId(userName, function(credentialId){
         if(!credentialId){
@@ -46,11 +44,11 @@ router.post('/', function(req, res, next) {
               {
                 res.send(userName+"'s document not present");
             } else {
-            User.isExist(currentUserName,currentDashboard,userId._id,function(result){
+            User.isExist(currentUserName,currentDashboard,userId._id,permission,function(result){
               if(result == true )
                 res.send("user already existing");
               else {
-                res.send("could share");
+                res.send(true);
               }
             });
             }
