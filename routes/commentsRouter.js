@@ -8,7 +8,8 @@ router.post('/',function(req,res,next){
 	
 	if(req.isAuthenticated()){
 		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-		res.send({resp:'success',user:req.user.name});
+		console.log(req);
+		res.send({resp:'success',user:req.user.name,image:req.user.imagePath});
 	}
 	else
 		res.send({resp:'error',msg:'Authentication failure'});

@@ -12,7 +12,7 @@
   <div id="collapse1" class="collapse in">
     <timeline>
       <timeline-event ng-repeat="comment in chartInfo.comments" side="">
-        <timeline-badge class="displayImage">
+        <timeline-badge ng-style="{{commentThumbStyle}}">
         </timeline-badge>
         <timeline-panel class="{{comment.badgeClass}}">
 			<i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}" ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
@@ -22,10 +22,12 @@
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-			<p>	  {{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
+			<p>	  {{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i>
+			</p>
 
         </timeline-panel>
       </timeline-event>
     </timeline>
+	  {{commentThumbStyle}}
   </div>
 </div>

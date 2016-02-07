@@ -28,7 +28,9 @@
 
   .timeline li timeline-badge.displayImage {
 /*    background-color: #2e6da4 !important;*/
-	background-image: url('../images/profile.jpg');	
+/*	background-image: url('../images/profile.jpg');	*/
+	background-image: url('../images/file-1454675036157.jpg');	
+	background-size: 50px 50px;
 }
 
 .timeline-ui-delete-btn{

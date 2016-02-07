@@ -75,7 +75,9 @@ angular.module('vbiApp')
 							}
 						}).success(function successCallback(data, status) {
 							if(data.resp=='success'){
-								resolve(data.user);
+								console.log('Comment posted');
+								resolve(data);
+								//console.log(data);
 							}
 							else
 								{
