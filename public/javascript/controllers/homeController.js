@@ -2,7 +2,7 @@ angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
-		 $scope.canShare = true;
+		 $scope.canS
 		 $scope.canEdit = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
@@ -22,7 +22,6 @@ angular.module('vbiApp')
 						 }
 					}
 		 	});
-
 
 		$scope.logout = function() {
 			userManager.logout()
@@ -47,9 +46,6 @@ angular.module('vbiApp')
 		};
 
 		$scope.showSharedDashboard = function(userid, dashboardId){
-			//userid = who has shared the dashboard
-//			userid = "56a205563f8a5736206982c8";
-
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
@@ -60,20 +56,19 @@ angular.module('vbiApp')
 			});
 		};
 
-  //        /*share Dashboard Modal*/
-    $scope.shareModalClick = function() {
-      var shareConfig ={
+        /*share Dashboard Modal*/
+    $scope.shareDashboardModal = function(sharedWith) {
+      var shareConfig = {
         templateUrl: 'shareModal',
-        controller: function($scope, $uibModalInstance) {
-              $scope.closeModal = function() {
-                $uibModalInstance.close();
-              };
-            }
-          };
+        controller: 'shareDashboardController',
+        resolve: {
+          sharedDashboards: function(){
+            return sharedWith;
+          }
+        }
+      };
       $uibModal.open(shareConfig);
-
   }
-
 
 		$scope.fullScreen = function(widget) {
 			var modalConfig = {
@@ -85,7 +80,6 @@ angular.module('vbiApp')
                         var userComments=[];
 
                         angular.forEach(widget.comments, function(comment, key){
-
                             userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
@@ -107,7 +101,6 @@ angular.module('vbiApp')
 				}
 			};
 			$uibModal.open(modalConfig);
-
 		}
 
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
@@ -154,18 +147,13 @@ angular.module('vbiApp')
 		};
 
     $scope.createTab = function(tab) {
-
       var tabCount = $scope.tabs.length;
-
       var newCount = 0;
-
       if(tabCount > 0) {
         var curCount = tabCount - 1;
         newCount = $scope.tabs[curCount].tabId.toString().split('tab')[1];
       }
-
       var tabId = "tab" + (parseInt(newCount) + 1);
-
       var newTab = {
         'tabId' : tabId,
         'tabTitle' : tab,
@@ -238,11 +226,9 @@ angular.module('vbiApp')
               'Content-Type': 'application/json'
           }
       }).success(function successCallback(data, status) {
-          console.log('Post successful');
           $location.url('/');
 
       }, function errorCallback(response) {
-          console.log('Post failed');
       });
     }
 }]).directive('showonhoverparent',
@@ -273,7 +259,6 @@ angular.module('vbiApp')
           homeCtrl.renameTab(title, tabTitle.tabIndex)
         }
       }
-
       $scope.closeModal = function() {
         $uibModalInstance.close();
       }

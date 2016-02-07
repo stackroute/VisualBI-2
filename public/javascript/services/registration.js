@@ -50,6 +50,7 @@ angular.module('vbiApp').factory('UserService', UserService);
         }
         
           function register(user) {
+           return $http.post('/register', {
            return new Promise (function(resolve, reject){
 				  $http.post('/register', {
 					  username:user.username, 

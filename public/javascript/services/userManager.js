@@ -16,7 +16,7 @@ angular.module('vbiApp')
 			  logout: function(user, done) {
 				  return $http.get('/logout');
 			  },
-			  //returns the dashboard of a user
+			    //returns the dashboard of a user
            getDashboard: function(userid, dashboardId) {
 				  return $http({
 					  method: 'GET',
@@ -26,7 +26,7 @@ angular.module('vbiApp')
 						});
           },
 			  //returns dashboard of current loggedin user
-			 getData: function() {
+			  getData: function() {
 				  return $http({
 					  method: 'GET',
 					  url: '/dashboard'
@@ -35,16 +35,17 @@ angular.module('vbiApp')
 					});
           },
 
-           getUserId: function(userName,currentDashboard){
-                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard});
-                     return $http.post('/getUserId', parms)
-                     .then(function(res){
-                       return (res.data);
+           getUserId: function(userName,currentDashboard,permission){
+                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard, permission:permission || "Access"});
+                   return $http.post('/getUserId', parms)
+                   .then(function(res){
+                   return (res.data);
                      });
             },
 
-            shareDashboard: function(userNames,currentDashboard){
-              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard});
+            shareDashboard: function(userNames,currentDashboard,permission){
+              console.log(permission || "Access");
+              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission || "Access"});
                       return $http.post(' /getUserId/shareDashboard', parms)
                       .then(function(res){
                         return (res);
@@ -94,10 +95,10 @@ angular.module('vbiApp')
 				});
 				},
 			getCommenters :	function(widgetId){
-				
+
 						return new Promise (function(resolve, reject){
-							
-						
+
+
 						//POST request to Mongo to write the comment to the database, with parameters object as payload
 						$http.get('/addcomment/'+widgetId).then(function successCallback(data, status) {
 							resolve(data);
@@ -134,8 +135,6 @@ angular.module('vbiApp')
 										 return(err);
 									 });
 			}
-			
+
 		};
 	}]);
-
-         

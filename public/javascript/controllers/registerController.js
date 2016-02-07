@@ -2,7 +2,7 @@
        
         var regCtrl = this;
 	 	var imagePath='';
-        
+        regCtrl.errorMessage = "";
         regCtrl.submit = function(){ //function to call on form submit
             if (regCtrl.file) { //check if from is valid
                 regCtrl.upload(regCtrl.file); //call upload function
@@ -31,16 +31,20 @@
         
         
         regCtrl.register = function () {
-            
+            regCtrl.errorMessage = "";
             regCtrl.dataLoading = true;
 			regCtrl.user.imagePath=imagePath;
 			
             UserService.register(regCtrl.user)
             .then(function (response) {
-					alert('user registered successfully');
-					$location.path('/home');
+					$rootScope.registerUserMessage = 'New user registered successfully. SignIn to access dashboard'
+					$location.path("/");
 				}).catch(function(err){
-						alert('Failed to add user - ' + err.message);
+//						alert('Failed to add user - ' + err.message);
+						regCtrl.errorMessage = err.data.error.message;
 					}
-			)}
-    }]);
+			)};
+		 
+		 regCtrl.cancel = function(){
+			 $location.path("/");
+		 };

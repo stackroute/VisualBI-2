@@ -1,19 +1,16 @@
 <script type="text/ng-template" id="customWidth">
- <div class="panel panel-primary">
+ <div class="panel-primary">
  	<div class="modal-header panel-heading">
-		<h3 class="modal-title">Column Width
+		<h4 class="modal-title">Enter tab width between 1 - {{ widthConfig.columnWidth }}
 		 	<button ng-click="closeModal()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		 </h3>
+		 </h4>
   </div>
   <div class="modal-body">
 
     <div class="input-group">
-      <h4>Enter tab width between 1 - {{ widthConfig.columnWidth }}</h4>
-
       <input type="text" class="form-control" name="userData" ng-model="widthConfig.userData" value="widthConfig.userData">
+      <button class="btn btn-success modal-btn" type="button" ng-click="setWidgetWidth(widthConfig.userData)">Save</button>
 
-      <button class="btn btn-success" type="button" ng-click="setWidgetWidth(widthConfig.userData)">Save</button>
-      
     </div>
   </div>
 </script>

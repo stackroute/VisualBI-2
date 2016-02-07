@@ -1,13 +1,12 @@
   <script type="text/ng-template" id="shareModal">
 
-    <div class="panel panel-primary">
+    <div class="panel-primary">
       <div class="panel-heading">
       <h4 class = "modal-title" id = "shareModalLabel"> Share With Others </h4>
       <button ng-click="closeModal()" type="button" class="close" aria-label="Close" id ="ShareModalCloseBtn"><span aria-hidden="true">&times;</span></button></div>
     </div>
 
-    <div class="modal-body" id="shareBody" ng-controller ="shareDashboardController" >
-
+    <div class="modal-body" id="shareBody">
     <div class="input-group input-group-lg" id ="input-group">
      <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
@@ -28,20 +27,16 @@
       </tags-input>
     </div>
 
-      <div class="access">
-        <select ng-model="selectedItem" ng-options="c as (c.name) for c in containers" class="dropdown-height">
-          <option value="">Access</option>
+      <div class="permission">
+        <select ng-model="selectedItem" ng-change="changedPermission(selectedItem)"
+        ng-options="c as (c.name) for c in containers" class="dropdown-height">
         </select>
-        <div class="ui selection dropdown ">
-          <input name="id" type="hidden" value="0"/>
-          <div class="menu transition hidden">
-            <div data-value="{{container.id}}" class="item" ng-repeat="container in containers"
-            ng-click="select(container)">
-            </div>
-          </div>
-        </div>
-      </div>
 
+      </div>
+      <div>
+        <p ng-show="validUserNames.length > 0">Shared with {{validUserNames}}</p>
+        <p>{{shareErrMessage}}</p>
+      </div>
       <div class="share-btn" id="sharebutton">
         <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>
         <button class="btn btn-warning" ng-click="closeModal()">Close</button>

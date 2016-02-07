@@ -249,6 +249,10 @@ table,  th,  td{
 	height: 200px;
 }
 
+.modal-btn {
+	margin-top: 20px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;
@@ -281,19 +285,16 @@ table,  th,  td{
 
 /* Share Modal  Styles*/
 
-#input-group{
-	width:380px;
-}
-
-.access{
+.permission{
 	position: absolute;
-	right:10px;
-  top:19px;
+	right:30px;
+  top:20px;
+	height:40px;
 }
 
 .dropdown-height{
-	height:41px;
-	left:25px;
+	height:39px;
+	left:15px;
 	down:10px;
 }
 
@@ -305,15 +306,12 @@ margin-top: 85px;
 
 #shareBody{
   width:600px;
-}
-
-.input-group-addon{
-	height:38px;
+	height: auto;
 }
 
 #shareTag{
-	width: 350px;
-	height: 46px;
+	width: 380px;
+	height: 40px;
 }
 
 #ShareModalCloseBtn{
