@@ -1,4 +1,6 @@
- var mongoose = require('mongoose');
+//User schema contains all widgets layout for a user
+
+var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
 	userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
@@ -33,6 +35,7 @@ UserSchema.statics.addUser = function(userid, dashboardId, done) {
 
 }
 
+//Gets the dashboard of a user. It specically helps to fetch the shared dashboard
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	this.model('User')
 		.findOne({
@@ -48,6 +51,7 @@ UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	});
 }
 
+//Gets the user's widgets layout
 UserSchema.statics.getData = function (userid, callback) {
 	this.model('User')
 		.findOne({

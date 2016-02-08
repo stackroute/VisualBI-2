@@ -2,7 +2,6 @@ angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
-		 $scope.canS
 		 $scope.canEdit = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;

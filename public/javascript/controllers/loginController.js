@@ -10,6 +10,8 @@ angular.module('vbiApp')
 	 var self = this;
     this.errorMessage = "";
     this.login = function() {
+		 //reset the message if when a user login
+		$scope.registerUserMessage = $rootScope.registerUserMessage = "";
 		  userManager.login(this.user, function(err, data) {
 				if(!err) {
 					$rootScope.loggedInUser = JSON.parse($cookies.get($rootScope.authToken));
@@ -24,6 +26,6 @@ angular.module('vbiApp')
 	$scope.$watch(function() {
 		return self.user.password;}, function(newValue) {
 		self.errorMessage = "";
-//		$scope.registerUserMessage = $rootScope.registerUserMessage = "";
+
 	})
 }])
