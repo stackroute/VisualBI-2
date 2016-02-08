@@ -4,9 +4,7 @@ angular.module('vbiApp').service('editManager', function() {
   var tabIndex;
 
   var setTabDetails = function(tabs, index) {
-//    tabDetails.pop();
-//    tabDetails.push(tabs);
-  tabDetails = tabs;
+    tabDetails = tabs;
     tabIndex = index;
   };
 

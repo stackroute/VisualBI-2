@@ -3,7 +3,7 @@ angular.module('vbiApp').service('widgetManager', ['$http', function($http) {
 	   getWidget: function() {
 		    return $http({
           method: 'GET',
-					url: '/widgetsWave1'
+					url: '/widgetsMdx'
 				}).then(function(res) {
 				  return (res.data);
 		    });

@@ -1,17 +1,64 @@
 
 <body class="reg">
+   
 <div class="register-page"> 
 	<header id="header">
 			<div class="page-holder">
-				<small class="logo">datapine</small>
+				<small class="logo">Slate</small>
 				<div class="help">
 					<p>CALL US &nbsp; +91 96 5455 1782</p>
 					<a class="link" href="" id="registration_support">SUPPORT</a>
 				</div>
-				<a class="link-login icon-lock" href="" id="registration_login"><span>LOG IN</span></a>
+				<a class="link-login icon-lock" href="javascript:window.location.reload(true)" id="registration_login"><span>LOG IN</span></a>
 			</div>
 		</header>
- <div class="container" ng-controller="RegisterController as vm">
+ 
+    <div class="container">
+ <div  ng-controller="loginController as loginCtrl" ng-hide="showRegisterPage">
+   
+  <div class="register">
+   <div class="page-holder">
+    <div class="form">
+        <h1 class="mainheading">The Only Business Intelligence Software You'll Ever Need</h1>
+        <p class="mainheading">Setup only takes one minute. No credit card required.</p>
+     <form class="register-form validate-form big-form" name="form" role="form" novalidate>
+       <fieldset>
+            
+    <div class ="row">
+         <div class="form-group half" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+
+            <label for="username">E-mail</label>
+            <input type="email" name="username" id="username" class="form-control" ng-model="loginCtrl.user.email"  required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail is required</span>
+
+            </div>
+
+         <div class="form-group half" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+
+           <label for="password">Password</label>
+           <input type="password" id="password" name="password" class="form-control" ng-model="loginCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
+           <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
+
+          </div>
+        </div>
+    <div class="form-actions row">
+              
+            <button type="submit" ng-disabled="form.$invalid" class="btn1 big mainheading" ng-click="loginCtrl.login()">LOGIN</button>
+            <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>
+        </div>
+         </fieldset>
+        </form>
+       </div>
+      </div>
+     </div>
+    </div>
+    
+    
+    
+    
+    
+ <div  ng-controller="RegisterController as vm" ng-show ="showRegisterPage">
+
   <div class="register">
    <div class="page-holder">
     <div class="form">
@@ -53,8 +100,7 @@
            <label for="password">Password</label>
            <input type="password" id="password" name="password" class="form-control" ng-model="vm.user.password" ng-minlength="1" ng-maxlength="20"  required  />
            <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
-<!--           <span ng-show="!form.password.$error.required && (form.password.$error.minlength || form.password.$error.maxlength) && form.password.$dirty" class="help-block">Passwords must be between 8 and 20 characters.</span>-->
-<!--             </div>-->
+
           </div>
         </div>
 <!--        <div class ="row">    -->
@@ -73,7 +119,9 @@
 <!--         </div>-->
 <!--        </div>    -->
         <div class="form-actions row">
-            <button type="submit" ng-disabled="form.$invalid" class="btn1 big mainheading" ng-click="vm.register()">Register For Free Trial</button>
+              
+              
+            <button type="submit" ng-disabled="form.$invalid" class="btn1 big mainheading" ng-click="vm.register()">Register</button>
 <!--            <a href="#/login" class="btn btn-link" ng-click="cancel()">Cancel</a>-->
         </div>
         <div ng-show="vm.errorMessage.length > 0" class="alert alert-danger row" role="alert">{{ vm.errorMessage }}</div>
@@ -84,3 +132,5 @@
   </div>    
  </div>
 </div>
+</div>
+<!--</div>-->

@@ -20,7 +20,6 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 //         console.log(container);
          $http(req).then(function(data){
 //           console.log("got data");
-console.log(data);
            var graphArray = renderData(container, data.data);
 //                  console.log(graphArray);
                   if(graphArray !== undefined){

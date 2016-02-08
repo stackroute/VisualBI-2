@@ -12,10 +12,11 @@ var UserSchema = mongoose.Schema({
    dashboards: [{
       _id: String,
       sharedWith: [mongoose.Schema.Types.Mixed],
-      tabs: [{tabTitle: String,
+      tabs: [{_id: false,
+         tabTitle: String,
          tabId: String,
-         rows: [{
-				columns:[{
+         rows: [{_id: false,
+				columns:[{_id: false,
 					colWidth: Number,
             	widgetId: {type: mongoose.Schema.ObjectId, ref: 'Widget'}
 				}]
@@ -129,10 +130,8 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
       }]
     }
   },function(err, data) {
-    // console.log("Data " + data);
+
   });
-
-
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId,userName,user,currentDashboard){
