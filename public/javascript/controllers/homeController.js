@@ -1,28 +1,28 @@
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
-		 $scope.canShare = true;
-		 $scope.canEdit = true;
-		 $scope.canComment = true;
-		 $scope.tabs = [];
-		 $scope.showMenu = true;
-		 //data for every widget will put here. It is required to give more functionality like
-		 // line, bar or area chart in mdx grid
-		 $scope.widgetData = {};
-		 $scope.currentUserData = {};
-		 userManager.getData()
-			 .then(function(userData) {
-			 	$scope.currentUserData = userData;
-				// Make additional dashboard. Assuming that there is only one dashboard now
-				if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
-					var dashboard = $scope.currentUserData.dashboards[0];
-			  		$rootScope.currentDashboard = dashboard._id;
-						 if(dashboard.tabs && dashboard.tabs.length > 0) {
-									$scope.tabs = dashboard.tabs;
-						 }
-					}
-		 	});
+	 $scope.canShare = true;
+	 $scope.canEdit = true;
+	 $scope.canComment = true;
+	 $scope.tabs = [];
+	 $scope.showMenu = true;
 
+	 //data for every widget will put here. It is required to give more functionality like
+	 // line, bar or area chart in mdx grid
+	 $scope.widgetData = {};
+	 $scope.currentUserData = {};
+	 userManager.getData()
+		 .then(function(userData) {
+			$scope.currentUserData = userData;
+			// Make additional dashboard. Assuming that there is only one dashboard now
+			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
+				var dashboard = $scope.currentUserData.dashboards[0];
+				$rootScope.currentDashboard = dashboard._id;
+					 if(dashboard.tabs && dashboard.tabs.length > 0) {
+								$scope.tabs = dashboard.tabs;
+					 }
+				}
+		});
 		$scope.logout = function() {
 			userManager.logout()
 				.then(function() {
@@ -36,6 +36,7 @@ angular.module('vbiApp')
 		};
 
 		$scope.showCurrentUserDashboard = function(){
+			userManager.getData().then(function(userData){ $scope.currentUserData = userData; });
 			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
 				var dashboard = $scope.currentUserData.dashboards[0];
 				$rootScope.currentDashboard = dashboard._id;
