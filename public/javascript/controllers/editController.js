@@ -32,6 +32,7 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
 
   widgetManager.getWidget()
     .then(function(widgets) {
+      console.log(widgets);
       $scope.widgetItems = widgets;
     });
 
@@ -87,25 +88,47 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
 
     $scope.getAllTabs[$scope.tabIndex] = $scope.tabs[0];
 
-    var params={
-                tabs: $scope.getAllTabs
+    var newparams={
+      widget: $scope.tabs[0]
+    }
+
+    console.log(newparams);
+
+    var allparams={
+                tabs: $scope.getAllTabs,
+                tabIndex: $scope.tabIndex
              };
 
     $http({
-        url: "/user/savetab",
-        method: "POST",
-        data: params,
-        headers : {
-            'Content-Type': 'application/json'
-        }
+       url: "/widgets/saveWidget",
+       method: "POST",
+       data: allparams,
+       headers : {
+         'Content-Type': 'application/json'
+       }
     }).success(function successCallback(data, status) {
-        $location.url('/');
+        console.log("reached http callback success");
+        console.log(data + " " + status);
     }, function errorCallback(response) {
+      console.log("reached http callback failure " + response);
     });
+
+    // $http({
+    //     url: "/user/savetab",
+    //     method: "POST",
+    //     data: params,
+    //     headers : {
+    //         'Content-Type': 'application/json'
+    //     }
+    // }).success(function successCallback(data, status) {
+    //     $location.url('/');
+    // }, function errorCallback(response) {
+    // });
   }
 
   $scope.widthModal = function(event, ui, rowId, colId, colWidth) {
-
+    console.log("widget");
+console.log($scope.tabs[0].rows[rowId].columns[colId]);
     var widthModalConfig = {
       templateUrl: 'customWidth',
       controller: 'widthController',

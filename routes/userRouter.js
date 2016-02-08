@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    User = require('../model/user');
+    User = require('../config/db').userModel;
 
 
 router.get('/dashboard', function(req, res, next) {

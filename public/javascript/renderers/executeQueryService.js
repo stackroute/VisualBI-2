@@ -20,6 +20,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 //         console.log(container);
          $http(req).then(function(data){
 //           console.log("got data");
+console.log(data);
            var graphArray = renderData(container, data.data);
 //                  console.log(graphArray);
                   if(graphArray !== undefined){
@@ -38,7 +39,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showPieGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  	
+
 			 if((tableContainer.find("."+"miniPieGraph"+"").length) === 0){
 				  tableContainer.find("#row0").prev().append("<td class="+"miniPieGraph"+"><span class='graphIcon'>"+"</span></td>");
 
@@ -56,7 +57,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showAreaGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  
+
 		  if((tableContainer.find("."+"miniAreaGraph"+"").length) === 0){
 				tableContainer.find("#row0").prev().append("<td class="+"miniAreaGraph"+"><span class='graphIcon'>"+"</span></td>");
 
@@ -73,7 +74,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 	  showLineGraphColumn: function(table_container, scope) {
 		  var graphArray = scope.widgetData[table_container];
 		  var tableContainer = angular.element(document.getElementById(table_container));
-		  
+
 		  if((tableContainer.find("."+"miniLineGraph"+"").length) === 0){
 				tableContainer.find("#row0").prev().append("<td class="+"miniLineGraph"+"><span class='graphIcon'>"+"</span></td>");
 
@@ -121,6 +122,7 @@ var renderData =  function (container, data){
   container.find('#axis0_insersion').append('{{axis0}}');
   container.find('#axis1_insersion').append('{{axis1}}');
   // $( container+" tr" ).replaceWith( "" );
+
   var addElement, ans, fs, members, tdChild;
   var axes = data.Axes,
       axis = axes.Axis,

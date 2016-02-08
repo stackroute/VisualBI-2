@@ -22,7 +22,6 @@ angular.module('vbiApp')
 
       //remove loop assaign usernames directly to scope
       $scope.shareDashboard = function(){
-        debugger;
         $scope.userNames = $scope.tags;
         userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.selectedItem.name)
         .then(function(userid){
@@ -35,6 +34,7 @@ angular.module('vbiApp')
                .then(function(data){
                  return data;
                })
+
       }
 
       $scope.closeModal = function() {
@@ -47,6 +47,7 @@ angular.module('vbiApp')
             name: 'Can Comment'
           }, {
             name: 'Can View'
+
           }];
 
       $scope.selectedItem = $scope.permissons[2];

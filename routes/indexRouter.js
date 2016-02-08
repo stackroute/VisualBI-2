@@ -3,9 +3,9 @@ var express = require('express'),
     fs = require('fs'),
     path = require('path'),
     utils = require('./utils'),
-    User = require('../model/user'),
+    User = require('../config/db').userModel,
     passport = require('passport'),
-	 Credential = require('../model/credential'),
+	 Credential = require('../config/db').credentialModel,
 	 dbUtils = require('../model/dbUtils');
 
 // Login page
@@ -37,7 +37,7 @@ router.post('/register',function(req,res,next){
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
 			imagePath: req.body.imagePath
-			
+
 		}, function(err, user) {
 			if(err){
 				res.status(500).send({ error: err });
@@ -64,6 +64,6 @@ function registerUser (req, res, next) {
   passport.authenticate('local')(req, res, function () {
 	 res.redirect('/');
   });
-	
+
 }
 module.exports = router;

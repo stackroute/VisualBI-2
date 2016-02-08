@@ -52,5 +52,5 @@ ConnectionsSchema.methods.getConnectionId = function() {
 ConnectionsSchema.methods.getServer = function(){
   return (this.serverURL+"?userid="+this.userid+"&password="+this.password);
 };
-var Connections = mongoose.model('Connection', ConnectionsSchema);
-module.exports = Connections;
+//var Connections = mongoose.model('Connection', ConnectionsSchema);
+module.exports = ConnectionsSchema;
