@@ -16,10 +16,11 @@
                   key-property="_id"
                   display-property="username"
                   on-tag-added="tagAdded($tag)"
+                  on-tag-removed="tagRemoved()"
                   addFromAutocompleteOnly=true
                   placeholder="User email"
                   replace-spaces-with-dashes="false">
-           <auto-complete source="loadEmails($query)"
+           <auto-complete source="loadUserNames($query)"
                        min-length="0"
                        load-on-focus="true"
                        load-on-empty="true"
@@ -29,14 +30,13 @@
     </div>
 
       <div class="permission">
-        <select ng-model="selectedItem" ng-change="changedPermission(selectedItem)" ng-options="c as (c.name) for c in containers" class="dropdown-height">
-          <option value="">Access</option>
+        <select ng-model="selectedItem" ng-options="permisson.name for permisson in permissons" class="dropdown-height">
         </select>
-
       </div>
+
       <div>
-        <p ng-show="validUserNames.length > 0">Shared with {{validUserNames}}</p>
-        <p>{{shareErrMessage}}</p>
+        <p  class="alert alert-success" ng-show="validUserNames.length > 0">Shared with {{validUserNames}}</p>
+        <p class="alert alert-danger" ng-show="shareErrMessage.length > 0">{{shareErrMessage}}</p>
       </div>
       <div class="share-btn" id="sharebutton">
         <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>

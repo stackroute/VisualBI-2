@@ -2,7 +2,6 @@ angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
-		 $scope.canShare = true;
 		 $scope.canEdit = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
@@ -58,13 +57,13 @@ angular.module('vbiApp')
 		};
 
         /*share Dashboard Modal*/
-    $scope.shareDashboardModal = function(sharedWith) {
+    $scope.shareDashboardModal = function(currentUserData) {
       var shareConfig = {
         templateUrl: 'shareModal',
         controller: 'shareDashboardController',
         resolve: {
           sharedDashboards: function(){
-            return sharedWith;
+            return currentUserData.dashboards[0].sharedWith; //assuming there is only one dashboard.
           }
         }
       };

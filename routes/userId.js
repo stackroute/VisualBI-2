@@ -16,22 +16,33 @@ router.post('/shareDashboard',function(req, res, next){
       if(userObj === null)
         {
           res.send(credentialObj.username+"'s document not present");
-      }else{
-        User.shareDashboard(currentUserId,currentUserName,currentDashboard,userObj._id,permission,function(result){
-          User.sharedDashboards(currentUserId,credentialObj.username,currentDashboard);
+      }
+      else{
+        User.isExist(currentUserName,currentDashboard,userObj._id,permission,function(result){
+          if(result == true )
+          {User.updatePermission(currentUserId,currentUserName,currentDashboard,userObj._id,permission);
+            console.log("updating permission");}
+          else {
+            console.log("not updating");
+            User.shareDashboard(currentUserId,currentUserName,currentDashboard,userObj._id,permission,function(result){
+              User.sharedDashboards(currentUserId,credentialObj.username,currentDashboard);
+            });
+          }
         });
+
+
         usernameProcessed++;
         if(userNames.length==usernameProcessed)
           res.send(true);
       }
-
     });
   });
 });
+
 router.post('/', function(req, res, next) {
     var userName = req.body.userName;
     var currentDashboard = req.body.currentDashboard;
-    var currentUserName = req.user.name;
+    var currentUserName = req.user.username;
     var permission = req.body.permission;
     if(userName) {
       Credential.getCredentialId(userName, function(credentialId){
@@ -48,7 +59,7 @@ router.post('/', function(req, res, next) {
               if(result == true )
                 res.send("user already existing");
               else {
-                res.send(true);
+                res.send("can be shared");
               }
             });
             }

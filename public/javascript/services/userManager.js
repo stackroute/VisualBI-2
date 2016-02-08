@@ -36,7 +36,7 @@ angular.module('vbiApp')
           },
 
            getUserId: function(userName,currentDashboard,permission){
-                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard, permission:permission || "Access"});
+                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard, permission:permission});
                    return $http.post('/getUserId', parms)
                    .then(function(res){
                    return (res.data);
@@ -44,19 +44,19 @@ angular.module('vbiApp')
             },
 
             shareDashboard: function(userNames,currentDashboard,permission){
-              console.log(permission || "Access");
-              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission || "Access"});
+              console.log(permission);
+              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission});
                       return $http.post(' /getUserId/shareDashboard', parms)
                       .then(function(res){
                         return (res);
                       });
              },
 
-             loadEmails: function($query) {
+             loadUserNames: function($query) {
                  return $http.post('/getUserList', { cache: true}).then(function(response) {
-                   var emails = response.data;
-                   return emails.filter(function(email) {
-                     return email.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
+                   var userNames = response.data;
+                   return userNames.filter(function(userNameObj) {
+                     return userNameObj.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
                    });
                  });
                },
