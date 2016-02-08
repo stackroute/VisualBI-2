@@ -7,7 +7,10 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   $scope.tempId = [];
   $scope.getAllTabs = editManager.getTabDetails();
   $scope.tabIndex = editManager.getTabIndex();
+  var sharedDashboardUserId = editManager.getSharedDashboardUserId();
   $scope.tabs = [];
+
+  console.log("edit page " + sharedDashboardUserId);
 
   if((typeof $scope.getAllTabs === 'undefined') || (typeof $scope.tabIndex === 'undefined')) {
     $location.url('/');
@@ -102,9 +105,12 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       widget: $scope.tabs[0]
     }
 
+console.log("id " + sharedDashboardUserId);
+
     var allparams={
                 tabs: $scope.getAllTabs,
-                tabIndex: $scope.tabIndex
+                tabIndex: $scope.tabIndex,
+                userid: sharedDashboardUserId
              };
 
     $http({

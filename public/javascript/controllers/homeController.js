@@ -6,6 +6,7 @@ angular.module('vbiApp')
 		 $scope.canComment = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
+     var sharedDashboardUserId;
 		 //data for every widget will put here. It is required to give more functionality like
 		 // line, bar or area chart in mdx grid
 		 $scope.widgetData = {};
@@ -47,9 +48,11 @@ angular.module('vbiApp')
 		};
 
 		$scope.showSharedDashboard = function(userid, dashboardId, permission){
+
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
+            sharedDashboardUserId = userid;
 						$scope.tabs = sharedDashboard.tabs;
 						$scope.canShare = false;
 						$scope.canEdit = permission.toUpperCase() === "CAN EDIT";
@@ -172,7 +175,8 @@ angular.module('vbiApp')
     }
 
     $scope.gotoEditPage = function(tabs, index) {
-      editManager.setTabDetails(tabs, index);
+      console.log(sharedDashboardUserId);
+      editManager.setTabDetails(tabs, index, sharedDashboardUserId);
       $location.url('/edittab');
     }
 

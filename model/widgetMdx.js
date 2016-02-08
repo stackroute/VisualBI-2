@@ -23,26 +23,24 @@ var widgetSchema = new schema({
 widgetSchema.statics.getWidgets = function(callback) {
    this.model('Widget').find({}, function(err, data) {
 
-
-
      var dataLen = data.length;
 
      for(var i=dataLen-1; i>=0; i--) {
-       var removeMe = false;
+       var removeData = false;
 
        if(typeof data[i].connectionData.catalog === 'undefined') {
-         removeMe = true;
+         removeData = true;
        } else if(typeof data[i].connectionData.dataSource === 'undefined') {
-         removeMe = true;
+         removeData = true;
        } else if(typeof data[i].connectionData.connectionId === 'undefined') {
-         removeMe = true;
+         removeData = true;
        } else if(typeof data[i].queryMDX === 'undefined') {
-         removeMe = true;
+         removeData = true;
        } else if(typeof data[i].widgetName === 'undefined') {
-         removeMe = true;
+         removeData = true;
        }
 
-       if(removeMe) {
+       if(removeData) {
          data.splice(i, 1);
        }
      }
