@@ -20,6 +20,10 @@ angular.module('vbiApp')
 
 		  });
 	 };
+        
+    this.newUser = function(){
+        $rootScope.showRegisterPage=true;
+    };
 	
 	$scope.$watch(function() {
 		return self.user.password;}, function(newValue) {
