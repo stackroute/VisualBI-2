@@ -43,6 +43,7 @@ angular.module('vbiApp')
 				$scope.canShare = true;
 				$scope.canEdit = true;
 				$scope.canComment = true;
+				$location.url('/');
 			}
 		};
 
@@ -54,6 +55,7 @@ angular.module('vbiApp')
 						$scope.canShare = false;
 						$scope.canEdit = permission.toUpperCase() === "CAN EDIT";
 						$scope.canComment = permission.toUpperCase() === "CAN EDIT" || permission.toUpperCase() === "CAN COMMENT";
+						$location.url('/');
 					}
 			});
 		};
