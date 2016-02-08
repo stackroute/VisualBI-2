@@ -70,40 +70,63 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, tabIndex,User) {
     var colLen = savewidget.rows[i].columns.length;
     for (var j = 0; j < colLen; j++) {
 
-      var title = savewidget.rows[i].columns[j].widgetId.widgetName;
-      var studio_id = savewidget.rows[i].columns[j].widgetId._id;
-      var chartRenderer = "executeQueryService";
-      var params = {
-        "catalog" : savewidget.rows[i].columns[j].widgetId.connectionData.catalog,
-        "dataSource" : savewidget.rows[i].columns[j].widgetId.connectionData.dataSource,
-        "connId" : savewidget.rows[i].columns[j].widgetId.connectionData.connectionId,
-        "statement" : savewidget.rows[i].columns[j].widgetId.queryMDX
-      };
+
+      if(typeof savewidget.rows[i].columns[j].widgetId.connectionData === 'undefined') {
+        var title = savewidget.rows[i].columns[j].widgetId.title;
+        var studio_id = savewidget.rows[i].columns[j].widgetId.studio_id;
+        var chartRenderer = "executeQueryService";
+        var params = {
+          "showGraphIcon" : true,
+          "catalog" : savewidget.rows[i].columns[j].widgetId.parameters.catalog,
+          "dataSource" : savewidget.rows[i].columns[j].widgetId.parameters.dataSource,
+          "connId" : savewidget.rows[i].columns[j].widgetId.parameters.connId,
+          "statement" : savewidget.rows[i].columns[j].widgetId.parameters.statement
+        };
+      } else {
+        var title = savewidget.rows[i].columns[j].widgetId.widgetName;
+        var studio_id = savewidget.rows[i].columns[j].widgetId._id;
+        var chartRenderer = "executeQueryService";
+        var params = {
+          "showGraphIcon" : true,
+          "catalog" : savewidget.rows[i].columns[j].widgetId.connectionData.catalog,
+          "dataSource" : savewidget.rows[i].columns[j].widgetId.connectionData.dataSource,
+          "connId" : savewidget.rows[i].columns[j].widgetId.connectionData.connectionId,
+          "statement" : savewidget.rows[i].columns[j].widgetId.queryMDX
+        };
+      }
       var studioWidget = new widgetProto(studio_id, title, chartRenderer, params);
       widgetArray.push(studioWidget);
     }
   }
 
-  this.model('Widget').collection.insert(widgetArray,function(err,data) {
-    var insertCount = data.insertedCount;
-    var insertedData = data.ops;
-    var rowLen = savewidget.rows.length;
-    for (var i = 0; i < rowLen; i++) {
-      var colLen = savewidget.rows[i].columns.length;
-      for (var j = 0; j < colLen; j++) {
-        var studio_id = savewidget.rows[i].columns[j].widgetId._id;
-        for(var k=0; k<insertCount; k++) {
-          if(studio_id === insertedData[k].studio_id) {
-            savewidget.rows[i].columns[j].widgetId = insertedData[k]._id;//mongoose.Types.ObjectId(insertedData[k]._id);
-            break;
+  if(widgetArray.length == 0) {
+    var rowLen = tabs[tabIndex].rows.length;
+    if(rowLen == 0) {
+      tabs.splice(rowLen, 1);
+    }
+    User.saveTab(userId, tabs);
+  } else {
+    this.model('Widget').collection.insert(widgetArray,function(err,data) {
+      var insertCount = data.insertedCount;
+      var insertedData = data.ops;
+      var rowLen = savewidget.rows.length;
+      for (var i = 0; i < rowLen; i++) {
+        var colLen = savewidget.rows[i].columns.length;
+        for (var j = 0; j < colLen; j++) {
+          var studio_id = savewidget.rows[i].columns[j].widgetId._id;
+          for(var k=0; k<insertCount; k++) {
+            if(studio_id === insertedData[k].studio_id) {
+              savewidget.rows[i].columns[j].widgetId = insertedData[k]._id;//mongoose.Types.ObjectId(insertedData[k]._id);
+              break;
+            }
           }
         }
       }
-    }
-    tabs[tabIndex] = savewidget;
+      tabs[tabIndex] = savewidget;
 
-    User.saveTab(userId, tabs);
-  })
+      User.saveTab(userId, tabs);
+    })
+  }
 }
 
 WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){

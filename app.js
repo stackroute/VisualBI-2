@@ -14,7 +14,7 @@ var express = require('express'),
 var indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
-    widgetWave1Router = require('./routes/widgetWave1Router'),
+    widgetMdxRouter = require('./routes/widgetMdxRouter'),
     dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
@@ -86,7 +86,7 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
-app.use('/widgetsWave1', widgetWave1Router);
+app.use('/widgetsMdx', widgetMdxRouter);
 app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);

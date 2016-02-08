@@ -1,4 +1,6 @@
- var mongoose = require('mongoose');
+//User schema contains all widgets layout for a user
+
+var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
 	userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
@@ -10,10 +12,11 @@ var UserSchema = mongoose.Schema({
    dashboards: [{
       _id: String,
       sharedWith: [mongoose.Schema.Types.Mixed],
-      tabs: [{tabTitle: String,
+      tabs: [{_id: false,
+         tabTitle: String,
          tabId: String,
-         rows: [{
-				columns:[{
+         rows: [{_id: false,
+				columns:[{_id: false,
 					colWidth: Number,
             	widgetId: {type: mongoose.Schema.ObjectId, ref: 'Widget'}
 				}]
@@ -21,7 +24,7 @@ var UserSchema = mongoose.Schema({
       }]
    }],
 	sharedDashboards:[{
-		userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
+		userid: String, //{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
 		username: String,
 		dashboardid: String,
 		permission: String
@@ -33,6 +36,7 @@ UserSchema.statics.addUser = function(userid, dashboardId, done) {
 
 }
 
+//Gets the dashboard of a user. It specically helps to fetch the shared dashboard
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	this.model('User')
 		.findOne({
@@ -48,6 +52,7 @@ UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	});
 }
 
+//Gets the user's widgets layout
 UserSchema.statics.getData = function (userid, callback) {
 	this.model('User')
 		.findOne({
@@ -74,19 +79,18 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
 }
 
 UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,permission,callback){
+  // console.log("isExist userId "+userId+" "+currentUserName+" "+currentDashboard+" "+permission);
   this.model('User')
     .findOne({
       _id:mongoose.Types.ObjectId(userId),
       "sharedDashboards.username": currentUserName,
-      "sharedDashboards.dashboardId": currentDashboard,
-      "permission": permission
+      "sharedDashboards.dashboardid": currentDashboard
     }).exec(function(err, data) {
       callback(data !== null )
 	});
 }
 
 UserSchema.statics.shareDashboard = function(currentUserId,currentusername,currentDashboard,shareWithUserId,permission,callback){
-
   this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId)},
   {$addToSet:{"sharedDashboards":
       { "userid" : currentUserId,
@@ -97,19 +101,25 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
     }
   },{upsert: true},
   function(err,data){
-        if(err){
-                return false;
-        }else{
-          console.log(data);
-          callback(true);
-        }
+    callback(data !== null )
+  });
+}
+
+UserSchema.statics.updatePermission = function(currentUserId,currentUserName,currentDashboard,shareWithUserId,permission){
+  // console.log("permission "+shareWithUserId+" "+currentUserId+" "+currentUserName+" "+currentDashboard);
+  this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId),
+                            "sharedDashboards.userid": currentUserId,
+                            "sharedDashboards.username": currentUserName,
+                            "sharedDashboards.dashboardid": currentDashboard
+                            },
+  {$set:{"sharedDashboards.$.permission": permission}}
+  ,{upsert: true})
+  .exec(function(err, data){
+    // console.log(data);
   });
 }
 
 UserSchema.statics.saveTab = function(userid, savetabs) {
-  console.log("reached user savetab");
-  console.log(userid);
-  console.log(savetabs);
 
   this.model('User').update({
     'userid': userid
@@ -120,17 +130,14 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
       }]
     }
   },function(err, data) {
-    console.log("Data " + data);
+
   });
-
-
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDashboard){
-  console.log("sharedDashboards currentUserId "+currentUserId);
-  console.log("currentUserName "+userName);
-  this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
-    {$addToSet:{"dashboards.0.sharedWith":
+    // console.log("dashboards.0.sharedWith "+currentUserId);
+    this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
+    {$addToSet:{"dashboards.$.sharedWith":
         {
           "username" : userName
         },
@@ -151,10 +158,8 @@ UserSchema.statics.getUserId =function(credentialId,callback){
     {
       _id:1
     }).exec(function(err, data) {
-      if(err)
-        return err;
-      callback(data);
-	});
+        callback(data);
+    	});
 }
 // mongoose.model("User", UserSchema);
 module.exports = UserSchema;
