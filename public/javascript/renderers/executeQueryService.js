@@ -20,6 +20,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 //         console.log(container);
          $http(req).then(function(data){
 //           console.log("got data");
+console.log(data);
            var graphArray = renderData(container, data.data);
 //                  console.log(graphArray);
                   if(graphArray !== undefined){
@@ -121,6 +122,7 @@ var renderData =  function (container, data){
   container.find('#axis0_insersion').append('{{axis0}}');
   container.find('#axis1_insersion').append('{{axis1}}');
   // $( container+" tr" ).replaceWith( "" );
+
   var addElement, ans, fs, members, tdChild;
   var axes = data.Axes,
       axis = axes.Axis,

@@ -11,17 +11,17 @@ var router = express.Router(),
 router.post('/', function(req, res) {
   // console.log(req.body.mdxQuery);
   // console.log("inside route/execute");
-
+console.log("grid router " + req.body.connId);
       var statement  = req.body.statement,
           connId   = req.body.connId,
           properties = {};
-      properties[Xmla.PROP_DATASOURCEINFO]  = req.body.dataSource;
-      properties[Xmla.PROP_CATALOG]         = req.body.catalog;
+          properties[Xmla.PROP_DATASOURCEINFO]  = req.body.dataSource;
+          properties[Xmla.PROP_CATALOG] = req.body.catalog;
       /*available formats:
         .PROP_FORMAT_MULTIDIMENSIONAL
         .PROP_FORMAT_TABULAR
       */
-      properties[Xmla.PROP_FORMAT]          = Xmla.PROP_FORMAT_MULTIDIMENSIONAL;
+        properties[Xmla.PROP_FORMAT] = Xmla.PROP_FORMAT_MULTIDIMENSIONAL;
       /*available axis formats
         (applicable to .PROP_FORMAT_MULTIDIMENSIONAL):
             TupleFormat
@@ -79,7 +79,7 @@ router.post('/', function(req, res) {
       dataSet.Axes={"Axis":[columnAxis,rowAxis]};
       dataSet.CellData={"Cell":cellData};
     }
-
+        console.log("sdlclsd");
         Connections.findById(connId,function(err,conn){
           var xmlaRequest = {
             async       : true,
@@ -89,14 +89,18 @@ router.post('/', function(req, res) {
 
             success:function(xmla,xmlaRequest,xmlaResponse) {
                 var obj=xmlaResponse;
+                console.log('asdadasddasdas');
                 if(obj instanceof Xmla.Dataset)
                   {
                     getDatafrmDataset(obj);
                   }
+                  console.log(JSON.stringify(dataSet,null,2));
                   res.json(dataSet);
-                  // console.log(JSON.stringify(dataSet,null,2));
               },
             error: function(xmla, xmlaRequest, exception) {
+              console.log(xmla);
+        //      console.log(url);
+              console.log(xmlaRequest);
                   res.json({status: "error", info: exception});
             },
             callback: function(){
@@ -106,8 +110,6 @@ router.post('/', function(req, res) {
           var x = new xmla.Xmla();
           var result =x.execute(xmlaRequest);
           //////////
-
-
         });
 });
 

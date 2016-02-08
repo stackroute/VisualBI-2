@@ -93,7 +93,6 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, tabIndex,User) {
         for(var k=0; k<insertCount; k++) {
           if(studio_id === insertedData[k].studio_id) {
             savewidget.rows[i].columns[j].widgetId = insertedData[k]._id;//mongoose.Types.ObjectId(insertedData[k]._id);
-            
             break;
           }
         }
