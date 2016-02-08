@@ -32,7 +32,6 @@ angular.module('vbiApp').controller('editController', ['$scope', 'widgetManager'
 
   widgetManager.getWidget()
     .then(function(widgets) {
-      console.log(widgets);
       $scope.widgetItems = widgets;
     });
 

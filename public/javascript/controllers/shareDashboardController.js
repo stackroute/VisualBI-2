@@ -25,7 +25,7 @@ angular.module('vbiApp')
         $scope.userNames = $scope.tags;
         userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.selectedItem.name)
         .then(function(userid){
-          console.log(userid);
+          // console.log(userid);
           //$scope.validUserNames.push(userObj.username);
         })
       }

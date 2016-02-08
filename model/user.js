@@ -78,7 +78,7 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
 }
 
 UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,permission,callback){
-  console.log("isExist userId "+userId+" "+currentUserName+" "+currentDashboard+" "+permission);
+  // console.log("isExist userId "+userId+" "+currentUserName+" "+currentDashboard+" "+permission);
   this.model('User')
     .findOne({
       _id:mongoose.Types.ObjectId(userId),
@@ -105,7 +105,7 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
 }
 
 UserSchema.statics.updatePermission = function(currentUserId,currentUserName,currentDashboard,shareWithUserId,permission){
-  console.log("permission "+shareWithUserId+" "+currentUserId+" "+currentUserName+" "+currentDashboard);
+  // console.log("permission "+shareWithUserId+" "+currentUserId+" "+currentUserName+" "+currentDashboard);
   this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
@@ -114,7 +114,7 @@ UserSchema.statics.updatePermission = function(currentUserId,currentUserName,cur
   {$set:{"sharedDashboards.$.permission": permission}}
   ,{upsert: true})
   .exec(function(err, data){
-    console.log(data);
+    // console.log(data);
   });
 }
 
@@ -129,16 +129,16 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
       }]
     }
   },function(err, data) {
-    console.log("Data " + data);
+    // console.log("Data " + data);
   });
 
 
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDashboard){
-    console.log("dashboards.0.sharedWith "+currentUserId);
+    // console.log("dashboards.0.sharedWith "+currentUserId);
     this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
-    {$addToSet:{"dashboards.0.sharedWith":
+    {$addToSet:{"dashboards.$.sharedWith":
         {
           "username" : userName
         },

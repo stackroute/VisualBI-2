@@ -44,7 +44,6 @@ angular.module('vbiApp')
             },
 
             shareDashboard: function(userNames,currentDashboard,permission){
-              console.log(permission);
               var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission});
                       return $http.post(' /getUserId/shareDashboard', parms)
                       .then(function(res){
