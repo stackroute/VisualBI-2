@@ -7,8 +7,7 @@ var express = require('express'),
 router.post('/',function(req,res,next){
 	
 	if(req.isAuthenticated()){
-		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-		console.log(req);
+		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory,req.user.imagePath);
 		res.send({resp:'success',user:req.user.name,image:req.user.imagePath});
 	}
 	else

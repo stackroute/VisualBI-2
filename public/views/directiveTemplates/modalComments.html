@@ -12,22 +12,21 @@
   <div id="collapse1" class="collapse in">
     <timeline>
       <timeline-event ng-repeat="comment in chartInfo.comments" side="">
-        <timeline-badge ng-style="{{commentThumbStyle}}">
+        <timeline-badge ng-style="{{comment.commenterThumb}}">
+<!--			{{commentThumbStyle}}-->
         </timeline-badge>
-        <timeline-panel class="{{comment.badgeClass}}">
-			<i class="glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}" ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
+<!-- 		 timeline-comment-{{comment.badgeClass}}-->
+        <timeline-panel ng-style="{{comment.badgeClass}}">
+		<i ng-class="'glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}'"  ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
           <timeline-heading>
             <h4>{{comment.userid | uppercase}}&nbsp;</h4>
             <p ng-if="comment.when">
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-			<p>	  {{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i>
-			</p>
-
+			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
         </timeline-panel>
       </timeline-event>
     </timeline>
-	  {{commentThumbStyle}}
   </div>
 </div>

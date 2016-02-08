@@ -48,3 +48,5 @@
 		 regCtrl.cancel = function(){
 			 $location.path("/");
 		 };
+	 
+ }]);

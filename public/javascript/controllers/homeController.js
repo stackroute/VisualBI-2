@@ -78,13 +78,23 @@ angular.module('vbiApp')
 				resolve: {
 					chartInfo: function(){
                         var userComments=[];
-
+						var imgSrc='url("../images/login-page.png")';
+						
                         angular.forEach(widget.comments, function(comment, key){
-                            userComments.push({
+								
+								if(comment.commenterDpThumb!='')
+									imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
+								else
+									imgSrc='url("../images/login-page.png")';
+									
+							
+	                            userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
                                 badgeClass: comment.badgeClass,
                                 badgeIconClass: comment.badgeIconClass,
+								commenterThumb: {'background-image': imgSrc,
+												'background-size': '50px 50px'},
                                 when: Date()
                             });
                         });

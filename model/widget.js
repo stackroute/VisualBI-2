@@ -13,7 +13,8 @@ var WidgetSchema = mongoose.Schema({
       comment: String,
       datetime:{type:Date, default: Date.Now},
 	  badgeClass: String,
-	  badgeIconClass: String
+	  badgeIconClass: String,
+	  commenterDpThumb:String
    }],
   commenters:[{commenter:String}],
   commentersCounter : Number
@@ -48,60 +49,61 @@ WidgetSchema.statics.getCommenters = function(widgetId,callback) {
 
 
 WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
-	
-   this.model('Widget').update({
-     '_id' : widgetId
-   },{$push:{
-         commenters : {commenter:userid}
-     }
-   },function(err) {
-       if(err){   
-                console.log(err);
-       }        
-   });
-	
-   
-   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
-       if(err){  
-                console.log(err);
-       }
-   });
+
+	   this.model('Widget').update({
+		 '_id' : widgetId
+	   },{$push:{
+			 commenters : {commenter:userid}
+		 }
+	   },function(err) {
+		   if(err){   
+					console.log(err);
+		   }        
+	   });
+
+
+	   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
+		   if(err){  
+					console.log(err);
+		   }
+	   });
 }
 
-WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory){
+WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory,commenterThumb){
    this.model('Widget').update({
      '_id' : widgetId
    },{
      $push: {
          comments:{userid : userid,
                    comment : userComment,
-                   datetime : new Date(),//{type:Date, default: Date.Now}, 
+                   datetime : new Date(),//{type:Date, default: Date.Now},
 				   badgeClass : commentCategory,
 				   badgeIconClass:commentClass,
+				   commenterDpThumb:commenterThumb,
 				   _id:0
 				  }
      }
    },function(err, userComment) {
        if(err){
-                
+
                 console.log(err);
        }
    });
-	
+
    this.model('Widget').update({
      '_id' : widgetId
    },{$set:{
          lastCommentedBy : userid
      }
    },function(err, userComment) {
-       if(err){   
+       if(err){
                 console.log(err);
-       }        
+       }
    });
-    
-   
+
+
    this.model('Widget').update({'_id' : widgetId},{$inc : { commentsCounter : 1 }},function(err, userComment) {
-       if(err){  
+       if(err){
                 console.log(err);
        }
    });

@@ -33,6 +33,9 @@
 	background-size: 50px 50px;
 }
 
+.testerClass{
+	color:aqua;
+}
 .timeline-ui-delete-btn{
 	font-size: 12px;
 }
