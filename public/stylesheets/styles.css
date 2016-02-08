@@ -288,16 +288,19 @@ table,  th,  td{
 
 /* Share Modal  Styles*/
 
+#input-group{
+	width:380px;
+}
+
 .permission{
 	position: absolute;
-	right:30px;
-  top:20px;
-	height:40px;
+	right:10px;
+  top:22px;
 }
 
 .dropdown-height{
-	height:39px;
-	left:15px;
+	height:41px;
+	left:25px;
 	down:10px;
 }
 
@@ -309,12 +312,17 @@ margin-top: 85px;
 
 #shareBody{
   width:600px;
-	height: auto;
 }
 
-#shareTag{
+.input-group-addon{
+	height:32px;
+}
+
+#shareTag .tags{
 	width: 380px;
-	height: 40px;
+	max-height: 70px;
+	min-height: 42px;
+	overflow-y: scroll;
 }
 
 #ShareModalCloseBtn{

@@ -1,7 +1,12 @@
+//This files contains method which interact with database. All logic should be written here so that
+//unit test cases can be written for all db interaction
+
 var mongoose = require('mongoose'),
 	 User = require('../config/db').userModel,
 	 Credential = require('../config/db').credentialModel;
 
+//Registers a user. It creates an entry into Credential collection. It also adds one template 
+//in User collection for dashboard
 this.registerUser = function (user, done) {
 	Credential.register({
 		username : user.username,

@@ -16,3 +16,7 @@ module.exports = {
 	widgetWave1Model : studiodb.model('Widget', widgetWave1Schema),
   connectionModel : studiodb.model('Connection',connectionSchema)
 };
+
+ // module.exports = {
+ //   url: "mongodb://localhost:27017/visualdb"
+ // };
