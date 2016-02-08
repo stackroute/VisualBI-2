@@ -63,6 +63,9 @@ body{
     position: absolute;
     padding: 15px;
 }
+.edit-widget-style{
+	text-align: center;
+}
 
 /* Sidebar Styles */
 .sidebar-nav {
