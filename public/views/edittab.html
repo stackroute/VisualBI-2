@@ -39,10 +39,9 @@
 																						data-jqyoui-options="{revert: 'invalid'}" data-direction="{{col.jqyouiDirection}}"	>
 						<button class="pull-right" ng-click="removeWidget(rowIndex, colIndex,col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-remove resize-icon"></span></button>
 						<button  class="pull-right" ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-resize-horizontal resize-icon"></span></button>
-							<p>
+							<div class="panel-heading edit-widget-style">
 								
 								{{isExists(col.widgetId.widgetName) && col.widgetId.widgetName || col.widgetId.title}}
-							</p>
 						</div>
 			  	</div>
 			 	</div>
