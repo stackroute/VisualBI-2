@@ -1,3 +1,5 @@
+//Model used to create a schema for widget collection of visualBI database
+
 var mongoose = require('mongoose'),
     schema = mongoose.Schema;
 
@@ -17,11 +19,11 @@ var widgetSchema = new schema({
    widgetSlug      : String
 });
 
+//function to fetch the widget documents from visualBI widget collection
 widgetSchema.statics.getWidgets = function(callback) {
    this.model('Widget').find({}, function(err, data) {
       callback(data);
    })
 }
 
-//var widget = mongoose.model('Widget', widgetSchema);
 module.exports = widgetSchema;

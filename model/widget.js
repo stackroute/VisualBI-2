@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
+//Model used to create a schema for widget collection of visualdb database
 
+var mongoose = require('mongoose');
 
 var WidgetSchema = mongoose.Schema({
    title: String,
@@ -19,6 +20,7 @@ var WidgetSchema = mongoose.Schema({
   commentersCounter : Number
 }, {strict: false});
 
+//prototype for writing into widget collection
 var widgetProto = function(studio_id, title,chartRenderer,parameters) {
   this.studio_id = studio_id;
   this.title = title;
