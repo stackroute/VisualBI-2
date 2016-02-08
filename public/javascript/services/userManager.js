@@ -52,7 +52,7 @@ angular.module('vbiApp')
              },
 
              loadUserNames: function($query) {
-                 return $http.post('/getUserList', { cache: true}).then(function(response) {
+                 return $http.post('/getUserId/userList', { cache: true}).then(function(response) {
                    var userNames = response.data;
                    return userNames.filter(function(userNameObj) {
                      return userNameObj.username.toLowerCase().indexOf($query.toLowerCase()) != -1;

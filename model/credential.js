@@ -35,7 +35,7 @@ CredentialSchema.statics.getCredentialId = function(username, callback){
 
 CredentialSchema.statics.getUsers = function(callback){
 	this.model('Credential')
-			.find({},{'username':1}).exec(function(err,data){
+			.find({},{'username':1,'name':1}).exec(function(err,data){
 				if(!err)
 					callback(data);
 			})

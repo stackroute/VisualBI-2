@@ -5,7 +5,9 @@ angular.module('vbiApp')
       $scope.validUserNames = []; $scope.tags = [];
 
       $scope.tagAdded = function(tag) {
-          userManager.getUserId(tag.username,$rootScope.currentDashboard,$scope.permission)
+        console.log($scope.selectedPermisson);
+        debugger;
+          userManager.getUserId(tag.username,$rootScope.currentDashboard,$scope.selectedPermisson.name)
           .then(function(result){
               $scope.shareErrMessage = result;
           })
@@ -23,8 +25,9 @@ angular.module('vbiApp')
       //remove loop assaign usernames directly to scope
       $scope.shareDashboard = function(){
         $scope.userNames = $scope.tags;
-        userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.selectedItem.name)
+        userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.selectedPermisson.name)
         .then(function(userid){
+          $uibModalInstance.close();
           // console.log(userid);
           //$scope.validUserNames.push(userObj.username);
         })
@@ -50,5 +53,5 @@ angular.module('vbiApp')
 
           }];
 
-      $scope.selectedItem = $scope.permissons[2];
+      $scope.selectedPermisson = $scope.permissons[2];
     }]);
