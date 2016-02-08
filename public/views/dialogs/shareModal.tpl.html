@@ -7,7 +7,6 @@
     </div>
 
     <div class="modal-body" id="shareBody">
-
     <div class="input-group input-group-lg" id ="input-group">
      <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
@@ -29,8 +28,8 @@
     </div>
 
       <div class="permission">
-        <select ng-model="selectedItem" ng-change="changedPermission(selectedItem)" ng-options="c as (c.name) for c in containers" class="dropdown-height">
-          <option value="">Access</option>
+        <select ng-model="selectedItem" ng-change="changedPermission(selectedItem)"
+        ng-options="c as (c.name) for c in containers" class="dropdown-height">
         </select>
 
       </div>
