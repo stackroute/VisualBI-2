@@ -14,15 +14,16 @@ var express = require('express'),
 var indexRouter = require('./routes/indexRouter'),
     userRouter = require('./routes/userRouter'),
     widgetRouter = require('./routes/widgetRouter'),
+    widgetMdxRouter = require('./routes/widgetMdxRouter'),
     dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
-    Credential = require('./model/credential'),
+    Credential = require('./config/db').credentialModel,
     gridRouter = require('./routes/girdRouter'),
     commentsRouter=require('./routes/commentsRouter'),
     getUserId  = require('./routes/userId');
     getUserList = require('./routes/userList');
-   
+
 
 
 
@@ -48,8 +49,7 @@ var storage = multer.diskStorage({ //multers disk storage settings
         },
         filename: function (req, file, cb) {
             var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
-			console.log(file.fieldname);
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
         }
     });
 
@@ -81,12 +81,12 @@ passport.use(new LocalStrategy(Credential.authenticate()));
 passport.serializeUser(Credential.serializeUser());
 passport.deserializeUser(Credential.deserializeUser());
 
-mongoose.connect(dbConfig.url);
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
+app.use('/widgetsMdx', widgetMdxRouter);
 app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);

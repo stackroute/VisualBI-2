@@ -2,7 +2,7 @@ var express = require('express'),
     mongoose  = require('mongoose');
 
 var xmla   =  require("../lib/Xmla.js"),
-    Connections = require("../model/connections");
+    Connections = require("../config/db").connectionModel;
 
 var router = express.Router(),
     Xmla   =  xmla.Xmla;
@@ -11,17 +11,16 @@ var router = express.Router(),
 router.post('/', function(req, res) {
   // console.log(req.body.mdxQuery);
   // console.log("inside route/execute");
-  
       var statement  = req.body.statement,
           connId   = req.body.connId,
           properties = {};
-      properties[Xmla.PROP_DATASOURCEINFO]  = req.body.dataSource;
-      properties[Xmla.PROP_CATALOG]         = req.body.catalog;
+          properties[Xmla.PROP_DATASOURCEINFO]  = req.body.dataSource;
+          properties[Xmla.PROP_CATALOG] = req.body.catalog;
       /*available formats:
         .PROP_FORMAT_MULTIDIMENSIONAL
         .PROP_FORMAT_TABULAR
       */
-      properties[Xmla.PROP_FORMAT]          = Xmla.PROP_FORMAT_MULTIDIMENSIONAL;
+        properties[Xmla.PROP_FORMAT] = Xmla.PROP_FORMAT_MULTIDIMENSIONAL;
       /*available axis formats
         (applicable to .PROP_FORMAT_MULTIDIMENSIONAL):
             TupleFormat
@@ -89,14 +88,16 @@ router.post('/', function(req, res) {
 
             success:function(xmla,xmlaRequest,xmlaResponse) {
                 var obj=xmlaResponse;
+
                 if(obj instanceof Xmla.Dataset)
                   {
                     getDatafrmDataset(obj);
                   }
                   res.json(dataSet);
-                  // console.log(JSON.stringify(dataSet,null,2));
+                  //console.log(JSON.stringify(dataSet,null,2));
               },
             error: function(xmla, xmlaRequest, exception) {
+
                   res.json({status: "error", info: exception});
             },
             callback: function(){
@@ -106,8 +107,6 @@ router.post('/', function(req, res) {
           var x = new xmla.Xmla();
           var result =x.execute(xmlaRequest);
           //////////
-
-
         });
 });
 

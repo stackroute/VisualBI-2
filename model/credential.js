@@ -1,3 +1,5 @@
+//Credential collections keeps the information related to user like username, password and email address
+
 var mongoose = require('mongoose'),
 	 passportLocal = require('passport-local'),
 	 passportLocalMongoose = require('passport-local-mongoose');
@@ -17,22 +19,6 @@ var CredentialSchema = mongoose.Schema({
 //CredentialSchema.plugin(passportLocal);
 CredentialSchema.plugin(passportLocalMongoose);
 
-CredentialSchema.statics.registerUser =function(username,password) {
-    this.model('Credential').update({},{$push:{userinfo:{
-         username : username,
-         password : password
-    }
-     }
-     },
-   function(err, data) {
-       if(err){
-                
-                console.log(err);
-       }
-        console.log("Registration updated in db");
-   });
-};
-
 CredentialSchema.statics.getCredentialId = function(username, callback){
   this.model('Credential')
 		.findOne({
@@ -41,7 +27,7 @@ CredentialSchema.statics.getCredentialId = function(username, callback){
 		'_id': 1
 	}).exec(function(err, data) {
 			if(err){
-				console.log(err);
+				// console.log(err);
 			}
 			callback(data);
 	});
@@ -54,4 +40,5 @@ CredentialSchema.statics.getUsers = function(callback){
 					callback(data);
 			})
 }
-module.exports = mongoose.model("Credential", CredentialSchema);
+// mongoose.model("Credential", CredentialSchema);
+module.exports = CredentialSchema;

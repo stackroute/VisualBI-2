@@ -2,8 +2,8 @@ angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
      $scope.user = $rootScope.loggedInUser;
 		 $scope.canShare = true;
-		 $scope.canS
 		 $scope.canEdit = true;
+		 $scope.canComment = true;
 		 $scope.tabs = [];
 		 $scope.showMenu = true;
 		 //data for every widget will put here. It is required to give more functionality like
@@ -42,28 +42,30 @@ angular.module('vbiApp')
 				$scope.tabs = dashboard.tabs;
 				$scope.canShare = true;
 				$scope.canEdit = true;
+				$scope.canComment = true;
 			}
 		};
 
-		$scope.showSharedDashboard = function(userid, dashboardId){
+		$scope.showSharedDashboard = function(userid, dashboardId, permission){
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
 						$scope.tabs = sharedDashboard.tabs;
 						$scope.canShare = false;
-						$scope.canEdit = false;
+						$scope.canEdit = permission.toUpperCase() === "CAN EDIT";
+						$scope.canComment = permission.toUpperCase() === "CAN EDIT" || permission.toUpperCase() === "CAN COMMENT";
 					}
 			});
 		};
 
         /*share Dashboard Modal*/
-    $scope.shareDashboardModal = function(sharedWith) {
+    $scope.shareDashboardModal = function(currentUserData) {
       var shareConfig = {
         templateUrl: 'shareModal',
         controller: 'shareDashboardController',
         resolve: {
           sharedDashboards: function(){
-            return sharedWith;
+            return currentUserData.dashboards[0].sharedWith; //assuming there is only one dashboard.
           }
         }
       };
@@ -105,7 +107,7 @@ angular.module('vbiApp')
 							title: widget.title,
 							comments: userComments,
 							widgetId: widget._id,
-							canComment: $scope.canEdit
+							canComment: $scope.canComment
 						};
 					}
 				}
