@@ -3,10 +3,46 @@
 	<div>
 		<div ng-include="'views/dialogs/customWidgetWidth.tpl.html'"></div>
 		<div ng-include="'views/dialogs/overwritePopup.tpl.html'"></div>
-		<div class="panel panel-primary pull-left" id="widget-library">
+    <!-- *************************************************************** -->
+		<div class="tabbable tabs-left" ng-controller="menuCtrl">
+      <ul class="nav nav-tabs nav-customWidget-style">
+         <li ng-class="getTabClass(1)" ng-click="setActiveTab(1)"><a href="studioWidget" data-toggle="tab">Studio Widget</a></li>
+         <li ng-class="getTabClass(2)" ng-click="setActiveTab(2)"><a href="userWidget" data-toggle="tab">User Widget</a></li>
+      </ul>
+			<div class="tab-content">
+        <div ng-class="getTabPaneClass(1)" id="studioWidget" ng-show="showTab(1)">
+					<div class=" panel panel-body panel-width-style">
+						<ul class="ul-widget-style">
+							<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.widgetName"
+												data-drag="true"
+												data-jqyoui-options="{revert: 'invalid', appendTo: 'body', helper: 'clone'}"
+												ng-model="widgetItems"
+												jqyoui-draggable="{index: {{$index}}, animate: true, placeholder: 'keep', onStart: 'startDrag(1)'}">
+								<a>
+									<div class="panel panel-info ">
+										<div class="panel-heading">{{ widget.widgetName }}
+										</div>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+         </div>
+        <div ng-class="getTabPaneClass(2)" id="userWidget" ng-show="showTab(2)">
+					<div class=" panel panel-body panel-width-style">
+					</div>
+        </div>
+			</div>
+		</div>
+
+
+
+
+		<!-- *************************************************************** -->
+		<!-- <div class="panel panel-primary pull-left" id="widget-library">
 			<div class="panel-heading">widget Library </div>
-			<!-- widget library comes here -->
-			<div class="panel-body">
+			<!- widget library comes here -->
+			<!-- <div class="panel-body">
 				<ul>
 					<li id="widget" ng-repeat="widget in widgetItems" ng-show="widget.widgetName"
 										data-drag="true"
@@ -21,7 +57,7 @@
 						</a>
 					</li>
 				</ul>
-			</div>
+			</div> -->
 		<!-- </aside> -->
 	</div>
 		<div class="container">
@@ -40,7 +76,7 @@
 						<button class="pull-right" ng-click="removeWidget(rowIndex, colIndex,col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-remove resize-icon"></span></button>
 						<button  class="pull-right" ng-click="widthModal(0,0,rowIndex, colIndex, col.colWidth)" type="button"><span aria-hidden="true" class="glyphicon glyphicon-resize-horizontal resize-icon"></span></button>
 							<div class="panel-heading edit-widget-style">
-								
+
 								{{isExists(col.widgetId.widgetName) && col.widgetId.widgetName || col.widgetId.title}}
 						</div>
 			  	</div>

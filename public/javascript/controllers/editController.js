@@ -41,24 +41,24 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       $scope.widgetItems = widgets;
     });
 
-  function initTabs() {
-    tabClasses = ["","","",""];
-  }
-
-  $scope.getTabClass = function (tabNum) {
-    return tabClasses[tabNum];
-  };
-
-  $scope.getTabPaneClass = function (tabNum) {
-    return "tab-pane " + tabClasses[tabNum];
-  }
-
-  $scope.setActiveTab = function (tabNum) {
-    initTabs();
-    tabClasses[tabNum] = "active";
-  };
-
-  initTabs();
+  // function initTabs() {
+  //   tabClasses = ["","","",""];
+  // }
+  //
+  // $scope.getTabClass = function (tabNum) {
+  //   return tabClasses[tabNum];
+  // };
+  //
+  // $scope.getTabPaneClass = function (tabNum) {
+  //   return "tab-pane " + tabClasses[tabNum];
+  // }
+  //
+  // $scope.setActiveTab = function (tabNum) {
+  //   initTabs();
+  //   tabClasses[tabNum] = "active";
+  // };
+  //
+  // initTabs();
 
   $scope.addRow = function() {
     addNewRow();
@@ -268,3 +268,42 @@ angular.module('vbiApp')
       }
       $scope.widthConfig = widthConfig;
     }]);
+angular.module('vbiApp')
+.controller('menuCtrl', function($scope){
+var tabClasses;
+var curId = 0;
+
+function initTabs() {
+tabClasses = ["","","",""];
+}
+
+$scope.getTabClass = function (tabNum) {
+return tabClasses[tabNum];
+};
+
+$scope.getTabPaneClass = function (tabNum) {
+return "tab-pane " + tabClasses[tabNum];
+}
+
+$scope.setActiveTab = function (tabNum) {
+initTabs();
+console.log(tabNum);
+curId = tabNum;
+tabClasses[tabNum] = "active";
+};
+
+$scope.showTab = function(tabId) {
+  console.log(tabId + " " + curId);
+  if(tabId == curId) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+ $scope.tab2 = "This is SECOND section";
+
+//Initialize
+  initTabs();
+  $scope.setActiveTab(1);
+});
