@@ -10,10 +10,11 @@ var UserSchema = mongoose.Schema({
    dashboards: [{
       _id: String,
       sharedWith: [mongoose.Schema.Types.Mixed],
-      tabs: [{tabTitle: String,
+      tabs: [{_id: false,
+         tabTitle: String,
          tabId: String,
-         rows: [{
-				columns:[{
+         rows: [{_id: false,
+				columns:[{_id: false,
 					colWidth: Number,
             	widgetId: {type: mongoose.Schema.ObjectId, ref: 'Widget'}
 				}]
@@ -107,9 +108,6 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
 }
 
 UserSchema.statics.saveTab = function(userid, savetabs) {
-  console.log("reached user savetab");
-  console.log(userid);
-  console.log(savetabs);
 
   this.model('User').update({
     'userid': userid
@@ -120,10 +118,8 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
       }]
     }
   },function(err, data) {
-    console.log("Data " + data);
+
   });
-
-
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDashboard){

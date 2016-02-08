@@ -7,12 +7,12 @@ var connectionSchema = require('../model/connections');
 var credentialSchema = require('../model/credential');
 var userSchema = require('../model/user');
 var widgetSchema = require('../model/widget');
-var widgetWave1Schema = require('../model/widget_wave1')
+var widgetMdxSchema = require('../model/widgetMdx')
 
 module.exports = {
   credentialModel : mongoose.model('Credential',credentialSchema),
   userModel : mongoose.model('User',userSchema),
   widgetModel : mongoose.model('Widget', widgetSchema),
-	widgetWave1Model : studiodb.model('Widget', widgetWave1Schema),
+	widgetMdxModel : studiodb.model('Widget', widgetMdxSchema),
   connectionModel : studiodb.model('Connection',connectionSchema)
 };

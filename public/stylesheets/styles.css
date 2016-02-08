@@ -112,11 +112,9 @@ body{
 }
 
 .widget-body {
-/*
     overflow-x: scroll;
-    height: 500px;
-*/
 }
+
 .login-error {
    color: red;
    font-weight: bold;
