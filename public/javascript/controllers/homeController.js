@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route) {
      $scope.user = $rootScope.loggedInUser;
 	 $scope.canShare = true;
 	 $scope.canEdit = true;
@@ -78,7 +78,11 @@ angular.module('vbiApp')
   }
 
 		$scope.fullScreen = function(widget) {
-			var modalConfig = {
+			//get comments from the server
+			widgetManager.getComment(widget._id).then(function(comments){
+				widget.comments = comments;
+				
+				var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
 				size: 'lg',
@@ -108,6 +112,9 @@ angular.module('vbiApp')
 				}
 			};
 			$uibModal.open(modalConfig);
+				
+			});
+			
 		}
 
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {

@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-	.factory('chartRenderer', ['gdpPerCapitaBarChart', 'gdpStackedBarChart', 'plotContinentChart', 'plotNorthEast', 'executeQueryService', function(gdpPerCapitaBarChart, gdpStackedBarChart, plotContinentChart, plotNorthEast, executeQueryService){
+	.factory('chartRenderer', ['gdpPerCapitaBarChart', 'gdpStackedBarChart', 'plotContinentChart', 'plotNorthEast', 'executeQueryService', 'GraphService', function(gdpPerCapitaBarChart, gdpStackedBarChart, plotContinentChart, plotNorthEast, executeQueryService, GraphService){
 		
 		this.plotChart = function(serviceName, chartContainer, parameter) {
 			var chartRendererMethod = serviceName + '.render(chartContainer, parameter)';
