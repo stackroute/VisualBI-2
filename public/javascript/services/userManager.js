@@ -88,7 +88,7 @@ angular.module('vbiApp')
 
                     //POST request to Mongo to write the comment to the database, with parameters object as payload
                     $http({
-                        url: "/addcomment",
+							url: "/comment",
                         method: "POST",
                         data: parameters,
                         headers: {
@@ -116,7 +116,7 @@ angular.module('vbiApp')
 
 
                     //POST request to Mongo to write the comment to the database, with parameters object as payload
-                    $http.get('/addcomment/' + widgetId).then(function successCallback(data, status) {
+						$http.get('/comment/commenters/'+widgetId).then(function successCallback(data, status) {
                         resolve(data);
                     }, function errorCallback(err) {
                         reject(err);
@@ -128,7 +128,7 @@ angular.module('vbiApp')
                 return new Promise(function(resolve, reject) {
                     //POST request to Mongo to write the comment to the database, with parameters object as payload
                     $http({
-                        url: "/addcomment/updateCommenterInfo",
+											url: "/comment/updateCommenterInfo",
                         method: "POST",
                         data: {
                             widgetId: widgetId,

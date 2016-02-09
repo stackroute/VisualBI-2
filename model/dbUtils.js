@@ -3,7 +3,8 @@
 
 var mongoose = require('mongoose'),
 	 User = require('../config/db').userModel,
-	 Credential = require('../config/db').credentialModel;
+	 Credential = require('../config/db').credentialModel,
+	 Widget = require('../config/db').widgetModel;
 
 //Registers a user. It creates an entry into Credential collection. It also adds one template 
 //in User collection for dashboard
@@ -35,5 +36,12 @@ this.registerUser = function (user, done) {
 	});
 }
 
+this.getComments = function(widgetId) {
+	return Widget.getComments(widgetId)
+		.then(function(widget) {
+//			console.log(widget);
+			return widget;
+	});
+};
 
 module.exports = this;

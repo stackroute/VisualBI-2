@@ -20,7 +20,7 @@ var indexRouter = require('./routes/indexRouter'),
     dbConfig = require('./config/db'),
     Credential = require('./config/db').credentialModel,
     gridRouter = require('./routes/girdRouter'),
-    commentsRouter=require('./routes/commentsRouter'),
+    commentsRouter = require('./routes/commentsRouter'),
     dashboardRouter  = require('./routes/dashboardRouter');
 
 var app = express();
@@ -83,7 +83,7 @@ app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
 app.use('/widgetsMdx', widgetMdxRouter);
-app.use('/addcomment', commentsRouter);
+app.use('/comment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
 
