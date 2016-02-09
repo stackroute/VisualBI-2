@@ -36,6 +36,7 @@
       <div>
         <p  class="alert alert-success" ng-show="validUserNames.length > 0">Shared with {{validUserNames}}</p>
         <p class="alert alert-danger" ng-show="shareErrMessage.length > 0">{{shareErrMessage}}</p>
+        <p ng-hide="dashboardAlert" style="position: absolute;">this is dashboardAlert</p>
       </div>
       <div class="share-btn" id="sharebutton">
         <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>

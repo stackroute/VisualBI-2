@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .service('userManager', ['$http', function($http) {
+    .service('userManager', ['$http','$timeout', function($http, $timeout) {
         return {
 			  login: function(user, done) {
 				  $http.post('/login', {username:user.email, password:user.password})
@@ -41,6 +41,16 @@ angular.module('vbiApp')
                    .then(function(res){
                    return (res.data);
                      });
+            },
+
+            toggleDashboardAlert: function(){
+                dashboardAlert:false;
+
+                return $timeout(function () {
+                  dashboardAlert = true;
+                }, 3000).then(function(){
+                  return(true);
+                });
             },
 
             shareDashboard: function(userNames,currentDashboard,permission){
