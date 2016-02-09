@@ -7,7 +7,13 @@ var express = require('express'),
 router.post('/',function(req,res,next){
 
 	if(req.isAuthenticated()){
-		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory,req.user.imagePath);
+		imgSrc=req.user.imagePath;
+		
+		if(imgSrc=='test path')
+			imgSrc='public/images/default-user.png';
+		
+		
+		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory,imgSrc);
 		res.send({resp:'success',user:req.user.name,image:req.user.imagePath});
 	}
 	else

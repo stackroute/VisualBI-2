@@ -2,7 +2,8 @@ angular.module('vbiApp').controller('chartModalController', ['userManager', '$sc
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
-		loggedInUser = '';
+		loggedInUser = '',
+		deleteIndc=false;
 
     //	function to set the comment icon class and color
     $scope.registerCommentType = function(icon) {
@@ -36,13 +37,14 @@ angular.module('vbiApp').controller('chartModalController', ['userManager', '$sc
 			
             loggedInUser = data.user;
 			
-			if(data.image!='')
-				imgSrc='url("'+data.image.substring(6)+'")';
-			else
-				imgSrc='url("../images/login-page.png")';
+			if(data.image=='test path')//cleanup
+				imgSrc='url("../images/default-user.png")';
+			
+			
 
 			var commentThumbStyle = {'background-image': imgSrc,
 				'background-size': '50px 50px'};
+
 			
             chartInfo.comments.push({
                 userid: loggedInUser, 
@@ -60,7 +62,7 @@ angular.module('vbiApp').controller('chartModalController', ['userManager', '$sc
             userManager.getCommenters(chartInfo.widgetId).then(function(data) {
 
                 var insertIndc;
-                angular.forEach(data.data[0].commenters, function(commenter, key) {
+                angular.forEach(data.data[0].commenters, function(commenter, key) { //cleanup
                     if (loggedInUser == commenter.commenter) {
                         insertIndc = false;
                     }
@@ -82,4 +84,12 @@ angular.module('vbiApp').controller('chartModalController', ['userManager', '$sc
     $scope.hide = function() {
         $uibModalInstance.dismiss('cancel');
     };
+	
+	$scope.deleteComment=function(array,index){
+		array.splice(index,1);
+		deleteIndc=true;
+	}
+	$scope.movingOut=function(){ //cleanup
+		alert('I am losing focus! Please do something');
+	}
 }]);

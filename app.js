@@ -87,7 +87,7 @@ app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
 app.use('/widgetsMdx', widgetMdxRouter);
-app.use('/addcomment', commentsRouter);
+app.use('/comment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
 app.use('/getUserId', getUserId);

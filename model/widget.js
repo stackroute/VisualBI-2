@@ -32,6 +32,7 @@ var widgetProto = function(studio_id, title,chartRenderer,parameters) {
   this.commenters = [];
   this.commentsCounter = 0;
   this.lastCommentedBy = "";
+  this.commenterDpThumb='';
   this.parameters = parameters;
 }
 
@@ -154,7 +155,8 @@ WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
 }
 
 WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory,commenterThumb){
-   this.model('Widget').update({
+	
+	this.model('Widget').update({
      '_id' : widgetId
    },{
      $push: {

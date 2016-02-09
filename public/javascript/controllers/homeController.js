@@ -80,16 +80,16 @@ angular.module('vbiApp')
 				resolve: {
 					chartInfo: function(){
                         var userComments=[];
-						var imgSrc='url("../images/login-page.png")';
+						var imgSrc='url("../images/default-user.png")';
 						
                         angular.forEach(widget.comments, function(comment, key){
 								
-								if(comment.commenterDpThumb!='')
+								if(comment.commenterDpThumb!=''||comment.commenterDpThumb!='undefined')
 									imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
 								else
-									imgSrc='url("../images/login-page.png")';
-									
-							
+									imgSrc='url("../images/default-user.png")';
+								
+													
 	                            userComments.push({
                                 userid: comment.userid,
                                 comment: comment.comment,
@@ -97,6 +97,7 @@ angular.module('vbiApp')
                                 badgeIconClass: comment.badgeIconClass,
 								commenterThumb: {'background-image': imgSrc,
 												'background-size': '50px 50px'},
+								commentView:
                                 when: Date()
                             });
                         });
@@ -258,6 +259,7 @@ angular.module('vbiApp')
 });
 ;
 
+
 angular.module('vbiApp')
     .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {
       var homeCtrl = $scope.$new();
@@ -268,7 +270,7 @@ angular.module('vbiApp')
         if(tabTitle.setType == 1) {
           homeCtrl.createTab(title);
         } else {
-          homeCtrl.renameTab(title, tabTitle.tabIndex)
+          homeCtrl.renameTab(title, tabTitle.tabIndex);
         }
       }
       $scope.closeModal = function() {
