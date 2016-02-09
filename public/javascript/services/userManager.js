@@ -1,10 +1,13 @@
 angular.module('vbiApp')
-    .service('userManager', ['$http', function($http) {
+    .service('userManager', ['$http', '$timeout', function($http, $timeout) {
         return {
-			  login: function(user, done) {
-				  $http.post('/login', {username:user.email, password:user.password})
-				  	.success(function (data, status, headers, config) {
-					  done(null, data);
+            login: function(user, done) {
+                $http.post('/login', {
+                        username: user.email,
+                        password: user.password
+                    })
+                    .success(function(data, status, headers, config) {
+                        done(null, data);
 
                     }).error(function(data, status, header, config) {
                         error = "Invalid User name or password!"
@@ -13,53 +16,71 @@ angular.module('vbiApp')
                     });
             },
 
-			  logout: function(user, done) {
-				  return $http.get('/logout');
-			  },
-			    //returns the dashboard of a user
-           getDashboard: function(userid, dashboardId) {
-				  return $http({
-					  method: 'GET',
-					  url: '/dashboard/' + userid + '/' + dashboardId
-						}).then(function(res) {
-						  return (res.data);
-						});
-          },
-			  //returns dashboard of current loggedin user
-			  getData: function() {
-				  return $http({
-					  method: 'GET',
-					  url: '/dashboard'
-					}).then(function(res) {
-						  return (res.data);
-					});
-          },
-
-           getUserId: function(userName,currentDashboard,permission){
-                     var parms = JSON.stringify({type:"user", userName:userName, currentDashboard:currentDashboard, permission:permission});
-                   return $http.post('/getUserId', parms)
-                   .then(function(res){
-                   return (res.data);
-                     });
+            logout: function(user, done) {
+                return $http.get('/logout');
+            },
+            //returns the dashboard of a user
+            getDashboard: function(userid, dashboardId) {
+                return $http({
+                    method: 'GET',
+                    url: '/dashboard/' + userid + '/' + dashboardId
+                }).then(function(res) {
+                    return (res.data);
+                });
+            },
+            //returns dashboard of current loggedin user
+            getData: function() {
+                return $http({
+                    method: 'GET',
+                    url: '/dashboard/userData'
+                }).then(function(res) {
+                    return (res.data);
+                });
             },
 
-            shareDashboard: function(userNames,currentDashboard,permission){
-              var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission});
-                      return $http.post(' /getUserId/shareDashboard', parms)
-                      .then(function(res){
+            getUserId: function(userName, currentDashboard, permission) {
+                var parms = JSON.stringify({
+                    type: "user",
+                    userName: userName,
+                    currentDashboard: currentDashboard,
+                    permission: permission
+                });
+                return $http.post('/dashboard', parms)
+                    .then(function(res) {
+                        return (res.data);
+                    });
+            },
+
+            timeoutDashboardAlert: function() {
+                return $timeout(function() {}, 3000).then(function() {
+                    return (true);
+                });
+            },
+
+            shareDashboard: function(userNames, currentDashboard, permission) {
+                var parms = JSON.stringify({
+                    type: "user",
+                    userNames: userNames,
+                    currentDashboard: currentDashboard,
+                    permission: permission
+                });
+                return $http.post(' /dashboard/shareDashboard', parms)
+                    .then(function(res) {
                         return (res);
                     });
             },
 
-             loadUserNames: function($query) {
-                 return $http.post('/getUserList', { cache: true}).then(function(response) {
-                   var userNames = response.data;
-                   return userNames.filter(function(userNameObj) {
-                     return userNameObj.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
-                   });
-                 });
-               },
-				pushComment: function(parameters) {
+            loadUserNames: function($query) {
+                return $http.post('/dashboard/userList', {
+                    cache: true
+                }).then(function(response) {
+                    var userNames = response.data;
+                    return userNames.filter(function(userNameObj) {
+                        return userNameObj.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
+                    });
+                });
+            },
+            pushComment: function(parameters) {
 
                 return new Promise(function(resolve, reject) {
 
@@ -67,7 +88,7 @@ angular.module('vbiApp')
 
                     //POST request to Mongo to write the comment to the database, with parameters object as payload
                     $http({
-                        url: "/comment",
+							url: "/comment",
                         method: "POST",
                         data: parameters,
                         headers: {
@@ -95,7 +116,7 @@ angular.module('vbiApp')
 
 
                     //POST request to Mongo to write the comment to the database, with parameters object as payload
-                    $http.get('/comment/' + widgetId).then(function successCallback(data, status) {
+						$http.get('/comment/commenters/'+widgetId).then(function successCallback(data, status) {
                         resolve(data);
                     }, function errorCallback(err) {
                         reject(err);

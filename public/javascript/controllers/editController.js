@@ -7,6 +7,7 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   $scope.tempId = [];
   $scope.getAllTabs = editManager.getTabDetails();
   $scope.tabIndex = editManager.getTabIndex();
+  var sharedDashboardUserId = editManager.getSharedDashboardUserId();
   $scope.tabs = [];
 
   if((typeof $scope.getAllTabs === 'undefined') || (typeof $scope.tabIndex === 'undefined')) {
@@ -16,6 +17,7 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   $scope.tabs.push($scope.getAllTabs[$scope.tabIndex]);
 
   $scope.resetPlaceHolder = function(rowId, remainingWidth) {
+    console.log("Reached ResetPlaceHolder");
     var i = $scope.tabs[0].rows[rowId].columns.length;
     while (i--) {
       var column = $scope.tabs[0].rows[rowId].columns[i];
@@ -29,36 +31,20 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
           };
 
         $scope.tabs[0].rows[rowId].columns.push(addColumn);
+        console.log($scope.tabs[0].rows[rowId].columns);
     }
   };
 
   angular.forEach($scope.tabs[0].rows, function(row, rowIndex) {
     $scope.resetPlaceHolder(rowIndex, maxWidth);
+    console.log(rowIndex + " " + maxWidth);
   });
 
   widgetManager.getWidget()
     .then(function(widgets) {
       $scope.widgetItems = widgets;
+      console.log(widgets);
     });
-
-  function initTabs() {
-    tabClasses = ["","","",""];
-  }
-
-  $scope.getTabClass = function (tabNum) {
-    return tabClasses[tabNum];
-  };
-
-  $scope.getTabPaneClass = function (tabNum) {
-    return "tab-pane " + tabClasses[tabNum];
-  }
-
-  $scope.setActiveTab = function (tabNum) {
-    initTabs();
-    tabClasses[tabNum] = "active";
-  };
-
-  initTabs();
 
   $scope.addRow = function() {
     addNewRow();
@@ -104,7 +90,8 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
 
     var allparams={
                 tabs: $scope.getAllTabs,
-                tabIndex: $scope.tabIndex
+                tabIndex: $scope.tabIndex,
+                userid: sharedDashboardUserId
              };
 
     $http({
@@ -268,3 +255,40 @@ angular.module('vbiApp')
       }
       $scope.widthConfig = widthConfig;
     }]);
+angular.module('vbiApp')
+.controller('menuCtrl', function($scope){
+var tabClasses;
+var curId = 0;
+
+function initTabs() {
+tabClasses = ["","","",""];
+}
+
+$scope.getTabClass = function (tabNum) {
+return tabClasses[tabNum];
+};
+
+$scope.getTabPaneClass = function (tabNum) {
+return "tab-pane " + tabClasses[tabNum];
+}
+
+$scope.setActiveTab = function (tabNum) {
+initTabs();
+curId = tabNum;
+tabClasses[tabNum] = "active";
+};
+
+$scope.showTab = function(tabId) {
+  if(tabId == curId) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+ $scope.tab2 = "This is SECOND section";
+
+//Initialize
+  initTabs();
+  $scope.setActiveTab(1);
+});

@@ -65,6 +65,7 @@ body{
 }
 .edit-widget-style{
 	text-align: center;
+	margin-top: 80px;
 }
 
 /* Sidebar Styles */
@@ -254,6 +255,46 @@ table,  th,  td{
 	margin-top: 20px;
 }
 
+/*widgets Library style*/
+
+.panel-width-style{
+	z-index: 1000;
+	position: fixed;
+	left: 105px;
+	width: 0;
+	/*height: 100%;*/
+	/*margin-left: -150px;*/
+	overflow-y: auto;
+	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+
+}
+.ul-widget-style{
+	padding-left: 0px;
+	list-style-type: none;
+}
+
+.nav-customWidget-style{
+	margin-top: 100px;
+	position:fixed;
+}
+
+.panel-width-style{
+	width: 200px;
+}
+
+
+.tabs-below>.nav-tabs,.tabs-right>.nav-tabs,.tabs-left>.nav-tabs{border-bottom:0;}
+
+.tabs-left>.nav-tabs>li,.tabs-right>.nav-tabs>li{float:none;}
+.tabs-left>.nav-tabs>li>a,.tabs-right>.nav-tabs>li>a{min-width:74px;margin-right:0;margin-bottom:3px;}
+.tabs-left>.nav-tabs{float:left;margin-right:19px;border-right:1px solid #ddd;}
+.tabs-left>.nav-tabs>li>a{margin-right:-1px;-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px;}
+.tabs-left>.nav-tabs>li>a:hover,.tabs-left>.nav-tabs>li>a:focus{border-color:#eeeeee #dddddd #eeeeee #eeeeee;}
+.tabs-left>.nav-tabs .active>a,.tabs-left>.nav-tabs .active>a:hover,.tabs-left>.nav-tabs .active>a:focus{border-color:#ddd transparent #ddd #ddd;*border-right-color:#ffffff;}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;
@@ -325,4 +366,10 @@ margin-top: 85px;
 
 #ShareModalCloseBtn{
 	margin-top: -22px;
+}
+
+#dashbboard-alert{
+	position: absolute;
+	left:50%;
+	z-index: 10000px;
 }

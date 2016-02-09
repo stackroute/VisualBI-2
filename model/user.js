@@ -134,11 +134,12 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
   });
 }
 
-UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDashboard){
+UserSchema.statics.sharedDashboards = function(currentUserId,userName,user,currentDashboard){
     // console.log("dashboards.0.sharedWith "+currentUserId);
     this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
     {$addToSet:{"dashboards.$.sharedWith":
         {
+					"user": user,
           "username" : userName
         },
       }

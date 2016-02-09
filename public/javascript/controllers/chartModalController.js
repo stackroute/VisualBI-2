@@ -1,20 +1,21 @@
-angular.module('vbiApp').controller('chartModalController', ['userManager', '$scope', '$http', '$uibModalInstance', 'chartInfo', '$route', function(userManager, $scope, $http, $uibModalInstance, chartInfo, $route) {
+angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route){
+		
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
 		loggedInUser = '',
 		deleteIndc=false;
 
-    //	function to set the comment icon class and color
-    $scope.registerCommentType = function(icon) {
-        commentType = 'glyphicon-' + icon;
-    }
-
-    //	function to write to comment entered by the user to the database and to add the comment to modal view
-    $scope.IsNotVisible = true;
-    $scope.ShowHide = function() {
-        $scope.IsVisible = $scope.IsVisible ? false : true;
-        $scope.IsNotVisible = $scope.IsVisible ? false : true;
+		//	function to set the comment icon class and color
+		$scope.registerCommentType=function(icon){
+			commentType='glyphicon-'+icon;
+			}
+	
+		//	function to write to comment entered by the user to the database and to add the comment to modal view
+		$scope.IsNotVisible = true;
+		$scope.ShowHide = function () {
+			$scope.IsVisible = $scope.IsVisible ? false : true;
+			$scope.IsNotVisible = $scope.IsVisible ?false : true;
 
     }
 
@@ -22,12 +23,12 @@ angular.module('vbiApp').controller('chartModalController', ['userManager', '$sc
 
         var newComment = $scope.userComment;
         //the payload for POST request to the server
-        var parameters = {
-            comment: newComment,
-            widgetid: chartInfo.widgetId,
-            commentType: commentType,
-            commentCategory: commentCategory
-        };
+		var parameters = {
+				comment:newComment,
+				widgetid:chartInfo.widgetId,
+				commentType:commentType,
+				commentCategory:commentCategory
+			  };
 
 		
         userManager.pushComment(parameters).then(function(data) {
@@ -88,8 +89,5 @@ angular.module('vbiApp').controller('chartModalController', ['userManager', '$sc
 	$scope.deleteComment=function(array,index){
 		array.splice(index,1);
 		deleteIndc=true;
-	}
-	$scope.movingOut=function(){ //cleanup
-		alert('I am losing focus! Please do something');
 	}
 }]);

@@ -1,5 +1,9 @@
 <div id="wrapper" ng-class="{'toggled': showMenu}">
 	<header-directive></header-directive>
+
+	<!-- dashboardAlert comes from share dashboard controller-->
+	<p ng-show="dashboardAlert.length > 0" class="alert alert-info" id="dashbboard-alert">{{dashboardAlert}}</p>
+
 	<div ng-include="'views/dialogs/shareModal.tpl.html'"></div>
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
@@ -44,23 +48,23 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-                                                        See {{col.widgetId.commentsCounter}}
-                                                        <span class="user-comments-meta">
-                                                        <span ng-show="col.widgetId.comments.length == 1">comment from</span>
-                                                        <span ng-show="col.widgetId.comments.length> 1">comments from </span>
-                                                        {{col.widgetId.lastCommentedBy}}
-                                                        </span>
-                                                        <span class="user-comments-meta">
+														  See {{col.widgetId.commentsCounter}}
+														  <span class="user-comments-meta">
+														  <span ng-show="col.widgetId.comments.length == 1">comment from</span>
+														  <span ng-show="col.widgetId.comments.length> 1">comments from </span>
+														  {{col.widgetId.lastCommentedBy}}
+														  </span>
+														  <span class="user-comments-meta">
                                                         <span ng-show="col.widgetId.commentersCounter>1">
-                                                        and
-                                                        {{col.widgetId.commentersCounter-1}}
+														  and
+														  {{col.widgetId.commentersCounter - 1}}
 
                                                         <span ng-show="col.widgetId.commentersCounter== 2">other</span>
                                                         <span ng-show="col.widgetId.commentersCounter > 2">others</span>
 
-                                                            </span>
-                                                        </span>
-                                                    </span>
+																</span>
+														  </span>
+													 </span>
 												</a>
 											</div>
 										</div>

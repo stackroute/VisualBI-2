@@ -2,10 +2,12 @@ angular.module('vbiApp').service('editManager', function() {
 
   var tabDetails;
   var tabIndex;
+  var sharedDashboardUserId;
 
-  var setTabDetails = function(tabs, index) {
+  var setTabDetails = function(tabs, index, sharedId) {
     tabDetails = tabs;
     tabIndex = index;
+    sharedDashboardUserId = sharedId;
   };
 
   var getTabIndex = function() {
@@ -16,9 +18,14 @@ angular.module('vbiApp').service('editManager', function() {
     return tabDetails;
   };
 
+  var getSharedDashboardUserId = function() {
+    return sharedDashboardUserId;
+  }
+
   return {
     setTabDetails: setTabDetails,
     getTabDetails: getTabDetails,
-    getTabIndex: getTabIndex
+    getTabIndex: getTabIndex,
+    getSharedDashboardUserId: getSharedDashboardUserId
   };
 });

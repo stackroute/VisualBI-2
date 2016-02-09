@@ -1,45 +1,34 @@
-  <script type="text/ng-template" id="shareModal">
+<script type="text/ng-template" id="shareModal">
 
     <div class="panel-primary">
-      <div class="panel-heading">
-      <h4 class = "modal-title" id = "shareModalLabel"> Share With Others </h4>
-      <button ng-click="closeModal()" type="button" class="close" aria-label="Close" id ="ShareModalCloseBtn"><span aria-hidden="true">&times;</span></button></div>
+        <div class="panel-heading">
+            <h4 class="modal-title" id="shareModalLabel"> Share With Others </h4>
+            <button ng-click="closeModal()" type="button" class="close" aria-label="Close" id="ShareModalCloseBtn"><span aria-hidden="true">&times;</span></button></div>
     </div>
 
     <div class="modal-body" id="shareBody">
-    <div class="input-group input-group-lg" id ="input-group">
-     <span class="input-group-addon">
+        <div class="input-group input-group-lg" id="input-group">
+            <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
-      </span>
-      <tags-input ng-model="tags" id = "shareTag"
-                  key-property="_id"
-                  display-property="username"
-                  on-tag-added="tagAdded($tag)"
-                  on-tag-removed="tagRemoved()"
-                  addFromAutocompleteOnly=true
-                  placeholder="User email"
-                  replace-spaces-with-dashes="false">
-           <auto-complete source="loadUserNames($query)"
-                       min-length="0"
-                       load-on-focus="true"
-                       load-on-empty="true"
-                       max-results-to-show="5">
-        </auto-complete>
-      </tags-input>
-    </div>
+            </span>
+            <tags-input ng-model="tags" id="shareTag" key-property="_id" display-property="username" on-tag-added="tagAdded($tag)" on-tag-removed="tagRemoved()" addFromAutocompleteOnly=true placeholder="User email" replace-spaces-with-dashes="false">
+                <auto-complete source="loadUserNames($query)" min-length="0" load-on-focus="true" load-on-empty="true" max-results-to-show="5">
+                </auto-complete>
+            </tags-input>
+        </div>
 
-      <div class="permission">
-        <select ng-model="selectedItem" ng-options="permisson.name for permisson in permissons" class="dropdown-height">
+        <div class="permission">
+            <select ng-model="selectedPermisson" ng-options="permisson.name for permisson in permissons" class="dropdown-height">
         </select>
-      </div>
+        </div>
 
-      <div>
-        <p  class="alert alert-success" ng-show="validUserNames.length > 0">Shared with {{validUserNames}}</p>
-        <p class="alert alert-danger" ng-show="shareErrMessage.length > 0">{{shareErrMessage}}</p>
-      </div>
-      <div class="share-btn" id="sharebutton">
-        <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>
-        <button class="btn btn-warning" ng-click="closeModal()">Close</button>
-      </div>
+        <div>
+            <p class="alert alert-success" ng-show="validUserNames.length > 0">Shared with {{validUserNames}}</p>
+            <p class="alert alert-danger" ng-show="shareErrMessage.length > 0">{{shareErrMessage}}</p>
+        </div>
+        <div class="share-btn" id="sharebutton">
+            <button class="btn btn-primary" ng-click="shareDashboard()">Done </button>
+            <button class="btn btn-warning" ng-click="closeModal()">Close</button>
+        </div>
     </div>
 </script>
