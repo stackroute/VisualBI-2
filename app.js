@@ -21,10 +21,7 @@ var indexRouter = require('./routes/indexRouter'),
     Credential = require('./config/db').credentialModel,
     gridRouter = require('./routes/girdRouter'),
     commentsRouter = require('./routes/commentsRouter'),
-    getUserId  = require('./routes/userId');
-
-
-
+    dashboardRouter  = require('./routes/dashboardRouter');
 
 var app = express();
 
@@ -89,7 +86,7 @@ app.use('/widgetsMdx', widgetMdxRouter);
 app.use('/comment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
-app.use('/getUserId', getUserId);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
    var err = new Error('Not found');

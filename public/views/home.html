@@ -1,5 +1,9 @@
 <div id="wrapper" ng-class="{'toggled': showMenu}">
 	<header-directive></header-directive>
+
+	<!-- dashboardAlert comes from share dashboard controller-->
+	<p ng-show="dashboardAlert.length > 0" class="alert alert-info" id="dashbboard-alert">{{dashboardAlert}}</p>
+
 	<div ng-include="'views/dialogs/shareModal.tpl.html'"></div>
 	<div id="page-content-wrapper">
 		<div class="container-fluid">
