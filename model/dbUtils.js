@@ -12,7 +12,9 @@ this.registerUser = function (user, done) {
 	Credential.register({
 		username : user.username,
 		name: user.firstName + ' ' + user.lastName,
-		imagePath: user.imagePath}, user.password, function(err, account) {
+		imagePath: user.imagePath,
+		email: user.email
+	}, user.password, function(err, account) {
 		if(err) {
 			done(err, 'failed')
 		} else {
