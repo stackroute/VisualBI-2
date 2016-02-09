@@ -3,23 +3,30 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   var maxWidth = 12;
   draggerId = 0;
 
-  $scope.user = $rootScope.loggedInUser;
-  $scope.tempId = [];
   $scope.getAllTabs = editManager.getTabDetails();
   $scope.tabIndex = editManager.getTabIndex();
   var sharedDashboardUserId = editManager.getSharedDashboardUserId();
-  $scope.tabs = [];
+  $scope.selectedTab = [];
+  $scope.userWidgetItems = [];
 
   if((typeof $scope.getAllTabs === 'undefined') || (typeof $scope.tabIndex === 'undefined')) {
     $location.url('/');
   }
 
-  $scope.tabs.push($scope.getAllTabs[$scope.tabIndex]);
+  $scope.selectedTab.push($scope.getAllTabs[$scope.tabIndex]);
+
+  angular.forEach($scope.getAllTabs, function(tab, tabIndex) {
+    angular.forEach(tab.rows, function(row, rowIndex) {
+      angular.forEach(row.columns, function(col, colIndex) {
+        $scope.userWidgetItems.push(col.widgetId);
+      });
+    });
+  });
 
   $scope.resetPlaceHolder = function(rowId, remainingWidth) {
-    var i = $scope.tabs[0].rows[rowId].columns.length;
+    var i = $scope.selectedTab[0].rows[rowId].columns.length;
     while (i--) {
-      var column = $scope.tabs[0].rows[rowId].columns[i];
+      var column = $scope.selectedTab[0].rows[rowId].columns[i];
       remainingWidth -= column.colWidth
     }
 
@@ -29,11 +36,11 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
             'colWidth': remainingWidth
           };
 
-        $scope.tabs[0].rows[rowId].columns.push(addColumn);
+        $scope.selectedTab[0].rows[rowId].columns.push(addColumn);
     }
   };
 
-  angular.forEach($scope.tabs[0].rows, function(row, rowIndex) {
+  angular.forEach($scope.selectedTab[0].rows, function(row, rowIndex) {
     $scope.resetPlaceHolder(rowIndex, maxWidth);
   });
 
@@ -42,24 +49,11 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       $scope.widgetItems = widgets;
     });
 
-  // function initTabs() {
-  //   tabClasses = ["","","",""];
-  // }
-  //
-  // $scope.getTabClass = function (tabNum) {
-  //   return tabClasses[tabNum];
-  // };
-  //
-  // $scope.getTabPaneClass = function (tabNum) {
-  //   return "tab-pane " + tabClasses[tabNum];
-  // }
-  //
-  // $scope.setActiveTab = function (tabNum) {
-  //   initTabs();
-  //   tabClasses[tabNum] = "active";
-  // };
-  //
-  // initTabs();
+  widgetManager.getAllWidgets()
+    .then(function(allWidgets) {
+      $scope.allWidgetItems = allWidgets;
+    });
+
 
   $scope.addRow = function() {
     addNewRow();
@@ -71,10 +65,10 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
             'colWidth': maxWidth
         }]
     };
-    $scope.tabs[0].rows.push(newRow);
+    $scope.selectedTab[0].rows.push(newRow);
   }
 
-  if($scope.tabs[0].rows.length == 0) {
+  if($scope.selectedTab[0].rows.length == 0) {
     addNewRow();
   }
 
@@ -97,10 +91,10 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       });
     });
 
-    $scope.getAllTabs[$scope.tabIndex] = $scope.tabs[0];
+    $scope.getAllTabs[$scope.tabIndex] = $scope.selectedTab[0];
 
     var newparams={
-      widget: $scope.tabs[0]
+      widget: $scope.selectedTab[0]
     }
 
     var allparams={
@@ -201,7 +195,7 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       width = maxWidth;
     }
 
-    $scope.tabs[0].rows[rowId].columns[colId].colWidth = parseInt(width);
+    $scope.selectedTab[0].rows[rowId].columns[colId].colWidth = parseInt(width);
 
     if(width <= columnCurWidth) {
       $scope.resetPlaceHolder(rowId, remainingWidth)
@@ -214,15 +208,15 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
     var newColumn = {
       'colWidth': colWidth
     };
-    $scope.tabs[0].rows[rowIndex].columns.splice(colIndex, 1, newColumn);
+    $scope.selectedTab[0].rows[rowIndex].columns.splice(colIndex, 1, newColumn);
   }
 
   $scope.resizeWidgetWidth = function(rowId, colId) {
-    var len = $scope.tabs[0].rows[rowId].columns.length;
+    var len = $scope.selectedTab[0].rows[rowId].columns.length;
     var usedWidth = 0, i=0, newWidth=0, newRowId = rowId;
     var removePosition = [];
     while (i<len) {
-      var column = $scope.tabs[0].rows[rowId].columns[i];
+      var column = $scope.selectedTab[0].rows[rowId].columns[i];
       if(column.hasOwnProperty('widgetId')) {
         usedWidth += parseInt(column.colWidth);
 
@@ -236,9 +230,9 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
                 'columns' : [column]
             };
 
-            $scope.tabs[0].rows.splice(newRowId, 0, newRow);
+            $scope.selectedTab[0].rows.splice(newRowId, 0, newRow);
           } else {
-            $scope.tabs[0].rows[newRowId].columns.push(column);
+            $scope.selectedTab[0].rows[newRowId].columns.push(column);
           }
           removePosition.push(i);
           newWidth += parseInt(column.colWidth);
@@ -251,9 +245,10 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
     }
     var removeLen = removePosition.length;
     for(var i=removeLen-1; i>=0; i--) {
-      $scope.tabs[0].rows[rowId].columns.splice(removePosition[i], 1);
+      $scope.selectedTab[0].rows[rowId].columns.splice(removePosition[i], 1);
     }
   }
+
 }]);
 
 angular.module('vbiApp')

@@ -281,7 +281,8 @@ table,  th,  td{
 }
 
 .panel-width-style{
-	width: 200px;
+	width: 210px;
+	max-height: 700px;
 }
 
 
