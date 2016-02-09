@@ -22,7 +22,6 @@ var indexRouter = require('./routes/indexRouter'),
     gridRouter = require('./routes/girdRouter'),
     commentsRouter=require('./routes/commentsRouter'),
     getUserId  = require('./routes/userId');
-    getUserList = require('./routes/userList');
 
 
 
@@ -91,7 +90,6 @@ app.use('/addcomment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
 app.use('/getUserId', getUserId);
-app.use('/getUserList', getUserList);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
    var err = new Error('Not found');

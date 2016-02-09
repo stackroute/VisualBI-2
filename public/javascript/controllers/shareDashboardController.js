@@ -1,11 +1,11 @@
 angular.module('vbiApp')
-    .controller('shareDashboardController', ['$rootScope','$scope','$uibModal','userManager','$http', '$uibModalInstance','sharedDashboards',
-    function($rootScope, $scope, $uibModal, userManager, $http, $uibModalInstance, sharedDashboards){
+    .controller('shareDashboardController', ['$rootScope','$scope','$uibModal','userManager','$http', '$uibModalInstance','sharedDashboards','$timeout',
+    function($rootScope, $scope, $uibModal, userManager, $http, $uibModalInstance, sharedDashboards, $timeout){
 
-      $scope.validUserNames = []; $scope.tags = [];
+      $scope.validUserNames = []; $scope.tags = [];$scope.dashboardAlert=true;
 
       $scope.tagAdded = function(tag) {
-          userManager.getUserId(tag.username,$rootScope.currentDashboard,$scope.permission)
+          userManager.getUserId(tag.username,$rootScope.currentDashboard,$scope.selectedPermisson.name)
           .then(function(result){
               $scope.shareErrMessage = result;
           })
@@ -23,12 +23,27 @@ angular.module('vbiApp')
       //remove loop assaign usernames directly to scope
       $scope.shareDashboard = function(){
         $scope.userNames = $scope.tags;
-        userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.selectedItem.name)
+        userManager.shareDashboard($scope.userNames,$rootScope.currentDashboard,$scope.selectedPermisson.name)
         .then(function(userid){
-          // console.log(userid);
-          //$scope.validUserNames.push(userObj.username);
-        })
-      }
+          // $uibModalInstance.close();
+          $scope.dashboardAlert = false;
+          userManager.toggleDashboardAlert()
+          .then(function(result){
+            $scope.dashboardAlert = result;
+          })
+
+          // $scope.toggleDashboardAlert();
+          // console.log($scope.dashboardAlert);
+
+      })};
+      // $scope.toggleDashboardAlert = function () {
+      //          $scope.dashboardAlert=false;
+      //          console.log($scope.dashboardAlert);
+      //          $timeout(function () {
+      //            $scope.dashboardAlert = true;console.log($scope.dashboardAlert);
+      //          }, 3000);
+      // };
+
       $scope.loadUserNames = function($query) {
         return userManager.loadUserNames($query)
                .then(function(data){
@@ -50,5 +65,5 @@ angular.module('vbiApp')
 
           }];
 
-      $scope.selectedItem = $scope.permissons[2];
+      $scope.selectedPermisson = $scope.permissons[2];
     }]);

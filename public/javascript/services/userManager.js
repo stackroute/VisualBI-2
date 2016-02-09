@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .service('userManager', ['$http', function($http) {
+    .service('userManager', ['$http','$timeout', function($http, $timeout) {
         return {
 			  login: function(user, done) {
 				  $http.post('/login', {username:user.email, password:user.password})
@@ -43,6 +43,16 @@ angular.module('vbiApp')
                      });
             },
 
+            toggleDashboardAlert: function(){
+                dashboardAlert:false;
+
+                return $timeout(function () {
+                  dashboardAlert = true;
+                }, 3000).then(function(){
+                  return(true);
+                });
+            },
+
             shareDashboard: function(userNames,currentDashboard,permission){
               var parms = JSON.stringify({type:"user", userNames:userNames, currentDashboard:currentDashboard, permission:permission});
                       return $http.post(' /getUserId/shareDashboard', parms)
@@ -52,7 +62,7 @@ angular.module('vbiApp')
              },
 
              loadUserNames: function($query) {
-                 return $http.post('/getUserList', { cache: true}).then(function(response) {
+                 return $http.post('/getUserId/userList', { cache: true}).then(function(response) {
                    var userNames = response.data;
                    return userNames.filter(function(userNameObj) {
                      return userNameObj.username.toLowerCase().indexOf($query.toLowerCase()) != -1;

@@ -7,7 +7,7 @@ router.post('/shareDashboard',function(req, res, next){
   var currentDashboard = req.body.currentDashboard;
   var userNames = req.body.userNames;
   var currentUserId = req.user._id;
-  var currentUserName = req.user.username;
+  var currentUserName = req.user.name;
   var permission = req.body.permission;
   var usernameProcessed = 0;
 
@@ -25,7 +25,7 @@ router.post('/shareDashboard',function(req, res, next){
           else {
             console.log("not updating");
             User.shareDashboard(currentUserId,currentUserName,currentDashboard,userObj._id,permission,function(result){
-              User.sharedDashboards(currentUserId,credentialObj.username,currentDashboard);
+              User.sharedDashboards(currentUserId,credentialObj.name,credentialObj.username,currentDashboard);
             });
           }
         });
@@ -42,7 +42,7 @@ router.post('/shareDashboard',function(req, res, next){
 router.post('/', function(req, res, next) {
     var userName = req.body.userName;
     var currentDashboard = req.body.currentDashboard;
-    var currentUserName = req.user.username;
+    var currentUserName = req.user.name;
     var permission = req.body.permission;
     if(userName) {
       Credential.getCredentialId(userName, function(credentialId){
@@ -57,7 +57,7 @@ router.post('/', function(req, res, next) {
             } else {
             User.isExist(currentUserName,currentDashboard,userId._id,permission,function(result){
               if(result == true )
-                res.send("user already existing");
+                res.send(userName+" already existing");
               else {
                 res.send("can be shared");
               }
@@ -69,4 +69,9 @@ router.post('/', function(req, res, next) {
     }
 });
 
+router.post('/userList',function(req,res){
+  Credential.getUsers(function(data){
+    res.send(data);
+  });
+});
 module.exports = router;
