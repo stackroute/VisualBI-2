@@ -18,8 +18,8 @@ var indexRouter = require('./routes/indexRouter'),
     dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
-    Credential = require('./config/db').credentialModel,
-    gridRouter = require('./routes/girdRouter'),
+    Credential = dbConfig.credentialModel,
+    gridRouter = require('./routes/gridRouter'),
     commentsRouter = require('./routes/commentsRouter'),
     dashboardRouter  = require('./routes/dashboardRouter');
 
@@ -38,7 +38,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
 
-
+//TODO: keep multer related stuff separate file
+//TODO: create a separate folder for user profile images
+//TODO: error handling should be standerd - put res.status
 var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
             cb(null, 'public/images/')

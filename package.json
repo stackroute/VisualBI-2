@@ -1,7 +1,7 @@
 {
   "name": "visualbi-2",
   "version": "1.0.0",
-  "description": "Visual Bisuness tool",
+  "description": "Visual BI tool",
   "scripts": {
     "start": "supervisor bin/server.js"
   },

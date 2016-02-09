@@ -36,7 +36,7 @@ angular.module('vbiApp').factory('UserService', UserService);
             return deferred.promise;
         }
  
-        
+        //TODO: Rewrite the file
         function getUsers() {
             if(!localStorage.users){
                 localStorage.users = JSON.stringify([]);
@@ -55,7 +55,8 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
-					  imagePath: "test path"
+					  imagePath: "test path",
+				  		email: user.email
 				  }).success(function (data, status, headers, config) {
 					 	return(data);
 				  }).error(function (data, status, header, config) {
