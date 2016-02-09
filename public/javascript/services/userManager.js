@@ -52,7 +52,7 @@ angular.module('vbiApp')
             },
 
             timeoutDashboardAlert: function() {
-                return $timeout(function() {}, 3000).then(function() {
+                return $timeout(function() {}, 5000).then(function() {
                     return (true);
                 });
             },
