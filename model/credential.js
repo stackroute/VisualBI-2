@@ -3,9 +3,6 @@
 var mongoose = require('mongoose'),
 	 passportLocal = require('passport-local'),
 	 passportLocalMongoose = require('passport-local-mongoose');
-   mongoose = require('mongoose');
-	 // set Promise provider to bluebird
-	 mongoose.Promise = require('bluebird');
 
 var CredentialSchema = mongoose.Schema({
    username: String,
@@ -13,12 +10,14 @@ var CredentialSchema = mongoose.Schema({
 	firstName: String,
 	lastName: String,
 	imagePath: String,
+	email: String,
 	time: {type: Date, default: Date.now}
 }, {strict: false});
 
 //CredentialSchema.plugin(passportLocal);
 CredentialSchema.plugin(passportLocalMongoose);
 
+//TODO: getCredentialsId is not required. Remove it 
 CredentialSchema.statics.getCredentialId = function(username, callback){
   this.model('Credential')
 		.findOne({
@@ -33,6 +32,7 @@ CredentialSchema.statics.getCredentialId = function(username, callback){
 	});
 };
 
+//TODO: There must be error handling here. Use regular expression to get filterred users
 CredentialSchema.statics.getUsers = function(callback){
 	this.model('Credential')
 			.find({},{'username':1,'name':1}).exec(function(err,data){

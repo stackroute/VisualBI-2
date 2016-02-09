@@ -5,7 +5,8 @@ angular.module('vbiApp')
             $scope.validUserNames = [];
             $scope.tags = [];
             $rootScope.dashboardAlert = "";
-
+			  //TODO: currentDashboard id has to be removed
+			  //TODO: need to fetch only matching users
             $scope.tagAdded = function(tag) {
                 userManager.getUserId(tag.username, $rootScope.currentDashboard, $scope.selectedPermisson.name)
                     .then(function(result) {

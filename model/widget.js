@@ -1,13 +1,14 @@
 //Model used to create a schema for widget collection of visualdb database
 
 var mongoose = require('mongoose');
-
+//TODO: In commentters, there should be array of mongo userid. Also make 
 var WidgetSchema = mongoose.Schema({
    title: String,
    chartRenderer: String,
-   url: String,
+   parameters: Object,
    lastCommentedBy : String,
    commentsCounter :Number,
+	studioId: String,
    comments:[{
 	  _id : false,
       userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
@@ -20,6 +21,7 @@ var WidgetSchema = mongoose.Schema({
   commentersCounter : Number
 }, {strict: false});
 
+//TODO: not required here. check at client end and send the correct schema to server
 //prototype for writing into widget collection
 var widgetProto = function(studio_id, title,chartRenderer,parameters) {
   this.studio_id = studio_id;
@@ -40,15 +42,15 @@ WidgetSchema.statics.getWidgets = function(callback) {
    })
 }
 
-WidgetSchema.statics.getWidget = function (widgetId, callback) {
-   this.model('Widget').findOne({
-      'widgetId': widgetId
-   }, {
-      '_id': 0
-   },function(err, data) {
-      callback(data);
-   });
-}
+//WidgetSchema.statics.getWidget = function (widgetId, callback) {
+//   this.model('Widget').findOne({
+//      'widgetId': widgetId
+//   }, {
+//      '_id': 0
+//   },function(err, data) {
+//      callback(data);
+//   });
+//}
 
 WidgetSchema.statics.getComments = function (widgetId, callback) {
    return this.model('Widget').findOne({
@@ -135,6 +137,7 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, tabIndex,User) {
   }
 }
 
+//TODO: there should be only one postcomment method which will update complete comment details
 WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
 
    this.model('Widget').update({

@@ -39,6 +39,7 @@ angular.module('vbiApp')
             },
 
             getUserId: function(userName, currentDashboard, permission) {
+					//TODO: Need to change it to get request
                 var parms = JSON.stringify({
                     type: "user",
                     userName: userName,
@@ -81,7 +82,7 @@ angular.module('vbiApp')
                 });
             },
             pushComment: function(parameters) {
-
+					//TODO: need to move to widgetmangar and remove extra promise
                 return new Promise(function(resolve, reject) {
 
                     var currentUser = '';

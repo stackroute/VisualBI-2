@@ -8,6 +8,7 @@ var express = require('express'),
 	 Credential = require('../config/db').credentialModel,
 	 dbUtils = require('../model/dbUtils');
 
+//TODO: need to make authetication for each route
 // Login page
 router.get('/',function(req, res, next) {
    res.render('index');
@@ -17,7 +18,8 @@ router.get('/logout', function(req, res, next) {
 	res.clearCookie('authToken');
 	req.logout();
   	req.session.destroy();
-	console.log("logged out successfully");
+//	console.log("logged out successfully");
+	//TODO: send the status
    res.send("success");
 });
 
@@ -36,7 +38,8 @@ router.post('/register',function(req,res,next){
 			password: req.body.password,
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
-			imagePath: req.body.imagePath
+			imagePath: req.body.imagePath,
+			email: req.body.email
 
 		}, function(err, user) {
 			if(err){
@@ -53,17 +56,5 @@ router.post('/register',function(req,res,next){
 //	  });
 	}
 });
-
-
-function registerUser (req, res, next) {
-	Credential.register({ username : "wave1@wipro.com", name: "Wave 1"}, "abc@123", function(err, account) {
-		console.log("added");
-		next();
-	});
-
-  passport.authenticate('local')(req, res, function () {
-	 res.redirect('/');
-  });
-
-}
+ 
 module.exports = router;

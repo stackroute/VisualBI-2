@@ -1,6 +1,8 @@
 //This files contains method which interact with database. All logic should be written here so that
 //unit test cases can be written for all db interaction
 
+//TODO: not required, can be put in route only
+
 var mongoose = require('mongoose'),
 	 User = require('../config/db').userModel,
 	 Credential = require('../config/db').credentialModel,

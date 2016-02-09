@@ -36,7 +36,7 @@ angular.module('vbiApp').factory('UserService', UserService);
             return deferred.promise;
         }
  
-        
+        //TODO: Rewrite the file
         function getUsers() {
             if(!localStorage.users){
                 localStorage.users = JSON.stringify([]);

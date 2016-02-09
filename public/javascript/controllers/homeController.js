@@ -1,17 +1,20 @@
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route) {
      $scope.user = $rootScope.loggedInUser;
+		 //TODO: need to refactor permissions
 	 $scope.canShare = true;
 	 $scope.canEdit = true;
 	 $scope.canComment = true;
 	 $scope.tabs = [];
 	 $scope.showMenu = true;
+		 //TODO: dashboardid in rootscope is not required
     var sharedDashboardUserId;
 	 $scope.keepPolling = true;
 	 //data for every widget will put here. It is required to give more functionality like
 	 // line, bar or area chart in mdx grid
-	 $scope.widgetData = {};
+	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
 	 $scope.currentUserData = {};
+		 
 	 userManager.getData()
 	 .then(function(userData) {
 			$scope.currentUserData = userData;
@@ -184,7 +187,8 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-
+		 
+		 //TODO: required
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
