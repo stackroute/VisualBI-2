@@ -367,3 +367,9 @@ margin-top: 85px;
 #ShareModalCloseBtn{
 	margin-top: -22px;
 }
+
+#dashbboard-alert{
+	position: absolute;
+	left:50%;
+	z-index: 10000px;
+}

@@ -2,8 +2,10 @@ var express = require('express'),
     router = express.Router(),
     util = require('./utils'),
     path = require('path'),
-    Widget =require('../config/db').widgetModel;
+    Widget =require('../config/db').widgetModel,
+	 dbUtils = require('../model/dbUtils');
 
+//updates comments for widget
 router.post('/',function(req,res,next){
 
 	if(req.isAuthenticated()){
@@ -14,13 +16,23 @@ router.post('/',function(req,res,next){
 		res.send({resp:'error',msg:'Authentication failure'});
 });
 
-router.get('/:widgetId',function(req,res,next){
+//gets the comments for a widget
+router.get('/:widgetId', function(req, res, next) {
+	dbUtils.getComments(req.params.widgetId)
+		.then(function(doc) {
+			res.json(doc ? doc : {});	
+	})
+})
+
+//get commenters for a widget
+router.get('/commenters/:widgetId',function(req,res,next){
 	Widget.getCommenters(req.params.widgetId,function(data){
 		res.send(data);
 	});
 
 });
 
+//Updates commenters details into the mongo for a widget
 router.post('/updateCommenterInfo',function(req,res,next){
 
 	Widget.updateCommenterDetails(req.body.widgetId, req.body.userid,function(resp){

@@ -50,6 +50,12 @@ WidgetSchema.statics.getWidget = function (widgetId, callback) {
    });
 }
 
+WidgetSchema.statics.getComments = function (widgetId, callback) {
+   return this.model('Widget').findOne({
+		 "_id" : mongoose.Types.ObjectId(widgetId)
+	}).exec(callback);
+}
+
 WidgetSchema.statics.getCommenters = function(widgetId,callback) {
    this.model('Widget').find({
 	   '_id': widgetId
@@ -138,14 +144,14 @@ WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
      }
    },function(err) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 
 
    this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 }
@@ -166,7 +172,7 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
    },function(err, userComment) {
        if(err){
 
-                console.log(err);
+//                console.log(err);
        }
    });
 
@@ -177,14 +183,14 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
      }
    },function(err, userComment) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 
 
    this.model('Widget').update({'_id' : widgetId},{$inc : { commentsCounter : 1 }},function(err, userComment) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 

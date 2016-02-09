@@ -1,4 +1,5 @@
 angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route){
+		
 		//	set the default comment icon as check icon and color to blue(info)
 		var commentType='glyphicon-check',commentCategory='primary',loggedInUser=''; 
 
@@ -15,16 +16,16 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
 		}
 
-        $scope.postComment=function(updateCommentsModel){
+      $scope.postComment=function(updateCommentsModel){
 		
 		var newComment=$scope.userComment;
 		//the payload for POST request to the server
-		var parameters={
-                        comment:newComment,
-                        widgetid:chartInfo.widgetId,
-						commentType:commentType,
-						commentCategory:commentCategory
-                 };
+		var parameters = {
+				comment:newComment,
+				widgetid:chartInfo.widgetId,
+				commentType:commentType,
+				commentCategory:commentCategory
+			  };
 		userManager.pushComment(parameters).then(function(user){
 	
 				chartInfo.comments.push({userid:user,//expectedchanges
@@ -54,12 +55,12 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				});
 			
 		});
-			$route.reload();
+//			$route.reload();
  };
 			
     $scope.chartInfo = chartInfo;
 	
 	$scope.hide = function () {
-    	$uibModalInstance.dismiss('cancel');
+    		$uibModalInstance.dismiss('cancel');
   		};
 }]);
