@@ -177,7 +177,6 @@ angular.module('vbiApp')
     }
 
     $scope.gotoEditPage = function(tabs, index) {
-      console.log(sharedDashboardUserId);
       editManager.setTabDetails(tabs, index, sharedDashboardUserId);
       $location.url('/edittab');
     }

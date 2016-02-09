@@ -10,8 +10,6 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   var sharedDashboardUserId = editManager.getSharedDashboardUserId();
   $scope.tabs = [];
 
-  console.log("edit page " + sharedDashboardUserId);
-
   if((typeof $scope.getAllTabs === 'undefined') || (typeof $scope.tabIndex === 'undefined')) {
     $location.url('/');
   }
@@ -104,8 +102,6 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
     var newparams={
       widget: $scope.tabs[0]
     }
-
-console.log("id " + sharedDashboardUserId);
 
     var allparams={
                 tabs: $scope.getAllTabs,
@@ -293,13 +289,11 @@ return "tab-pane " + tabClasses[tabNum];
 
 $scope.setActiveTab = function (tabNum) {
 initTabs();
-console.log(tabNum);
 curId = tabNum;
 tabClasses[tabNum] = "active";
 };
 
 $scope.showTab = function(tabId) {
-  console.log(tabId + " " + curId);
   if(tabId == curId) {
     return true;
   } else {
