@@ -20,7 +20,7 @@ router.post('/',function(req,res,next){
 router.get('/:widgetId', function(req, res, next) {
 	dbUtils.getComments(req.params.widgetId)
 		.then(function(doc) {
-			res.json(doc ? doc.comments : []);	
+			res.json(doc ? doc : {});	
 	})
 })
 

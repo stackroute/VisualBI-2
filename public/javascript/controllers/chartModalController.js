@@ -55,7 +55,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				});
 			
 		});
-			$route.reload();
+//			$route.reload();
  };
 			
     $scope.chartInfo = chartInfo;

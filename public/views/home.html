@@ -48,23 +48,23 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-                                                        See {{col.widgetId.commentsCounter}}
-                                                        <span class="user-comments-meta">
-                                                        <span ng-show="col.widgetId.comments.length == 1">comment from</span>
-                                                        <span ng-show="col.widgetId.comments.length> 1">comments from </span>
-                                                        {{col.widgetId.lastCommentedBy}}
-                                                        </span>
-                                                        <span class="user-comments-meta">
-                                                        <span ng-show="col.widgetId.commentersCounter-1 > 0">
-                                                        and
-                                                        {{col.widgetId.commentersCounter-1}}
+														  See {{col.widgetId.commentsCounter}}
+														  <span class="user-comments-meta">
+														  <span ng-show="col.widgetId.comments.length == 1">comment from</span>
+														  <span ng-show="col.widgetId.comments.length> 1">comments from </span>
+														  {{col.widgetId.lastCommentedBy}}
+														  </span>
+														  <span class="user-comments-meta">
+														  <span ng-show="col.widgetId.commentersCounter-1 > 0">
+														  and
+														  {{col.widgetId.commentersCounter - 1}}
 
-                                                        <span ng-show="col.widgetId.commentersCounter-1 == 1">other</span>
-                                                        <span ng-show="col.widgetId.commentersCounter-1 > 1">others</span>
+														  <span ng-show="col.widgetId.commentersCounter-1 == 1">other</span>
+														  <span ng-show="col.widgetId.commentersCounter-1 > 1">others</span>
 
-                                                            </span>
-                                                        </span>
-                                                    </span>
+																</span>
+														  </span>
+													 </span>
 												</a>
 											</div>
 										</div>
