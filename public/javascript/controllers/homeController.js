@@ -131,8 +131,7 @@ angular.module('vbiApp')
                                 badgeIconClass: comment.badgeIconClass,
 								commenterThumb: {'background-image': imgSrc,
 												'background-size': '50px 50px'},
-								commentView:
-                                when: Date()
+								when: Date()
                             });
                         });
 

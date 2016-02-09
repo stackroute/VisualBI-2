@@ -38,39 +38,29 @@ angular.module('vbiApp').factory('UserService', UserService);
  
         
         function getUsers() {
-            if(!localStorage.users){
-                localStorage.users = JSON.stringify([]);
-            }
- 
-            return JSON.parse(localStorage.users);
-        }
- 
-        function setUsers(users) {
-            localStorage.users = JSON.stringify(users);
-        }
+            if(!localStorage.users){
+                localStorage.users = JSON.stringify([]);
+            }
+ 
+            return JSON.parse(localStorage.users);
+        }
+ 
+        function setUsers(users) {
+            localStorage.users = JSON.stringify(users);
+        }
         
           function register(user) {
-           return new Promise (function(resolve, reject){
-				  $http.post('/register', {
+           return $http.post('/register', {
 					  username:user.username, 
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
-					  imagePath: user.imagePath
+					  imagePath: "test path"
 				  }).success(function (data, status, headers, config) {
-                      
-					 	resolve(user);
-
+					 	return(data);
 				  }).error(function (data, status, header, config) {
-					  reject(data.error);
-				  });
-               
-                   
-			  },function(err){
-               reject(err);
-           });
-                               
- 
+					  return(data);
+				  });             
  
         }
     }
