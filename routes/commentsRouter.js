@@ -17,18 +17,13 @@ router.post('/',function(req, res, next){
 		badgeIconClass: req.body.commentType,
 		badgeClass: req.body.commentCategory,
 		displayName: req.user.displayName,
+		userImage: req.user.imagePath,
 		datetime: new Date(),
 	}).then(function(err, comment) {
 		if(err) res.status(500).send("Failed to update comments")
 		else res.sendStatus(200);
 	});
 
-//	if(req.isAuthenticated()){
-//		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-//		res.send({resp:'success',user:req.user.name});
-//	}
-//	else
-//		res.send({resp:'error',msg:'Authentication failure'});
 });
 
 //gets the comments for a widget
@@ -48,12 +43,5 @@ router.get('/commenters/:widgetId',function(req,res,next){
 
 });
 
-//Updates commenters details into the mongo for a widget
-router.post('/updateCommenterInfo',function(req,res,next){
-
-	Widget.updateCommenterDetails(req.body.widgetId, req.body.userid,function(resp){
-		res.send({resp:'success',user:req.user.name});
-	});
-});
 
 module.exports=router;

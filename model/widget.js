@@ -16,6 +16,7 @@ var WidgetSchema = mongoose.Schema({
 	  badgeClass: String,
 	  badgeIconClass: String,
 	  displayName: String,
+	  userImage: String,
      datetime:{type:Date, default: Date.Now},
    }],
   commenters:[String],
@@ -124,72 +125,6 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
         console.log(err);
       }
   });
-}
-
-//TODO: there should be only one postcomment method which will update complete comment details
-WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
-
-   this.model('Widget').update({
-     '_id' : widgetId
-   },{$push:{
-         commenters : {commenter:userid}
-     }
-   },function(err) {
-       if(err){
-//                console.log(err);
-       }
-   });
-
-
-
-
-	   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
-		   if(err){  
-//                console.log(err);
-		   }
-	   });
-}
-
-WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory,commenterThumb){
-	
-	this.model('Widget').update({
-     '_id' : widgetId
-   },{
-     $push: {
-         comments:{userid : userid,
-                   comment : userComment,
-                   datetime : new Date(),//{type:Date, default: Date.Now},
-				   badgeClass : commentCategory,
-				   badgeIconClass:commentClass,
-				   commenterDpThumb:commenterThumb,
-				   _id:0
-				  }
-     }
-   },function(err, userComment) {
-       if(err){
-
-//                console.log(err);
-       }
-   });
-
-   this.model('Widget').update({
-     '_id' : widgetId
-   },{$set:{
-         lastCommentedBy : userid
-     }
-   },function(err, userComment) {
-       if(err){
-//                console.log(err);
-       }
-   });
-
-
-   this.model('Widget').update({'_id' : widgetId},{$inc : { commentsCounter : 1 }},function(err, userComment) {
-       if(err){
-//                console.log(err);
-       }
-   });
-
 }
 
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {

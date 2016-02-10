@@ -24,13 +24,11 @@
     <timeline>
       <timeline-event ng-repeat="comment in comments" side="">
         <timeline-badge ng-style="{{comment.commenterThumb}}">
-<!--			{{commentThumbStyle}}-->
         </timeline-badge>
-<!-- 		 timeline-comment-{{comment.badgeClass}}-->
         <timeline-panel ng-style="{{comment.badgeClass}}">
 		<i ng-class="'glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}'"  ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
           <timeline-heading>
-            <h4>{{comment.userid | uppercase}}&nbsp;</h4>
+            <h4>{{ comment.displayName }}&nbsp;</h4>
             <p ng-if="comment.when">
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>

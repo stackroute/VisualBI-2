@@ -9,29 +9,31 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 		$scope.IsVisible = true;
 		$scope.IsNotVisible=false;
 	
-		widgetManager.getComment(chartInfo.widgetId).then(function(data){
-				var userComments=data.data.comments;
+		widgetManager.getComment(chartInfo.widgetId)
+			.then(function(widgetData){
+			
+				var userComments = widgetData.comments;
 				
 				var imgSrc="";
 			
 				angular.forEach(userComments, function(comment, key){
 						
-						if(comment.commenterDpThumb!=''||comment.commenterDpThumb!='undefined')
-							imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
-						else
-							imgSrc='url("../images/displayimages/default-user.png")';
+//						if(comment.userImage !=''||comment.commenterDpThumb!='undefined')
+//							imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
+//						else
+//							imgSrc='url("../images/displayimages/default-user.png")';
 
 						commentsCollection.push({
-												userid: comment.userid,
-												comment: comment.comment,
-												badgeClass: comment.badgeClass,
-												badgeIconClass: comment.badgeIconClass,
-												commenterThumb: {'background-image': imgSrc,
-																'background-size': '50px 50px'},
-												when: Date()
+							userid: comment.userid,
+							comment: comment.comment,
+							badgeClass: comment.badgeClass,
+							badgeIconClass: comment.badgeIconClass,
+							commenterThumb: {'background-image': imgSrc,
+											'background-size': '50px 50px'},
+							when: Date()
 					});
 				});
-				$scope.comments=commentsCollection;
+				$scope.comments = commentsCollection;
 				console.log($scope.comments);
 		});
 	

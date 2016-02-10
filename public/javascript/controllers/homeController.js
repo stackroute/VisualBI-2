@@ -114,56 +114,29 @@ angular.module('vbiApp')
 		$scope.fullScreen = function(widget) {
 			
 				var modalConfig = {
-				templateUrl: 'chartModal',
-				controller: 'chartModalController',
-				size: 'lg',
-				resolve: {
-					chartInfo: function(){
-                        return {
-							chartRendererMethod: widget.chartRenderer,
-							parameters: widget.parameters,
-							title: widget.title,
-							widgetId: widget._id,
-							canComment: $scope.canComment
-						};
-			
-		
-			}
-					
-		  }
+					templateUrl: 'chartModal',
+					controller: 'chartModalController',
+					size: 'lg',
+					resolve: {
+						chartInfo: function(){
+							return {
+								chartRendererMethod: widget.chartRenderer,
+								parameters: widget.parameters,
+								title: widget.title,
+								widgetId: widget._id,
+								canComment: $scope.canComment
+							};
+						}
+					}
+				}
+				$uibModal.open(modalConfig);
 		}
-				var modal = $uibModal.open(modalConfig);
-				modal.close(function(){
-					console.log('modal closed');
-				});
-
-
-		}
-		
 				
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
 			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
 
-		//Show Modal Bar Graph in Modal Window
-		$scope.openModalBarGraph = function(indexPassed, widgetUid) {
-		  var modalInstance = $uibModal.open({
-			 templateUrl : 'modalBarGraph.html',
-			 controller : 'ModalGraphController',
-			 indexPassed : indexPassed,
-			 resolve : {
-				graphData : function() {
-				  return $scope.widgetData[widgetUid];
-				},
-
-				index : function() {
-				  return indexPassed;
-				}
-			 }
-		  });
-		};
-
-		 //Show Line Modal Graph
+		 //Show Modal Graph
 		$scope.openModalGraph = function(template, indexPassed, widgetUid) {
 		  var modalInstance = $uibModal.open({
 			 templateUrl : template,
