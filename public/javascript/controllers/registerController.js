@@ -34,8 +34,9 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
             regCtrl.dataLoading = true;
             UserService.register(regCtrl.user)
             .then(function (response) {
-					$rootScope.registerUserMessage = 'New user registered successfully. SignIn to access dashboard'
-					$location.path("/");
+					regCtrl.registerUserMessage = 'New user registered successfully. SignIn to access dashboard';
+          // regCtrl.errorMessage ="successfully registered"
+          $location.path("/");
 				}).catch(function(err){
 //						alert('Failed to add user - ' + err.message);
 						regCtrl.errorMessage = err.data.error.message;

@@ -33,6 +33,7 @@ router.post('/register',function(req,res,next){
 	if(!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
 		res.status(400).send('failed');
 	} else {
+
 		dbUtils.registerUser({
 			username: req.body.username,
 			password: req.body.password,
@@ -40,9 +41,9 @@ router.post('/register',function(req,res,next){
 			lastName: req.body.lastName,
 			imagePath: req.body.imagePath,
 			email: req.body.email
-
 		}, function(err, user) {
 			if(err){
+        console.log(err);
 				res.status(500).send({ error: err });
 			}
 			else {
@@ -51,5 +52,5 @@ router.post('/register',function(req,res,next){
 		});
 	}
 });
- 
+
 module.exports = router;
