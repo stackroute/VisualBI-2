@@ -1,24 +1,56 @@
-angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route){
+angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route','widgetManager', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route,widgetManager){
 		
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
 		loggedInUser = '',
 		deleteIndc=false;
+		var commentsCollection=[];
+		$scope.IsVisible = true;
+		$scope.IsNotVisible=false;
+	
+		widgetManager.getComment(chartInfo.widgetId).then(function(data){
+				var userComments=data.data.comments;
+				//console.log(userComments);
+			
+				
+				var imgSrc='url("../images/default-user.png")';
 
+				angular.forEach(userComments, function(comment, key){
+
+						if(comment.commenterDpThumb!=''||comment.commenterDpThumb!='undefined')
+							imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
+						else
+							imgSrc='url("../images/default-user.png")';
+
+						commentsCollection.push({
+												userid: comment.userid,
+												comment: comment.comment,
+												badgeClass: comment.badgeClass,
+												badgeIconClass: comment.badgeIconClass,
+												commenterThumb: {'background-image': imgSrc,
+																'background-size': '50px 50px'},
+												when: Date()
+					});
+				});
+				$scope.comments=commentsCollection;
+				console.log($scope.comments);
+		});
+	
 		//	function to set the comment icon class and color
 		$scope.registerCommentType=function(icon){
 			commentType='glyphicon-'+icon;
 			}
 	
 		//	function to write to comment entered by the user to the database and to add the comment to modal view
-		$scope.IsNotVisible = true;
+
+	
 		$scope.ShowHide = function () {
 			$scope.IsVisible = $scope.IsVisible ? false : true;
 			$scope.IsNotVisible = $scope.IsVisible ?false : true;
 
     }
-
+		
     $scope.postComment = function(updateCommentsModel) {
 
         var newComment = $scope.userComment;
@@ -47,7 +79,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				'background-size': '50px 50px'};
 
 			
-            chartInfo.comments.push({
+            $scope.comments.push({
                 userid: loggedInUser, 
                 badgeClass: commentCategory,
                 badgeIconClass: commentType,
