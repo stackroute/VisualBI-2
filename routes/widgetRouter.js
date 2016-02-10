@@ -1,10 +1,11 @@
 var express = require('express'),
     router = express.Router(),
-    util = require('./utils'),
+    utils = require('./utils'),
     path = require('path'),
     Widget =require('../config/db').widgetModel,
     User = require('../config/db').userModel;
 
+router.use(utils.isAuthenticated);
 
 //Get the widgets
 router.get('/', function(req, res, next) {

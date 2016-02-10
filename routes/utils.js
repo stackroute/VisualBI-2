@@ -8,7 +8,7 @@ this.readFile = function(path) {
 
 this.isAuthenticated = function isAuthenticated(req,res,next){
 	 if(req.isAuthenticated()) return next();
-	 res.redirect('/');
+	 res.status(401).send('Not authorised');
 };
 
 module.exports = this;

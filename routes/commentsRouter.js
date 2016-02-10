@@ -1,9 +1,12 @@
 var express = require('express'),
     router = express.Router(),
-    util = require('./utils'),
+    utils = require('./utils'),
     path = require('path'),
     Widget =require('../config/db').widgetModel,
 	 dbUtils = require('../model/dbUtils');
+
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 
 //updates comments for widget
 router.post('/',function(req,res,next){
@@ -18,9 +21,10 @@ router.post('/',function(req,res,next){
 
 //gets the comments for a widget
 router.get('/:widgetId', function(req, res, next) {
-	dbUtils.getComments(req.params.widgetId)
-		.then(function(doc) {
-			res.json(doc ? doc : {});	
+	
+	Widget.getComments(req.params.widgetId)
+	.then(function(widget) {
+		res.status(200).json(widget);
 	})
 })
 

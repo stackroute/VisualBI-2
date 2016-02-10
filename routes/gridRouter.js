@@ -2,11 +2,13 @@ var express = require('express'),
     mongoose  = require('mongoose');
 
 var xmla   =  require("../lib/Xmla.js"),
+	 utils = require('./utils'),
     Connections = require("../config/db").connectionModel;
 
 var router = express.Router(),
     Xmla   =  xmla.Xmla;
 
+router.use(utils.isAuthenticated);
 
 router.post('/', function(req, res) {
   // console.log(req.body.mdxQuery);

@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var util = require('./utils');
+var utils = require('./utils');
 var path = require('path');
 var Widget =require('../config/db').widgetModel;
+
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 
 router.get('/:chartType', function(req, res, next) {
    // picks :chartType from the URL
