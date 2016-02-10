@@ -35,7 +35,7 @@
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete" ng-click="deleteComment(comments.comments,$index)"></i></p>
+			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete" ng-click="deleteComment(comments,$index)"></i></p>
         </timeline-panel>
       </timeline-event>
     </timeline>

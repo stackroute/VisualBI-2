@@ -18,7 +18,7 @@ var WidgetSchema = mongoose.Schema({
 	  badgeIconClass: String,
 	  commenterDpThumb:String
    }],
-  commenters:[{commenter:String}],
+  commenters:[commenter:String],
   commentersCounter : Number
 }, {strict: false});
 

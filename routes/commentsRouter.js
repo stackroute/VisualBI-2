@@ -12,7 +12,7 @@ router.post('/',function(req,res,next){
 		imgSrc=req.user.imagePath;
 		
 		if(imgSrc=='test path')
-			imgSrc='public/images/default-user.png';
+			imgSrc='public/images/displayimages/default-user.png';
 		
 		
 		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory,imgSrc);
@@ -46,7 +46,5 @@ router.post('/updateCommenterInfo',function(req,res,next){
 		res.send({resp:'success',user:req.user.name});
 	});
 });
-
-
 
 module.exports=router;

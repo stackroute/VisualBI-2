@@ -55,8 +55,8 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
-					  imagePath: "test path",
-				  		email: user.email
+					  imagePath: "public/images/displayimages/default-user.png",
+				  	  email: user.email
 				  }).success(function (data, status, headers, config) {
 					 	return(data);
 				  }).error(function (data, status, header, config) {

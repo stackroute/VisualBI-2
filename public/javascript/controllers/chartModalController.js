@@ -11,17 +11,15 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 	
 		widgetManager.getComment(chartInfo.widgetId).then(function(data){
 				var userComments=data.data.comments;
-				//console.log(userComments);
-			
 				
-				var imgSrc='url("../images/default-user.png")';
-
+				var imgSrc="";
+			
 				angular.forEach(userComments, function(comment, key){
-
+						
 						if(comment.commenterDpThumb!=''||comment.commenterDpThumb!='undefined')
 							imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
 						else
-							imgSrc='url("../images/default-user.png")';
+							imgSrc='url("../images/displayimages/default-user.png")';
 
 						commentsCollection.push({
 												userid: comment.userid,
