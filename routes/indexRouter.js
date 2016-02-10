@@ -20,13 +20,13 @@ router.get('/logout', function(req, res, next) {
   	req.session.destroy();
 //	console.log("logged out successfully");
 	//TODO: send the status
-   res.send("success");
+   res.status(500).send("success");
 });
 
 router.post('/login', passport.authenticate('local'),function(req, res){
 	//authenticated successfully, send the authentication token
 	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "name": req.user.name}), { maxAge: 3600000 });
-	res.send("success");
+	res.status(200).send("success");
 });
 
 router.post('/register',function(req,res,next){
@@ -49,11 +49,6 @@ router.post('/register',function(req,res,next){
 				res.status(200).send('success');
 			}
 		});
-
-
-//	  passport.authenticate('local')(req, res, function () {
-//		 res.redirect('/');
-//	  });
 	}
 });
  

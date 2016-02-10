@@ -1,6 +1,5 @@
 angular.module('vbiApp')
     .controller('loginController', ['$rootScope', '$location', 'userManager', '$cookies', '$scope', function($rootScope, $location, userManager, $cookies, $scope) {
-	 $scope.registerUserMessage = $rootScope.registerUserMessage;
 	 $rootScope.loggedInUser = {};
     this.user = {
         email: "",
@@ -11,7 +10,7 @@ angular.module('vbiApp')
     this.errorMessage = "";
     this.login = function() {
 		 //reset the message if when a user login
-		$scope.registerUserMessage = $rootScope.registerUserMessage = "";
+		  $rootScope.registerUserMessage = "";
 		  userManager.login(this.user, function(err, data) {
 				if(!err) {
 					$rootScope.loggedInUser = JSON.parse($cookies.get($rootScope.authToken));

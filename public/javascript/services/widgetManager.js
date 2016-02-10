@@ -10,10 +10,12 @@ angular.module('vbiApp').service('widgetManager', ['$http', function($http) {
    };
 	
 	this.getComment = function(widgetId) {
-		return $http({
-			method: 'GET',
-			url: '/comment/' + widgetId
-		}).then(function(res){ return(res.data)})
+		return $http.get('/comment/' + widgetId)
+			.success(function (data, status, headers, config) {
+					return(data);
+			  }).error(function (data, status, header, config) {
+				  return(data);
+			  }); 
 	};
 	
 	return this;

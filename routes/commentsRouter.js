@@ -24,9 +24,10 @@ router.post('/',function(req,res,next){
 
 //gets the comments for a widget
 router.get('/:widgetId', function(req, res, next) {
-	dbUtils.getComments(req.params.widgetId)
-		.then(function(doc) {
-			res.json(doc ? doc : {});	
+	
+	Widget.getComments(req.params.widgetId)
+	.then(function(widget) {
+		res.status(200).json(widget);
 	})
 })
 
