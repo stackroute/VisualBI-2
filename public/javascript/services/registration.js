@@ -56,7 +56,7 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  firstName: user.firstName,
 					  lastName: user.lastName,
 					  imagePath: "test path",
-				  		email: user.email
+				  		email: "test@wipro.com"
 				  }).success(function (data, status, headers, config) {
 					 	return(data);
 				  }).error(function (data, status, header, config) {

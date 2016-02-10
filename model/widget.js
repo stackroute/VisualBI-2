@@ -74,7 +74,6 @@ WidgetSchema.statics.getNewWidgetId = function(callback) {
        'status': 'blank'
     },function(err, data) {
       if(data == null) {
-        console.log("creating new widget id");
         createNewWidgetId(function(id) {
           callback(id);
         });
@@ -85,9 +84,7 @@ WidgetSchema.statics.getNewWidgetId = function(callback) {
 }
 
 WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
-
   var widgetCount = widgetList.length;
-
   for(var i=0; i<widgetCount; i++) {
     this.model('Widget').update({
       '_id' : widgetList[i]._id

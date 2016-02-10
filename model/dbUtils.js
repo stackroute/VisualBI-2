@@ -13,7 +13,7 @@ var mongoose = require('mongoose'),
 this.registerUser = function (user, done) {
 	Credential.register({
 		username : user.username,
-		name: user.firstName + ' ' + user.lastName,
+		displayName: user.firstName + ' ' + user.lastName,
 		imagePath: user.imagePath,
 		email: user.email
 	}, user.password, function(err, account) {
@@ -39,12 +39,5 @@ this.registerUser = function (user, done) {
 		}
 	});
 }
-
-this.getComments = function(widgetId) {
-	return Widget.getComments(widgetId)
-		.then(function(widget) {
-			return widget;
-	});
-};
 
 module.exports = this;

@@ -69,7 +69,7 @@ angular.module('vbiApp').service('widgetManager', ['$http', '$location',function
 					return(data);
 			  }).error(function (data, status, header, config) {
 				  return(data);
-			  }); 
+			  });
 	};
 
 	return this;
