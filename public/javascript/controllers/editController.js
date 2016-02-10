@@ -38,23 +38,25 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
           };
 
         $scope.selectedTab[0].rows[rowId].columns.push(addColumn);
+        console.log($scope.tabs[0].rows[rowId].columns);
     }
   };
 
   angular.forEach($scope.selectedTab[0].rows, function(row, rowIndex) {
     $scope.resetPlaceHolder(rowIndex, maxWidth);
+    console.log(rowIndex + " " + maxWidth);
   });
 
   widgetManager.getWidget()
     .then(function(widgets) {
       $scope.widgetItems = widgets;
+      console.log(widgets);
     });
 
   widgetManager.getAllWidgets()
     .then(function(allWidgets) {
       $scope.allWidgetItems = allWidgets;
     });
-
 
   $scope.addRow = function() {
     addNewRow();

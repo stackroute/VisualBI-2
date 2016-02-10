@@ -1,18 +1,21 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
-     $scope.user = $rootScope.loggedInUser;
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route) {
+		 //TODO: need to refactor permissions
 	 $scope.canShare = true;
 	 $scope.canEdit = true;
 	 $scope.canComment = true;
 	 $scope.tabs = [];
 	 $scope.showMenu = true;
-     var sharedDashboardUserId;
+		 //TODO: dashboardid in rootscope is not required
+    var sharedDashboardUserId;
+	 $scope.keepPolling = true;
 	 //data for every widget will put here. It is required to give more functionality like
 	 // line, bar or area chart in mdx grid
-	 $scope.widgetData = {};
+	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
 	 $scope.currentUserData = {};
+		 
 	 userManager.getData()
-		 .then(function(userData) {
+	 .then(function(userData) {
 			$scope.currentUserData = userData;
 			// Make additional dashboard. Assuming that there is only one dashboard now
 			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
@@ -23,6 +26,30 @@ angular.module('vbiApp')
 					 }
 				}
 		});
+		 
+		 var pollForNewComments = function() {
+        $timeout(function() {
+			  //update comments from server for current tab
+            if($scope.tabs && $scope.tabs.length > 0) {
+					$scope.tabs.forEach(function(tab, index, ar) {
+						tab.rows.forEach(function(row, rIndex) {
+							row.columns.forEach(function(col, cIndex) {
+								widgetManager.getComment(col.widgetId._id)
+									.then(function(cm){
+										col.widgetId.comments = cm.comments;
+										col.widgetId.commentsCounter = cm.commentsCounter;
+										col.widgetId.lastCommentedBy = cm.lastCommentedBy;
+										col.widgetId.commentersCounter = cm.commentersCounter;
+								});
+							})
+						})
+					})
+				}
+            pollForNewComments();
+        }, 10000);
+    	};
+		pollForNewComments();
+			 
 		$scope.logout = function() {
 			userManager.logout()
 				.then(function() {
@@ -78,7 +105,11 @@ angular.module('vbiApp')
   }
 
 		$scope.fullScreen = function(widget) {
-			var modalConfig = {
+			//get comments from the server
+			widgetManager.getComment(widget._id).then(function(data){
+				widget.comments = data.comments;
+				
+				var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
 				size: 'lg',
@@ -107,7 +138,14 @@ angular.module('vbiApp')
 					}
 				}
 			};
-			$uibModal.open(modalConfig);
+				var modal = $uibModal.open(modalConfig);
+				modal.close(function(){
+					console.log('modal closed');
+				});
+				
+				
+			});
+			
 		}
 
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
@@ -148,7 +186,8 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-
+		 
+		 //TODO: required
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
@@ -219,7 +258,9 @@ angular.module('vbiApp')
       }, function() {
       });
     }
-
+	 
+	 
+		 
     saveTabsToServer = function() {
       var params={
                   tabs: $scope.tabs

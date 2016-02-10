@@ -1,13 +1,14 @@
 //Model used to create a schema for widget collection of visualdb database
 
 var mongoose = require('mongoose');
-
+//TODO: In commentters, there should be array of mongo userid. Also make 
 var WidgetSchema = mongoose.Schema({
    title: String,
    chartRenderer: String,
-   url: String,
+   parameters: Object,
    lastCommentedBy : String,
    commentsCounter :Number,
+	studioId: String,
    comments:[{
 	  _id : false,
       userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
@@ -20,20 +21,27 @@ var WidgetSchema = mongoose.Schema({
   commentersCounter : Number
 }, {strict: false});
 
+//TODO: not required here. check at client end and send the correct schema to server
 WidgetSchema.statics.getWidgets = function(callback) {
    this.model('Widget').find({}, function(err, data) {
       callback(data);
    })
 }
 
-WidgetSchema.statics.getWidget = function (widgetId, callback) {
-   this.model('Widget').findOne({
-      'widgetId': widgetId
-   }, {
-      '_id': 0
-   },function(err, data) {
-      callback(data);
-   });
+//WidgetSchema.statics.getWidget = function (widgetId, callback) {
+//   this.model('Widget').findOne({
+//      'widgetId': widgetId
+//   }, {
+//      '_id': 0
+//   },function(err, data) {
+//      callback(data);
+//   });
+//}
+
+WidgetSchema.statics.getComments = function (widgetId, callback) {
+   return this.model('Widget').findOne({
+		 "_id" : mongoose.Types.ObjectId(widgetId)
+	}).exec(callback);
 }
 
 WidgetSchema.statics.getCommenters = function(widgetId,callback) {
@@ -78,6 +86,7 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   User.saveTab(userId, tabs);
 }
 
+//TODO: there should be only one postcomment method which will update complete comment details
 WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
 
    this.model('Widget').update({
@@ -87,14 +96,14 @@ WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
      }
    },function(err) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 
 
    this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 }
@@ -115,7 +124,7 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
    },function(err, userComment) {
        if(err){
 
-                console.log(err);
+//                console.log(err);
        }
    });
 
@@ -126,14 +135,14 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
      }
    },function(err, userComment) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 
 
    this.model('Widget').update({'_id' : widgetId},{$inc : { commentsCounter : 1 }},function(err, userComment) {
        if(err){
-                console.log(err);
+//                console.log(err);
        }
    });
 
