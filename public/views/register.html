@@ -1,136 +1,119 @@
+<div class ="outer">
+<div class="container" id="main">
+<div class="navbar navbar-fixed-top">
+<div class="container">
+<a class="logo" href="/"><img src="../images/slate-logo-real.png" alt="Your Logo"></a>
+</div>
+</div>
 
-<body class="reg">
-   
-<div class="register-page"> 
-	<header id="header">
-			<div class="page-holder">
-				<small class="logo">Slate</small>
-				<div class="help">
-					<p>CALL US &nbsp; +91 96 5455 1782</p>
-					<a class="link" href="" id="registration_support">SUPPORT</a>
-				</div>
-				<a class="link-login icon-lock" href="javascript:window.location.reload(true)" id="registration_login"><span>LOG IN</span></a>
-			</div>
-		</header>
- 
-    <div class="container">
- <div  ng-controller="loginController as loginCtrl" ng-hide="showRegisterPage">
-   
-  <div class="register">
-   <div class="page-holder">
-    <div class="form">
-        <h1 class="mainheading">The Only Business Intelligence Software You'll Ever Need</h1>
-        <p class="mainheading">Setup only takes one minute. No credit card required.</p>
-     <form class="register-form validate-form big-form" name="form" role="form" novalidate>
-       <fieldset>
-            
-    <div class ="row">
-         <div class="form-group half" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
 
-            <label for="username">E-mail</label>
+
+<div class="registerForm">
+
+  <ul class="tab-group">
+    <li class="tab active"><a href="" ng-click="showRegisterPage=true">Sign Up</a></li>
+    <li class="active1"><a href="" ng-click="showRegisterPage=false">Log In</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div  ng-controller="registerController as regCtrl" >
+    <div id="register-signup" ng-show ="showRegisterPage">
+
+      <h1>Sign Up</h1>
+
+      <form name="form" role="form" novalidate>
+
+        <div class="top-row">
+          <div class="field-wrap" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+            <label for="firstname">First Name </label>
+            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="regCtrl.user.firstName" required />
+            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+          </div>
+
+          <div class="field-wrap" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+             <label for="lastname">Last Name </label>
+            <input type="text" name="lastName" id="lastName" class="form-control" ng-model="regCtrl.user.lastName" required />
+            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+          </div>
+        </div>
+
+        <div class="field-wrap" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+          <label for ="username">Username</label>
+          <input type="text" name="username" id="username" class="form-control" ng-model="regCtrl.user.username" required />
+          <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+
+        <div class="field-wrap" ng-class="{ 'has-error': form.useremail.$dirty && form.useremail.$error.required }">
+          <label for ="email">Email Address</label>
+          <input type="email" name="useremail" id="useremail" class="form-control" ng-model="regCtrl.user.useremail" required />
+          <span ng-show="form.useremail.$dirty && form.useremail.$error.required" class="help-block">E-mail is required</span>
+        </div>
+
+        <div class="field-wrap" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+          <label for = "password">Set A Password</label>
+          <input type="password" id="password" name="password" class="form-control" ng-model="regCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
+          <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
+        </div>
+
+
+        <div class="field-wrap" ng-class="{ 'has-error': form.file.$error.maxSize && form.file.$error.required }">
+          <label for "image">Upload Image(optional)</label>
+        <input type="file" ngf-select ng-model="regCtrl.file" name="file" class="form-control"   ngf-pattern="'image/*'"
+            accept="image/*" ngf-max-size="2MB" />
+<!--
+             <label>
+            Image thumbnail:
+            </label> <img style="width:100px;" ngf-thumbnail="regCtrl.file"/>
+            <i ng-show="form.file.$error.required">*required</i><br>
+            <i ng-show="form.file.$error.maxSize">File too large
+            {{regCtrl.file.size / 1000000|number:1}}MB: max 2M</i>
+-->
+            <button ng-click="regCtrl.submit()" class="btn2 small">Upload</button>
+            <p>{{regCtrl.progress}}</p>
+        </div>
+        <div>
+        <button type="submit" ng-disabled="form.$invalid"  ng-click="regCtrl.register()"class="regbutton regbutton-block">Get Started</button>
+        </div>
+          <br/>
+        <div ng-show="regCtrl.errorMessage.length > 0" class="alert alert-danger row warn" role="alert">{{ regCtrl.errorMessage }}</div>
+
+</form>
+
+    </div>
+
+    <div id="register-login" ng-hide="showRegisterPage">
+     <div  ng-controller="loginController as loginCtrl" >
+      <h1>Welcome!</h1>
+
+      <form name="form" role="form">
+
+        <div class="field-wrap" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+          <label for ="email">Email Address</label>
             <input type="email" name="username" id="username" class="form-control" ng-model="loginCtrl.user.email"  required />
             <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail is required</span>
-
-            </div>
-
-         <div class="form-group half" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-
-           <label for="password">Password</label>
-           <input type="password" id="password" name="password" class="form-control" ng-model="loginCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
-           <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
-
-          </div>
         </div>
-    <div class="form-actions row">
-              
-            <button type="submit" ng-disabled="form.$invalid" class="btn1 big mainheading" ng-click="loginCtrl.login()">LOGIN</button>
-            <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>
+
+        <div class="field-wrap">
+          <label>Password</label>
+        <input type="password" id="password" name="password" class="form-control" ng-model="loginCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
+        <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
         </div>
-         </fieldset>
-        </form>
-       </div>
-      </div>
-     </div>
+
+
+
+        <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()"class="regbutton regbutton-block">Log In</button>
+<!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>-->
+      </form>
+
     </div>
-    
-    
-    
-    
-    
- <div  ng-controller="RegisterController as vm" ng-show ="showRegisterPage">
 
-  <div class="register">
-   <div class="page-holder">
-    <div class="form">
-        <h1 class="mainheading">The Only Business Intelligence Software You'll Ever Need</h1>
-        <p class="mainheading">Setup only takes one minute. No credit card required.</p>
-     <form class="register-form validate-form big-form" name="form" role="form" novalidate>
-       <fieldset>
-        <div class="row">
-         <div class="form-group half" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
-<!--           <div class="holder" data-error="Company name is required">-->
-            <label for="username">First name</label>
-            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="vm.user.firstName" required />
-<!--            <div class="error-container"></div>-->
-            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
-           </div>
-<!--        </div>-->
-         <div class="form-group half" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
-<!--           <div class="holder" data-error="last name is required">-->
-            <label for="username">Last name</label>
-            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="vm.user.lastName" required />
-            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
-<!--            <div class="error-container"></div>-->
-<!--           </div>-->
-          </div>
-        </div>
-        <div class ="row">
-         <div class="form-group half" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-<!--            <div class="holder" data-error="E-mail is required">-->
-            <label for="username">E-mail</label>
-            <input type="email" name="username" id="username" class="form-control" ng-model="vm.user.username" required />
-            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail is required</span>
-<!--            <div class="error-container"></div>    -->
-            </div>
-<!--         </div>-->
-<!--        </div>-->
-<!--        <div class ="row">   -->
-         <div class="form-group half" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-<!--           <div class="holder" data-error="Password is required">-->
-           <label for="password">Password</label>
-           <input type="password" id="password" name="password" class="form-control" ng-model="vm.user.password" ng-minlength="1" ng-maxlength="20"  required  />
-           <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
+  </div>
+  <!-- tab-content -->
 
-          </div>
-        </div>
-<!--        <div class ="row">    -->
-         <div class="form-group row" ng-class="{ 'has-error': form.file.$error.maxSize && form.file.$error.required }">
-<!--          <div class="holder" data-error="Image size is large">-->
-             <label for="image">Upload Image(optional)</label>
-             <input type="file" ngf-select ng-model="vm.file" name="file" class="form-control "   ngf-pattern="'image/*'"
-            accept="image/*" ngf-max-size="2MB" />
-             <label>Image thumbnail:</label> <img style="width:100px;" ngf-thumbnail="vm.file"/>
-            <i ng-show="form.file.$error.required">*required</i><br>
-            <i ng-show="form.file.$error.maxSize">File too large 
-            {{vm.file.size / 1000000|number:1}}MB: max 2M</i>
-            <button ng-click="vm.submit()" class="btn2 small">Upload</button>
-            <p>{{vm.progress}}</p>
-          </div>  
-<!--         </div>-->
-<!--        </div>    -->
-        <div class="form-actions row">
-              
-              
-            <button type="submit" ng-disabled="form.$invalid" class="btn1 big mainheading" ng-click="vm.register()">Register</button>
-<!--            <a href="#/login" class="btn btn-link" ng-click="cancel()">Cancel</a>-->
-        </div>
-        <div ng-show="vm.errorMessage.length > 0" class="alert alert-danger row" role="alert">{{ vm.errorMessage }}</div>
-      </fieldset>
-     </form> 
-    </div>
-   </div>
-  </div>    
- </div>
+</div>
+<!-- /form -->
+</div>
+
 </div>
 </div>
-<!--</div>-->
+</div>

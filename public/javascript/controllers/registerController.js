@@ -1,11 +1,11 @@
 (function () {
     'use strict';
  
-    angular.module('vbiApp').controller('RegisterController', RegisterController);
+    angular.module('vbiApp').controller('registerController', registerController);
  
-    RegisterController.$inject = ['UserService','Upload','$window','$location', '$rootScope','$scope'];
-    
-    function RegisterController(UserService,Upload,$window,$location, $rootScope, $scope) {
+    registerController.$inject = ['UserService','Upload','$window','$location', '$rootScope','$scope'];
+
+    function registerController(UserService,Upload,$window,$location, $rootScope, $scope) {
        
         var regCtrl = this;
         regCtrl.errorMessage = "";
@@ -14,7 +14,7 @@
                 regCtrl.upload(regCtrl.file); //call upload function
             }
         };
-        
+
         regCtrl.upload = function (file) {
             Upload.upload({
                 url: 'http://localhost:8080/upload', //webAPI exposed to upload the file
@@ -26,15 +26,15 @@
                     $window.alert('an error occured');
                 }
             }, function (resp) { //catch error
-                
+
                 $window.alert('Error status: ' + resp.status);
-            }, function (evt) { 
+            }, function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                 regCtrl.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
             });
         };
-        
-        
+ 
+
         regCtrl.register = function () {
             regCtrl.errorMessage = "";
             regCtrl.dataLoading = true;
@@ -47,7 +47,7 @@
 						regCtrl.errorMessage = err.data.error.message;
 					}
 			)};
-		 
+
 		 regCtrl.cancel = function(){
 			 $location.path("/");
 		 };
