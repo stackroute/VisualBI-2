@@ -1,6 +1,5 @@
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route) {
-     $scope.user = $rootScope.loggedInUser;
 		 //TODO: need to refactor permissions
 	 $scope.canShare = true;
 	 $scope.canEdit = true;

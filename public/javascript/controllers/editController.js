@@ -3,7 +3,6 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   var maxWidth = 12;
   draggerId = 0;
 
-  $scope.user = $rootScope.loggedInUser;
   $scope.tempId = [];
   $scope.getAllTabs = editManager.getTabDetails();
   $scope.tabIndex = editManager.getTabIndex();
