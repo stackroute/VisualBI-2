@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route, $mdDialog) {
 		 //TODO: need to refactor permissions
 	 $scope.canShare = true;
 	 $scope.canEdit = true;
@@ -13,7 +13,7 @@ angular.module('vbiApp')
 	 // line, bar or area chart in mdx grid
 	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
 	 $scope.currentUserData = {};
-		 
+
 	 userManager.getData()
 	 .then(function(userData) {
 			$scope.currentUserData = userData;
@@ -26,7 +26,7 @@ angular.module('vbiApp')
 					 }
 				}
 		});
-		 
+
 		 var pollForNewComments = function() {
         $timeout(function() {
 			  //update comments from server for current tab
@@ -49,7 +49,7 @@ angular.module('vbiApp')
         }, 10000);
     	};
 		pollForNewComments();
-			 
+
 		$scope.logout = function() {
 			userManager.logout()
 				.then(function() {
@@ -108,7 +108,7 @@ angular.module('vbiApp')
 			//get comments from the server
 			widgetManager.getComment(widget._id).then(function(data){
 				widget.comments = data.comments;
-				
+
 				var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
@@ -142,10 +142,10 @@ angular.module('vbiApp')
 				modal.close(function(){
 					console.log('modal closed');
 				});
-				
-				
+
+
 			});
-			
+
 		}
 
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
@@ -186,7 +186,7 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-		 
+
 		 //TODO: required
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
@@ -258,26 +258,28 @@ angular.module('vbiApp')
       }, function() {
       });
     }
-	 
-	 
-		 
+
+
+
     saveTabsToServer = function() {
       var params={
                   tabs: $scope.tabs
                };
 
-      $http({
-          url: "/user/savetab",
-          method: "POST",
-          data: params,
-          headers : {
-              'Content-Type': 'application/json'
-          }
-      }).success(function successCallback(data, status) {
-          $location.url('/');
+               userManager.saveTab(params);
 
-      }, function errorCallback(response) {
-      });
+      // $http({
+      //     url: "/user/savetab",
+      //     method: "POST",
+      //     data: params,
+      //     headers : {
+      //         'Content-Type': 'application/json'
+      //     }
+      // }).success(function successCallback(data, status) {
+      //     $location.url('/');
+      //
+      // }, function errorCallback(response) {
+      // });
     }
 }]).directive('showonhoverparent',
    function() {
@@ -292,22 +294,3 @@ angular.module('vbiApp')
        }
    };
 });
-;
-
-angular.module('vbiApp')
-    .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {
-      var homeCtrl = $scope.$new();
-      $controller('homeController',{$scope:homeCtrl});
-
-      $scope.setTabTitle = function(title) {
-        $uibModalInstance.close();
-        if(tabTitle.setType == 1) {
-          homeCtrl.createTab(title);
-        } else {
-          homeCtrl.renameTab(title, tabTitle.tabIndex)
-        }
-      }
-      $scope.closeModal = function() {
-        $uibModalInstance.close();
-      }
-    }]);

@@ -1,7 +1,7 @@
 //Model used to create a schema for widget collection of visualdb database
 
 var mongoose = require('mongoose');
-//TODO: In commentters, there should be array of mongo userid. Also make 
+//TODO: In commentters, there should be array of mongo userid. Also make
 var WidgetSchema = mongoose.Schema({
    title: String,
    chartRenderer: String,
@@ -55,11 +55,33 @@ WidgetSchema.statics.getCommenters = function(widgetId,callback) {
    });
 }
 
-WidgetSchema.statics.createWidget = function() {
-  this.model('Widget').insert(function(err,data) {
-    console.log("createWidget " + data);
+createNewWidgetId = function(callback) {
 
+  var widget = mongoose.model('Widget', WidgetSchema);
+
+  var emptyWidget = new widget({
+      status: 'blank'
+    });
+
+  emptyWidget.save(function(err, res) {
+    if (err) return console.error(err);
+    callback(res._id);
   });
+}
+
+WidgetSchema.statics.getNewWidgetId = function(callback) {
+  this.model('Widget').findOne({
+       'status': 'blank'
+    },function(err, data) {
+      if(data == null) {
+        console.log("creating new widget id");
+        createNewWidgetId(function(id) {
+          callback(id);
+        });
+      } else {
+        callback(data._id);
+      }
+    });
 }
 
 WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
@@ -75,6 +97,9 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
         title: widgetList[i].title,
         chartRenderer: widgetList[i].chartRenderer,
         parameters: widgetList[i].parameters
+      },
+      $unset:{
+        status: 'blank'
       }
     },function(err) {
         if(err){
@@ -84,6 +109,21 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   }
 
   User.saveTab(userId, tabs);
+}
+
+WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
+
+  this.model('Widget').update({
+    '_id' : widgetId
+  },{
+    $set:{
+      title: newTitle
+    }
+  },function(err) {
+      if(err){
+        console.log(err);
+      }
+  });
 }
 
 //TODO: there should be only one postcomment method which will update complete comment details

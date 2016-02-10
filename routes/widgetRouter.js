@@ -14,8 +14,10 @@ router.get('/', function(req, res, next) {
       });
 });
 
-router.post('/createWidget', function(req, res, next) {
-  Widget.createWidget();
+router.get('/getNewWidgetId', function(req, res, next) {
+  Widget.getNewWidgetId(function(id) {
+    res.send(id);
+  });
 });
 
 router.post('/saveWidget', function(req, res, next) {
@@ -28,7 +30,13 @@ router.post('/saveWidget', function(req, res, next) {
 
   Widget.saveWidget(userid, req.body.tabs, req.body.widgetList, User);
   res.send({resp:"Widgets updated successfully"});
+ });
+
+
+router.post('/renameTitle', function(req, res, next) {
+  Widget.renameTitle(req.body.widgetId, req.body.title);
 });
+
 
 //Get the widget details
 router.get('/:id', function(req, res, next) {

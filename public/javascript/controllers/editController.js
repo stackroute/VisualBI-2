@@ -38,19 +38,16 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
           };
 
         $scope.selectedTab[0].rows[rowId].columns.push(addColumn);
-        console.log($scope.tabs[0].rows[rowId].columns);
     }
   };
 
   angular.forEach($scope.selectedTab[0].rows, function(row, rowIndex) {
     $scope.resetPlaceHolder(rowIndex, maxWidth);
-    console.log(rowIndex + " " + maxWidth);
   });
 
   widgetManager.getWidget()
     .then(function(widgets) {
       $scope.widgetItems = widgets;
-      console.log(widgets);
     });
 
   widgetManager.getAllWidgets()
@@ -161,10 +158,14 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
     $scope.selectedTab[0].rows[rowId].columns[colId].widgetId.title = title;
 
     if($scope.selectedTab[0].rows[rowId].columns[colId].widgetId._id.length == 0) {
-      console.log("id not found");
-      var id = "56b848522e0554b40c7d4f52";//createNewWidget();
 
-      $scope.selectedTab[0].rows[rowId].columns[colId].widgetId._id = id;
+      widgetManager.getNewWidgetId()
+          .then(function(data) {
+            $scope.selectedTab[0].rows[rowId].columns[colId].widgetId._id = data.data;
+          }, function(error) {
+          });
+
+
       $rootScope.newWidgetList.push($scope.selectedTab[0].rows[rowId].columns[colId].widgetId);
     }
 
@@ -175,8 +176,11 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
     }
   }
 
-  $scope.resetTitle = function(widgetId, title) {
-    console.log(widgetId + " " + title);
+  $scope.renameTitle = function(widgetId, title) {
+    widgetManager.renameTitle(widgetId, title)
+      .then(function() {
+
+      });
   }
 
   $scope.removeWidget = function(rowIndex, colIndex,colWidth) {
@@ -252,89 +256,19 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
                 widgetList: $rootScope.newWidgetList
              };
 
-    $http({
-       url: "/widgets/saveWidget",
-       method: "POST",
-       data: allparams,
-       headers : {
-         'Content-Type': 'application/json'
-       }
-    }).success(function successCallback(data, status) {
-      $location.url('/');
-    }, function errorCallback(response) {
-    });
+             widgetManager.saveWidget(allparams);
+
+    // $http({
+    //    url: "/widgets/saveWidget",
+    //    method: "POST",
+    //    data: allparams,
+    //    headers : {
+    //      'Content-Type': 'application/json'
+    //    }
+    // }).success(function successCallback(data, status) {
+    //   $location.url('/');
+    // }, function errorCallback(response) {
+    // });
   }
 
 }]);
-
-angular.module('vbiApp')
-    .controller('widthController', ['$scope','$controller','$uibModalInstance', 'widthConfig', function($scope, $controller, $uibModalInstance, widthConfig) {
-      var editCtrl = $scope.$new();
-      $controller('editController',{$scope:editCtrl});
-
-      $scope.showTitle = function(id) {
-        if(id == 0 || id == 2) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      $scope.showWidth = function(id) {
-        if(id == 0 || id == 1) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-
-      $scope.setWidgetWidth = function(width, title, id) {
-        $uibModalInstance.close();
-        if(id == 2) {
-          editCtrl.resetTitle(widthConfig.widgetId, title);
-        } else {
-          editCtrl.setWidgetWidth(widthConfig.rowIndex, widthConfig.colIndex, width, widthConfig.columnWidth, title);
-        }
-      }
-      $scope.closeModal = function() {
-        $uibModalInstance.close();
-      }
-      $scope.widthConfig = widthConfig;
-    }]);
-angular.module('vbiApp')
-.controller('menuCtrl', function($scope){
-var tabClasses;
-var curId = 0;
-
-function initTabs() {
-tabClasses = ["","","",""];
-}
-
-$scope.getTabClass = function (tabNum) {
-return tabClasses[tabNum];
-};
-
-$scope.getTabPaneClass = function (tabNum) {
-return "tab-pane " + tabClasses[tabNum];
-}
-
-$scope.setActiveTab = function (tabNum) {
-initTabs();
-curId = tabNum;
-tabClasses[tabNum] = "active";
-};
-
-$scope.showTab = function(tabId) {
-  if(tabId == curId) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
- $scope.tab2 = "This is SECOND section";
-
-//Initialize
-  initTabs();
-  $scope.setActiveTab(1);
-});
