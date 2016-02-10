@@ -11,14 +11,14 @@ var WidgetSchema = mongoose.Schema({
 	studioId: String,
    comments:[{
 	  _id : false,
-      userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
-      comment: String,
-      datetime:{type:Date, default: Date.Now},
+     userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
+     comment: String,
 	  badgeClass: String,
-	  badgeIconClass: String
+	  badgeIconClass: String,
+	  displayName: String,
+     datetime:{type:Date, default: Date.Now},
    }],
-  commenters:[{commenter:String}],
-  commentersCounter : Number
+  commenters:[String],
 }, {strict: false});
 
 //TODO: not required here. check at client end and send the correct schema to server
@@ -187,5 +187,17 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
    });
 
 }
+
+WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
+	return this.model('Widget').update({ '_id' : widgetId }, {
+		$set: { lastCommentedBy : comment.displayName }, 
+		$inc : { commentsCounter : 1 },
+		$addToSet : { commenters: comment.userid },
+		$push: { comments: comment }
+	}).exec(done);
+};
+
+//WidgetSchema.statics.updateCommenter = function(widgetId, commenterId, done) {};
+
 // mongoose.model("Widget", WidgetSchema);
 module.exports = WidgetSchema;

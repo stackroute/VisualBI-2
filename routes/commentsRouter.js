@@ -9,14 +9,26 @@ var express = require('express'),
 router.use(utils.isAuthenticated);
 
 //updates comments for widget
-router.post('/',function(req,res,next){
+router.post('/',function(req, res, next){
+	
+	Widget.saveComment(req.body.widgetid, {
+		userid: req.user._id,
+		comment: req.body.comment,
+		badgeIconClass: req.body.commentType,
+		badgeClass: req.body.commentCategory,
+		displayName: req.user.displayName,
+		datetime: new Date(),
+	}).then(function(err, comment) {
+		if(err) res.status(500).send("Failed to update comments")
+		else res.sendStatus(200);
+	});
 
-	if(req.isAuthenticated()){
-		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-		res.send({resp:'success',user:req.user.name});
-	}
-	else
-		res.send({resp:'error',msg:'Authentication failure'});
+//	if(req.isAuthenticated()){
+//		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
+//		res.send({resp:'success',user:req.user.name});
+//	}
+//	else
+//		res.send({resp:'error',msg:'Authentication failure'});
 });
 
 //gets the comments for a widget
