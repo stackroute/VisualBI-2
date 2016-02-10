@@ -3,11 +3,11 @@ angular.module('vbiApp')
 
         $routeProvider
 
-        .when('/', {
+        .when('/register', {
             templateUrl: 'views/login.html',
             controller: 'loginController'
         })
-        .when('/register', {
+        .when('/', {
             templateUrl: 'views/register.html',
             controller: 'registerController'
         })

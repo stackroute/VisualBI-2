@@ -5,7 +5,7 @@ angular.module('vbiApp')
         email: "",
         password: ""
     };
-	
+
 	 var self = this;
     this.errorMessage = "";
     this.login = function() {
@@ -21,11 +21,11 @@ angular.module('vbiApp')
 
 		  });
 	 };
-        
+
     this.newUser = function(){
         $rootScope.showRegisterPage=true;
     };
-	
+
 	$scope.$watch(function() {
 		return self.user.password;}, function(newValue) {
 		self.errorMessage = "";

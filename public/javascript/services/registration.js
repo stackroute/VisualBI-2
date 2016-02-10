@@ -10,15 +10,16 @@ angular.module('vbiApp').factory('UserService', UserService);
 
           function register(user) {
            return $http.post('/register', {
-            useremail:user.useremail,
+            email:user.useremail,
 					  username:user.username,
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
 					  imagePath: "test path",
-				  		email: "test@wipro.com"
+
 				  }).success(function (data, status, headers, config) {
-					 	return(data);
+            
+            return(data);
 				  }).error(function (data, status, header, config) {
 					  return(data);
 				  });
