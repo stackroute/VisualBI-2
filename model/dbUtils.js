@@ -11,7 +11,6 @@ var mongoose = require('mongoose'),
 //Registers a user. It creates an entry into Credential collection. It also adds one template
 //in User collection for dashboard
 this.registerUser = function (user, done) {
-	console.log(user);
 	Credential.register({
 		username : user.username,
 		displayName: user.firstName + ' ' + user.lastName,
