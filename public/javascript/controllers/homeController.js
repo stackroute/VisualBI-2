@@ -1,29 +1,63 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', '$mdDialog', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, $mdDialog, $route) {
-     $scope.user = $rootScope.loggedInUser;
-		 $scope.canShare = true;
-		 $scope.canEdit = true;
-		 $scope.canComment = true;
-		 $scope.tabs = [];
-		 $scope.showMenu = true;
-		 //data for every widget will put here. It is required to give more functionality like
-		 // line, bar or area chart in mdx grid
-		 $scope.widgetData = {};
-		 $scope.currentUserData = {};
-		 userManager.getData()
-			 .then(function(userData) {
-			 	$scope.currentUserData = userData;
-				// Make additional dashboard. Assuming that there is only one dashboard now
-				if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
-					var dashboard = $scope.currentUserData.dashboards[0];
-			  		$rootScope.currentDashboard = dashboard._id;
-						 if(dashboard.tabs && dashboard.tabs.length > 0) {
-									$scope.tabs = dashboard.tabs;
-						 }
-					}
-		 	});
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route, $mdDialog) {
+		 //TODO: need to refactor permissions
+	 $scope.canShare = true;
+	 $scope.canEdit = true;
+	 $scope.canComment = true;
+	 $scope.tabs = [];
+	 $scope.showMenu = true;
+		 //TODO: dashboardid in rootscope is not required
+    var sharedDashboardUserId;
+	 $scope.keepPolling = false;
+	 //data for every widget will put here. It is required to give more functionality like
+	 // line, bar or area chart in mdx grid
+	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
+	 $scope.currentUserData = {};
 
+	 userManager.getData()
+	 .then(function(userData) {
+			$scope.currentUserData = userData;
+			// Make additional dashboard. Assuming that there is only one dashboard now
+			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
+				var dashboard = $scope.currentUserData.dashboards[0];
+				$rootScope.currentDashboard = dashboard._id;
+					 if(dashboard.tabs && dashboard.tabs.length > 0) {
+								$scope.tabs = dashboard.tabs;
+					 }
+				}
+		});
+
+		 var pollForNewComments = function() {
+        if($scope.keepPolling) {
+			  $timeout(function() {
+			  //update comments from server for current tab
+            if($scope.tabs && $scope.tabs.length > 0) {
+					$scope.tabs.forEach(function(tab, index, ar) {
+						tab.rows.forEach(function(row, rIndex) {
+							row.columns.forEach(function(col, cIndex) {
+								if(col.widgetId && col.widgetId._id) {
+									widgetManager.getComment(col.widgetId._id)
+										.then(function(cm){
+										col.widgetId.comments = cm.comments;
+										col.widgetId.commentsCounter = cm.commentsCounter;
+										col.widgetId.lastCommentedBy = cm.lastCommentedBy;
+										col.widgetId.commentersCounter = cm.commentersCounter;
+								});
+								}
+							})
+						})
+					})
+				}
+			   pollForNewComments();
+        }, 10000);
+		  }
+    	};
+		 
+		$scope.$watch($scope.keepPolling, pollForNewComments)
+//		pollForNewComments();
+		$scope.keepPolling = true; //start polling	 
 		$scope.logout = function() {
+			$scope.keepPolling = false;
 			userManager.logout()
 				.then(function() {
 					$cookies.remove($rootScope.authToken);
@@ -36,6 +70,7 @@ angular.module('vbiApp')
 		};
 
 		$scope.showCurrentUserDashboard = function(){
+			userManager.getData().then(function(userData){ $scope.currentUserData = userData; });
 			if($scope.currentUserData && $scope.currentUserData.dashboards.length > 0) {
 				var dashboard = $scope.currentUserData.dashboards[0];
 				$rootScope.currentDashboard = dashboard._id;
@@ -43,23 +78,27 @@ angular.module('vbiApp')
 				$scope.canShare = true;
 				$scope.canEdit = true;
 				$scope.canComment = true;
+				$location.url('/');
 			}
 		};
 
 		$scope.showSharedDashboard = function(userid, dashboardId, permission){
+
 			userManager.getDashboard(userid, dashboardId)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
+            sharedDashboardUserId = userid;
 						$scope.tabs = sharedDashboard.tabs;
 						$scope.canShare = false;
 						$scope.canEdit = permission.toUpperCase() === "CAN EDIT";
 						$scope.canComment = permission.toUpperCase() === "CAN EDIT" || permission.toUpperCase() === "CAN COMMENT";
+						$location.url('/');
 					}
 			});
 		};
 
         /*share Dashboard Modal*/
-    $scope.shareDashboardModal = function(currentUserData) {
+    	$scope.shareDashboardModal = function(currentUserData) {
       var shareConfig = {
         templateUrl: 'shareModal',
         controller: 'shareDashboardController',
@@ -73,7 +112,11 @@ angular.module('vbiApp')
   }
 
 		$scope.fullScreen = function(widget) {
-			var modalConfig = {
+			//get comments from the server
+			widgetManager.getComment(widget._id).then(function(data){
+				widget.comments = data.comments;
+
+				var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
 				size: 'lg',
@@ -102,7 +145,14 @@ angular.module('vbiApp')
 					}
 				}
 			};
-			$uibModal.open(modalConfig);
+				var modal = $uibModal.open(modalConfig);
+				modal.close(function(){
+					console.log('modal closed');
+				});
+
+
+			});
+
 		}
 
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
@@ -144,6 +194,7 @@ angular.module('vbiApp')
 		  });
 		};
 
+		 //TODO: required
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
 		};
@@ -172,7 +223,7 @@ angular.module('vbiApp')
     }
 
     $scope.gotoEditPage = function(tabs, index) {
-      editManager.setTabDetails(tabs, index);
+      editManager.setTabDetails(tabs, index, sharedDashboardUserId);
       $location.url('/edittab');
     }
 
@@ -215,23 +266,27 @@ angular.module('vbiApp')
       });
     }
 
+
+
     saveTabsToServer = function() {
       var params={
                   tabs: $scope.tabs
                };
 
-      $http({
-          url: "/user/savetab",
-          method: "POST",
-          data: params,
-          headers : {
-              'Content-Type': 'application/json'
-          }
-      }).success(function successCallback(data, status) {
-          $location.url('/');
+               userManager.saveTab(params);
 
-      }, function errorCallback(response) {
-      });
+      // $http({
+      //     url: "/user/savetab",
+      //     method: "POST",
+      //     data: params,
+      //     headers : {
+      //         'Content-Type': 'application/json'
+      //     }
+      // }).success(function successCallback(data, status) {
+      //     $location.url('/');
+      //
+      // }, function errorCallback(response) {
+      // });
     }
 }]).directive('showonhoverparent',
    function() {
@@ -246,22 +301,3 @@ angular.module('vbiApp')
        }
    };
 });
-;
-
-angular.module('vbiApp')
-    .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {
-      var homeCtrl = $scope.$new();
-      $controller('homeController',{$scope:homeCtrl});
-
-      $scope.setTabTitle = function(title) {
-        $uibModalInstance.close();
-        if(tabTitle.setType == 1) {
-          homeCtrl.createTab(title);
-        } else {
-          homeCtrl.renameTab(title, tabTitle.tabIndex)
-        }
-      }
-      $scope.closeModal = function() {
-        $uibModalInstance.close();
-      }
-    }]);

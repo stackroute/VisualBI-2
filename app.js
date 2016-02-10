@@ -18,14 +18,10 @@ var indexRouter = require('./routes/indexRouter'),
     dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
-    Credential = require('./config/db').credentialModel,
-    gridRouter = require('./routes/girdRouter'),
-    commentsRouter=require('./routes/commentsRouter'),
-    getUserId  = require('./routes/userId');
-    getUserList = require('./routes/userList');
-
-
-
+    Credential = dbConfig.credentialModel,
+    gridRouter = require('./routes/gridRouter'),
+    commentsRouter = require('./routes/commentsRouter'),
+    dashboardRouter  = require('./routes/dashboardRouter');
 
 var app = express();
 
@@ -42,7 +38,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
 
-
+//TODO: keep multer related stuff separate file
+//TODO: create a separate folder for user profile images
+//TODO: error handling should be standerd - put res.status
 var storage = multer.diskStorage({ //multers disk storage settings
         destination: function (req, file, cb) {
             cb(null, 'public/images/')
@@ -87,11 +85,10 @@ app.use('/user', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/widgets', widgetRouter);
 app.use('/widgetsMdx', widgetMdxRouter);
-app.use('/addcomment', commentsRouter);
+app.use('/comment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
-app.use('/getUserId', getUserId);
-app.use('/getUserList', getUserList);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
    var err = new Error('Not found');

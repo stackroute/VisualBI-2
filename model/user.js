@@ -31,12 +31,8 @@ var UserSchema = mongoose.Schema({
 	}]
 }, {strict: false});
 
-UserSchema.statics.addUser = function(userid, dashboardId, done) {
-
-
-}
-
 //Gets the dashboard of a user. It specically helps to fetch the shared dashboard
+//TODO: should be sharedDashboard
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 	this.model('User')
 		.findOne({
@@ -58,13 +54,14 @@ UserSchema.statics.getData = function (userid, callback) {
 		.findOne({
 		'userid': mongoose.Types.ObjectId(userid)
 	}, {
-		'_id': 0,
+		'_id': 0, //TODO: not required as it will not be inserted
 	}).populate('dashboards.tabs.rows.columns.widgetId')
 		.exec(function(err, data) {
 			callback(data);
 	});
 }
 
+//TODO: TO be deleted
 UserSchema.statics.setUserTheme=function(id, userTheme){
    this.model('User').update({
      'email' : id
@@ -78,6 +75,7 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
    });
 }
 
+//TODO: can be done at client side because it has all the data there. check and remove the method
 UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,permission,callback){
   // console.log("isExist userId "+userId+" "+currentUserName+" "+currentDashboard+" "+permission);
   this.model('User')
@@ -105,6 +103,7 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
   });
 }
 
+//TODO: indentation needs to be corrected
 UserSchema.statics.updatePermission = function(currentUserId,currentUserName,currentDashboard,shareWithUserId,permission){
   // console.log("permission "+shareWithUserId+" "+currentUserId+" "+currentUserName+" "+currentDashboard);
   this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId),
@@ -134,11 +133,12 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
   });
 }
 
-UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDashboard){
+UserSchema.statics.sharedDashboards = function(currentUserId,userName,user,currentDashboard){
     // console.log("dashboards.0.sharedWith "+currentUserId);
     this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
     {$addToSet:{"dashboards.$.sharedWith":
         {
+					"user": user,
           "username" : userName
         },
       }
@@ -150,6 +150,7 @@ UserSchema.statics.sharedDashboards = function(currentUserId,userName,currentDas
   	});
 }
 
+//TODO: revisit the logic and remove the unnecessary stuff
 UserSchema.statics.getUserId =function(credentialId,callback){
   this.model('User')
     .findOne({

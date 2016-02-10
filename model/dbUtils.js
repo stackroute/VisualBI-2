@@ -1,17 +1,22 @@
 //This files contains method which interact with database. All logic should be written here so that
 //unit test cases can be written for all db interaction
 
+//TODO: not required, can be put in route only
+
 var mongoose = require('mongoose'),
 	 User = require('../config/db').userModel,
-	 Credential = require('../config/db').credentialModel;
+	 Credential = require('../config/db').credentialModel,
+	 Widget = require('../config/db').widgetModel;
 
 //Registers a user. It creates an entry into Credential collection. It also adds one template 
 //in User collection for dashboard
 this.registerUser = function (user, done) {
 	Credential.register({
 		username : user.username,
-		name: user.firstName + ' ' + user.lastName,
-		imagePath: user.imagePath}, user.password, function(err, account) {
+		displayName: user.firstName + ' ' + user.lastName,
+		imagePath: user.imagePath,
+		email: user.email
+	}, user.password, function(err, account) {
 		if(err) {
 			done(err, 'failed')
 		} else {
@@ -34,6 +39,5 @@ this.registerUser = function (user, done) {
 		}
 	});
 }
-
 
 module.exports = this;
