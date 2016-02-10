@@ -19,6 +19,14 @@ var widgetSchema = new schema({
    widgetSlug      : String
 });
 
+var widgetProto = function(studioid, title, chartRenderer, parameters) {
+  this._id = '';
+  this.studioId = studioid;
+  this.title = title;
+  this.chartRenderer = chartRenderer;
+  this.parameters = parameters;
+}
+
 //function to fetch the widget documents from visualBI widget collection
 widgetSchema.statics.getWidgets = function(callback) {
    this.model('Widget').find({}, function(err, data) {
@@ -42,6 +50,20 @@ widgetSchema.statics.getWidgets = function(callback) {
 
        if(removeData) {
          data.splice(i, 1);
+       } else {
+
+         var title = data[i].widgetName;
+         var studioId = data[i]._id;
+         var chartRenderer = "executeQueryService";
+         var params = {
+           "showGraphIcon" : true,
+           "catalog" : data[i].connectionData.catalog,
+           "dataSource" : data[i].connectionData.dataSource,
+           "connId" : data[i].connectionData.connectionId,
+           "statement" : data[i].queryMDX
+         };
+
+         data[i] = new widgetProto(studioId, title, chartRenderer, params);
        }
      }
      callback(data);

@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route) {
+    .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route, $mdDialog) {
 		 //TODO: need to refactor permissions
 	 $scope.canShare = true;
 	 $scope.canEdit = true;
@@ -8,12 +8,12 @@ angular.module('vbiApp')
 	 $scope.showMenu = true;
 		 //TODO: dashboardid in rootscope is not required
     var sharedDashboardUserId;
-	 $scope.keepPolling = true;
+	 $scope.keepPolling = false;
 	 //data for every widget will put here. It is required to give more functionality like
 	 // line, bar or area chart in mdx grid
 	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
 	 $scope.currentUserData = {};
-		 
+
 	 userManager.getData()
 	 .then(function(userData) {
 			$scope.currentUserData = userData;
@@ -26,31 +26,38 @@ angular.module('vbiApp')
 					 }
 				}
 		});
-		 
+
 		 var pollForNewComments = function() {
-        $timeout(function() {
+        if($scope.keepPolling) {
+			  $timeout(function() {
 			  //update comments from server for current tab
             if($scope.tabs && $scope.tabs.length > 0) {
 					$scope.tabs.forEach(function(tab, index, ar) {
 						tab.rows.forEach(function(row, rIndex) {
 							row.columns.forEach(function(col, cIndex) {
-								widgetManager.getComment(col.widgetId._id)
-									.then(function(cm){
+								if(col.widgetId && col.widgetId._id) {
+									widgetManager.getComment(col.widgetId._id)
+										.then(function(cm){
 										col.widgetId.comments = cm.comments;
 										col.widgetId.commentsCounter = cm.commentsCounter;
 										col.widgetId.lastCommentedBy = cm.lastCommentedBy;
 										col.widgetId.commentersCounter = cm.commentersCounter;
 								});
+								}
 							})
 						})
 					})
 				}
-            pollForNewComments();
+			   pollForNewComments();
         }, 10000);
+		  }
     	};
-		pollForNewComments();
-			 
+		 
+		$scope.$watch($scope.keepPolling, pollForNewComments)
+//		pollForNewComments();
+		$scope.keepPolling = true; //start polling	 
 		$scope.logout = function() {
+			$scope.keepPolling = false;
 			userManager.logout()
 				.then(function() {
 					$cookies.remove($rootScope.authToken);
@@ -91,7 +98,7 @@ angular.module('vbiApp')
 		};
 
         /*share Dashboard Modal*/
-    $scope.shareDashboardModal = function(currentUserData) {
+    	$scope.shareDashboardModal = function(currentUserData) {
       var shareConfig = {
         templateUrl: 'shareModal',
         controller: 'shareDashboardController',
@@ -129,6 +136,8 @@ angular.module('vbiApp')
 				modal.close(function(){
 					console.log('modal closed');
 				});
+
+
 		}
 		
 				
@@ -170,7 +179,7 @@ angular.module('vbiApp')
 			 }
 		  });
 		};
-		 
+
 		 //TODO: required
 		$scope.lastCommentBy = function(comments){
 			return typeof comments !== 'undefined' && comments.length > 0 ? comments[comments.length - 1].userid : "";
@@ -242,26 +251,28 @@ angular.module('vbiApp')
       }, function() {
       });
     }
-	 
-	 
-		 
+
+
+
     saveTabsToServer = function() {
       var params={
                   tabs: $scope.tabs
                };
 
-      $http({
-          url: "/user/savetab",
-          method: "POST",
-          data: params,
-          headers : {
-              'Content-Type': 'application/json'
-          }
-      }).success(function successCallback(data, status) {
-          $location.url('/');
+               userManager.saveTab(params);
 
-      }, function errorCallback(response) {
-      });
+      // $http({
+      //     url: "/user/savetab",
+      //     method: "POST",
+      //     data: params,
+      //     headers : {
+      //         'Content-Type': 'application/json'
+      //     }
+      // }).success(function successCallback(data, status) {
+      //     $location.url('/');
+      //
+      // }, function errorCallback(response) {
+      // });
     }
 }]).directive('showonhoverparent',
    function() {
@@ -276,23 +287,4 @@ angular.module('vbiApp')
        }
    };
 });
-;
 
-
-angular.module('vbiApp')
-    .controller('titleController', ['$scope','$controller','$uibModalInstance', 'tabTitle', function($scope, $controller, $uibModalInstance, tabTitle) {
-      var homeCtrl = $scope.$new();
-      $controller('homeController',{$scope:homeCtrl});
-
-      $scope.setTabTitle = function(title) {
-        $uibModalInstance.close();
-        if(tabTitle.setType == 1) {
-          homeCtrl.createTab(title);
-        } else {
-          homeCtrl.renameTab(title, tabTitle.tabIndex);
-        }
-      }
-      $scope.closeModal = function() {
-        $uibModalInstance.close();
-      }
-    }]);

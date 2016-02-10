@@ -1,10 +1,11 @@
 var express = require('express'),
     router = express.Router(),
-    util = require('./utils'),
+    utils = require('./utils'),
     path = require('path'),
     Widget =require('../config/db').widgetModel,
     User = require('../config/db').userModel;
 
+router.use(utils.isAuthenticated);
 
 //Get the widgets
 router.get('/', function(req, res, next) {
@@ -12,6 +13,12 @@ router.get('/', function(req, res, next) {
     Widget.getWidgets(function(data){
          res.send(data);
       });
+});
+
+router.get('/getNewWidgetId', function(req, res, next) {
+  Widget.getNewWidgetId(function(id) {
+    res.send(id);
+  });
 });
 
 router.post('/saveWidget', function(req, res, next) {
@@ -22,9 +29,15 @@ router.post('/saveWidget', function(req, res, next) {
     userid = req.body.userid;
   }
 
-  Widget.saveWidget(userid, req.body.tabs, req.body.tabIndex,User);
+  Widget.saveWidget(userid, req.body.tabs, req.body.widgetList, User);
   res.send({resp:"Widgets updated successfully"});
+ });
+
+
+router.post('/renameTitle', function(req, res, next) {
+  Widget.renameTitle(req.body.widgetId, req.body.title);
 });
+
 
 //Get the widget details
 router.get('/:id', function(req, res, next) {

@@ -1,9 +1,11 @@
 var express = require('express'),
     router = express.Router(),
-    util = require('./utils'),
+    utils = require('./utils'),
     path = require('path'),
     WidgetMdx =require('../config/db').widgetMdxModel;
 
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 
 //Get the widgets
 router.get('/', function(req, res, next) {

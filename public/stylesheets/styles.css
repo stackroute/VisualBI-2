@@ -282,7 +282,8 @@ table,  th,  td{
 }
 
 .panel-width-style{
-	width: 200px;
+	width: 210px;
+	max-height: 700px;
 }
 
 
@@ -372,4 +373,121 @@ margin-top: 85px;
 	position: absolute;
 	left:50%;
 	z-index: 10000px;
+}
+
+
+/*code for main page*/
+
+.outer {
+  background-image: url("../images/background.jpg");
+  font-family: 'Titillium Web', sans-serif;
+  height:1000px;
+}
+.registerForm {
+  /*background: rgba(19, 35, 47, 0.7);*/
+  background: rgba(143, 151, 121, 0.9);
+  /*background-color: #cc0000;*/
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+.registerForm .tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.registerForm .tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.registerForm .tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+
+.registerForm .tab-group .active a {
+  /*background: #1ab188;*/
+  background: #008880;
+  /*color: #ffffff;*/
+}
+.registerForm .tab-group .active1 a {
+  /*background: #1ab188;*/
+  background: #8b0046;
+  /*color: #ffffff;*/
+}
+
+#register-login h1, #register-signup h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+
+.registerForm label{
+    color:white;
+    font-family: 'Raleway', serif;
+}
+
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.registerForm .top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.registerForm .top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.registerForm .top-row > div:last-child {
+  margin: 0;
+}
+
+.regbutton {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background:#008880 ;
+}
+.regbutton:hover, .regbutton:focus {
+  background: #008880;
+}
+
+.regbutton-block {
+  display: block;
+  width: 100%;
+}
+.warn{
+margin: 0px;
+  display: block;
+  width: 100%;
+}
+
+@media  (max-width: 768px) {
+  .outer {
+   height: 1024px;
+   background :url('../images/background_small.jpg');
+  }
 }

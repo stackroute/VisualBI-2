@@ -20,18 +20,18 @@ router.get('/logout', function(req, res, next) {
   	req.session.destroy();
 //	console.log("logged out successfully");
 	//TODO: send the status
-   res.status(500).send("success");
+   res.status(200).send("success");
 });
 
 router.post('/login', passport.authenticate('local'),function(req, res){
 	//authenticated successfully, send the authentication token
-	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "name": req.user.name}), { maxAge: 3600000 });
+	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "displayName": req.user.displayName}), { maxAge: 3600000 });
 	res.status(200).send("success");
 });
 
 router.post('/register',function(req,res,next){
 	if(!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
-		res.send('failed');
+		res.status(400).send('failed');
 	} else {
 		dbUtils.registerUser({
 			username: req.body.username,

@@ -37,14 +37,14 @@ angular.module('vbiApp')
 	  $rootScope.$on('$routeChangeStart', function(event, next, current) {
 		  var authToken = $cookies.get($rootScope.authToken);
 		  var currentUrl = $location.url();
-		  
+
 		  if(authToken) {
 			  $rootScope.loggedInUser= JSON.parse(authToken);
 			  if(currentUrl == '/') {
 
 				  $location.path("/home");
         		}
-		  } 
+		  }
 		  else if(currentUrl == '/home') {
 			  $location.path("/");
 		  }

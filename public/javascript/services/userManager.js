@@ -1,5 +1,5 @@
 angular.module('vbiApp')
-    .service('userManager', ['$http', '$timeout', function($http, $timeout) {
+    .service('userManager', ['$http', '$timeout', '$location', function($http, $timeout,$location) {
         return {
             login: function(user, done) {
                 $http.post('/login', {
@@ -69,6 +69,21 @@ angular.module('vbiApp')
                     .then(function(res) {
                         return (res);
                     });
+            },
+
+            saveTab : function(params){
+              $http({
+                  url: "/user/savetab",
+                  method: "POST",
+                  data: params,
+                  headers : {
+                      'Content-Type': 'application/json'
+                  }
+              }).success(function successCallback(data, status) {
+                  $location.url('/');
+
+              }, function errorCallback(response) {
+              });
             },
 
             loadUserNames: function($query) {

@@ -1,9 +1,12 @@
 var express = require('express'),
     router = express.Router(),
-    util = require('./utils'),
+    utils = require('./utils'),
     path = require('path'),
     Widget =require('../config/db').widgetModel,
 	 dbUtils = require('../model/dbUtils');
+
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 
 //updates comments for widget
 router.post('/',function(req,res,next){

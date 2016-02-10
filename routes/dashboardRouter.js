@@ -2,8 +2,10 @@ var express = require('express'),
     router = express.Router(),
     User = require('../config/db').userModel,
     Credential = require('../config/db').credentialModel;
-utils = require('./utils');
+	 utils = require('./utils');
 
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 
 router.get('/userData', function(req, res, next) {
     var userid = req.user._id; //it contains _id value of user whose dashboard to be fetched
