@@ -56,6 +56,4 @@ router.post('/updateCommenterInfo',function(req,res,next){
 	});
 });
 
-
-
 module.exports=router;

@@ -3,7 +3,6 @@ var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
     bodyParser = require('body-parser'),
-    multer = require('multer'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
@@ -22,6 +21,7 @@ var indexRouter = require('./routes/indexRouter'),
     gridRouter = require('./routes/gridRouter'),
     commentsRouter = require('./routes/commentsRouter'),
     dashboardRouter  = require('./routes/dashboardRouter');
+	uploadImageRouter=require('./routes/uploadImageRouter');
 
 var app = express();
 
@@ -38,32 +38,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
 
-//TODO: keep multer related stuff separate file
-//TODO: create a separate folder for user profile images
-//TODO: error handling should be standerd - put res.status
-var storage = multer.diskStorage({ //multers disk storage settings
-        destination: function (req, file, cb) {
-            cb(null, 'public/images/')
-        },
-        filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-        }
-    });
 
- var upload = multer({ //multer settings
-                    storage: storage
-                }).single('file');
-
-app.post('/upload', function(req, res) {
-        upload(req,res,function(err){
-            if(err){
-                 res.json({error_code:1,err_desc:err});
-                 return;
-            }
-             res.json({error_code:0,err_desc:null});
-        })
-    });
 
 //initialize passort sessions
 app.use(expressSession({
@@ -88,6 +63,7 @@ app.use('/widgetsMdx', widgetMdxRouter);
 app.use('/comment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
+app.use('/upload',uploadImageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
