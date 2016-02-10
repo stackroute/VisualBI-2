@@ -14,6 +14,10 @@ router.get('/', function(req, res, next) {
       });
 });
 
+router.post('/createWidget', function(req, res, next) {
+  Widget.createWidget();
+});
+
 router.post('/saveWidget', function(req, res, next) {
   var userid;
   if(typeof req.body.userid === 'undefined') {
@@ -22,7 +26,7 @@ router.post('/saveWidget', function(req, res, next) {
     userid = req.body.userid;
   }
 
-  Widget.saveWidget(userid, req.body.tabs, req.body.tabIndex,User);
+  Widget.saveWidget(userid, req.body.tabs, req.body.widgetList, User);
   res.send({resp:"Widgets updated successfully"});
 });
 
