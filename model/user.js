@@ -3,7 +3,6 @@
 var mongoose = require('mongoose');
 
 var UserSchema = mongoose.Schema({
-	_id: false,
 	userid: { type: mongoose.Schema.ObjectId, ref: 'Credential' },
    preferences:[{
       _id: false,
