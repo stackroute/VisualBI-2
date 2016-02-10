@@ -62,7 +62,7 @@ createNewWidgetId = function(callback) {
   var emptyWidget = new widget({
       status: 'blank'
     });
-
+    
   emptyWidget.save(function(err, res) {
     if (err) return console.error(err);
     callback(res._id);
@@ -85,6 +85,8 @@ WidgetSchema.statics.getNewWidgetId = function(callback) {
 
 WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   var widgetCount = widgetList.length;
+  console.log("saveWidget");
+  console.log(userId);
   for(var i=0; i<widgetCount; i++) {
     this.model('Widget').update({
       '_id' : widgetList[i]._id
@@ -96,7 +98,8 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
         parameters: widgetList[i].parameters
       },
       $unset:{
-        status: 'blank'
+        status: 'blank',
+        __v: 0
       }
     },function(err) {
         if(err){
