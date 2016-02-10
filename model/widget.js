@@ -15,7 +15,8 @@ var WidgetSchema = mongoose.Schema({
       comment: String,
       datetime:{type:Date, default: Date.Now},
 	  badgeClass: String,
-	  badgeIconClass: String
+	  badgeIconClass: String,
+	  commenterDpThumb:String
    }],
   commenters:[{commenter:String}],
   commentersCounter : Number
@@ -141,15 +142,18 @@ WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
    });
 
 
-   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
-       if(err){
+
+
+	   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
+		   if(err){  
 //                console.log(err);
-       }
-   });
+		   }
+	   });
 }
 
-WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory){
-   this.model('Widget').update({
+WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory,commenterThumb){
+	
+	this.model('Widget').update({
      '_id' : widgetId
    },{
      $push: {
@@ -158,6 +162,7 @@ WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentCla
                    datetime : new Date(),//{type:Date, default: Date.Now},
 				   badgeClass : commentCategory,
 				   badgeIconClass:commentClass,
+				   commenterDpThumb:commenterThumb,
 				   _id:0
 				  }
      }

@@ -12,8 +12,14 @@ router.use(utils.isAuthenticated);
 router.post('/',function(req,res,next){
 
 	if(req.isAuthenticated()){
-		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-		res.send({resp:'success',user:req.user.name});
+		imgSrc=req.user.imagePath;
+		
+		if(imgSrc=='test path')
+			imgSrc='public/images/displayimages/default-user.png';
+		
+		
+		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory,imgSrc);
+		res.send({resp:'success',user:req.user.name,image:req.user.imagePath});
 	}
 	else
 		res.send({resp:'error',msg:'Authentication failure'});
@@ -43,7 +49,5 @@ router.post('/updateCommenterInfo',function(req,res,next){
 		res.send({resp:'success',user:req.user.name});
 	});
 });
-
-
 
 module.exports=router;

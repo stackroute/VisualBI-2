@@ -8,15 +8,15 @@ angular.module('vbiApp').factory('UserService', UserService);
         service.register = register;
         return service;
 
+        
           function register(user) {
            return $http.post('/register', {
-            email:user.useremail,
-					  username:user.username,
+					  username:user.username, 
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
-					  imagePath: "test path",
-
+					  imagePath: "public/images/displayimages/default-user.png",
+				  	  email: user.email
 				  }).success(function (data, status, headers, config) {
             
             return(data);

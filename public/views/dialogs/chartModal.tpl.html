@@ -9,7 +9,39 @@
 		<chart-panel column-width="12" parameters = "{{ chartInfo.parameters }}" chart-renderer-method = "{{ chartInfo.chartRendererMethod }}" ></chart-panel>
   </div>
 
- <modal-comments></modal-comments>
+ <div class="modal-footer">
+ 
+    <!--code for toggling the show comment option--->
+  <h4 class="panel-title">
+      <span >
+       <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
+           <span class="commentDisplayToggle" ng-show = "IsNotVisible">Show Comments</span>
+           <span class="commentDisplayToggle" ng-show = "IsVisible">Hide Comments</span>    
+      </a>
+      </span>
+  </h4>
+  <div id="collapse1" class="collapse">
+    <timeline>
+      <timeline-event ng-repeat="comment in comments" side="">
+        <timeline-badge ng-style="{{comment.commenterThumb}}">
+<!--			{{commentThumbStyle}}-->
+        </timeline-badge>
+<!-- 		 timeline-comment-{{comment.badgeClass}}-->
+        <timeline-panel ng-style="{{comment.badgeClass}}">
+		<i ng-class="'glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}'"  ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
+          <timeline-heading>
+            <h4>{{comment.userid | uppercase}}&nbsp;</h4>
+            <p ng-if="comment.when">
+              <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
+            </p>
+          </timeline-heading>
+			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete" ng-click="deleteComment(comments,$index)"></i></p>
+        </timeline-panel>
+      </timeline-event>
+    </timeline>
+  </div>
+</div>
+
    <div class="input-group" ng-show="chartInfo.canComment">
     <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
 	   	 <span class="input-group-btn">
@@ -19,5 +51,4 @@
       <button class="btn btn-success" rows="3" type="button" ng-click="postComment()" >Post comment&nbsp</button>
 	  </span>
    </div>
-	 {{pattern}}
 </script>

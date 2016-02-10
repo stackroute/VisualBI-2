@@ -112,49 +112,35 @@ angular.module('vbiApp')
   }
 
 		$scope.fullScreen = function(widget) {
-			//get comments from the server
-			widgetManager.getComment(widget._id).then(function(data){
-				widget.comments = data.comments;
-
+			
 				var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
 				size: 'lg',
 				resolve: {
 					chartInfo: function(){
-                        var userComments=[];
-
-                        angular.forEach(widget.comments, function(comment, key){
-                            userComments.push({
-                                userid: comment.userid,
-                                comment: comment.comment,
-                                badgeClass: comment.badgeClass,
-                                badgeIconClass: comment.badgeIconClass,
-                                when: Date()
-                            });
-                        });
-
-						return {
+                        return {
 							chartRendererMethod: widget.chartRenderer,
 							parameters: widget.parameters,
 							title: widget.title,
-							comments: userComments,
 							widgetId: widget._id,
 							canComment: $scope.canComment
 						};
-					}
-				}
-			};
+			
+		
+			}
+					
+		  }
+		}
 				var modal = $uibModal.open(modalConfig);
 				modal.close(function(){
 					console.log('modal closed');
 				});
 
 
-			});
-
 		}
-
+		
+				
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
 			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
@@ -301,3 +287,4 @@ angular.module('vbiApp')
        }
    };
 });
+
