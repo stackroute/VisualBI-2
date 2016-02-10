@@ -1,7 +1,9 @@
 var express = require('express'),
     router = express.Router(),
+	 utils = require('./utils'),
     User = require('../config/db').userModel;
 
+router.use(utils.isAuthenticated);
 
 router.get('/dashboard', function(req, res, next) {
     var email = req.email;
