@@ -18,7 +18,8 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  imagePath: "public/images/displayimages/default-user.png",
 				  	  email: user.email
 				  }).success(function (data, status, headers, config) {
-					 	return(data);
+            
+            return(data);
 				  }).error(function (data, status, header, config) {
 					  return(data);
 				  });

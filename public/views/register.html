@@ -75,6 +75,7 @@
         <button type="submit" ng-disabled="form.$invalid"  ng-click="regCtrl.register()"class="regbutton regbutton-block">Get Started</button>
         </div>
           <br/>
+        <div ng-show="regCtrl.registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ regCtrl.registerUserMessage }}</div>
         <div ng-show="regCtrl.errorMessage.length > 0" class="alert alert-danger row warn" role="alert">{{ regCtrl.errorMessage }}</div>
 
 </form>
@@ -103,6 +104,8 @@
 
         <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()"class="regbutton regbutton-block">Log In</button>
 <!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>-->
+       <div ng-show="loginCtrl.errorMessage.length > 0" class="alert alert-danger row warn" role="alert">{{ loginCtrl.errorMessage}}</div>
+
       </form>
 
     </div>
