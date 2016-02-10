@@ -43,7 +43,6 @@ this.registerUser = function (user, done) {
 this.getComments = function(widgetId) {
 	return Widget.getComments(widgetId)
 		.then(function(widget) {
-//			console.log(widget);
 			return widget;
 	});
 };
