@@ -3,6 +3,19 @@ angular.module('vbiApp')
       var editCtrl = $scope.$new();
       $controller('editController',{$scope:editCtrl});
 
+//      Enter tab width between 1 - {{ widthConfig.columnWidth }}
+
+      if(widthConfig.calledFor == 0) {
+        //title and width
+        $scope.modalTitle = "Enter the title and width";
+      } else if(widthConfig.calledFor == 1) {
+        //width
+        $scope.modalTitle = "Edit the width 1 - " + widthConfig.columnWidth;
+      } else if(widthConfig.calledFor == 2) {
+        //title
+        $scope.modalTitle = "Edit the widget title";
+      }
+
       $scope.showTitle = function(id) {
         if(id == 0 || id == 2) {
           return true;
