@@ -70,6 +70,7 @@ angular.module('vbiApp')
         controller: 'shareDashboardController',
         resolve: {
           sharedDashboards: function(){
+            console.log(currentUserData.dashboards[0].sharedWith);
             return currentUserData.dashboards[0].sharedWith; //assuming there is only one dashboard.
           }
         }
@@ -81,7 +82,7 @@ angular.module('vbiApp')
 			//get comments from the server
 			widgetManager.getComment(widget._id).then(function(comments){
 				widget.comments = comments;
-				
+
 				var modalConfig = {
 				templateUrl: 'chartModal',
 				controller: 'chartModalController',
@@ -112,9 +113,9 @@ angular.module('vbiApp')
 				}
 			};
 			$uibModal.open(modalConfig);
-				
+
 			});
-			
+
 		}
 
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {

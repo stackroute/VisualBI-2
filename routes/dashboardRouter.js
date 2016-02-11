@@ -2,8 +2,7 @@ var express = require('express'),
     router = express.Router(),
     User = require('../config/db').userModel,
     Credential = require('../config/db').credentialModel;
-utils = require('./utils');
-
+    utils = require('./utils');
 
 router.get('/userData', function(req, res, next) {
     var userid = req.user._id; //it contains _id value of user whose dashboard to be fetched
@@ -15,7 +14,7 @@ router.get('/userData', function(req, res, next) {
         res.json({});
 });
 
-router.get('/:userid/:dashboardId', function(req, res, next) {
+router.get('/getDashboard/:userid/:dashboardId', function(req, res, next) {
     var userid = req.params.userid; //it contains _id value of credentials
     var dashId = req.params.dashboardId;
     if (userid) {
@@ -27,70 +26,59 @@ router.get('/:userid/:dashboardId', function(req, res, next) {
 });
 
 router.post('/shareDashboard', function(req, res, next) {
-    var currentDashboard = req.body.currentDashboard;
     var userNames = req.body.userNames;
     var currentUserId = req.user._id;
-    var currentUserName = req.user.name;
+    var currentUserName = req.user.username;
+    var currentUserDisplayName = req.user.name;
     var permission = req.body.permission;
     var usernameProcessed = 0;
+    var currentUserEmail = currentUserName;//have to change once email feild exists.
 
-    userNames.forEach(function(credentialObj) {
-        User.getUserId(credentialObj._id, function(userObj) {
-            if (userObj === null) {
-                res.send(credentialObj.username + "'s document not present");
-            } else {
-                User.isExist(currentUserName, currentDashboard, userObj._id, permission, function(result) {
-                    if (result == true) {
-                        User.updatePermission(currentUserId, currentUserName, currentDashboard, userObj._id, permission);
-                        console.log("updating permission");
-                    } else {
-                        console.log("not updating");
-                        User.shareDashboard(currentUserId, currentUserName, currentDashboard, userObj._id, permission, function(result) {
-                            User.sharedDashboards(currentUserId, credentialObj.name, credentialObj.username, currentDashboard);
-                        });
-                    }
-                });
-
-
-                usernameProcessed++;
-                if (userNames.length == usernameProcessed)
-                    res.send(true);
-            }
-        });
-    });
+    userNames.forEach(function(userName){
+      Credential.getCredentialId(userName).then(function(credentialObj){
+        if(credentialObj !== null){
+          credentialObj.displayName = credentialObj.name; //remove and assign from database.
+          credentialObj.email = credentialObj.username;
+          console.log("credObj",JSON.stringify(credentialObj));
+          return credentialObj;
+        }else{
+          res.status(400).send("Not a valid user.");
+        }
+      }).then(function(credentialObj){
+        User.isExist(currentUserEmail, currentUserName, credentialObj._id, permission).then(function(isExist){
+          return {isExist:isExist,credentialObj:credentialObj};
+        }).then(function(result){
+          if(result.isExist !== null){
+            User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(data){
+            }).catch(function(err){
+              res.status(500).send("internal server error");
+            });
+          }else{
+            User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(){
+              console.log("inserted into user document");
+            }).catch(function(err){
+              res.status(500).send("internal server error");
+            });
+          }
+          return credentialObj;
+        }).then(function(credentialObj){
+          console.log("sharedDashboards ",currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.username, credentialObj._id);
+          User.sharedDashboards(currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.email, credentialObj._id);
+          usernameProcessed++;
+          if (userNames.length == usernameProcessed)
+           res.status(200).send(true);
+        })
+      }).catch(function(err){
+        res.status(500).send("internal server error");
+      })
+    })
 });
 
-router.post('/', function(req, res, next) {
-    var userName = req.body.userName;
-    var currentDashboard = req.body.currentDashboard;
-    var currentUserName = req.user.name;
-    var permission = req.body.permission;
-    if (userName) {
-        Credential.getCredentialId(userName, function(credentialId) {
-            if (!credentialId) {
-                res.send("Invalid user");
-            } else {
-                User.getUserId(credentialId._id, function(userId) {
-                    if (userId === null) {
-                        res.send(userName + "'s document not present");
-                    } else {
-                        User.isExist(currentUserName, currentDashboard, userId._id, permission, function(result) {
-                            if (result == true)
-                                res.send(userName + " already existing");
-                            else {
-                                res.send("can be shared");
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
-});
+router.get('/userList/:query?', function(req, res) {
+  var  query =req.params.query;
 
-router.post('/userList', function(req, res) {
-    Credential.getUsers(function(data) {
-        res.send(data);
+    Credential.getUsers(query,function(data) {
+        res.status(200).json(data);
     });
 });
 
