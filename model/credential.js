@@ -43,25 +43,26 @@ var CredentialSchema = mongoose.Schema({
 CredentialSchema.plugin(passportLocalMongoose);
 
 //TODO: getCredentialsId is not required. Remove it 
-CredentialSchema.statics.getCredentialId = function(username, callback){
-  this.model('Credential')
+  return this.model('Credential')
 		.findOne({
 		'username': username
 	}, {
-		'_id': 1
+		'_id': 1,
+		'displayName': 1,//display name should be given.
+		'username': 1
+		'email': 1
 	}).exec(function(err, data) {
-			if(err){
-			}
-			callback(data);
+			// callback(data);
 	});
 };
 
 //TODO: There must be error handling here. Use regular expression to get filterred users
-CredentialSchema.statics.getUsers = function(callback){
+CredentialSchema.statics.getUsers = function(query,callback){
 	this.model('Credential')
-			.find({},{'username':1,'name':1}).exec(function(err,data){
-				if(!err)
+			.find({username:{$regex:query}},{'username':1,'name':1}).exec(function(err,data){
+				if(!err){
 					callback(data);
+					}
 			})
 }
 // mongoose.model("Credential", CredentialSchema);
