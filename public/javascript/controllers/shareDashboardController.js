@@ -33,10 +33,11 @@ angular.module('vbiApp')
 			  //TODO: currentDashboard id has to be removed
 			  //TODO: need to fetch only matching users
             sharedDashboards.forEach(function(userObj) {
-              $scope.validUserNames.push(userObj.displayname);
+              $scope.validUserNames.push(userObj.username);
             });
             $scope.tagAdded = function(tag) {
               $scope.userNames.push(tag.username);
+              debugger;
               if(~$.inArray(tag.username, $scope.validUserNames)){
                 $scope.shareErrMessage = tag.username+"user already exists";
               }else{
