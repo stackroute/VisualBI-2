@@ -106,7 +106,6 @@ UserSchema.statics.isExist =function(currentUserEmail, currentUserName, userId, 
 }
 
 UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, currentusername, shareWithUserId, currentUserDisplayName, permission){
-	console.log("inserting"+currentUserEmail, currentUserId, currentusername, shareWithUserId, permission);
 	return this.model('User').update({'userid':shareWithUserId},
   {$addToSet:{"sharedDashboards":
       { "userid" : currentUserId,
@@ -149,7 +148,6 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId, displayName, userName, email, userId){ //email should b passed
-    console.log("dashboards.0.sharedWith "+currentUserId);
     return this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId)},
     {$addToSet:{"dashboards.0.sharedWith":
         {

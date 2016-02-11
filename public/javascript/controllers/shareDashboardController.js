@@ -53,7 +53,6 @@ angular.module('vbiApp')
 
             //remove loop assaign usernames directly to scope
             $scope.shareDashboard = function() {
-              console.log($scope.userNames);
                 userManager.shareDashboard($scope.userNames, $scope.selectedPermisson.name)
                     .then(function(userid) {
                         $uibModalInstance.close();
