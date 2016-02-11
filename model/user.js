@@ -41,9 +41,9 @@ var UserSchema = mongoose.Schema({
          tabTitle: String,
          tabId: String,
          rows: [{_id: false,
-				columns:[{_id: false,
-					colWidth: Number,
-            	widgetId: {type: mongoose.Schema.ObjectId, ref: 'Widget'}
+				 columns:[{_id: false,
+				 colWidth: Number,
+         widgetId: {type: mongoose.Schema.ObjectId, ref: 'Widget'}
 				}]
          }]
       }]
@@ -122,17 +122,16 @@ UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, cu
 
 //TODO: indentation needs to be corrected
 UserSchema.statics.updatePermission = function(currentUserEmail, currentUserId, currentUserName, shareWithUserId, currentUserDisplayName, permission){
-console.log("updating perm ",shareWithUserId,currentUserId,currentUserName,currentUserEmail,currentUserDisplayName,permission);
+// console.log("updating perm ",shareWithUserId,currentUserId,currentUserName,currentUserEmail,currentUserDisplayName,permission);
 	return this.model('User').update({'userid':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
 														"sharedDashboards.email": currentUserEmail,
 														"sharedDashboards.displayname": currentUserDisplayName
                             },
-  {$set:{"sharedDashboards.permission": permission}}
+  {$set:{"sharedDashboards.$.permission": permission}}
   ,{upsert: true})
   .exec(function(err, data){
-    console.log(data);
   });
 }
 
