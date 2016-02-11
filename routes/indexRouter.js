@@ -50,7 +50,11 @@ router.get('/logout', function(req, res, next) {
 
 router.post('/login', passport.authenticate('local'),function(req, res){
 	//authenticated successfully, send the authentication token
-	res.cookie("authToken", JSON.stringify({"authToken": req.user._id, "displayName": req.user.displayName}), { maxAge: 3600000 });
+	res.cookie("authToken", JSON.stringify({
+		"authToken": req.user._id, 
+		"displayName": req.user.displayName,
+		"imagePath": req.user.imagePath
+	}), { maxAge: 3600000 });
 	res.status(200).send("success");
 });
 

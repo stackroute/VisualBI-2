@@ -153,6 +153,9 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
 }
 
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
+	console.log('Comment in widget manager');
+	console.log(comment);
+	
 	return this.model('Widget').update({ '_id' : widgetId }, {
 		$set: { lastCommentedBy : comment.displayName }, 
 		$inc : { commentsCounter : 1 },

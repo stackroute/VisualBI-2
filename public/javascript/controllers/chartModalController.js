@@ -23,30 +23,32 @@
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
-angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route','widgetManager', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route,widgetManager){
+angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route','widgetManager','$rootScope', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route,widgetManager,$rootScope){
 		
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
 		loggedInUser = '',
-		deleteIndc=false;
-		var commentsCollection=[];
-		$scope.IsVisible = true;
-		$scope.IsNotVisible=false;
+		deleteIndc=false,
+		commentsCollection=[];
+		$scope.commentsVisibility = true;
+		$scope.chartInfo = chartInfo;
 	
 		widgetManager.getComment(chartInfo.widgetId)
 			.then(function(widgetData){
+				
+				//console.log(widgetData.data.comments);
 			
-				var userComments = widgetData.comments;
+				var userComments = widgetData.data.comments;
 				
 				var imgSrc="";
 			
 				angular.forEach(userComments, function(comment, key){
 						
-//						if(comment.userImage !=''||comment.commenterDpThumb!='undefined')
-//							imgSrc='url("../'+comment.commenterDpThumb.substring(6)+'")'
-//						else
-//							imgSrc='url("../images/displayimages/default-user.png")';
+					imgSrc='url("../'+comment.userImage.substring(6)+'")';
+
+					
+						console.log(comment.userImage);
 
 						commentsCollection.push({
 							userid: comment.userid,
@@ -55,6 +57,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 							badgeIconClass: comment.badgeIconClass,
 							commenterThumb: {'background-image': imgSrc,
 											'background-size': '50px 50px'},
+							commenterDpPath : comment.userImage,
 							when: Date()
 					});
 				});
@@ -71,10 +74,8 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
 	
 		$scope.ShowHide = function () {
-			$scope.IsVisible = $scope.IsVisible ? false : true;
-			$scope.IsNotVisible = $scope.IsVisible ?false : true;
-
-    }
+			$scope.commentsVisibility= $scope.commentsVisibility ? false : true;
+		}
 		
     $scope.postComment = function(updateCommentsModel) {
 
@@ -86,27 +87,20 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				commentType:commentType,
 				commentCategory:commentCategory
 			  };
-
 		
-        userManager.pushComment(parameters).then(function(data) {
+		console.log('Logged in User -> ');
+		console.log($rootScope.loggedInUser);
+		
+		widgetManager.saveComment(parameters).then(function(data) {
 			
+		
 			var imgSrc='url("../'+data.image.substring(6)+'")';
-		
-			
-            loggedInUser = data.user;
-			
-			if(data.image=='test path')//cleanup
-				imgSrc='url("../images/default-user.png")';
-			
-			console.log(loggedInUser,imgSrc);
-			
 
 			var commentThumbStyle = {'background-image': imgSrc,
 				'background-size': '50px 50px'};
 
-			
-            $scope.comments.push({
-                userid: loggedInUser, 
+			$scope.comments.push({
+                userid: $rootScope.loggedInUser, 
                 badgeClass: commentCategory,
                 badgeIconClass: commentType,
                 comment: newComment,
@@ -118,27 +112,11 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
             commentType = 'glyphicon-check', commentCategory = 'primary';
             $scope.$apply();
 
-            userManager.getCommenters(chartInfo.widgetId).then(function(data) {
-
-                var insertIndc;
-                angular.forEach(data.data[0].commenters, function(commenter, key) { //cleanup
-                    if (loggedInUser == commenter.commenter) {
-                        insertIndc = false;
-                    }
-                });
-
-                if (insertIndc!==false) {
-				       userManager.insertNewCommenterInfo(chartInfo.widgetId, loggedInUser).then(function(data) {insertIndc=false});
-                }
-						$scope.$apply();
-						$route.reload(); //refreshes the background page
-            });
-
         });
 
     };
 
-    $scope.chartInfo = chartInfo;
+    
 
     $scope.hide = function() {
         $uibModalInstance.dismiss('cancel');

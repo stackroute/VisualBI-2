@@ -45,8 +45,8 @@ router.post('/',function(req, res, next){
 		userImage: req.user.imagePath,
 		datetime: new Date(),
 	}).then(function(err, comment) {
-		if(err) res.status(500).send("Failed to update comments")
-		else res.sendStatus(200);
+		if(err) res.status(500).send(err);
+		else res.send(200);
 	});
 
 });
