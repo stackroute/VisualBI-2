@@ -53,8 +53,7 @@ var UserSchema = mongoose.Schema({
 
 //Gets the dashboard of a user. It specically helps to fetch the shared dashboard
 //TODO: should be sharedDashboard
-UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
-	console.log("getDashboard ",userid);
+UserSchema.statics.getDashboard = function (userid, callback) {
 	this.model('User')
 		.findOne({
 		'userid': mongoose.Types.ObjectId(userid)
@@ -65,7 +64,6 @@ UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 			var d={};
 			if(!err && data && data.dashboards && data.dashboards.length > 0)
 				d = data.dashboards[0];
-				console.log(d);
 			callback(d);
 	});
 }

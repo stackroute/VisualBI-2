@@ -41,11 +41,10 @@ router.get('/userData', function(req, res, next) {
         res.json({});
 });
 
-router.get('/getDashboard/:userid/:dashboardId', function(req, res, next) {
+router.get('/getDashboard/:userid', function(req, res, next) {
     var userid = req.params.userid; //it contains _id value of credentials
-    var dashId = req.params.dashboardId;
     if (userid) {
-        User.getDashboard(userid, dashId, function(data) {
+        User.getDashboard(userid, function(data) {
             res.json(data);
         });
     } else

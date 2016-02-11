@@ -20,10 +20,10 @@ angular.module('vbiApp')
                 return $http.get('/logout');
             },
             //returns the dashboard of a user
-            getDashboard: function(userid, dashboardId) {
+            getDashboard: function(userid) {
                 return $http({
                     method: 'GET',
-                    url: '/dashboard/getDashboard' + userid + '/' + dashboardId
+                    url: '/dashboard/getDashboard/' + userid
                 }).then(function(res) {
                     return (res.data);
                 });

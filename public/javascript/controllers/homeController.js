@@ -111,9 +111,9 @@ angular.module('vbiApp')
 			}
 		};
 
-		$scope.showSharedDashboard = function(userid, dashboardId, permission){
+		$scope.showSharedDashboard = function(userid, permission){
 
-			userManager.getDashboard(userid, dashboardId)
+			userManager.getDashboard(userid)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
             sharedDashboardUserId = userid;
