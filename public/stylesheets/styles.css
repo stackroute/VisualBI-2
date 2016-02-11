@@ -282,6 +282,10 @@ table,  th,  td{
 
 /*widgets Library style*/
 
+.customWidgetStyle{
+	margin:10px 0px;
+}
+
 .panel-width-style{
 	z-index: 1000;
 	position: fixed;
@@ -397,7 +401,10 @@ margin-top: 85px;
 #dashbboard-alert{
 	position: absolute;
 	left:50%;
-	z-index: 10000px;
+	color: #222;
+	font-family: Roboto,sans-serif;
+	font-size: 13px;
+  -webkit-font-smoothing: antialiased;
 }
 
 

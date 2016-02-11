@@ -48,17 +48,13 @@ var UserSchema = mongoose.Schema({
          }]
       }]
    }],
-	sharedDashboards:[{
-		userid: String, //{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
-		username: String,
-		dashboardid: String,
-		permission: String
-	}]
+	sharedDashboards:[]
 }, {strict: false});
 
 //Gets the dashboard of a user. It specically helps to fetch the shared dashboard
 //TODO: should be sharedDashboard
 UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
+	console.log("getDashboard ",userid);
 	this.model('User')
 		.findOne({
 		'userid': mongoose.Types.ObjectId(userid)
@@ -69,6 +65,7 @@ UserSchema.statics.getDashboard = function (userid, dashboardId, callback) {
 			var d={};
 			if(!err && data && data.dashboards && data.dashboards.length > 0)
 				d = data.dashboards[0];
+				console.log(d);
 			callback(d);
 	});
 }
@@ -101,42 +98,43 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
 }
 
 //TODO: can be done at client side because it has all the data there. check and remove the method
-UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,permission,callback){
-  this.model('User')
+UserSchema.statics.isExist =function(currentUserEmail, currentUserName, userId, permission){
+  console.log("isExist userId "+mongoose.Types.ObjectId(userId)+" "+currentUserName);
+	return  this.model('User')
     .findOne({
-      _id:mongoose.Types.ObjectId(userId),
-      "sharedDashboards.username": currentUserName,
-      "sharedDashboards.dashboardid": currentDashboard
-    }).exec(function(err, data) {
-      callback(data !== null )
+      "userid": userId,
+      "sharedDashboards.username": currentUserName
+    }).exec(function(data) {
 	});
 }
 
-UserSchema.statics.shareDashboard = function(currentUserId,currentusername,currentDashboard,shareWithUserId,permission,callback){
-  this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId)},
+UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, currentusername, shareWithUserId, currentUserDisplayName, permission){
+	console.log("inserting"+currentUserEmail, currentUserId, currentusername, shareWithUserId, permission);
+	return this.model('User').update({'userid':shareWithUserId},
   {$addToSet:{"sharedDashboards":
       { "userid" : currentUserId,
+				"email" : currentUserEmail,
         "username" : currentusername,
-        "dashboardid": currentDashboard,
+				"displayname": currentUserDisplayName,
         "permission": permission
       },
     }
-  },{upsert: true},
-  function(err,data){
-    callback(data !== null )
-  });
+  },{upsert: true}).exec();
 }
 
 //TODO: indentation needs to be corrected
-UserSchema.statics.updatePermission = function(currentUserId,currentUserName,currentDashboard,shareWithUserId,permission){
-  this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId),
+UserSchema.statics.updatePermission = function(currentUserEmail, currentUserId, currentUserName, shareWithUserId, currentUserDisplayName, permission){
+console.log("updating perm ",shareWithUserId,currentUserId,currentUserName,currentUserEmail,currentUserDisplayName,permission);
+	return this.model('User').update({'userid':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
-                            "sharedDashboards.dashboardid": currentDashboard
+														"sharedDashboards.email": currentUserEmail,
+														"sharedDashboards.displayname": currentUserDisplayName
                             },
-  {$set:{"sharedDashboards.$.permission": permission}}
+  {$set:{"sharedDashboards.permission": permission}}
   ,{upsert: true})
   .exec(function(err, data){
+    console.log(data);
   });
 }
 
@@ -155,32 +153,30 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
   });
 }
 
-UserSchema.statics.sharedDashboards = function(currentUserId,userName,user,currentDashboard){
-    this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
-    {$addToSet:{"dashboards.$.sharedWith":
+UserSchema.statics.sharedDashboards = function(currentUserId, displayName, userName, email, userId){ //email should b passed
+    console.log("dashboards.0.sharedWith "+currentUserId);
+    return this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId)},
+    {$addToSet:{"dashboards.0.sharedWith":
         {
-					"user": user,
-          "username" : userName
-        },
+					"displayname": displayName,
+          "username" : userName,
+					"email" : email,
+					"userid": userId
+        }
       }
-    },{upsert: true},
-    function(err, data) {
-        if(err)
-          return err;
-        return true;
-  	});
+    },{upsert: true}).exec();
 }
 
 //TODO: revisit the logic and remove the unnecessary stuff
-UserSchema.statics.getUserId =function(credentialId,callback){
-  this.model('User')
+UserSchema.statics.getUserId =function(credentialId){
+  return this.model('User')
     .findOne({
       userid:mongoose.Types.ObjectId(credentialId)
     },
     {
       _id:1
     }).exec(function(err, data) {
-        callback(data);
+        // callback(data);
     	});
 }
 // mongoose.model("User", UserSchema);

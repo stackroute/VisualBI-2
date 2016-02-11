@@ -21,12 +21,12 @@
     * 4. Venkatakrishnan U
     * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
-	* 7. Yogesh Goyal
+	  * 7. Yogesh Goyal
  */
 var mongoose = require('mongoose');
 //connecting multiple database
 var visualdb = mongoose.connect("mongodb://localhost:27017/visualdb");
-var studiodb = mongoose.createConnection("mongodb://localhost:27017/visualBI"); //172.23.238.253
+var studiodb = mongoose.createConnection("mongodb://172.23.238.253:27017/visualBI"); //172.23.238.253
 
 var connectionSchema = require('../model/connections');
 var credentialSchema = require('../model/credential');

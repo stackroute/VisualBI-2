@@ -11,7 +11,7 @@
             <span class="input-group-addon">
       <span class="glyphicon glyphicon-envelope"></span>
             </span>
-            <tags-input ng-model="tags" id="shareTag" key-property="_id" display-property="username" on-tag-added="tagAdded($tag)" on-tag-removed="tagRemoved()" addFromAutocompleteOnly=true placeholder="User email" replace-spaces-with-dashes="false">
+            <tags-input ng-model="tags" id="shareTag" key-property="_id" display-property="username" on-tag-added="tagAdded($tag)" on-tag-removed="tagRemoved($tag)" add-from-autocomplete-only="true" placeholder="User email" replace-spaces-with-dashes="false">
                 <auto-complete source="loadUserNames($query)" min-length="0" load-on-focus="true" load-on-empty="true" max-results-to-show="5">
                 </auto-complete>
             </tags-input>

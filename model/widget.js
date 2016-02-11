@@ -88,10 +88,29 @@ createNewWidgetId = function(callback) {
   var emptyWidget = new widget({
       status: 'blank'
     });
-    
+
   emptyWidget.save(function(err, res) {
     if (err) return console.error(err);
     callback(res._id);
+  });
+}
+
+removeStatus = function(id) {
+
+//console.log("reached removeStatus");
+  var widget = mongoose.model('Widget', WidgetSchema);
+  widget.model('Widget').update({
+    '_id' : id
+  },{
+    $unset:{
+      status: 'blank'
+    }
+  },function(err) {
+      if(err){
+        console.log("_____________________________________________");
+        console.log(err);
+        console.log("---------------------------------------------");
+      }
   });
 }
 
@@ -101,9 +120,11 @@ WidgetSchema.statics.getNewWidgetId = function(callback) {
     },function(err, data) {
       if(data == null) {
         createNewWidgetId(function(id) {
+          removeStatus(id);
           callback(id);
         });
       } else {
+        removeStatus(data._id);
         callback(data._id);
       }
     });
@@ -150,7 +171,7 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
 
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
 	return this.model('Widget').update({ '_id' : widgetId }, {
-		$set: { lastCommentedBy : comment.displayName }, 
+		$set: { lastCommentedBy : comment.displayName },
 		$inc : { commentsCounter : 1 },
 		$addToSet : { commenters: comment.userid },
 		$push: { comments: comment }
