@@ -3,7 +3,7 @@ angular.module('vbiApp')
         return {
             login: function(user, done) {
                 $http.post('/login', {
-                        username: user.email,
+                        username: user.username,
                         password: user.password
                     })
                     .success(function(data, status, headers, config) {
