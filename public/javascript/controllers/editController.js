@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -283,18 +283,14 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
              };
 
              widgetManager.saveWidget(allparams);
+  }
 
-    // $http({
-    //    url: "/widgets/saveWidget",
-    //    method: "POST",
-    //    data: allparams,
-    //    headers : {
-    //      'Content-Type': 'application/json'
-    //    }
-    // }).success(function successCallback(data, status) {
-    //   $location.url('/');
-    // }, function errorCallback(response) {
-    // });
+  $scope.showPanel = function(col) {
+    if(typeof col.widgetId === 'undefined') {
+      return false;
+    } else {
+      return true
+    }
   }
 
 }]);
