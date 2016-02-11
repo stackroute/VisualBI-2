@@ -23,7 +23,7 @@ angular.module('vbiApp')
             getDashboard: function(userid, dashboardId) {
                 return $http({
                     method: 'GET',
-                    url: '/dashboard/' + userid + '/' + dashboardId
+                    url: '/dashboard/getDashboard' + userid + '/' + dashboardId
                 }).then(function(res) {
                     return (res.data);
                 });
@@ -38,31 +38,16 @@ angular.module('vbiApp')
                 });
             },
 
-            getUserId: function(userName, currentDashboard, permission) {
 					//TODO: Need to change it to get request
-                var parms = JSON.stringify({
-                    type: "user",
-                    userName: userName,
-                    currentDashboard: currentDashboard,
-                    permission: permission
-                });
-                return $http.post('/dashboard', parms)
-                    .then(function(res) {
-                        return (res.data);
-                    });
-            },
-
             timeoutDashboardAlert: function() {
-                return $timeout(function() {}, 3000).then(function() {
+                return $timeout(function() {}, 5000).then(function() {
                     return (true);
                 });
             },
 
-            shareDashboard: function(userNames, currentDashboard, permission) {
+            shareDashboard: function(userNames, permission) {
                 var parms = JSON.stringify({
-                    type: "user",
                     userNames: userNames,
-                    currentDashboard: currentDashboard,
                     permission: permission
                 });
                 return $http.post(' /dashboard/shareDashboard', parms)
@@ -71,7 +56,20 @@ angular.module('vbiApp')
                     });
             },
 
-            saveTab : function(params){
+            loadUserNames: function($query) {
+              return $http({
+                  method: 'GET',
+                  url: '/dashboard/userList/' + $query
+              }).then(function(res) {
+                    var userNames = res.data;
+                    return userNames.filter(function(userNameObj) {
+                        return true;//ngtagsinput plugin expects true value by comparing $query with list of users in data.
+                      });
+                  });
+            },
+            
+              saveTab : function(params){
+
               $http({
                   url: "/user/savetab",
                   method: "POST",
@@ -86,16 +84,6 @@ angular.module('vbiApp')
               });
             },
 
-            loadUserNames: function($query) {
-                return $http.post('/dashboard/userList', {
-                    cache: true
-                }).then(function(response) {
-                    var userNames = response.data;
-                    return userNames.filter(function(userNameObj) {
-                        return userNameObj.username.toLowerCase().indexOf($query.toLowerCase()) != -1;
-                    });
-                });
-            },
             getCommenters: function(widgetId) {
 
                 return new Promise(function(resolve, reject) {
