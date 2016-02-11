@@ -1,3 +1,28 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan
+    * 5. Arun Karthic
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 //Model used to create a schema for widget collection of visualdb database
 
 var mongoose = require('mongoose');
@@ -11,14 +36,15 @@ var WidgetSchema = mongoose.Schema({
 	studioId: String,
    comments:[{
 	  _id : false,
-      userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
-      comment: String,
-      datetime:{type:Date, default: Date.Now},
+     userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
+     comment: String,
 	  badgeClass: String,
-	  badgeIconClass: String
+	  badgeIconClass: String,
+	  displayName: String,
+	  userImage: String,
+     datetime:{type:Date, default: Date.Now},
    }],
-  commenters:[{commenter:String}],
-  commentersCounter : Number
+  commenters:[String],
 }, {strict: false});
 
 //TODO: not required here. check at client end and send the correct schema to server
@@ -126,66 +152,16 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
   });
 }
 
-//TODO: there should be only one postcomment method which will update complete comment details
-WidgetSchema.statics.updateCommenterDetails=function(widgetId,userid,callback){
+WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
+	return this.model('Widget').update({ '_id' : widgetId }, {
+		$set: { lastCommentedBy : comment.displayName }, 
+		$inc : { commentsCounter : 1 },
+		$addToSet : { commenters: comment.userid },
+		$push: { comments: comment }
+	}).exec(done);
+};
 
-   this.model('Widget').update({
-     '_id' : widgetId
-   },{$push:{
-         commenters : {commenter:userid}
-     }
-   },function(err) {
-       if(err){
-//                console.log(err);
-       }
-   });
+//WidgetSchema.statics.updateCommenter = function(widgetId, commenterId, done) {};
 
-
-   this.model('Widget').update({'_id' : widgetId},{$inc : { commentersCounter : 1 }},function(err) {
-       if(err){
-//                console.log(err);
-       }
-   });
-}
-
-WidgetSchema.statics.postComment=function(userid,widgetId,userComment,commentClass,commentCategory){
-   this.model('Widget').update({
-     '_id' : widgetId
-   },{
-     $push: {
-         comments:{userid : userid,
-                   comment : userComment,
-                   datetime : new Date(),//{type:Date, default: Date.Now},
-				   badgeClass : commentCategory,
-				   badgeIconClass:commentClass,
-				   _id:0
-				  }
-     }
-   },function(err, userComment) {
-       if(err){
-
-//                console.log(err);
-       }
-   });
-
-   this.model('Widget').update({
-     '_id' : widgetId
-   },{$set:{
-         lastCommentedBy : userid
-     }
-   },function(err, userComment) {
-       if(err){
-//                console.log(err);
-       }
-   });
-
-
-   this.model('Widget').update({'_id' : widgetId},{$inc : { commentsCounter : 1 }},function(err, userComment) {
-       if(err){
-//                console.log(err);
-       }
-   });
-
-}
 // mongoose.model("Widget", WidgetSchema);
 module.exports = WidgetSchema;

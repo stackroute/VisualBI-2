@@ -1,3 +1,28 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan
+    * 5. Arun Karthic
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 angular.module('vbiApp')
     .controller('homeController', ['$rootScope', '$scope', 'userManager', '$location', '$cookies','$timeout', '$uibModal', 'chartRenderer', '$log', 'editManager', '$http', 'widgetManager', '$route', '$mdDialog', function($rootScope, $scope, userManager, $location, $cookies, $timeout, $uibModal, chartRenderer, $log, editManager, $http, widgetManager, $route, $mdDialog) {
 		 //TODO: need to refactor permissions
@@ -112,72 +137,31 @@ angular.module('vbiApp')
   }
 
 		$scope.fullScreen = function(widget) {
-			//get comments from the server
-			widgetManager.getComment(widget._id).then(function(data){
-				widget.comments = data.comments;
-
+			
 				var modalConfig = {
-				templateUrl: 'chartModal',
-				controller: 'chartModalController',
-				size: 'lg',
-				resolve: {
-					chartInfo: function(){
-                        var userComments=[];
-
-                        angular.forEach(widget.comments, function(comment, key){
-                            userComments.push({
-                                userid: comment.userid,
-                                comment: comment.comment,
-                                badgeClass: comment.badgeClass,
-                                badgeIconClass: comment.badgeIconClass,
-                                when: Date()
-                            });
-                        });
-
-						return {
-							chartRendererMethod: widget.chartRenderer,
-							parameters: widget.parameters,
-							title: widget.title,
-							comments: userComments,
-							widgetId: widget._id,
-							canComment: $scope.canComment
-						};
+					templateUrl: 'chartModal',
+					controller: 'chartModalController',
+					size: 'lg',
+					resolve: {
+						chartInfo: function(){
+							return {
+								chartRendererMethod: widget.chartRenderer,
+								parameters: widget.parameters,
+								title: widget.title,
+								widgetId: widget._id,
+								canComment: $scope.canComment
+							};
+						}
 					}
 				}
-			};
-				var modal = $uibModal.open(modalConfig);
-				modal.close(function(){
-					console.log('modal closed');
-				});
-
-
-			});
-
+				$uibModal.open(modalConfig);
 		}
-
+				
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
 			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
 
-		//Show Modal Bar Graph in Modal Window
-		$scope.openModalBarGraph = function(indexPassed, widgetUid) {
-		  var modalInstance = $uibModal.open({
-			 templateUrl : 'modalBarGraph.html',
-			 controller : 'ModalGraphController',
-			 indexPassed : indexPassed,
-			 resolve : {
-				graphData : function() {
-				  return $scope.widgetData[widgetUid];
-				},
-
-				index : function() {
-				  return indexPassed;
-				}
-			 }
-		  });
-		};
-
-		 //Show Line Modal Graph
+		 //Show Modal Graph
 		$scope.openModalGraph = function(template, indexPassed, widgetUid) {
 		  var modalInstance = $uibModal.open({
 			 templateUrl : template,
@@ -301,3 +285,4 @@ angular.module('vbiApp')
        }
    };
 });
+

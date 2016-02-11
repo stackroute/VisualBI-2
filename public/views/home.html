@@ -55,12 +55,12 @@
 														  {{col.widgetId.lastCommentedBy}}
 														  </span>
 														  <span class="user-comments-meta">
-														  <span ng-show="col.widgetId.commentersCounter-1 > 0">
+                                                        <span ng-show="col.widgetId.commenters.length > 1">
 														  and
-														  {{col.widgetId.commentersCounter - 1}}
+														  {{col.widgetId.commenters.length - 1}}
 
-														  <span ng-show="col.widgetId.commentersCounter-1 == 1">other</span>
-														  <span ng-show="col.widgetId.commentersCounter-1 > 1">others</span>
+                                                        <span ng-show="col.widgetId.commenters.length == 2">other</span>
+                                                        <span ng-show="col.widgetId.commenters.length > 2">others</span>
 
 																</span>
 														  </span>

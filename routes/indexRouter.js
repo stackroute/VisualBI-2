@@ -1,3 +1,28 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan
+    * 5. Arun Karthic
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 var express = require('express'),
     router = express.Router(),
     fs = require('fs'),
@@ -33,6 +58,7 @@ router.post('/register',function(req,res,next){
 	if(!req.body.username || !req.body.password || !req.body.firstName || !req.body.lastName) {
 		res.status(400).send('failed');
 	} else {
+
 		dbUtils.registerUser({
 			username: req.body.username,
 			password: req.body.password,
@@ -40,9 +66,9 @@ router.post('/register',function(req,res,next){
 			lastName: req.body.lastName,
 			imagePath: req.body.imagePath,
 			email: req.body.email
-
 		}, function(err, user) {
 			if(err){
+        console.log(err);
 				res.status(500).send({ error: err });
 			}
 			else {
@@ -51,5 +77,5 @@ router.post('/register',function(req,res,next){
 		});
 	}
 });
- 
+
 module.exports = router;

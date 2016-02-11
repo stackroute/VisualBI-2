@@ -112,8 +112,8 @@ angular.module('vbiApp')
                         }
                     }).success(function successCallback(data, status) {
                         if (data.resp == 'success') {
-                            resolve(data.user);
-                        } else {
+                            resolve(data);
+                         } else {
                             alert(data.resp + ' could not post the comment. Please log out and log in again.');
                             reject("Error. comment not posted")
                         }
@@ -144,7 +144,7 @@ angular.module('vbiApp')
                 return new Promise(function(resolve, reject) {
                     //POST request to Mongo to write the comment to the database, with parameters object as payload
                     $http({
-											url: "/comment/updateCommenterInfo",
+                        url: "/comment/updateCommenterInfo",
                         method: "POST",
                         data: {
                             widgetId: widgetId,
