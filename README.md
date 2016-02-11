@@ -1,12 +1,32 @@
-# visualbi_angularjs
+VISUAL-BI
+Visual-BI is an open source business intelligence tool with easy to use interface.
 
-run npm install to install all node package dependencies
-go to dbdump directory and run below command
-mongorestore - it will create the database in your mongodb
+Version
 
-now run npm start will start the server.
+0.0.1
 
-default credentials are ashok.kumar6@wipro.com and password is abc@123.
+Technologies used
 
-if charts are not loaded the click on account dropdown button on the right will load the charts.
+Visual-BI uses a number of open source technologies to work properly:
 
+jQuery - A write-less-do-more Javascript library
+Twitter Bootstrap - great UI boilerplate for modern web apps
+AngularJS - Front end web framework
+node.js - evented I/O for the backend
+Express - fast node.js network app framework
+MongoDB - NOSQL database
+Installation
+
+You need supervisor installed globally:
+
+$ npm i -g supervisor
+$ git clone [git-repo-url] VisualBI
+$ cd VisualBI
+$ npm install
+$ npm start
+Todos
+
+Write Tests
+License
+
+Apache
