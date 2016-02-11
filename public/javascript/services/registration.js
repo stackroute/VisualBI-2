@@ -15,7 +15,7 @@ angular.module('vbiApp').factory('UserService', UserService);
 					  password:user.password,
 					  firstName: user.firstName,
 					  lastName: user.lastName,
-					  imagePath: "public/images/displayimages/default-user.png",
+					  imagePath: user.imagePath,
 				  	  email: user.email
 				  }).success(function (data, status, headers, config) {
 
