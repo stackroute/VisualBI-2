@@ -24,11 +24,14 @@
 	 * 7. Yogesh Goyal
  */
 var express = require('express'),
+    bodyParser = require('body-parser'),
     router = express.Router(),
     util = require('./utils'),
     path = require('path'),
     multer = require('multer');
 
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(bodyParser.json());
 //TODO: keep multer related stuff separate file
 //TODO: create a separate folder for user profile images
 //TODO: error handling should be standerd - put res.status
@@ -53,7 +56,7 @@ router.post('/upload', function(req, res) {
                  return;
             }
              res.json({error_code:0,err_desc:null,destination:req.file.destination,file:req.file.filename});
-        });   
+        });
     });
 
 

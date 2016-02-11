@@ -6,18 +6,16 @@
 </div>
 </div>
 
-
-
 <div class="registerForm">
 
-  <ul class="tab-group">
-    <li class="tab active"><a href="" ng-click="showRegisterPage=true">Sign Up</a></li>
-    <li class="active1"><a href="" ng-click="showRegisterPage=false">Log In</a></li>
+  <ul class="tab-group" ng-init="$root.showRegisterPage=false">
+    <li class="tab active"><a href="" ng-click="$root.showRegisterPage=true">Sign Up</a></li>
+    <li class="active1"><a href="" ng-click="$root.showRegisterPage=false">Log In</a></li>
   </ul>
 
   <div class="tab-content">
     <div  ng-controller="registerController as regCtrl" >
-    <div id="register-signup" ng-show ="showRegisterPage">
+    <div id="register-signup" ng-show ="showRegisterPage==true">
 
       <h1>Sign Up</h1>
 
@@ -43,10 +41,10 @@
           <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
         </div>
 
-        <div class="field-wrap" ng-class="{ 'has-error': form.useremail.$dirty && form.useremail.$error.required }">
+        <div class="field-wrap" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
           <label for ="email">Email Address</label>
-          <input type="email" name="useremail" id="useremail" class="form-control" ng-model="regCtrl.user.useremail" required />
-          <span ng-show="form.useremail.$dirty && form.useremail.$error.required" class="help-block">E-mail is required</span>
+          <input type="email" name="email" id="email" class="form-control" ng-model="regCtrl.user.email" required />
+          <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">E-mail is required</span>
         </div>
 
         <div class="field-wrap" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
@@ -81,17 +79,18 @@
 </form>
 
     </div>
+  </div>
+    <div  ng-controller="loginController as loginCtrl" >
+    <div id="register-login" ng-show="showRegisterPage==false">
 
-    <div id="register-login" ng-hide="showRegisterPage">
-     <div  ng-controller="loginController as loginCtrl" >
       <h1>Welcome!</h1>
 
       <form name="form" role="form">
 
         <div class="field-wrap" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-          <label for ="email">Email Address</label>
-            <input type="email" name="username" id="username" class="form-control" ng-model="loginCtrl.user.email"  required />
-            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">E-mail is required</span>
+          <label for ="Username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="loginCtrl.user.username"  required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
         </div>
 
         <div class="field-wrap">
@@ -103,7 +102,8 @@
 
 
         <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()"class="regbutton regbutton-block">Log In</button>
-<!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>-->
+<!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>--><br/>
+        <div ng-show="registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ registerUserMessage }}</div>
        <div ng-show="loginCtrl.errorMessage.length > 0" class="alert alert-danger row warn" role="alert">{{ loginCtrl.errorMessage}}</div>
 
       </form>
@@ -117,6 +117,5 @@
 <!-- /form -->
 </div>
 
-</div>
 </div>
 </div>
