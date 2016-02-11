@@ -95,15 +95,36 @@ createNewWidgetId = function(callback) {
   });
 }
 
+removeStatus = function(id) {
+
+//console.log("reached removeStatus");
+  var widget = mongoose.model('Widget', WidgetSchema);
+  widget.model('Widget').update({
+    '_id' : id
+  },{
+    $unset:{
+      status: 'blank'
+    }
+  },function(err) {
+      if(err){
+        console.log("_____________________________________________");
+        console.log(err);
+        console.log("---------------------------------------------");
+      }
+  });
+}
+
 WidgetSchema.statics.getNewWidgetId = function(callback) {
   this.model('Widget').findOne({
        'status': 'blank'
     },function(err, data) {
       if(data == null) {
         createNewWidgetId(function(id) {
+          removeStatus(id);
           callback(id);
         });
       } else {
+        removeStatus(data._id);
         callback(data._id);
       }
     });
