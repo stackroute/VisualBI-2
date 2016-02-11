@@ -42,19 +42,20 @@ var CredentialSchema = mongoose.Schema({
 //CredentialSchema.plugin(passportLocal);
 CredentialSchema.plugin(passportLocalMongoose);
 
-//TODO: getCredentialsId is not required. Remove it 
+//TODO: getCredentialsId is not required. Remove it
+CredentialSchema.statics.getCredentialId = function(username){
   return this.model('Credential')
 		.findOne({
 		'username': username
 	}, {
 		'_id': 1,
 		'displayName': 1,//display name should be given.
-		'username': 1
+		'username': 1,
 		'email': 1
 	}).exec(function(err, data) {
 			// callback(data);
 	});
-};
+}
 
 //TODO: There must be error handling here. Use regular expression to get filterred users
 CredentialSchema.statics.getUsers = function(query,callback){
