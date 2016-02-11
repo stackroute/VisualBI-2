@@ -32,13 +32,13 @@ angular.module('vbiApp')
 
       if(widthConfig.calledFor == 0) {
         //title and width
-        $scope.modalTitle = "Enter the title and width";
+        $scope.modalTitle = "Customize widget Title and Width";
       } else if(widthConfig.calledFor == 1) {
         //width
-        $scope.modalTitle = "Edit the width 1 - " + widthConfig.columnWidth;
+        $scope.modalTitle = "Customize widget width between 1 - " + widthConfig.columnWidth;
       } else if(widthConfig.calledFor == 2) {
         //title
-        $scope.modalTitle = "Edit the widget title";
+        $scope.modalTitle = "Customize widget title";
       }
 
       $scope.showTitle = function(id) {
