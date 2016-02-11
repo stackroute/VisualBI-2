@@ -8,8 +8,8 @@
   <div class="modal-body">
 
     <div class="input-group">
-      <input type="text" class="form-control" name="setTitle" ng-show="showTitle(widthConfig.calledFor)" ng-model="widthConfig.setTitle" value="widthConfig.setTitle">
-      <input type="text" class="form-control" name="setWidth" ng-show="showWidth(widthConfig.calledFor)" ng-model="widthConfig.setWidth" value="widthConfig.setWidth">
+      <input type="text" class="form-control customWidgetStyle" name="setTitle" ng-show="showTitle(widthConfig.calledFor)" ng-model="widthConfig.setTitle" value="widthConfig.setTitle" placeholder="Widget Title">
+      <input type="text" class="form-control customWidgetStyle" name="setWidth" ng-show="showWidth(widthConfig.calledFor)" ng-model="widthConfig.setWidth" value="widthConfig.setWidth" placeholder="Widget Width">
       <button class="btn btn-success modal-btn" type="button" ng-click="setWidgetWidth(widthConfig.setWidth, widthConfig.setTitle, widthConfig.calledFor)">Save</button>
 
     </div>

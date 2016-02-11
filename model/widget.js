@@ -88,7 +88,7 @@ createNewWidgetId = function(callback) {
   var emptyWidget = new widget({
       status: 'blank'
     });
-    
+
   emptyWidget.save(function(err, res) {
     if (err) return console.error(err);
     callback(res._id);
@@ -149,11 +149,8 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
 }
 
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
-	console.log('Comment in widget manager');
-	console.log(comment);
-	
 	return this.model('Widget').update({ '_id' : widgetId }, {
-		$set: { lastCommentedBy : comment.displayName }, 
+		$set: { lastCommentedBy : comment.displayName },
 		$inc : { commentsCounter : 1 },
 		$addToSet : { commenters: comment.userid },
 		$push: { comments: comment }

@@ -255,19 +255,19 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
 
   $scope.saveRow = function() {
 
-    angular.forEach($scope.tabs, function(tab, tabIndex) {
+    angular.forEach($scope.selectedTab, function(tab, tabIndex) {
       angular.forEach(tab.rows, function(row, rowIndex) {
-        var i = $scope.tabs[tabIndex].rows[rowIndex].columns.length;
+        var i = $scope.selectedTab[tabIndex].rows[rowIndex].columns.length;
         while (i--) {
-          var column = $scope.tabs[tabIndex].rows[rowIndex].columns[i];
+          var column = $scope.selectedTab[tabIndex].rows[rowIndex].columns[i];
           if(!column.hasOwnProperty('widgetId')) {
-              $scope.tabs[tabIndex].rows[rowIndex].columns.splice(i, 1);
+              $scope.selectedTab[tabIndex].rows[rowIndex].columns.splice(i, 1);
           }
         }
-        var newLen = $scope.tabs[tabIndex].rows[rowIndex].columns.length;
+        var newLen = $scope.selectedTab[tabIndex].rows[rowIndex].columns.length;
 
         if(newLen == 0) {
-          $scope.tabs[tabIndex].rows.splice(rowIndex, 1);
+          $scope.selectedTab[tabIndex].rows.splice(rowIndex, 1);
         }
       });
     });
