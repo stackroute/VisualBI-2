@@ -1,26 +1,60 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 var express = require('express'),
     router = express.Router(),
-    util = require('./utils'),
+    utils = require('./utils'),
     path = require('path'),
-    Widget =require('../config/db').widgetModel,
-	 dbUtils = require('../model/dbUtils');
+    Widget =require('../config/db').widgetModel;
+
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 
 //updates comments for widget
-router.post('/',function(req,res,next){
+router.post('/',function(req, res, next){
+	
+	Widget.saveComment(req.body.widgetid, {
+		userid: req.user._id,
+		comment: req.body.comment,
+		badgeIconClass: req.body.commentType,
+		badgeClass: req.body.commentCategory,
+		displayName: req.user.displayName,
+		userImage: req.user.imagePath,
+		datetime: new Date(),
+	}).then(function(comment) {
+		res.status(200).send(comment);
+	});
 
-	if(req.isAuthenticated()){
-		Widget.postComment(req.user.name, req.body.widgetid, req.body.comment,req.body.commentType,req.body.commentCategory);
-		res.send({resp:'success',user:req.user.name});
-	}
-	else
-		res.send({resp:'error',msg:'Authentication failure'});
 });
 
 //gets the comments for a widget
 router.get('/:widgetId', function(req, res, next) {
-	dbUtils.getComments(req.params.widgetId)
-		.then(function(doc) {
-			res.json(doc ? doc.comments : []);	
+	
+	Widget.getComments(req.params.widgetId)
+	.then(function(widget) {
+		res.status(200).json(widget);
 	})
 })
 
@@ -31,15 +65,6 @@ router.get('/commenters/:widgetId',function(req,res,next){
 	});
 
 });
-
-//Updates commenters details into the mongo for a widget
-router.post('/updateCommenterInfo',function(req,res,next){
-
-	Widget.updateCommenterDetails(req.body.widgetId, req.body.userid,function(resp){
-		res.send({resp:'success',user:req.user.name});
-	});
-});
-
 
 
 module.exports=router;

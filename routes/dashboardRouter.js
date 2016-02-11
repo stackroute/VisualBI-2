@@ -1,9 +1,36 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 var express = require('express'),
     router = express.Router(),
     User = require('../config/db').userModel,
     Credential = require('../config/db').credentialModel;
     utils = require('./utils');
 
+//Checks wheather user is authenticated 
+router.use(utils.isAuthenticated);
 router.get('/userData', function(req, res, next) {
     var userid = req.user._id; //it contains _id value of user whose dashboard to be fetched
     if (userid) {
@@ -29,16 +56,16 @@ router.post('/shareDashboard', function(req, res, next) {
     var userNames = req.body.userNames;
     var currentUserId = req.user._id;
     var currentUserName = req.user.username;
-    var currentUserDisplayName = req.user.name;
+    var currentUserDisplayName = req.user.displayName;
     var permission = req.body.permission;
     var usernameProcessed = 0;
-    var currentUserEmail = currentUserName;//have to change once email feild exists.
+    var currentUserEmail = req.user.email;//have to change once email feild exists.
 
     userNames.forEach(function(userName){
       Credential.getCredentialId(userName).then(function(credentialObj){
         if(credentialObj !== null){
-          credentialObj.displayName = credentialObj.name; //remove and assign from database.
-          credentialObj.email = credentialObj.username;
+          //credentialObj.displayName = credentialObj.name; //remove and assign from database.
+          //credentialObj.email = credentialObj.username;
           console.log("credObj",JSON.stringify(credentialObj));
           return credentialObj;
         }else{

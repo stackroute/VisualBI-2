@@ -23,11 +23,11 @@
                     </div>
                     <button type="submit" ng-click="loginCtrl.login()" ng-disabled="loginForm.$invalid" class="btn btn-primary btn-lg btn-block login-input" id="btnSignin">Sign in</button>
                     <p class="login-error">
-                       
+
                        {{ loginCtrl.errorMessage}}
                     </p>
                  </div>
               </form>
 
               <a href="#register">Create new account</a>
-               <div ng-show="registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ registerUserMessage }}</div>
+               <!-- <div ng-show="registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ registerUserMessage }}</div> -->

@@ -1,9 +1,33 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 //Third party modules
 var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
     bodyParser = require('body-parser'),
-    multer = require('multer'),
     expressSession = require('express-session'),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
@@ -18,10 +42,11 @@ var indexRouter = require('./routes/indexRouter'),
     dashboardRouter = require('./routes/dashboardRouter'),
     chartdataRouter = require('./routes/chartdataRouter'),
     dbConfig = require('./config/db'),
-    Credential = require('./config/db').credentialModel,
-    gridRouter = require('./routes/girdRouter'),
+    Credential = dbConfig.credentialModel,
+    gridRouter = require('./routes/gridRouter'),
     commentsRouter = require('./routes/commentsRouter'),
     dashboardRouter  = require('./routes/dashboardRouter');
+	uploadImageRouter=require('./routes/uploadImageRouter');
 
 var app = express();
 
@@ -39,29 +64,6 @@ app.use(flash());
 
 
 
-var storage = multer.diskStorage({ //multers disk storage settings
-        destination: function (req, file, cb) {
-            cb(null, 'public/images/')
-        },
-        filename: function (req, file, cb) {
-            var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length -1])
-        }
-    });
-
- var upload = multer({ //multer settings
-                    storage: storage
-                }).single('file');
-
-app.post('/upload', function(req, res) {
-        upload(req,res,function(err){
-            if(err){
-                 res.json({error_code:1,err_desc:err});
-                 return;
-            }
-             res.json({error_code:0,err_desc:null});
-        })
-    });
 
 //initialize passort sessions
 app.use(expressSession({
@@ -86,6 +88,7 @@ app.use('/widgetsMdx', widgetMdxRouter);
 app.use('/comment', commentsRouter);
 app.use('/chartdata', chartdataRouter);
 app.use('/execute', gridRouter);
+app.use('/upload',uploadImageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

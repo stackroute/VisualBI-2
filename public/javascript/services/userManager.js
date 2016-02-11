@@ -1,9 +1,9 @@
 angular.module('vbiApp')
-    .service('userManager', ['$http', '$timeout', function($http, $timeout) {
+    .service('userManager', ['$http', '$timeout', '$location', function($http, $timeout,$location) {
         return {
             login: function(user, done) {
                 $http.post('/login', {
-                        username: user.email,
+                        username: user.username,
                         password: user.password
                     })
                     .success(function(data, status, headers, config) {
@@ -38,6 +38,7 @@ angular.module('vbiApp')
                 });
             },
 
+					//TODO: Need to change it to get request
             timeoutDashboardAlert: function() {
                 return $timeout(function() {}, 5000).then(function() {
                     return (true);
@@ -66,36 +67,23 @@ angular.module('vbiApp')
                       });
                   });
             },
-            pushComment: function(parameters) {
+            
+              saveTab : function(params){
 
-                return new Promise(function(resolve, reject) {
+              $http({
+                  url: "/user/savetab",
+                  method: "POST",
+                  data: params,
+                  headers : {
+                      'Content-Type': 'application/json'
+                  }
+              }).success(function successCallback(data, status) {
+                  $location.url('/');
 
-                    var currentUser = '';
-
-                    //POST request to Mongo to write the comment to the database, with parameters object as payload
-                    $http({
-							url: "/comment",
-                        method: "POST",
-                        data: parameters,
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).success(function successCallback(data, status) {
-                        if (data.resp == 'success') {
-                            resolve(data.user);
-                        } else {
-                            alert(data.resp + ' could not post the comment. Please log out and log in again.');
-                            reject("Error. comment not posted")
-                        }
-
-                    }, function errorCallback(err) {
-
-                    });
-
-                }, function(err) {
-                    reject(err);
-                });
+              }, function errorCallback(response) {
+              });
             },
+
             getCommenters: function(widgetId) {
 
                 return new Promise(function(resolve, reject) {
@@ -109,35 +97,6 @@ angular.module('vbiApp')
                     }); //http ends here
                 }); // Promise ends here
 
-            },
-            insertNewCommenterInfo: function(widgetId, userid) {
-                return new Promise(function(resolve, reject) {
-                    //POST request to Mongo to write the comment to the database, with parameters object as payload
-                    $http({
-											url: "/comment/updateCommenterInfo",
-                        method: "POST",
-                        data: {
-                            widgetId: widgetId,
-                            userid: userid
-                        },
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    }).success(function successCallback(data, status) {
-                        if (data.resp == 'success') {
-                            resolve(data.user);
-                        } else {
-                            reject("Error posting to Mongo...")
-                        }
-
-                    }, function errorCallback(err) {
-
-                    });
-
-                }, function(err) {
-                    return (err);
-                });
             }
-
         };
     }]);

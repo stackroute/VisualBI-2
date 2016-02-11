@@ -1,3 +1,28 @@
+/*
+    * Copyright 2016 NIIT Ltd, Wipro Ltd.
+    *
+    * Licensed under the Apache License, Version 2.0 (the "License");
+    * you may not use this file except in compliance with the License.
+    * You may obtain a copy of the License at
+    *
+    *    http://www.apache.org/licenses/LICENSE-2.0
+    *
+    * Unless required by applicable law or agreed to in writing, software
+    * distributed under the License is distributed on an "AS IS" BASIS,
+    * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    * See the License for the specific language governing permissions and
+    * limitations under the License.
+    *
+    * Contributors:
+    *
+    * 1. Ashok Kumar
+    * 2. Partha Mukharjee
+    * 3. Nabila Rafi
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
+    * 6. Hari Prasad Timmapathini
+	 * 7. Yogesh Goyal
+ */
 
 var app = angular.module('vbiApp');
 app.factory('executeQueryService', function($http, $rootScope, $compile) {
@@ -16,12 +41,8 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
           data: parameters
         };
        return new Promise (function(resolve, reject){
-//         console.log(req);
-//         console.log(container);
          $http(req).then(function(data){
-//           console.log("got data");
            var graphArray = renderData(container, data.data);
-//                  console.log(graphArray);
                   if(graphArray !== undefined){
                     resolve(graphArray);
                   }
@@ -129,8 +150,6 @@ var renderData =  function (container, data){
       axis1 = axis[1],
       axis0Child = {},
       axis1Child = {};
-//  console.log(axis0);
-//  console.log(axis1);
   /************* Function for graphKey *****************/
   var axis0Names = [];
   for (var index0 in axis0){
