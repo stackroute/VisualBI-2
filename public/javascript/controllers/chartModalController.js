@@ -73,6 +73,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 			if(data.image=='test path')//cleanup
 				imgSrc='url("../images/default-user.png")';
 			
+			console.log(loggedInUser,imgSrc);
 			
 
 			var commentThumbStyle = {'background-image': imgSrc,
