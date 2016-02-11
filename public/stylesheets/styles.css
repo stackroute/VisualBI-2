@@ -514,9 +514,16 @@ margin: 0px;
   width: 100%;
 }
 
+.modal-lg {
+	width: 1500px;
+}
+
 @media  (max-width: 768px) {
   .outer {
    height: 1024px;
    background :url('../images/background_small.jpg');
   }
+	.modal-lg {
+		width: 750px;
+	}
 }

@@ -170,6 +170,7 @@ angular.module('vbiApp')
 		  var modalInstance = $uibModal.open({
 			 templateUrl : template,
 			 controller : "ModalGraphController",
+//			 size: 'lg',
 			 indexPassed : indexPassed,
 			 resolve : {
 				graphData : function(){
