@@ -63,7 +63,6 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
           };
 
         $scope.selectedTab[0].rows[rowId].columns.push(addColumn);
-        console.log($scope.tabs[0].rows[rowId].columns);
     }
   };
 

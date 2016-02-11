@@ -111,8 +111,6 @@ WidgetSchema.statics.getNewWidgetId = function(callback) {
 
 WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   var widgetCount = widgetList.length;
-  console.log("saveWidget");
-  console.log(userId);
   for(var i=0; i<widgetCount; i++) {
     this.model('Widget').update({
       '_id' : widgetList[i]._id
@@ -129,7 +127,6 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
       }
     },function(err) {
         if(err){
-          console.log(err);
         }
     });
   }
@@ -147,7 +144,6 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
     }
   },function(err) {
       if(err){
-        console.log(err);
       }
   });
 }

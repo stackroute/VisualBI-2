@@ -27,8 +27,7 @@ var express = require('express'),
     router = express.Router(),
     utils = require('./utils'),
     path = require('path'),
-    Widget =require('../config/db').widgetModel,
-	 dbUtils = require('../model/dbUtils');
+    Widget =require('../config/db').widgetModel;
 
 //Checks wheather user is authenticated 
 router.use(utils.isAuthenticated);

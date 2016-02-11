@@ -59,7 +59,6 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 					});
 				});
 				$scope.comments = commentsCollection;
-				console.log($scope.comments);
 		});
 	
 		//	function to set the comment icon class and color

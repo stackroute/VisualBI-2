@@ -51,7 +51,6 @@ CredentialSchema.statics.getCredentialId = function(username, callback){
 		'_id': 1
 	}).exec(function(err, data) {
 			if(err){
-				// console.log(err);
 			}
 			callback(data);
 	});

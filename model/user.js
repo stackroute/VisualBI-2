@@ -102,7 +102,6 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
 
 //TODO: can be done at client side because it has all the data there. check and remove the method
 UserSchema.statics.isExist =function(currentUserName,currentDashboard,userId,permission,callback){
-  // console.log("isExist userId "+userId+" "+currentUserName+" "+currentDashboard+" "+permission);
   this.model('User')
     .findOne({
       _id:mongoose.Types.ObjectId(userId),
@@ -130,7 +129,6 @@ UserSchema.statics.shareDashboard = function(currentUserId,currentusername,curre
 
 //TODO: indentation needs to be corrected
 UserSchema.statics.updatePermission = function(currentUserId,currentUserName,currentDashboard,shareWithUserId,permission){
-  // console.log("permission "+shareWithUserId+" "+currentUserId+" "+currentUserName+" "+currentDashboard);
   this.model('User').update({'_id':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
@@ -139,7 +137,6 @@ UserSchema.statics.updatePermission = function(currentUserId,currentUserName,cur
   {$set:{"sharedDashboards.$.permission": permission}}
   ,{upsert: true})
   .exec(function(err, data){
-    // console.log(data);
   });
 }
 
@@ -159,7 +156,6 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
 }
 
 UserSchema.statics.sharedDashboards = function(currentUserId,userName,user,currentDashboard){
-    // console.log("dashboards.0.sharedWith "+currentUserId);
     this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId),"dashboards._id":currentDashboard},
     {$addToSet:{"dashboards.$.sharedWith":
         {
