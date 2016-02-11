@@ -51,7 +51,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 						console.log(comment.userImage);
 
 						commentsCollection.push({
-							userid: comment.userid,
+							displayName: comment.displayName,
 							comment: comment.comment,
 							badgeClass: comment.badgeClass,
 							badgeIconClass: comment.badgeIconClass,
@@ -99,7 +99,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				'background-size': '50px 50px'};
 
 			$scope.comments.push({
-                userid: $rootScope.loggedInUser, 
+                displayName: $rootScope.loggedInUser, 
                 badgeClass: commentCategory,
                 badgeIconClass: commentType,
                 comment: newComment,
