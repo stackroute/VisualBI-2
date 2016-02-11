@@ -28,37 +28,22 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
-		loggedInUser = '',
-		deleteIndc=false,
 		commentsCollection=[];
 		$scope.commentsVisibility = true;
 		$scope.chartInfo = chartInfo;
 	
 		widgetManager.getComment(chartInfo.widgetId)
 			.then(function(widgetData){
-				
-				//console.log(widgetData.data.comments);
-			
 				var userComments = widgetData.data.comments;
-				
-				var imgSrc="";
-			
+	
 				angular.forEach(userComments, function(comment, key){
-						
-					imgSrc='url("../'+comment.userImage.substring(6)+'")';
-
-					
-						console.log(comment.userImage);
-
-						commentsCollection.push({
-							displayName: comment.displayName,
-							comment: comment.comment,
-							badgeClass: comment.badgeClass,
-							badgeIconClass: comment.badgeIconClass,
-							commenterThumb: {'background-image': imgSrc,
-											'background-size': '50px 50px'},
-							commenterDpPath : comment.userImage,
-							when: Date()
+					commentsCollection.push({
+					displayName: comment.displayName,
+					comment: comment.comment,
+					badgeClass: comment.badgeClass,
+					badgeIconClass: comment.badgeIconClass,
+					commenterThumb: {'background-image': 'url("../'+comment.userImage.substring(6)+'")','background-size': '50px 50px'},
+					when: Date()
 					});
 				});
 				$scope.comments = commentsCollection;
@@ -87,19 +72,14 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				commentCategory:commentCategory
 			  };
 		
-		console.log('Logged in User -> ');
-		console.log($rootScope.loggedInUser);
-		
+	
 		widgetManager.saveComment(parameters).then(function(data) {
 			
-		
-			var imgSrc='url("../'+data.image.substring(6)+'")';
-
-			var commentThumbStyle = {'background-image': imgSrc,
+			var commentThumbStyle = {'background-image': 'url("../'+$rootScope.loggedInUser.imagePath.substring(6)+'")',
 				'background-size': '50px 50px'};
 
 			$scope.comments.push({
-                displayName: $rootScope.loggedInUser, 
+                displayName: $rootScope.loggedInUser.displayName, 
                 badgeClass: commentCategory,
                 badgeIconClass: commentType,
                 comment: newComment,
