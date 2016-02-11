@@ -34,7 +34,6 @@ router.use(utils.isAuthenticated);
 
 //Get the widgets
 router.get('/', function(req, res, next) {
-    console.log('Root Route');
     Widget.getWidgets(function(data){
          res.send(data);
       });

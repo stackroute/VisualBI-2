@@ -36,8 +36,6 @@ var router = express.Router(),
 router.use(utils.isAuthenticated);
 
 router.post('/', function(req, res) {
-  // console.log(req.body.mdxQuery);
-  // console.log("inside route/execute");
       var statement  = req.body.statement,
           connId   = req.body.connId,
           properties = {};
@@ -121,7 +119,6 @@ router.post('/', function(req, res) {
                     getDatafrmDataset(obj);
                   }
                   res.json(dataSet);
-                  //console.log(JSON.stringify(dataSet,null,2));
               },
             error: function(xmla, xmlaRequest, exception) {
 

@@ -282,6 +282,10 @@ table,  th,  td{
 
 /*widgets Library style*/
 
+.customWidgetStyle{
+	margin:10px 0px;
+}
+
 .panel-width-style{
 	z-index: 1000;
 	position: fixed;
