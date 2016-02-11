@@ -63,7 +63,6 @@ router.post('/shareDashboard', function(req, res, next) {
     userNames.forEach(function(userName){
       Credential.getCredentialId(userName).then(function(credentialObj){
         if(credentialObj !== null){
-          console.log("credObj",JSON.stringify(credentialObj));
           return credentialObj;
         }else{
           res.status(400).send("Not a valid user.");
@@ -74,14 +73,11 @@ router.post('/shareDashboard', function(req, res, next) {
         }).then(function(result){
             if(result.isExist !== null){
               User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(data){
-                console.log(data);
               }).catch(function(err){
                 res.status(500).send("internal server error");
               });
             }else{
-              console.log("inserting sharedDashboard ",currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission);
               User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(){
-              console.log("inserted into user document");
               }).catch(function(err){
                 res.status(500).send("internal server error");
               });

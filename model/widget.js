@@ -97,7 +97,6 @@ createNewWidgetId = function(callback) {
 
 removeStatus = function(id) {
 
-//console.log("reached removeStatus");
   var widget = mongoose.model('Widget', WidgetSchema);
   widget.model('Widget').update({
     '_id' : id
@@ -107,9 +106,6 @@ removeStatus = function(id) {
     }
   },function(err) {
       if(err){
-        console.log("_____________________________________________");
-        console.log(err);
-        console.log("---------------------------------------------");
       }
   });
 }

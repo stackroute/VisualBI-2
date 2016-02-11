@@ -68,9 +68,9 @@ angular.module('vbiApp')
 											col.widgetId.comments = widget.comments;
 											col.widgetId.commentsCounter = widget.commentsCounter;
 											col.widgetId.lastCommentedBy = widget.lastCommentedBy;
-											col.widgetId.commentersCounter = widget.commentersCounter;	
+											col.widgetId.commentersCounter = widget.commentersCounter;
 										}
-										
+
 								});
 								}
 							})
@@ -81,10 +81,10 @@ angular.module('vbiApp')
         }, 10000);
 		  }
     	};
-		 
+
 		$scope.$watch($scope.keepPolling, pollForNewComments)
 //		pollForNewComments();
-		$scope.keepPolling = true; //start polling	 
+		$scope.keepPolling = true; //start polling
 		$scope.logout = function() {
 			$scope.keepPolling = false;
 			userManager.logout()
@@ -133,7 +133,6 @@ angular.module('vbiApp')
         controller: 'shareDashboardController',
         resolve: {
           sharedDashboards: function(){
-            console.log(currentUserData.dashboards[0].sharedWith);
             return currentUserData.dashboards[0].sharedWith; //assuming there is only one dashboard.
           }
         }
@@ -163,7 +162,7 @@ angular.module('vbiApp')
 
 
 		}
-				
+
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
 			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
@@ -293,4 +292,3 @@ angular.module('vbiApp')
        }
    };
 });
-

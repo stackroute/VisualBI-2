@@ -97,7 +97,6 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
 
 //TODO: can be done at client side because it has all the data there. check and remove the method
 UserSchema.statics.isExist =function(currentUserEmail, currentUserName, userId, permission){
-  console.log("isExist userId "+mongoose.Types.ObjectId(userId)+" "+currentUserName);
 	return  this.model('User')
     .findOne({
       "userid": userId,
@@ -122,7 +121,6 @@ UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, cu
 
 //TODO: indentation needs to be corrected
 UserSchema.statics.updatePermission = function(currentUserEmail, currentUserId, currentUserName, shareWithUserId, currentUserDisplayName, permission){
-// console.log("updating perm ",shareWithUserId,currentUserId,currentUserName,currentUserEmail,currentUserDisplayName,permission);
 	return this.model('User').update({'userid':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
