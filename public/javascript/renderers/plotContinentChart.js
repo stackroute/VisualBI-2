@@ -35,11 +35,9 @@ angular.module('vbiApp')
 		var chartRenderer = function(chartContainer, parameters){
 			return new Promise(function(resolve, reject){
 				var containerWidth = parameters.width;
-//				var containerWidth = chartContainer.clientWidth, 
 					 jsonDataUrl = parameters.url;
 				if(parseInt(containerWidth) === 0)
 					containerWidth = 800;
-//				console.log("plotContinent", containerWidth);
 				if(parameters.config) {
 					//specific settings if provided for chart
 					margin.top = config.top || margin.top;
