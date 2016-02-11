@@ -70,24 +70,24 @@ router.post('/shareDashboard', function(req, res, next) {
           res.status(400).send("Not a valid user.");
         }
       }).then(function(credentialObj){
-        User.isExist(currentUserEmail, currentUserName, credentialObj._id, permission).then(function(isExist){
+          User.isExist(currentUserEmail, currentUserName, credentialObj._id, permission).then(function(isExist){
           return {isExist:isExist,credentialObj:credentialObj};
         }).then(function(result){
-          if(result.isExist !== null){
-            User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(data){
-              console.log(data);
-            }).catch(function(err){
-              res.status(500).send("internal server error");
-            });
-          }else{
-            console.log("inserting sharedDashboard ",currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission);
-            User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(){
+            if(result.isExist !== null){
+              User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(data){
+                console.log(data);
+              }).catch(function(err){
+                res.status(500).send("internal server error");
+              });
+            }else{
+              console.log("inserting sharedDashboard ",currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission);
+              User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(){
               console.log("inserted into user document");
-            }).catch(function(err){
-              res.status(500).send("internal server error");
-            });
-          }
-          return credentialObj;
+              }).catch(function(err){
+                res.status(500).send("internal server error");
+              });
+            }
+            return credentialObj;
         }).then(function(credentialObj){
           // console.log("sharedDashboards ",currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.username, credentialObj._id);
           User.sharedDashboards(currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.email, credentialObj._id);
