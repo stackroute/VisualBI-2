@@ -32,6 +32,7 @@ angular.module('vbiApp')
             $rootScope.dashboardAlert = "";$scope.userNames=[];
 			  //TODO: currentDashboard id has to be removed
 			  //TODO: need to fetch only matching users
+            sharedDashboards.forEach(function(userObj) {
               $scope.validUserNames.push(userObj.displayname);
             });
             $scope.tagAdded = function(tag) {

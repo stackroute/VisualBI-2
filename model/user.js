@@ -48,12 +48,7 @@ var UserSchema = mongoose.Schema({
          }]
       }]
    }],
-	sharedDashboards:[{
-		userid: String, //{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
-		username: String,
-		dashboardid: String,
-		permission: String
-	}]
+	sharedDashboards:[]
 }, {strict: false});
 
 //Gets the dashboard of a user. It specically helps to fetch the shared dashboard
@@ -129,7 +124,8 @@ UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, cu
 
 //TODO: indentation needs to be corrected
 UserSchema.statics.updatePermission = function(currentUserEmail, currentUserId, currentUserName, shareWithUserId, currentUserDisplayName, permission){
-  return this.model('User').update({'userid':shareWithUserId,
+console.log("updating perm ",shareWithUserId,currentUserId,currentUserName,currentUserEmail,currentUserDisplayName,permission);
+	return this.model('User').update({'userid':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
 														"sharedDashboards.email": currentUserEmail,

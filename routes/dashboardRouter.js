@@ -29,7 +29,7 @@ var express = require('express'),
     Credential = require('../config/db').credentialModel;
     utils = require('./utils');
 
-//Checks wheather user is authenticated 
+//Checks wheather user is authenticated
 router.use(utils.isAuthenticated);
 router.get('/userData', function(req, res, next) {
     var userid = req.user._id; //it contains _id value of user whose dashboard to be fetched
@@ -64,8 +64,6 @@ router.post('/shareDashboard', function(req, res, next) {
     userNames.forEach(function(userName){
       Credential.getCredentialId(userName).then(function(credentialObj){
         if(credentialObj !== null){
-          //credentialObj.displayName = credentialObj.name; //remove and assign from database.
-          //credentialObj.email = credentialObj.username;
           console.log("credObj",JSON.stringify(credentialObj));
           return credentialObj;
         }else{
@@ -77,10 +75,12 @@ router.post('/shareDashboard', function(req, res, next) {
         }).then(function(result){
           if(result.isExist !== null){
             User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(data){
+              console.log(data);
             }).catch(function(err){
               res.status(500).send("internal server error");
             });
           }else{
+            console.log("inserting sharedDashboard ",currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission);
             User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(){
               console.log("inserted into user document");
             }).catch(function(err){
@@ -89,7 +89,7 @@ router.post('/shareDashboard', function(req, res, next) {
           }
           return credentialObj;
         }).then(function(credentialObj){
-          console.log("sharedDashboards ",currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.username, credentialObj._id);
+          // console.log("sharedDashboards ",currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.username, credentialObj._id);
           User.sharedDashboards(currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.email, credentialObj._id);
           usernameProcessed++;
           if (userNames.length == usernameProcessed)
