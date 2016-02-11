@@ -33,7 +33,6 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
   var sharedDashboardUserId = editManager.getSharedDashboardUserId();
   $scope.selectedTab = [];
   $scope.userWidgetItems = [];
-  $rootScope.newWidgetList = [];
 
   if((typeof $scope.getAllTabs === 'undefined') || (typeof $scope.tabIndex === 'undefined')) {
     $location.url('/');
@@ -190,8 +189,8 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
           }, function(error) {
           });
 
+      editManager.setWidgetList($scope.selectedTab[0].rows[rowId].columns[colId].widgetId)
 
-      $rootScope.newWidgetList.push($scope.selectedTab[0].rows[rowId].columns[colId].widgetId);
     }
 
     if(width <= columnCurWidth) {
@@ -272,16 +271,20 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       });
     });
 
+    var newWidgetList = editManager.getWidgetList();
+
     $scope.getAllTabs[$scope.tabIndex] = $scope.selectedTab[0];
 
     var allparams={
                 tabs: $scope.getAllTabs,
                 tabIndex: $scope.tabIndex,
                 userid: sharedDashboardUserId,
-                widgetList: $rootScope.newWidgetList
+                widgetList: newWidgetList
              };
 
-             widgetManager.saveWidget(allparams);
+    widgetManager.saveWidget(allparams);
+
+    editManager.clearWidgetList();
   }
 
   $scope.showPanel = function(col) {
