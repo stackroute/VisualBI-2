@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -35,11 +35,9 @@ angular.module('vbiApp')
 		var chartRenderer = function(chartContainer, parameters){
 			return new Promise(function(resolve, reject){
 				var containerWidth = parameters.width;
-//				var containerWidth = chartContainer.clientWidth, 
 					 jsonDataUrl = parameters.url;
 				if(parseInt(containerWidth) === 0)
 					containerWidth = 800;
-//				console.log("plotNorthEast", containerWidth);
 				if(parameters.config) {
 					//specific settings if provided for chart
 					margin.top = config.top || margin.top;
@@ -96,7 +94,6 @@ angular.module('vbiApp')
 					  'IlliterateFemale': nData[d].illiteracyFemale
 					});
 				 }
-				 //console.log(nStates[0]);
 
 
 				  color.domain(d3.keys(data[0]).filter(function(key) { return key !== "state"; }));

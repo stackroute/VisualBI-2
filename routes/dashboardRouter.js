@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -69,9 +69,7 @@ router.post('/shareDashboard', function(req, res, next) {
                 User.isExist(currentUserName, currentDashboard, userObj._id, permission, function(result) {
                     if (result == true) {
                         User.updatePermission(currentUserId, currentUserName, currentDashboard, userObj._id, permission);
-                        console.log("updating permission");
                     } else {
-                        console.log("not updating");
                         User.shareDashboard(currentUserId, currentUserName, currentDashboard, userObj._id, permission, function(result) {
                             User.sharedDashboards(currentUserId, credentialObj.name, credentialObj.username, currentDashboard);
                         });

@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -27,11 +27,11 @@ var express = require('express'),
     router = express.Router(),
     fs = require('fs'),
     path = require('path'),
+	 mongoose = require('mongoose'),
+	 passport = require('passport'),
     utils = require('./utils'),
     User = require('../config/db').userModel,
-    passport = require('passport'),
-	 Credential = require('../config/db').credentialModel,
-	 dbUtils = require('../model/dbUtils');
+	 Credential = require('../config/db').credentialModel;
 
 //TODO: need to make authetication for each route
 // Login page
@@ -43,7 +43,6 @@ router.get('/logout', function(req, res, next) {
 	res.clearCookie('authToken');
 	req.logout();
   	req.session.destroy();
-//	console.log("logged out successfully");
 	//TODO: send the status
    res.status(200).send("success");
 });
@@ -63,7 +62,7 @@ router.post('/register',function(req,res,next){
 		res.status(400).send('failed');
 	} else {
 
-		dbUtils.registerUser({
+		registerUser({
 			username: req.body.username,
 			password: req.body.password,
 			firstName: req.body.firstName,
@@ -72,7 +71,6 @@ router.post('/register',function(req,res,next){
 			email: req.body.email
 		}, function(err, user) {
 			if(err){
-        console.log(err);
 				res.status(500).send({ error: err });
 			}
 			else {
@@ -82,4 +80,35 @@ router.post('/register',function(req,res,next){
 	}
 });
 
+//Registers a user. It creates an entry into Credential collection. It also adds one template
+//in User collection for dashboard
+var registerUser = function (user, done) {
+	Credential.register({
+		username : user.username,
+		displayName: user.firstName + ' ' + user.lastName,
+		imagePath: user.imagePath,
+		email: user.email
+	}, user.password, function(err, account) {
+		if(err) {
+			done(err, 'failed')
+		} else {
+			//make an entry in user collection for new user
+			var newUser = new User({
+				userid: account._id,
+				preferences: [ { theme: 'normal', showLegent: true}],
+				dashboards: [{
+					_id: mongoose.Types.ObjectId(),
+					displayName: "myDashboard",
+					sharedWith: [],
+					tabs: []
+				}],
+				sharedDashboards: []
+			});
+			newUser.save(function(err) {
+				if(err) done(err, 'failed');
+				else done(null, account);
+			});
+		}
+	});
+}
 module.exports = router;

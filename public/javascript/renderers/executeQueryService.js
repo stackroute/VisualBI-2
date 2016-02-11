@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -41,12 +41,8 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
           data: parameters
         };
        return new Promise (function(resolve, reject){
-//         console.log(req);
-//         console.log(container);
          $http(req).then(function(data){
-//           console.log("got data");
            var graphArray = renderData(container, data.data);
-//                  console.log(graphArray);
                   if(graphArray !== undefined){
                     resolve(graphArray);
                   }
@@ -154,8 +150,6 @@ var renderData =  function (container, data){
       axis1 = axis[1],
       axis0Child = {},
       axis1Child = {};
-//  console.log(axis0);
-//  console.log(axis1);
   /************* Function for graphKey *****************/
   var axis0Names = [];
   for (var index0 in axis0){

@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -34,7 +34,6 @@ router.use(utils.isAuthenticated);
 
 //Get the widgets
 router.get('/', function(req, res, next) {
-    console.log('Root Route');
     Widget.getWidgets(function(data){
          res.send(data);
       });

@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -28,11 +28,7 @@ angular.module('vbiApp').directive('validPasswordC', function () {
         require: 'ngModel',
         link: function (scope, elm, attrs, ctrl) {
             ctrl.$parsers.unshift(function (viewValue, $scope) {
-                console.log(viewValue);
-                console.log(scope.form.password.$viewValue);
                 var noMatch = viewValue != scope.form.password.$viewValue;
-                console.log(noMatch);
-                console.log(ctrl.$setValidity('noMatch', !noMatch));
             })
         }
     }
