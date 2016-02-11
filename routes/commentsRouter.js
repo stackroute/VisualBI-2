@@ -18,8 +18,8 @@
     * 1. Ashok Kumar
     * 2. Partha Mukharjee
     * 3. Nabila Rafi
-    * 4. Venkatakrishnan
-    * 5. Arun Karthic
+    * 4. Venkatakrishnan U
+    * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -27,8 +27,7 @@ var express = require('express'),
     router = express.Router(),
     utils = require('./utils'),
     path = require('path'),
-    Widget =require('../config/db').widgetModel,
-	 dbUtils = require('../model/dbUtils');
+    Widget =require('../config/db').widgetModel;
 
 //Checks wheather user is authenticated 
 router.use(utils.isAuthenticated);
@@ -44,9 +43,8 @@ router.post('/',function(req, res, next){
 		displayName: req.user.displayName,
 		userImage: req.user.imagePath,
 		datetime: new Date(),
-	}).then(function(err, comment) {
-		if(err) res.status(500).send("Failed to update comments")
-		else res.sendStatus(200);
+	}).then(function(comment) {
+		res.status(200).send(comment);
 	});
 
 });

@@ -15,12 +15,12 @@
   <h4 class="panel-title">
       <span >
        <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
-           <span class="commentDisplayToggle" ng-show = "IsNotVisible">Show Comments</span>
-           <span class="commentDisplayToggle" ng-show = "IsVisible">Hide Comments</span>    
+           <span class="commentDisplayToggle" ng-hide = "commentsVisibility">Show Comments</span>
+           <span class="commentDisplayToggle" ng-show = "commentsVisibility">Hide Comments</span>    
       </a>
       </span>
   </h4>
-  <div id="collapse1" class="collapse">
+  <div id="collapse1" class="collapse in">
     <timeline>
       <timeline-event ng-repeat="comment in comments" side="">
         <timeline-badge ng-style="{{comment.commenterThumb}}">
@@ -33,7 +33,7 @@
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete" ng-click="deleteComment(comments,$index)"></i></p>
+			<p>{{comment.comment}} &nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete" ng-click="deleteComment(comments,$index)"></i></p>
         </timeline-panel>
       </timeline-event>
     </timeline>
