@@ -63,11 +63,12 @@ angular.module('vbiApp')
 								if(col.widgetId && col.widgetId._id) {
 									widgetManager.getComment(col.widgetId._id)
 										.then(function(cm){
-										if(cm.comments && cm.comments.length > 0) {
-											col.widgetId.comments = cm.comments;
-											col.widgetId.commentsCounter = cm.commentsCounter;
-											col.widgetId.lastCommentedBy = cm.lastCommentedBy;
-											col.widgetId.commentersCounter = cm.commentersCounter;	
+										var widget = cm.data;
+										if(widget.comments && widget.comments.length > 0) {
+											col.widgetId.comments = widget.comments;
+											col.widgetId.commentsCounter = widget.commentsCounter;
+											col.widgetId.lastCommentedBy = widget.lastCommentedBy;
+											col.widgetId.commentersCounter = widget.commentersCounter;	
 										}
 										
 								});
