@@ -21,21 +21,23 @@
     * 4. Venkatakrishnan U
     * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
-	 * 7. Yogesh Goyal
- */
+	* 7. Yogesh Goyal
+ 	*/
 angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route','widgetManager','$rootScope', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route,widgetManager,$rootScope){
 		
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
 		commentsCollection=[];
-		$scope.commentsVisibility = true;
+		$scope.commentsVisibility = false;
 		$scope.chartInfo = chartInfo;
 	
 		widgetManager.getComment(chartInfo.widgetId)
 			.then(function(widgetData){
 				var userComments = widgetData.data.comments;
-	
+				$scope.showHideVisibility= (widgetData.data.commenters.length>0) ? true : false;
+				$scope.commentsVisibility= (widgetData.data.commenters.length>0) ? true : false;
+
 				angular.forEach(userComments, function(comment, key){
 					commentsCollection.push({
 					displayName: comment.displayName,
@@ -89,7 +91,11 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
             $scope.userComment = '';
             commentType = 'glyphicon-check', commentCategory = 'primary';
-  
+	
+			if($scope.showHideVisibility == false){
+				$scope.commentsVisibility = true;
+				$scope.showHideVisibility = true;
+			}
         });
 
     };

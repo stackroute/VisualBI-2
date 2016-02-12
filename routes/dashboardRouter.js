@@ -87,9 +87,7 @@ router.post('/shareDashboard', function(req, res, next) {
             }
             return credentialObj;
         }).then(function(credentialObj){
-          // console.log("sharedDashboards ",currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.username, credentialObj._id);
           User.sharedDashboards(currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.email, credentialObj._id).then(function(){
-
           });
           usernameProcessed++;
           if (userNames.length == usernameProcessed)
@@ -108,5 +106,15 @@ router.get('/userList/:query?', function(req, res) {
         res.status(200).json(data);
     });
 });
+
+router.get('/getSharedDashboards',function(req,res){
+  var userid = req.user._id;
+
+  User.getSharedDashboards(userid).then(function(data){
+    res.status(200).send(data.dashboards[0].sharedWith);
+  }), function(err){
+    res.status(500).send("internal server error");
+  }
+})
 
 module.exports = router;

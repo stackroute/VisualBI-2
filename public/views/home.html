@@ -53,21 +53,19 @@
 													<span class="glyph-right-space glyphicon glyphicon-comment"></span>
 													<span ng-show="col.widgetId.comments.length <= 0">Add comments</span>
 													<span ng-show="col.widgetId.comments.length > 0">
-														  See {{col.widgetId.commentsCounter}}
+											<!--			  See {{col.widgetId.commentsCounter}}
 														  <span class="user-comments-meta">
 														  <span ng-show="col.widgetId.comments.length == 1">comment from</span>
 														  <span ng-show="col.widgetId.comments.length> 1">comments from </span>
-														  {{col.widgetId.lastCommentedBy}}
-														  </span>
+														  </span>-->
+														  {{col.widgetId.lastCommentedBy}} 
 														  <span class="user-comments-meta">
                                                         <span ng-show="col.widgetId.commenters.length > 1">
 														  and
 														  {{col.widgetId.commenters.length - 1}}
 
                                                         <span ng-show="col.widgetId.commenters.length == 2">other</span>
-                                                        <span ng-show="col.widgetId.commenters.length > 2">others</span>
-
-																</span>
+                                                        <span ng-show="col.widgetId.commenters.length > 2">others </span>													  commented on this</span>
 														  </span>
 													 </span>
 												</a>
