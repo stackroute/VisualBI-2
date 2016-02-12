@@ -288,13 +288,16 @@ table,  th,  td{
 	margin:10px 0px;
 }
 
+.tabs-glyph {
+	font-size: 30px;
+}
+
 .panel-width-style{
 	z-index: 1000;
 	position: fixed;
-	left: 105px;
+	left: 85px;
 	width: 0;
-	/*height: 100%;*/
-	/*margin-left: -150px;*/
+	margin-top: 40px;
 	overflow-y: auto;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
@@ -308,7 +311,7 @@ table,  th,  td{
 }
 
 .nav-customWidget-style{
-	margin-top: 100px;
+	margin-top: 60px;
 	position:fixed;
 }
 
@@ -317,15 +320,50 @@ table,  th,  td{
 	max-height: 700px;
 }
 
+.tabs-left>.nav-tabs>li {
+	float:none;
+	padding-left: 10px;
+	text-align: center;
+}
 
-.tabs-below>.nav-tabs,.tabs-right>.nav-tabs,.tabs-left>.nav-tabs{border-bottom:0;}
+.tabs-below>.nav-tabs,.tabs-left>.nav-tabs {
+	border-bottom:0;
+}
 
-.tabs-left>.nav-tabs>li,.tabs-right>.nav-tabs>li{float:none;}
-.tabs-left>.nav-tabs>li>a,.tabs-right>.nav-tabs>li>a{min-width:74px;margin-right:0;margin-bottom:3px;}
-.tabs-left>.nav-tabs{float:left;margin-right:19px;border-right:1px solid #ddd;}
-.tabs-left>.nav-tabs>li>a{margin-right:-1px;-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px;}
-.tabs-left>.nav-tabs>li>a:hover,.tabs-left>.nav-tabs>li>a:focus{border-color:#eeeeee #dddddd #eeeeee #eeeeee;}
-.tabs-left>.nav-tabs .active>a,.tabs-left>.nav-tabs .active>a:hover,.tabs-left>.nav-tabs .active>a:focus{border-color:#ddd transparent #ddd #ddd;*border-right-color:#ffffff;}
+.tabs-left>.nav-tabs>li>a {
+	min-width:74px;
+	margin-right:0;
+	margin-bottom:3px;
+}
+
+.tabs-left>.nav-tabs {
+	float:left;
+	margin-right:19px;
+}
+
+.tabs-left>.nav-tabs>li>a {
+	margin-right:-1px;
+	-webkit-border-radius:4px 0 0 4px;
+	-moz-border-radius:4px 0 0 4px;
+	border-radius:4px 0 0 4px;
+}
+
+.tabs-left>.nav-tabs>li>a:hover,.tabs-left>.nav-tabs>li>a:focus {
+	border-color:#eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left>.nav-tabs .active>a,.tabs-left>.nav-tabs .active>a:hover,.tabs-left>.nav-tabs .active>a:focus {
+	border-color:#ddd transparent #ddd #ddd;
+	*border-right-color:#ffffff;
+}
+
+.share-modal {
+	margin-right: 5px;
+}
+
+.save-row, .add-row {
+	margin: 5px;
+}
 
 @media(min-width:768px) {
     #wrapper {
@@ -423,7 +461,7 @@ margin-top: 85px;
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
-  
+
 }
 .registerForm .tab-group {
   list-style: none;
@@ -524,7 +562,7 @@ margin: 0px;
 }
 
 .modal-lg {
-	width: 1500px;
+	width: 1200px;
 }
 
 @media  (max-width: 768px) {
