@@ -10,14 +10,17 @@
 			<div ng-include="'views/dialogs/chartModal.tpl.html'"></div>
 			<div ng-include="'views/dialogs/graphModal.tpl.html'"></div>
 			<div ng-include="'views/dialogs/customWidgetModal.tpl.html'"></div>
-		<button ng-show="canShare" type=button class="btn btn-warning pull-right share-modal" ng-click="shareDashboardModal(currentUserData)">Share<span class="glyphicon glyphicon-share"></span></button>
+		<button ng-show="canShare" type=button class="btn btn-warning pull-right share-modal" ng-click="shareDashboardModal(currentUserData)">Share<span class="glyphicon glyphicon-share"></span>
+			</button>
+			<button type="button" ng-show="canEdit" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary edit-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span>
+			</button>
 				<uib-tabset class="wrap">
 					 <uib-tab id="{{ tab.tabId }}" ng-dblclick="titleModal(2, $index)"  ng-repeat= "tab in tabs" active="tab.active" ng-init="tab.active = $index===0">
 						 <uib-tab-heading class="ng-scope">
 							 {{tab.tabTitle}}
 							 <i ng-click="removeTab(tab.tabId, $event)" type="button" class="close hide-button" showonhoverparent><span aria-hidden="true">&times;</span></i>
 						 </uib-tab-heading>
-						 <button type="button" ng-show="canEdit" ng-click="gotoEditPage(tabs, $index)" class="btn btn-primary row-btn pull-right">Edit Tab <span class="glyphicon glyphicon-edit"></span></button>
+						 
 						 <div class = "row row-style" id ="row{{ $index }}" ng-repeat = "row in tab.rows">
 							  <div class = "col-sm-{{ col.colWidth }}" ng-repeat = "col in row.columns">
 									<div class="panel panel-primary">

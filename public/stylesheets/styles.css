@@ -26,7 +26,7 @@
 /* Toggle Styles */
 
 body{
-	background-color:#f5f5f5;
+	background-color:white;
 	margin-top:50px;
 }
 
@@ -195,8 +195,8 @@ body{
   height: auto;
 }
 
-.row-btn {
-  margin: 5px 5px;
+.edit-btn {
+  margin-right: 5px;
 }
 
 .row {
@@ -230,9 +230,11 @@ table,  th,  td{
   padding: 10px;
 }
 
-.section_result .level0 {
-	background-color: #F7B05B;
+
+.section_result .level0, .section_result .level1, .section_result .level2, .section_result .level3 {
+	background-color: #efefef;
 }
+
 
 .dataRow .level0{
 /*	//#D3D3D3*/
@@ -411,19 +413,17 @@ margin-top: 85px;
 /*code for main page*/
 
 .outer {
-  background-image: url("../images/background.jpg");
-  font-family: 'Titillium Web', sans-serif;
-  height:1000px;
+  background-color:white;
 }
 .registerForm {
   /*background: rgba(19, 35, 47, 0.7);*/
-  background: rgba(143, 151, 121, 0.9);
+  background-color: #4f4d4d;
+	color:white;
   /*background-color: #cc0000;*/
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+  
 }
 .registerForm .tab-group {
   list-style: none;
@@ -440,8 +440,7 @@ margin-top: 85px;
   text-decoration: none;
   padding: 15px;
   background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
+   font-size: 20px;
   float: left;
   width: 50%;
   text-align: center;
@@ -452,13 +451,13 @@ margin-top: 85px;
 
 .registerForm .tab-group .active a {
   /*background: #1ab188;*/
-  background: #008880;
-  /*color: #ffffff;*/
+  background: #d3d5e1;
+  color: #black;*/
 }
 .registerForm .tab-group .active1 a {
   /*background: #1ab188;*/
-  background: #8b0046;
-  /*color: #ffffff;*/
+  background: #4a65be;
+  color: #ffffff;*/
 }
 
 #register-login h1, #register-signup h1 {
@@ -510,6 +509,13 @@ margin-top: 85px;
 .regbutton-block {
   display: block;
   width: 100%;
+}
+
+.btn2{
+	margin-top: 5px;
+	left:100px;
+	color:black;
+	margin-left:89%;
 }
 .warn{
 margin: 0px;
