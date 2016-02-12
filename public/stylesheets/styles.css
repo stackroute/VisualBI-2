@@ -357,6 +357,14 @@ table,  th,  td{
 	*border-right-color:#ffffff;
 }
 
+.share-modal {
+	margin-right: 5px;
+}
+
+.save-row, .add-row {
+	margin: 5px;
+}
+
 @media(min-width:768px) {
     #wrapper {
         padding-left: 150px;
@@ -453,7 +461,7 @@ margin-top: 85px;
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
-  
+
 }
 .registerForm .tab-group {
   list-style: none;

@@ -70,8 +70,8 @@
 	</div>
 		<div class="container">
 			<!-- placeholder comes here -->
-			<button type="button" ng-click="addRow()" class="btn btn-primary row-btn pull-right">Add Row <span class="glyphicon glyphicon-plus"></span></button>
-			<button type="button" ng-click="saveRow()" class="btn btn-primary row-btn pull-right">Save <span class="glyphicon glyphicon-floppy-save"></span></button>
+			<button type="button" uib-tooltip="Add Row" tooltip-placement="bottom" ng-click="addRow()" class="btn btn-primary row-btn pull-right add-row"><span class="glyphicon glyphicon-plus"></span></button>
+			<button type="button" uib-tooltip="Save" tooltip-placement="bottom" ng-click="saveRow()" class="btn btn-primary row-btn pull-right save-row "><span class="glyphicon glyphicon-floppy-save"></span></button>
 
 			<div class="edit-row-container" ng-repeat="tab in selectedTab" >
 				<div class = "row" ng-repeat="row in tab.rows" ng-init="rowIndex = $index">
