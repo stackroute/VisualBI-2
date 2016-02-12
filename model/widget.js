@@ -111,7 +111,7 @@ removeStatus = function(id) {
 }
 
 reuseUnusedIds = function() {
-console.log("reached reuse ");
+
   var widget = mongoose.model('Widget', WidgetSchema);
   widget.model('Widget').update({
     '__v' : 0
@@ -121,9 +121,7 @@ console.log("reached reuse ");
     }
   },{multi: true},function(err, data) {
       if(err){
-        console.log(err);
       }
-      console.log(data);
   });
 }
 
