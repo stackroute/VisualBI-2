@@ -24,7 +24,7 @@
 	 * 7. Yogesh Goyal
  */
 angular.module('vbiApp')
-	.controller("ModalGraphController", function($scope, $uibModalInstance, GraphService, graphData, index){
+	.controller("ModalGraphController", ['$scope', '$uibModalInstance', 'GraphService', 'graphData', 'index' ,function($scope, $uibModalInstance, GraphService, graphData, index){
 		$scope.graphArray = graphData;
 		$scope.index = index;
 		$scope.ok = function() {
@@ -34,4 +34,4 @@ angular.module('vbiApp')
 		$scope.cancel = function(){
 			$uibModalInstance.dismiss('cancel');
 		};
-	});
+	}]);

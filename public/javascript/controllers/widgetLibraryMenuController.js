@@ -24,7 +24,7 @@
 	 * 7. Yogesh Goyal
  */
 angular.module('vbiApp')
-.controller('menuCtrl', function($scope){
+.controller('menuCtrl', ['$scope' ,function($scope){
 var tabClasses;
 var curId = 0;
 
@@ -65,4 +65,4 @@ $scope.setTab = function(tabId) {
 //Initialize
   initTabs();
   $scope.setActiveTab(0);
-});
+}]);
