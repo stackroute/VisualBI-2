@@ -25,7 +25,7 @@
  */
 
 var app = angular.module('vbiApp');
-app.factory('executeQueryService', function($http, $rootScope, $compile) {
+app.factory('executeQueryService', ['$http', '$rootScope', '$compile',function($http, $rootScope, $compile) {
   return {
     render: function (containerDiv, parameters) {
      var container = angular.element(containerDiv);
@@ -125,7 +125,7 @@ app.factory('executeQueryService', function($http, $rootScope, $compile) {
 			 }
 	  }
   };
-});
+}]);
 var renderData =  function (container, data){
   // $('div.section_result').replaceWith('');
   container.children().replaceWith('');

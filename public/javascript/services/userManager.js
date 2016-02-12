@@ -50,7 +50,7 @@ angular.module('vbiApp')
                     userNames: userNames,
                     permission: permission
                 });
-                return $http.post(' /dashboard/shareDashboard', parms)
+                return $http.post('/dashboard/shareDashboard', parms)
                     .then(function(res) {
                         return (res);
                     });

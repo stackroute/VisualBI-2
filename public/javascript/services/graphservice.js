@@ -1,7 +1,7 @@
 var app = angular.module("vbiApp");
 
 //Graph Service to hold functions related to plotting Graphs
-app.factory('GraphService', function($compile,$rootScope){
+app.factory('GraphService', ['$compile', '$rootScope', function($compile,$rootScope){
 	return {
 		//Render MiniBarGraph to be displayed in the table
 		renderMiniBarGraph : function(dataset,container,index, widgetUid) {
@@ -558,4 +558,4 @@ app.factory('GraphService', function($compile,$rootScope){
 				relax();
    			}
    }//end of return object
-});
+}]);
