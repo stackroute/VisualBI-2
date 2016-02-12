@@ -35,7 +35,7 @@ var express = require('express'),
 //TODO: keep multer related stuff separate file
 //TODO: create a separate folder for user profile images
 //TODO: error handling should be standerd - put res.status
-var storage = multer.diskStorage({ 
+var storage = multer.diskStorage({
 	//multers disk storage settings
    destination: function (req, file, cb) {
    	cb(null, 'public/images/displayimages/')
@@ -55,7 +55,7 @@ router.post('/', function(req, res) {
                  res.json({error_code:1,err_desc:err});
                  return;
             }
-             res.json({error_code:0,err_desc:null,destination:req.file.destination,file:req.file.filename});
+             res.json({error_code:0,err_desc:null,destination:req.file.destination,file:req.file.filename,path:req.file.path});
         });
     });
 

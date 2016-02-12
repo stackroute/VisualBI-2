@@ -25,7 +25,7 @@
  */
 
 //Directive for modal Bar Graph
-angular.module("vbiApp").directive("modalbarGraph", function(GraphService) {
+angular.module("vbiApp").directive("modalbarGraph", ['GraphService' ,function(GraphService) {
 	return {
 		restrict : "AE",
 		scope : {
@@ -39,10 +39,10 @@ angular.module("vbiApp").directive("modalbarGraph", function(GraphService) {
 		}
 	}
 
-});
+}]);
 
 //Directive for mini Bar Graph
-angular.module("vbiApp").directive("minibarGraph", function(GraphService,$compile){
+angular.module("vbiApp").directive("minibarGraph", ['GraphService', '$compile' ,function(GraphService,$compile){
 	return {
 		restrict : "E",
 		scope : {
@@ -57,10 +57,10 @@ angular.module("vbiApp").directive("minibarGraph", function(GraphService,$compil
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}
-});
+}]);
 
 //Directive for mini Line chart
-angular.module("vbiApp").directive("minilineGraph", function(GraphService,$compile){
+angular.module("vbiApp").directive("minilineGraph", ['GraphService', '$compile' ,function(GraphService, $compile){
 	return {
 		restrict : "E",
 		scope : {
@@ -74,10 +74,10 @@ angular.module("vbiApp").directive("minilineGraph", function(GraphService,$compi
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}
-});
+}]);
 
 //Directive for Modal Line Graph
-angular.module("vbiApp").directive("modallineGraph", function(GraphService,$compile){
+angular.module("vbiApp").directive("modallineGraph", ['GraphService', '$compile', function(GraphService, $compile){
 	return {
 		restrict : "AE",
 		scope : {
@@ -90,7 +90,7 @@ angular.module("vbiApp").directive("modallineGraph", function(GraphService,$comp
 			GraphService.renderModalLineGraph(graphArray[index],element[0]);
 		}
 	}
-});
+}]);
 
 //Directive for Mini Area Graph
 angular.module("vbiApp").directive("miniareaGraph", function(GraphService,$compile){
@@ -110,7 +110,7 @@ angular.module("vbiApp").directive("miniareaGraph", function(GraphService,$compi
 });
 
 //Directive for Modal Area Graph
-angular.module("vbiApp").directive("modalareaGraph",function(GraphService,$compile){
+angular.module("vbiApp").directive("modalareaGraph",['GraphService', '$compile', function(GraphService, $compile){
 	return {
 		restrict : "AE",
 		scope : {
@@ -123,10 +123,10 @@ angular.module("vbiApp").directive("modalareaGraph",function(GraphService,$compi
 			GraphService.renderModalAreaGraph(graphArray[index],element[0]);
 		}
 	}
-});
+}]);
 
 //Directive for mini Pie Graph
-angular.module("vbiApp").directive("minipieGraph", function(GraphService,$compile){
+angular.module("vbiApp").directive("minipieGraph", ['GraphService', '$compile', function(GraphService,$compile){
 	return {
 		restrict : "E",
 		scope : {
@@ -140,10 +140,10 @@ angular.module("vbiApp").directive("minipieGraph", function(GraphService,$compil
 			$compile(element.find('div'))(scope.$parent);
 		}
 	}
-});
+}]);
 
 //Directive for Modal Pie Graph
-angular.module("vbiApp").directive("modalpieGraph",function(GraphService,$compile){
+angular.module("vbiApp").directive("modalpieGraph",['GraphService', '$compile', function(GraphService,$compile){
 	return {
 		restrict : "AE",
 		scope : {
@@ -156,4 +156,4 @@ angular.module("vbiApp").directive("modalpieGraph",function(GraphService,$compil
 			GraphService.renderModalPieGraph(graphArray[index],element[0]);
 		}
 	}
-});
+}]);

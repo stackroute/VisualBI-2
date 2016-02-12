@@ -29,29 +29,31 @@ angular.module('vbiApp')
 
             $scope.validUserNames = [];
             $scope.tags = [];
-            $rootScope.dashboardAlert = "";
+            $rootScope.dashboardAlert = "";$scope.userNames=[];
 			  //TODO: currentDashboard id has to be removed
 			  //TODO: need to fetch only matching users
+            sharedDashboards.forEach(function(userObj) {
+              $scope.validUserNames.push(userObj.username);
+            });
             $scope.tagAdded = function(tag) {
-                userManager.getUserId(tag.username, $rootScope.currentDashboard, $scope.selectedPermisson.name)
-                    .then(function(result) {
-                        $scope.shareErrMessage = result;
-                    })
+              $scope.userNames.push(tag.username);
+              debugger;
+              if(~$.inArray(tag.username, $scope.validUserNames)){
+                $scope.shareErrMessage = tag.username+"user already exists";
+              }else{
+                $scope.shareErrMessage = "can share";
+              }
             };
 
-            $scope.tagRemoved = function() {
+            $scope.tagRemoved = function(tag) {
                 $scope.shareErrMessage = '';
+                $scope.userNames.pop(tag.username);
             }
-
-            sharedDashboards.forEach(function(userObj) {
-                $scope.validUserNames.push(userObj.username);
-            });
 
 
             //remove loop assaign usernames directly to scope
             $scope.shareDashboard = function() {
-                $scope.userNames = $scope.tags;
-                userManager.shareDashboard($scope.userNames, $rootScope.currentDashboard, $scope.selectedPermisson.name)
+                userManager.shareDashboard($scope.userNames, $scope.selectedPermisson.name)
                     .then(function(userid) {
                         $uibModalInstance.close();
                         var nUsers = $scope.userNames.length;

@@ -212,6 +212,7 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
       'colWidth': colWidth
     };
     $scope.selectedTab[0].rows[rowIndex].columns.splice(colIndex, 1, newColumn);
+
   }
 
   $scope.resizeWidgetWidth = function(rowId, colId) {
@@ -254,22 +255,29 @@ angular.module('vbiApp').controller('editController', ['$rootScope', '$scope', '
 
   $scope.saveRow = function() {
 
+    var removeRow = [];
     angular.forEach($scope.selectedTab, function(tab, tabIndex) {
       angular.forEach(tab.rows, function(row, rowIndex) {
         var i = $scope.selectedTab[tabIndex].rows[rowIndex].columns.length;
         while (i--) {
           var column = $scope.selectedTab[tabIndex].rows[rowIndex].columns[i];
+
           if(!column.hasOwnProperty('widgetId')) {
               $scope.selectedTab[tabIndex].rows[rowIndex].columns.splice(i, 1);
           }
         }
         var newLen = $scope.selectedTab[tabIndex].rows[rowIndex].columns.length;
-
         if(newLen == 0) {
-          $scope.selectedTab[tabIndex].rows.splice(rowIndex, 1);
+          removeRow.push(rowIndex);
         }
       });
     });
+
+    var removeLen = removeRow.length;
+
+    for(var i=removeLen-1; i>0; i--) {
+      $scope.selectedTab[0].rows.splice(removeRow[i], 1);
+    }
 
     var newWidgetList = editManager.getWidgetList();
 

@@ -26,6 +26,7 @@
 angular.module('vbiApp').controller('registerController',['UserService','Upload','$window','$location', '$rootScope','$scope',function(UserService,Upload,$window,$location, $rootScope, $scope){
 
         var regCtrl = this;
+            imagePath= 'public/images/displayimages/default-user.png';
         regCtrl.errorMessage = "";
         regCtrl.submit = function(){ //function to call on form submit
             if (regCtrl.file) { //check if from is valid
@@ -38,8 +39,10 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
                 url: '/upload', //webAPI exposed to upload the file
                 data:{file:file} //pass file as data, should be user ng-model
             }).then(function (resp) { //upload function returns a promise
-                if(resp.data.error_code === 0){ //validate success
-                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded successfully ');
+                if(resp.data.error_code === 0){
+                   //validate success
+                    imagePath = resp.data.path;
+                    $window.alert(resp.config.data.file.name + ' uploaded as user profile image.');
                 } else {
                     $window.alert('an error occured');
                 }
@@ -57,15 +60,13 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
         regCtrl.register = function () {
             regCtrl.errorMessage = "";
             regCtrl.dataLoading = true;
+            regCtrl.user.imagePath =imagePath;
             UserService.register(regCtrl.user)
             .then(function (response) {
           $rootScope.showRegisterPage=false;
-          //console.log($rootScope.showRegisterPage);
 					$rootScope.registerUserMessage = 'New user registered successfully. SignIn to access dashboard';
-          //  regCtrl.errorMessage ="successfully registered"
           $location.path("/");
 				}).catch(function(err){
-//						alert('Failed to add user - ' + err.message);
 						regCtrl.errorMessage = err.data.error.message;
 					}
 			)};

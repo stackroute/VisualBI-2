@@ -89,8 +89,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
             $scope.userComment = '';
             commentType = 'glyphicon-check', commentCategory = 'primary';
-            $scope.$apply();
-
+  
         });
 
     };
@@ -101,8 +100,4 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
         $uibModalInstance.dismiss('cancel');
     };
 	
-	$scope.deleteComment=function(array,index){
-		array.splice(index,1);
-		deleteIndc=true;
-	}
 }]);

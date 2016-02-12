@@ -24,6 +24,6 @@
 	 * 7. Yogesh Goyal
  */
 angular.module('vbiApp')
-	.controller("SettingsController", function($scope){
+	.controller("SettingsController", ['$scope' ,function($scope){
 		$scope.setting='Change password';
-	});
+	}]);
