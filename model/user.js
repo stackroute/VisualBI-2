@@ -91,6 +91,16 @@ UserSchema.statics.getDashboardsSharedWithMe = function (userid, callback) {
 	}).populate('dashboards.tabs.rows.columns.widgetId')
 		.exec(callback);
 }
+//returns dashboards which current user sahred with others
+UserSchema.statics.getSharedDashboards = function (userid) {
+	return this.model('User')
+		.findOne({
+		'userid': mongoose.Types.ObjectId(userid)
+	}, {
+		_id: 0,
+		"dashboards.sharedWith" : 1
+	}).exec();
+}
 
 //TODO: TO be deleted
 UserSchema.statics.setUserTheme=function(id, userTheme){
