@@ -110,6 +110,24 @@ removeStatus = function(id) {
   });
 }
 
+reuseUnusedIds = function() {
+console.log("reached reuse ");
+  var widget = mongoose.model('Widget', WidgetSchema);
+  widget.model('Widget').update({
+    '__v' : 0
+  },{
+    $set:{
+      status: 'blank'
+    }
+  },{multi: true},function(err, data) {
+      if(err){
+        console.log(err);
+      }
+      console.log(data);
+  });
+}
+
+
 WidgetSchema.statics.getNewWidgetId = function(callback) {
   this.model('Widget').findOne({
        'status': 'blank'
@@ -149,6 +167,7 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   }
 
   User.saveTab(userId, tabs);
+  reuseUnusedIds();
 }
 
 WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {

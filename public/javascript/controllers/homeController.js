@@ -131,11 +131,13 @@ angular.module('vbiApp')
       var shareConfig = {
         templateUrl: 'shareModal',
         controller: 'shareDashboardController',
-        resolve: {
-          sharedDashboards: function(){
-            return currentUserData.dashboards[0].sharedWith; //assuming there is only one dashboard.
-          }
-        }
+        // resolve: {
+        //   sharedDashboards: function(){
+        //     userManager.getSharedDashboards().then(function(data){
+        //       return data; //return currentUserData.dashboards[0].sharedWith; assuming there is only one dashboard.
+        //     })
+        //   }
+        // }
       };
       $uibModal.open(shareConfig);
   }
@@ -284,16 +286,4 @@ angular.module('vbiApp')
       // }, function errorCallback(response) {
       // });
     }
-}]).directive('showonhoverparent',
-   function() {
-      return {
-         link : function(scope, element, attrs) {
-            element.parent().bind('mouseenter', function() {
-                element.show();
-            });
-            element.parent().bind('mouseleave', function() {
-                 element.hide();
-            });
-       }
-   };
-});
+}]);
