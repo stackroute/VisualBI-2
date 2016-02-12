@@ -61,7 +61,8 @@ router.post('/shareDashboard', function(req, res, next) {
     var currentUserEmail = req.user.email;//have to change once email feild exists.
 
     userNames.forEach(function(userName){
-      Credential.getCredentialId(userName).then(function(credentialObj){
+      Credential.getCredentialId(userName)
+      .then(function(credentialObj){
         if(credentialObj !== null){
           return credentialObj;
         }else{
@@ -72,12 +73,14 @@ router.post('/shareDashboard', function(req, res, next) {
           return {isExist:isExist,credentialObj:credentialObj};
         }).then(function(result){
             if(result.isExist !== null){
-              User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(data){
+              User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission)
+              .then(function(data){
               }).catch(function(err){
                 res.status(500).send("internal server error");
               });
             }else{
-              User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission).then(function(){
+              User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission)
+              .then(function(){
               }).catch(function(err){
                 res.status(500).send("internal server error");
               });
@@ -85,7 +88,9 @@ router.post('/shareDashboard', function(req, res, next) {
             return credentialObj;
         }).then(function(credentialObj){
           // console.log("sharedDashboards ",currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.username, credentialObj._id);
-          User.sharedDashboards(currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.email, credentialObj._id);
+          User.sharedDashboards(currentUserId, credentialObj.displayName, credentialObj.username, credentialObj.email, credentialObj._id).then(function(){
+
+          });
           usernameProcessed++;
           if (userNames.length == usernameProcessed)
            res.status(200).send(true);
