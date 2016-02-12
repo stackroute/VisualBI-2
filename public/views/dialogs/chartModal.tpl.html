@@ -14,9 +14,9 @@
     <!--code for toggling the show comment option--->
   <h4 class="panel-title">
       <span >
-       <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
-           <span class="commentDisplayToggle" ng-hide = "commentsVisibility">Show Comments</span>
-           <span class="commentDisplayToggle" ng-show = "commentsVisibility">Hide Comments</span>    
+       <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()" ng-show="showHideVisibility"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
+           <span class="commentDisplayToggle" ng-hide = "commentsVisibility">Invisible</span>
+           <span class="commentDisplayToggle" ng-show = "commentsVisibility">Visible</span>    
       </a>
       </span>
   </h4>
@@ -33,7 +33,7 @@
               <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
             </p>
           </timeline-heading>
-			<p>{{comment.comment}} &nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
+			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
         </timeline-panel>
       </timeline-event>
     </timeline>

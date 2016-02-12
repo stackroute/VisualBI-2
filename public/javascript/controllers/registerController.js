@@ -42,7 +42,6 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
                 if(resp.data.error_code === 0){
                    //validate success
                     imagePath = resp.data.path;
-                    $window.alert(resp.config.data.file.name + ' uploaded as user profile image.');
                 } else {
                     $window.alert('an error occured');
                 }
