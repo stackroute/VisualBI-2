@@ -257,7 +257,12 @@ angular.module('vbiApp')
       });
     }
 
-
+	 $scope.getDashboardsSharedWithMe = function() {
+		 userManager.getDashboardsSharedWithMe()
+			 .then(function(dashboard){
+			 	$scope.currentUserData.sharedDashboards = dashboard.data.sharedDashboards;
+		 })
+	 };
 
     saveTabsToServer = function() {
       var params={

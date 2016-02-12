@@ -40,19 +40,26 @@ router.get('/dashboard', function(req, res, next) {
         res.json({});
 });
 
-router.get('/:id', function(req, res, next) {
-    var email = req.params.id;
-    if(email) {
-        User.getUser(email, function(user){
-            res.json(user);
-        });
-    } else
-        res.json({});
-});
+//router.get('/:id', function(req, res, next) {
+//    var email = req.params.id;
+//    if(email) {
+//        User.getUser(email, function(user){
+//            res.json(user);
+//        });
+//    } else
+//        res.json({});
+//});
 
 router.post('/savetab', function(req, res, next) {
   User.saveTab(req.user._id, req.body.tabs);
   res.send({resp:"Tabs updated successfully"});
+});
+
+router.get('/dashboard/sharedWithMe', function(req, res, next) {
+    User.getDashboardsSharedWithMe(req.user._id)
+		 .then(function(data) {
+		 res.status(200).json(data)
+	 });
 });
 
 module.exports = router;
