@@ -97,6 +97,15 @@ angular.module('vbiApp')
                     }); //http ends here
                 }); // Promise ends here
 
-            }
+            },
+			   getDashboardsSharedWithMe: function() {
+					return $http.get('/user/dashboard/sharedWithMe')
+					.success(function(data) {
+						return data.sharedDashboards;
+					})
+					.error(function(error){
+						return error;
+					});
+        		}
         };
     }]);

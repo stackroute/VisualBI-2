@@ -81,6 +81,17 @@ UserSchema.statics.getData = function (userid, callback) {
 	});
 }
 
+UserSchema.statics.getDashboardsSharedWithMe = function (userid, callback) {
+	return this.model('User')
+		.findOne({
+		'userid': mongoose.Types.ObjectId(userid)
+	}, {
+		_id: 0,
+		'sharedDashboards': 1
+	}).populate('dashboards.tabs.rows.columns.widgetId')
+		.exec(callback);
+}
+
 //TODO: TO be deleted
 UserSchema.statics.setUserTheme=function(id, userTheme){
    this.model('User').update({
