@@ -75,15 +75,15 @@ router.post('/shareDashboard', function(req, res, next) {
             if(result.isExist !== null){
               User.updatePermission(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission)
               .then(function(data){
-              }).catch(function(err){
+              }), function(err){
                 res.status(500).send("internal server error");
-              });
+              };
             }else{
               User.shareDashboard(currentUserEmail, currentUserId, currentUserName, result.credentialObj._id, currentUserDisplayName, permission)
               .then(function(){
-              }).catch(function(err){
+              }), function(err){
                 res.status(500).send("internal server error");
-              });
+              };
             }
             return credentialObj;
         }).then(function(credentialObj){
@@ -95,9 +95,9 @@ router.post('/shareDashboard', function(req, res, next) {
           if (userNames.length == usernameProcessed)
            res.status(200).send(true);
         })
-      }).catch(function(err){
+      }), function(err){
         res.status(500).send("internal server error");
-      })
+      }
     })
 });
 
