@@ -431,7 +431,10 @@ margin-top: 85px;
 #dashbboard-alert{
 	position: absolute;
 	left:50%;
-	z-index: 10000px;
+	color: #222;
+	font-family: Roboto,sans-serif;
+	font-size: 13px;
+  -webkit-font-smoothing: antialiased;
 }
 
 
@@ -544,9 +547,16 @@ margin: 0px;
   width: 100%;
 }
 
+.modal-lg {
+	width: 1500px;
+}
+
 @media  (max-width: 768px) {
   .outer {
    height: 1024px;
    background :url('../images/background_small.jpg');
   }
+	.modal-lg {
+		width: 750px;
+	}
 }

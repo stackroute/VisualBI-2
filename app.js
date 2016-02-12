@@ -62,9 +62,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(flash());
 
-
-
-
 //initialize passort sessions
 app.use(expressSession({
    secret: 'keyboard cat',

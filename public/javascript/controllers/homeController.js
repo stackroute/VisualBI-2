@@ -68,9 +68,9 @@ angular.module('vbiApp')
 											col.widgetId.comments = widget.comments;
 											col.widgetId.commentsCounter = widget.commentsCounter;
 											col.widgetId.lastCommentedBy = widget.lastCommentedBy;
-											col.widgetId.commentersCounter = widget.commentersCounter;	
+											col.widgetId.commentersCounter = widget.commentersCounter;
 										}
-										
+
 								});
 								}
 							})
@@ -81,10 +81,10 @@ angular.module('vbiApp')
         }, 10000);
 		  }
     	};
-		 
+
 		$scope.$watch($scope.keepPolling, pollForNewComments)
 //		pollForNewComments();
-		$scope.keepPolling = true; //start polling	 
+		$scope.keepPolling = true; //start polling
 		$scope.logout = function() {
 			$scope.keepPolling = false;
 			userManager.logout()
@@ -111,9 +111,9 @@ angular.module('vbiApp')
 			}
 		};
 
-		$scope.showSharedDashboard = function(userid, dashboardId, permission){
+		$scope.showSharedDashboard = function(userid, permission){
 
-			userManager.getDashboard(userid, dashboardId)
+			userManager.getDashboard(userid)
 				.then(function(sharedDashboard) {
 					if(sharedDashboard) {
             sharedDashboardUserId = userid;
@@ -141,7 +141,7 @@ angular.module('vbiApp')
   }
 
 		$scope.fullScreen = function(widget) {
-			
+
 				var modalConfig = {
 					templateUrl: 'chartModal',
 					controller: 'chartModalController',
@@ -159,8 +159,10 @@ angular.module('vbiApp')
 					}
 				}
 				$uibModal.open(modalConfig);
+
+
 		}
-				
+
 		$scope.showGraphColumn = function(redererService, containerId, graphMethod) {
 			chartRenderer.executeMethod(redererService, graphMethod, [containerId, $scope]);
 		}
@@ -170,6 +172,7 @@ angular.module('vbiApp')
 		  var modalInstance = $uibModal.open({
 			 templateUrl : template,
 			 controller : "ModalGraphController",
+//			 size: 'lg',
 			 indexPassed : indexPassed,
 			 resolve : {
 				graphData : function(){
@@ -254,7 +257,12 @@ angular.module('vbiApp')
       });
     }
 
-
+	 $scope.getDashboardsSharedWithMe = function() {
+		 userManager.getDashboardsSharedWithMe()
+			 .then(function(dashboard){
+			 	$scope.currentUserData.sharedDashboards = dashboard.data.sharedDashboards;
+		 })
+	 };
 
     saveTabsToServer = function() {
       var params={
@@ -289,4 +297,3 @@ angular.module('vbiApp')
        }
    };
 });
-
