@@ -24,10 +24,14 @@ describe('Test cases for non-authnticated routers', function() {
 describe('Test cases for all authenticated routes', function(){
 	before(loginUser());
 	
-//	/widgets/56bd852fca641709098d88b8
 	it('get comments check', function(done) {
-		server.get('/comment/56bd852fca641709098d88b8')
-			.expect(200, done);
+		var widgetId = '56bd852fca641709098d88b8';
+		server.get('/comment/' + widgetId)
+			.expect(200).end(function(err, res) {
+				if(err) return done(err);
+					assert.equal(res.body._id, widgetId);
+					done();
+		});
 	})
 	
 	after(logoutUser());
