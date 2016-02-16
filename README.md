@@ -1,9 +1,7 @@
-VISUAL-BI
-Visual-BI is an open source business intelligence tool with easy to use interface.
+#VISUAL-BI
+##Visual-BI is an open source business intelligence tool with easy to use interface.
 
-Version
-
-0.0.1
+Version ###0.0.1
 
 Technologies used
 
