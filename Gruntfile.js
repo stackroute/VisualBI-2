@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 						 expand: true,     // Enable dynamic expansion.
 						 cwd: 'public/javascript/',      // Src matches are relative to this path.
 						 src: ['**/*.js', '!lib/*'], // Actual pattern(s) to match.
-						 dest: 'build/public/javascript',   // Destination path prefix.
+						 dest: '../build/VisualBI-2/public/javascript',   // Destination path prefix.
 						 ext: '.min.js',   // Dest filepaths will have this extension.
 						 extDot: 'first'   // Extensions in filenames begin after the first dot
 					}
