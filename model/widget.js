@@ -35,7 +35,6 @@ var WidgetSchema = mongoose.Schema({
    commentsCounter :Number,
 	studioId: String,
    comments:[{
-	  _id : false,
      userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
      comment: String,
 	  badgeClass: String,

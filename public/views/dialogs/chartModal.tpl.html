@@ -40,9 +40,10 @@
 	
 				<input type="text" value="{{comment.comment}}" size="50"></input>
 			
-				<a ng-click="cancelEditView(commentIndex)" class="btn btn-xs btn-success">Save</a>
+				<a ng-click="saveEditedComment(comment.commentId)" class="btn btn-xs btn-success">Save</a>
 			
 		  		<a ng-click="cancelEditView(commentIndex)" class="btn btn-xs btn-danger">Cancel</a>
+
 			</div>
 		  	<div ng-hide="isShowingEditView(commentIndex)">
 				<p ng-hide="showCommentEditor">{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-pencil text-muted timeline-ui-edit-btn" uib-tooltip="Edit" ng-click="showEditView(commentIndex)"></i></p>

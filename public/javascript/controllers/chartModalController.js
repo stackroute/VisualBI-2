@@ -41,6 +41,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
 				angular.forEach(userComments, function(comment, key){
 					commentsCollection.push({
+					commentId : comment._id,
 					displayName: comment.displayName,
 					comment: comment.comment,
 					badgeClass: comment.badgeClass,
@@ -48,7 +49,6 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 					commenterThumb: {'background-image': 'url("../'+comment.userImage.substring(6)+'")','background-size': '50px 50px'},
 					when: comment.datetime
 					});
-					console.log(comment.datetime);
 				});
 				$scope.comments = commentsCollection;
 		});
@@ -66,7 +66,13 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 		
 		$scope.cancelEditView=function(index){
 			$scope.activeCommentIndex=-1;
+			//alert($scope.comment.commentId
 		}
+		
+		$scope.saveEditedComment=function(commentId){
+			console.log('Comment Id '+commentId+' will be updated soon');
+		}
+		
 		//	function to write to comment entered by the user to the database and to add the comment to modal view
 
 	
