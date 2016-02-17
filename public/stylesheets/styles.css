@@ -455,14 +455,19 @@ margin-top: 85px;
 }
 .registerForm {
   /*background: rgba(19, 35, 47, 0.7);*/
-  background-color: #4f4d4d;
-	color:white;
+  background-color: rgba(193, 202, 220, 0.26);
+  color: white;
   /*background-color: #cc0000;*/
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
-
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.registerForm p{
+  color: #3A71EF;
+}
+
 .registerForm .tab-group {
   list-style: none;
   padding: 0;
@@ -477,7 +482,7 @@ margin-top: 85px;
   display: block;
   text-decoration: none;
   padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
+  background: rgba(186, 216, 186, 0.26);
    font-size: 20px;
   float: left;
   width: 50%;
@@ -488,26 +493,50 @@ margin-top: 85px;
 }
 
 .registerForm .tab-group .active a {
-  /*background: #1ab188;*/
-  background: #d3d5e1;
-  color: #black;*/
+  background: #77aaff;
+  color: whitesmoke;
 }
 .registerForm .tab-group .active1 a {
-  /*background: #1ab188;*/
-  background: #4a65be;
-  color: #ffffff;*/
+  background: #77aaff;
+  /* background: #4a65be; */
+  color: whitesmoke;
+  
 }
+
+.registerForm .tab-group a:hover {
+	background : #337ab7;
+/*		#5588ff;*/
+	color: #ffffff;
+}
+.highlight{
+	background: #5588ff;
+	color: #ffffff;
+}
+.registerForm .tab-group a:active {
+	background: #3A71EF;
+	color: #ffffff;
+}
+/*.app-title{
+	color: black;
+}
+.app-title:hover{
+  color: green;
+}*/
 
 #register-login h1, #register-signup h1 {
   text-align: center;
-  color: #ffffff;
-  font-weight: 300;
+  color: #137AC5;
   margin: 0 0 40px;
+  font-family: 'Poiret One', serif;
+  font-weight: 700;
 }
 
 .registerForm label{
-    color:white;
-    font-family: 'Raleway', serif;
+    color:#747474;
+    font-family: 'Noto Sans',sans-serif;
+/*	letter-spacing: 1px;/*/
+	font-weight: 700;
+	font-size: 14px;
 }
 
 .field-wrap {
@@ -529,19 +558,23 @@ margin-top: 85px;
   margin: 0;
 }
 
+.register-form-control{
+	background: rgba(255,255,255,0.6);
+}
+
 .regbutton {
   border: 0;
   outline: none;
-  border-radius: 0;
+  border-radius: 6px;
+  font-family: Montserrat,Helvetica,Arial,sans-serif;
   padding: 15px 0;
   font-size: 2rem;
-  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background:#008880 ;
+  background: #5588ff;
 }
 .regbutton:hover, .regbutton:focus {
-  background: #008880;
+  background: 	#5588ff;
 }
 
 .regbutton-block {

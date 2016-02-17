@@ -15,25 +15,41 @@
   <h4 class="panel-title">
       <span >
        <a data-toggle="collapse" data-target="#collapse1" ng-click="ShowHide()" ng-show="showHideVisibility"><i class="glyphicon glyphicon-comment commentDisplayToggle" ></i>
-           <span class="commentDisplayToggle" ng-hide = "commentsVisibility">Invisible</span>
-           <span class="commentDisplayToggle" ng-show = "commentsVisibility">Visible</span>    
+           <span class="commentDisplayToggle" ng-hide = "commentsVisibility">Show comments</span>
+           <span class="commentDisplayToggle" ng-show = "commentsVisibility">Hide comments</span>    
       </a>
       </span>
   </h4>
   <div id="collapse1" class="collapse in">
     <timeline>
-      <timeline-event ng-repeat="comment in comments" side="">
+      <timeline-event ng-repeat="(commentIndex,comment) in comments" side="">
         <timeline-badge ng-style="{{comment.commenterThumb}}">
         </timeline-badge>
         <timeline-panel ng-style="{{comment.badgeClass}}">
 		<i ng-class="'glyphicon {{comment.badgeIconClass}} timeline-comment-{{comment.badgeClass}}'"  ng-class-odd="'pull-right'" ng-class-even="'pull-left'"></i>
           <timeline-heading>
-            <h4>{{ comment.displayName }}&nbsp;</h4>
-            <p ng-if="comment.when">
-              <small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{comment.when | date : 'medium'}}</small>
-            </p>
+            <h4>{{ comment.displayName}}&nbsp;</h4>
           </timeline-heading>
-			<p>{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-trash timeline-ui-delete-btn text-muted" uib-tooltip="Delete"></i></p>
+			<div ng-show="isShowingEditView(commentIndex)">
+
+					<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')" uib-tooltip="Flag this comment"></i>
+
+					<i class="glyphicon glyphicon-check timeline-comment-primary btn comment-icon" ng-click="registerCommentType('check')" uib-tooltip="Agree"></i>
+
+					<i class="glyphicon glyphicon-bookmark  btn timeline-comment-primary btn-faded" ng-click="registerCommentType('bookmark')" uib-tooltip="Add link"></i>
+	
+				<input type="text" value="{{comment.comment}}" size="50"></input>
+			
+				<a ng-click="cancelEditView(commentIndex)" class="btn btn-xs btn-success">Save</a>
+			
+		  		<a ng-click="cancelEditView(commentIndex)" class="btn btn-xs btn-danger">Cancel</a>
+			</div>
+		  	<div ng-hide="isShowingEditView(commentIndex)">
+				<p ng-hide="showCommentEditor">{{comment.comment}}&nbsp;&nbsp;<i class="glyphicon glyphicon-pencil text-muted timeline-ui-edit-btn" uib-tooltip="Edit" ng-click="showEditView(commentIndex)"></i></p>
+				<p ng-if="comment.when">
+				  <small class="text-muted"><i class="glyphicon glyphicon-time"></i>&nbsp;&nbsp;{{comment.when|date : 'medium'}}</small>
+				</p>
+			</div>
         </timeline-panel>
       </timeline-event>
     </timeline>
@@ -42,7 +58,7 @@
 
    <div class="input-group" ng-show="chartInfo.canComment">
     <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
-	   	 <span class="input-group-btn">
+	  <span class="input-group-btn">
 		  	<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')" uib-tooltip="Flag this comment"></i>
 			<i><span	class="glyphicon glyphicon-check timeline-comment-primary btn comment-icon" ng-click="registerCommentType('check')" uib-tooltip="Agree"></span></i>
 		  <i	class="glyphicon glyphicon-bookmark  btn timeline-comment-primary btn-faded" ng-click="registerCommentType('bookmark')" uib-tooltip="Add link"></i>

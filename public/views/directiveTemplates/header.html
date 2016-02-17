@@ -29,16 +29,18 @@
 			 </ul>
         </li>
       </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyph-right-space glyphicon glyphicon-user"></span>{{ loggedInUser.displayName}} <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Settings</a></li>
-            <li><a ng-click="logout()">Log out</a></li>
-          </ul>
-        </li>
-      </ul>
+	  <div class="pull-right">
+		<div class="pull-left img-circle" ng-style="{{userDisplayImageStyle}}"></div>
+		<ul class="nav navbar-nav navbar-right pull-right">
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ loggedInUser.displayName}} <span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+				<li><a href="#">Settings</a></li>
+				<li><a ng-click="logout()">Log out</a></li>
+			  </ul>
+			</li>
+		  </ul>
+		</div>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

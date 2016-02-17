@@ -28,7 +28,20 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
         var regCtrl = this;
             imagePath= 'public/images/displayimages/default-user.png';
         regCtrl.errorMessage = "";
+	
+		$scope.higlightClass={
+			'background' : '#337ab7',
+			'color' : 	'#ffffff'
+		};
+		
+		$scope.lowlightClass={
+			'background' : '#5588ff',
+			'color' : 'whitesmoke'
+		};
+		
         regCtrl.submit = function(){ //function to call on form submit
+			$scope.imageUploadIndc=true;
+			$scope.imageUploadedIndc=false;
             if (regCtrl.file) { //check if from is valid
                 regCtrl.upload(regCtrl.file); //call upload function
             }
@@ -50,8 +63,12 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
                 $window.alert('Error status: ' + resp.status);
             }, function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                regCtrl.progress = 'progress: ' + progressPercentage + '% '; // capture upload progress
-            });
+                regCtrl.progress = progressPercentage; // capture upload progress
+				if(regCtrl.progress==100){
+					$scope.imageUploadIndc=false;
+					$scope.imageUploadedIndc=true;
+				}
+	           });
         };
 
 

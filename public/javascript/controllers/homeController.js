@@ -38,7 +38,16 @@ angular.module('vbiApp')
 	 // line, bar or area chart in mdx grid
 	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
 	 $scope.currentUserData = {};
-
+		
+	$scope.userDisplayImageStyle = {
+		'background-image':'url("../'+$rootScope.loggedInUser.imagePath.substring(6)+'")',
+		'background-size': '40px 40px',
+		'margin' : '5px 5px',
+		'height':'40px',
+		'width' : '40px',
+		'display-style' : 'inline'
+	};
+		
 	 userManager.getData()
 	 .then(function(userData) {
 			$scope.currentUserData = userData;

@@ -71,16 +71,10 @@ angular.module('vbiApp').service('widgetManager', ['$http', '$location',function
 				  return(data);
 			  });
 	};
+	
 	 this.saveComment = function(parameters) {
-		 
-					//TODO: need to move to widgetmangar and remove extra promise
-//
-//                    var currentUser = '';
-//					console.log('Parameters inside widget manager');
-//					console.log(parameters);
-
-                    //POST request to Mongo to write the comment to the database, with parameters object as payload
-	return $http.post("/comment", parameters)
+	 //POST request to Mongo to write the comment to the database, with parameters object as payload
+		return $http.post("/comment", parameters)
 			.success(function(data, status, headers, config) {
 			 return (data);
 		}).error(function(data, status, header, config) {

@@ -36,8 +36,8 @@
 .testerClass{
 	color:aqua;
 }
-.timeline-ui-delete-btn{
-	font-size: 12px;
+.timeline-ui-edit-btn{
+	font-size: 10px;
 }
   .timeline-comment-danger {
    color: #d9534f !important;
