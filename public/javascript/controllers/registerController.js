@@ -30,12 +30,14 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
         regCtrl.errorMessage = "";
 	
 		$scope.higlightClass={
-			'background' : '#337ab7',
+			'background' : '#5588ff',
+//			'#337ab7',
 			'color' : 	'#ffffff'
 		};
 		
 		$scope.lowlightClass={
-			'background' : '#5588ff',
+			'background' : '#337ab7',
+//			'#5588ff',
 			'color' : 'whitesmoke'
 		};
 		

@@ -194,6 +194,9 @@ body{
   display: block;
   height: auto;
 }
+.tab-content .btn:hover{
+	color:white;
+}
 
 .edit-btn {
   margin-right: 5px;
@@ -454,7 +457,7 @@ margin-top: 85px;
   background-color:white;
 }
 .registerForm {
-  /*background: rgba(19, 35, 47, 0.7);*/
+  /* background: rgba(19, 35, 47, 0.7); */
   background-color: rgba(193, 202, 220, 0.26);
   color: white;
   /*background-color: #cc0000;*/
@@ -492,6 +495,7 @@ margin-top: 85px;
   transition: .5s ease;
 }
 
+
 .registerForm .tab-group .active a {
   background: #77aaff;
   color: whitesmoke;
@@ -508,14 +512,11 @@ margin-top: 85px;
 /*		#5588ff;*/
 	color: #ffffff;
 }
-.highlight{
-	background: #5588ff;
-	color: #ffffff;
-}
+/*
 .registerForm .tab-group a:active {
 	background: #3A71EF;
 	color: #ffffff;
-}
+}*/
 /*.app-title{
 	color: black;
 }
@@ -562,18 +563,29 @@ margin-top: 85px;
 	background: rgba(255,255,255,0.6);
 }
 
-.regbutton {
+.register-button {
   border: 0;
-  outline: none;
   border-radius: 6px;
   font-family: Montserrat,Helvetica,Arial,sans-serif;
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 2rem;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #5588ff;
+  background: '#337ab7';
 }
-.regbutton:hover, .regbutton:focus {
+
+.reg-btn {
+  border: 0;
+  border-radius: 6px;
+  font-family: Montserrat,Helvetica,Arial,sans-serif;
+  padding: 10px 0;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #337ab7;
+}
+
+.reg-btn:hover, .reg-btn:focus {
   background: 	#5588ff;
 }
 
