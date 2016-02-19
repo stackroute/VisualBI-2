@@ -49,12 +49,12 @@ var indexRouter = require('./routes/indexRouter'),
 	uploadImageRouter=require('./routes/uploadImageRouter');
 
 var app = express();
-
+var env = app.get('env');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
-app.use(express.static(path.join(__dirname, 'public')));
+var cpath = env == 'development' ? 'public' : '../public';
+app.use(express.static(path.join(__dirname, cpath)));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(cookieParser('tobo'));
 

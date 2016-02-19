@@ -51,9 +51,21 @@ module.exports = function(grunt) {
 			}
 		},
 		clean: ['./dist'],
-		serve: {
-			dev: {},
-			prod: {}
+		execute: {
+			dev: {
+				src: './bin/server.js'
+			},
+			prod: {
+				src: './dist/server/bin/server.js'
+			}
+		},
+		env: {
+			dev: {
+				NODE_DEV: 'development'
+			},
+			prod: {
+				NODE_DEV: 'production'
+			}
 		}
 		
 	});
@@ -62,7 +74,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-execute');
+	grunt.loadNpmTasks('grunt-env');
 //	grunt.registerTask('copy file', 'Copies all the required files to distibution folder', ['copy']);
 //	grunt.registerTask('default', ['uglify', 'cssmin', 'mochaTest']);
+//	grunt.registerTask('execute:dev', ['env:dev', 'execute:dev']);
+//	grunt.registerTask('execute:prod', ['env:prod', 'execute']);
 	grunt.registerTask('default', ['mochaTest', 'clean', 'copy']);
 };
