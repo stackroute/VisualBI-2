@@ -181,6 +181,24 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
   });
 }
 
+WidgetSchema.statics.updateComment = function(updatedComment) {
+	
+  console.log('Updating widget model . . .');
+  return this.model('Widget').update({
+    'comments._id' : updatedComment.commentId
+  },{
+    $set:{
+      'comments.$.comment' : updatedComment.comment,
+	  'comments.$.badgeClass' : updatedComment.badgeClass,
+	  'comments.$.badgeIconClass' : updatedComment.badgeIconClass
+    }
+  },function(err) {
+      if(err){
+		  console.log(err);
+      }
+  });
+}
+
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
 	return this.model('Widget').update({ '_id' : widgetId }, {
 		$set: { lastCommentedBy : comment.displayName },

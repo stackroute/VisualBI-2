@@ -32,6 +32,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 		$scope.commentsVisibility = false;
 		$scope.showCommentEditor=false;
 		$scope.chartInfo = chartInfo;
+		$scope.updatedComment; 	
 	
 		widgetManager.getComment(chartInfo.widgetId)
 			.then(function(widgetData){
@@ -69,8 +70,20 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 			//alert($scope.comment.commentId
 		}
 		
-		$scope.saveEditedComment=function(commentId){
-			console.log('Comment Id '+commentId+' will be updated soon');
+		$scope.saveEditedComment=function(commentIndex){
+			//console.log('Comment Id '+commentId+' will be updated soon');
+			console.log($scope.comments[commentIndex]);
+	
+			var parameters={
+				commentId:$scope.comments[commentIndex].commentId,
+				comment: $scope.comments[commentIndex].comment,
+				bageClass:  $scope.comments[commentIndex].badgeClass,
+				bageIconClass:  $scope.comments[commentIndex].badgeIconClass,
+			}
+			
+			widgetManager.updateComment(parameters).then(function(data){
+				console.log('Updated succcessfully');
+			})
 		}
 		
 		//	function to write to comment entered by the user to the database and to add the comment to modal view

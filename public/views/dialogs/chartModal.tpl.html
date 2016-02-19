@@ -38,9 +38,9 @@
 
 					<i class="glyphicon glyphicon-bookmark  btn timeline-comment-primary btn-faded" ng-click="registerCommentType('bookmark')" uib-tooltip="Add link"></i>
 	
-				<input type="text" value="{{comment.comment}}" size="50"></input>
-			
-				<a ng-click="saveEditedComment(comment.commentId)" class="btn btn-xs btn-success">Save</a>
+				<input type="text" value="{{comment.comment}}" ng-model="comment.comment" size="50"></input>
+		
+				<a ng-click="saveEditedComment(commentIndex)" class="btn btn-xs btn-success">Save</a>
 			
 		  		<a ng-click="cancelEditView(commentIndex)" class="btn btn-xs btn-danger">Cancel</a>
 
@@ -58,6 +58,7 @@
 </div>
 
    <div class="input-group" ng-show="chartInfo.canComment">
+	   		<input type="text" ng-model="updComment"></input>
     <input type="text" class="form-control" name="userComment" ng-model="userComment" rows="3" placeholder="Enter comment...">
 	  <span class="input-group-btn">
 		  	<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')" uib-tooltip="Flag this comment"></i>

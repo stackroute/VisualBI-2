@@ -49,6 +49,18 @@ router.post('/',function(req, res, next){
 
 });
 
+//updates comments for widget
+router.post('/updateComment',function(req, res, next){
+	console.log('Update comment router . . .');
+	Widget.updateComment({commentId: req.body.commentId,
+						  comment: req.body.comment,
+						  badgeClass: req.body.badgeClass,
+						  bageIconClass: req.body.badgeIconClass})
+		.then(function(comment) {
+		res.status(200).send(comment);
+	});
+
+});
 //gets the comments for a widget
 router.get('/:widgetId', function(req, res, next) {
 	

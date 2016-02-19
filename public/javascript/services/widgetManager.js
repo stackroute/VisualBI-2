@@ -83,6 +83,17 @@ angular.module('vbiApp').service('widgetManager', ['$http', '$location',function
 		});
 
 	};
+	
+	this.updateComment=function(parameters){
+		//POST request to Mongo to write the comment to the database, with parameters object as payload
+		return $http.post("/comment/updateComment", parameters)
+			.success(function(data, status, headers, config) {
+			 return (data);
+		}).error(function(data, status, header, config) {
+			return ("Failed to update comments");
+
+		});
+	}
 		 
 	return this;
 }]);
