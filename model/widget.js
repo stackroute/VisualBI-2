@@ -181,9 +181,8 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
   });
 }
 
-WidgetSchema.statics.updateComment = function(updatedComment) {
+WidgetSchema.statics.updateComment = function(updatedComment,done) {
 	
-  console.log('Updating widget model . . .');
   return this.model('Widget').update({
     'comments._id' : updatedComment.commentId
   },{
@@ -192,11 +191,7 @@ WidgetSchema.statics.updateComment = function(updatedComment) {
 	  'comments.$.badgeClass' : updatedComment.badgeClass,
 	  'comments.$.badgeIconClass' : updatedComment.badgeIconClass
     }
-  },function(err) {
-      if(err){
-		  console.log(err);
-      }
-  });
+  }).exec(done);
 }
 
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
@@ -208,7 +203,4 @@ WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
 	}).exec(done);
 };
 
-//WidgetSchema.statics.updateCommenter = function(widgetId, commenterId, done) {};
-
-// mongoose.model("Widget", WidgetSchema);
 module.exports = WidgetSchema;

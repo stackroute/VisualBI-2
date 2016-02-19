@@ -31,13 +31,11 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
 	
 		$scope.higlightClass={
 			'background' : '#5588ff',
-//			'#337ab7',
 			'color' : 	'#ffffff'
 		};
 		
 		$scope.lowlightClass={
 			'background' : '#337ab7',
-//			'#5588ff',
 			'color' : 'whitesmoke'
 		};
 		
@@ -82,7 +80,7 @@ angular.module('vbiApp').controller('registerController',['UserService','Upload'
             UserService.register(regCtrl.user)
             .then(function (response) {
           $rootScope.showRegisterPage=false;
-					$rootScope.registerUserMessage = 'New user registered successfully. SignIn to access dashboard';
+					$rootScope.registerUserMessage = 'You are now registered with Slate. Sign In to access your dashboard';
           $location.path("/");
 				}).catch(function(err){
 						regCtrl.errorMessage = err.data.error.message;

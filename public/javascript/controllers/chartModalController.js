@@ -43,6 +43,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				angular.forEach(userComments, function(comment, key){
 					commentsCollection.push({
 					commentId : comment._id,
+					userid: comment.userid,
 					displayName: comment.displayName,
 					comment: comment.comment,
 					badgeClass: comment.badgeClass,
@@ -52,6 +53,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 					});
 				});
 				$scope.comments = commentsCollection;
+				console.log($scope.comments);
 		});
 	
 		//	function to set the comment icon class and color
@@ -82,8 +84,10 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 			}
 			
 			widgetManager.updateComment(parameters).then(function(data){
-				console.log('Updated succcessfully');
-			})
+				$scope.activeCommentIndex=-1;
+				console.log('comment updated successfully');
+				console.log($rootScope.loggedInUser.authToken);
+			});
 		}
 		
 		//	function to write to comment entered by the user to the database and to add the comment to modal view
@@ -126,6 +130,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				$scope.commentsVisibility = true;
 				$scope.showHideVisibility = true;
 			}
+			$route.reload();
         });
 
     };

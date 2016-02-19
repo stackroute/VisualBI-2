@@ -51,7 +51,7 @@ router.post('/',function(req, res, next){
 
 //updates comments for widget
 router.post('/updateComment',function(req, res, next){
-	console.log('Update comment router . . .');
+
 	Widget.updateComment({commentId: req.body.commentId,
 						  comment: req.body.comment,
 						  badgeClass: req.body.badgeClass,

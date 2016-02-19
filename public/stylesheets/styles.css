@@ -508,12 +508,8 @@ margin-top: 85px;
 }
 
 
-.registerForm .tab-group .active a {
+.registerForm .tab-group .tab-btn-default a {
   background: #77aaff;
-  color: whitesmoke;
-}
-.registerForm .tab-group .active1 a {
-  background: #C3C6CC;
   color: whitesmoke;
 }
 
