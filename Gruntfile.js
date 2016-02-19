@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 		cssmin: {
 			target: {
 				files: {
-					'build/public/stylesheets/styles.css': 'public/stylesheets/styles.css'
+					'build/VisualBI-2/public/stylesheets/styles.css': 'public/stylesheets/styles.css'
 				}
 			}
 		},
@@ -19,23 +19,50 @@ module.exports = function(grunt) {
 			option: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
 			},
-			dynamic_mappings: {
+			build: {
 				files: [
 					{
 						 expand: true,     // Enable dynamic expansion.
-						 cwd: 'public/javascript/',      // Src matches are relative to this path.
-						 src: ['**/*.js', '!lib/*'], // Actual pattern(s) to match.
-						 dest: 'build/public/javascript',   // Destination path prefix.
+						 cwd: './',      // Src matches are relative to this path.
+						 src: ['**/*.js', '!node_modules/*'], // Actual pattern(s) to match.
+						 dest: 'build/VisualBI-2/',   // Destination path prefix.
 						 ext: '.min.js',   // Dest filepaths will have this extension.
 						 extDot: 'first'   // Extensions in filenames begin after the first dot
 					}
 				]
 			}
+		},
+		copy: {
+			package: {
+				src: './package.json',
+				dest: './dist/',
+			},
+			client: {
+				expand: true,
+				cwd: './public',
+				src:['**/*'],
+				dest:'./dist/public',
+				extDot: 'first'
+			},
+			server: {
+				cwd: './',
+				src: ['./app.js', './bin/*', './config/*', './lib/*', './model/*', './routes/*', './views/*', '!**/node_modules', '!**/test'],
+				dest: './dist/server/',
+			}
+		},
+		clean: ['./dist'],
+		serve: {
+			dev: {},
+			prod: {}
 		}
 		
 	});
 	grunt.loadNpmTasks('grunt-mocha-test');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.registerTask('default', ['cssmin', 'uglify', 'mochaTest']);
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+//	grunt.registerTask('copy file', 'Copies all the required files to distibution folder', ['copy']);
+//	grunt.registerTask('default', ['uglify', 'cssmin', 'mochaTest']);
+	grunt.registerTask('default', ['mochaTest', 'clean', 'copy']);
 };
