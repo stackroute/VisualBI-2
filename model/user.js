@@ -66,7 +66,7 @@ UserSchema.statics.getDashboard = function (userid, callback) {
 				d = data.dashboards[0];
 			callback(d);
 	});
-}
+};
 
 //Gets the user's widgets layout
 UserSchema.statics.getData = function (userid, callback) {
@@ -79,7 +79,7 @@ UserSchema.statics.getData = function (userid, callback) {
 		.exec(function(err, data) {
 			callback(data);
 	});
-}
+};
 
 UserSchema.statics.getDashboardsSharedWithMe = function (userid, callback) {
 	return this.model('User')
@@ -90,7 +90,7 @@ UserSchema.statics.getDashboardsSharedWithMe = function (userid, callback) {
 		'sharedDashboards': 1
 	}).populate('dashboards.tabs.rows.columns.widgetId')
 		.exec(callback);
-}
+};
 //returns dashboards which current user sahred with others
 UserSchema.statics.getSharedDashboards = function (userid) {
 	return this.model('User')
@@ -100,7 +100,7 @@ UserSchema.statics.getSharedDashboards = function (userid) {
 		_id: 0,
 		"dashboards.sharedWith" : 1
 	}).exec();
-}
+};
 
 //TODO: TO be deleted
 UserSchema.statics.setUserTheme=function(id, userTheme){
@@ -114,7 +114,7 @@ UserSchema.statics.setUserTheme=function(id, userTheme){
      }
    },function(err, userTheme) {
    });
-}
+};
 
 //TODO: can be done at client side because it has all the data there. check and remove the method
 UserSchema.statics.isExist =function(currentUserEmail, currentUserName, userId, permission){
@@ -124,7 +124,7 @@ UserSchema.statics.isExist =function(currentUserEmail, currentUserName, userId, 
       "sharedDashboards.username": currentUserName
     }).exec(function(data) {
 	});
-}
+};
 
 UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, currentusername, shareWithUserId, currentUserDisplayName, permission){
 	return this.model('User').update({'userid':shareWithUserId},
@@ -137,21 +137,20 @@ UserSchema.statics.shareDashboard = function(currentUserEmail, currentUserId, cu
       },
     }
   },{upsert: true}).exec();
-}
+};
 
 //TODO: indentation needs to be corrected
-UserSchema.statics.updatePermission = function(currentUserEmail, currentUserId, currentUserName, shareWithUserId, currentUserDisplayName, permission){
+UserSchema.statics.updatePermission = function(currentUserEmail, currentUserId, currentUserName, shareWithUserId, currentUserDisplayName, permission) {
 	return this.model('User').update({'userid':mongoose.Types.ObjectId(shareWithUserId),
                             "sharedDashboards.userid": currentUserId,
                             "sharedDashboards.username": currentUserName,
 														"sharedDashboards.email": currentUserEmail,
 														"sharedDashboards.displayname": currentUserDisplayName
                             },
-  {$set:{"sharedDashboards.$.permission": permission}}
-  ,{upsert: true})
+  {$set:{"sharedDashboards.$.permission": permission}}, {upsert: true})
   .exec(function(err, data){
   });
-}
+};
 
 UserSchema.statics.saveTab = function(userid, savetabs) {
 
@@ -166,7 +165,7 @@ UserSchema.statics.saveTab = function(userid, savetabs) {
   },function(err, data) {
 
   });
-}
+};
 
 UserSchema.statics.sharedDashboards = function(currentUserId, displayName, userName, email, userId){ //email should b passed
     return this.model('User').update({userid:mongoose.Types.ObjectId(currentUserId)},
@@ -179,9 +178,9 @@ UserSchema.statics.sharedDashboards = function(currentUserId, displayName, userN
         }
       }
     },{upsert: true}).exec();
-}
+};
 
-//TODO: revisit the logic and remove the unnecessary stuff
+
 UserSchema.statics.getUserId =function(credentialId){
   return this.model('User')
     .findOne({
@@ -192,6 +191,6 @@ UserSchema.statics.getUserId =function(credentialId){
     }).exec(function(err, data) {
         // callback(data);
     	});
-}
+};
 // mongoose.model("User", UserSchema);
 module.exports = UserSchema;

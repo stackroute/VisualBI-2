@@ -55,7 +55,7 @@ CredentialSchema.statics.getCredentialId = function(username){
 	}).exec(function(err, data) {
 			// callback(data);
 	});
-}
+};
 
 //TODO: There must be error handling here. Use regular expression to get filterred users
 CredentialSchema.statics.getUsers = function(query,callback){
@@ -64,7 +64,7 @@ CredentialSchema.statics.getUsers = function(query,callback){
 				if(!err){
 					callback(data);
 					}
-			})
-}
+			});
+};
 // mongoose.model("Credential", CredentialSchema);
 module.exports = CredentialSchema;

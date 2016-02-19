@@ -66,6 +66,9 @@ module.exports = function(grunt) {
 			prod: {
 				NODE_DEV: 'production'
 			}
+		},
+		jshint: {
+			all: ['./public/javascript/services/*.js']
 		}
 		
 	});
@@ -76,6 +79,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-env');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
 //	grunt.registerTask('copy file', 'Copies all the required files to distibution folder', ['copy']);
 //	grunt.registerTask('default', ['uglify', 'cssmin', 'mochaTest']);
 //	grunt.registerTask('execute:dev', ['env:dev', 'execute:dev']);

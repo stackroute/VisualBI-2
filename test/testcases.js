@@ -2,7 +2,7 @@ var assert = require('chai').assert,
 	 supertest = require('supertest'),
 	 app = require('../bin/server.js');
 
-var server = supertest.agent("http://localhost:8080")
+var server = supertest.agent("http://localhost:8080");
 
 describe('Test cases for non-authnticated routers', function() {
 	it('index page check', function(done) {
@@ -22,7 +22,7 @@ describe('Test cases for non-authnticated routers', function() {
 					return done();
 		});
 	});
-})
+});
 
 describe('Test cases for all authenticated routes', function(){
 	before(loginUser());
@@ -35,10 +35,10 @@ describe('Test cases for all authenticated routes', function(){
 					assert.equal(res.body._id, widgetId);
 					done();
 		});
-	})
+	});
 	
 	after(logoutUser());
-})
+});
 
 
 
@@ -53,7 +53,7 @@ function loginUser() {
 			  		if (err) return done(err);
 			  			console.log('logged in to make user available to all routes');
 			  			return done();
-        })
+        });
     };
 }
 
@@ -65,7 +65,7 @@ function logoutUser() {
 				if (err) return done(err);
 					console.log('logged out the user to destroy the current session');
 					return done();
-		})
-	}
+		});
+	};
 }
 	

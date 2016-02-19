@@ -93,7 +93,7 @@ angular.module('vbiApp').service('widgetManager', ['$http', '$location',function
 			return ("Failed to update comments");
 
 		});
-	}
+	};
 		 
 	return this;
 }]);

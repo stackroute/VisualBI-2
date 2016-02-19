@@ -34,7 +34,7 @@ var connectionSchema = require('../model/connections');
 var credentialSchema = require('../model/credential');
 var userSchema = require('../model/user');
 var widgetSchema = require('../model/widget');
-var widgetMdxSchema = require('../model/widgetMdx')
+var widgetMdxSchema = require('../model/widgetMdx');
 
 module.exports = {
   credentialModel : mongoose.model('Credential',credentialSchema),

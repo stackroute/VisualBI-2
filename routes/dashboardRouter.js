@@ -92,11 +92,11 @@ router.post('/shareDashboard', function(req, res, next) {
           usernameProcessed++;
           if (userNames.length == usernameProcessed)
            res.status(200).send(true);
-        })
+        });
       }), function(err){
         res.status(500).send("internal server error");
       }
-    })
+    });
 });
 
 router.get('/userList/:query?', function(req, res) {
@@ -115,6 +115,6 @@ router.get('/getSharedDashboards',function(req,res){
   }), function(err){
     res.status(500).send("internal server error");
   }
-})
+});
 
 module.exports = router;

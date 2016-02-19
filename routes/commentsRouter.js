@@ -67,8 +67,8 @@ router.get('/:widgetId', function(req, res, next) {
 	Widget.getComments(req.params.widgetId)
 	.then(function(widget) {
 		res.status(200).json(widget);
-	})
-})
+	});
+});
 
 //get commenters for a widget
 router.get('/commenters/:widgetId',function(req,res,next){
