@@ -11,9 +11,12 @@ describe('Test cases for non-authnticated routers', function() {
 	});
 	
 	it('validates login route', function(done) {
+		this.timeout(10000);
 		server.post('/login')
 			.send({ username: 'ashokruhela', password: 'abc@1234' })
-			.expect(200).end(function(err, res){
+			.expect(200)
+			.timeout(10000)
+			.end(function(err, res){
 				if (err) return done(err);
 //					console.log('logged out from login check');
 					return done();
@@ -44,7 +47,8 @@ function loginUser() {
         server
             .post('/login')
             .send({ username: 'ashokruhela', password: 'abc@1234' })
-            .expect(200).timeout(10000)
+            .expect(200)
+			  .timeout(10000)
             .end(function (err, res) {
 			  		if (err) return done(err);
 			  			console.log('logged in to make user available to all routes');
