@@ -182,7 +182,6 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
 }
 
 WidgetSchema.statics.updateComment = function(updatedComment,done) {
-	
   return this.model('Widget').update({
     'comments._id' : updatedComment.commentId
   },{

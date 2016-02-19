@@ -32,11 +32,11 @@
           </timeline-heading>
 			<div ng-show="isShowingEditView(commentIndex)">
 
-					<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')" uib-tooltip="Flag this comment"></i>
+					<i tooltips tooltip-template="tooltip" class="glyphicon glyphicon-tag btn timeline-comment-primary" ng-click="registerCommentType('tag')"></i>
 
-					<i class="glyphicon glyphicon-check timeline-comment-primary btn comment-icon" ng-click="registerCommentType('check')" uib-tooltip="Agree"></i>
+					<i class="glyphicon glyphicon-check timeline-comment-primary btn comment-icon" ng-click="registerCommentType('check')"></i>
 
-					<i class="glyphicon glyphicon-bookmark  btn timeline-comment-primary btn-faded" ng-click="registerCommentType('bookmark')" uib-tooltip="Add link"></i>
+					<i class="glyphicon glyphicon-bookmark  btn timeline-comment-primary btn-faded" ng-click="registerCommentType('bookmark')"></i>
 	
 				<input type="text" value="{{comment.comment}}" ng-model="comment.comment" size="50"></input>
 		

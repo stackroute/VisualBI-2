@@ -54,8 +54,8 @@ router.post('/updateComment',function(req, res, next){
 
 	Widget.updateComment({commentId: req.body.commentId,
 						  comment: req.body.comment,
-						  badgeClass: req.body.badgeClass,
-						  bageIconClass: req.body.badgeIconClass})
+						  badgeIconClass: req.body.commentType,
+						  badgeClass: req.body.commentCategory})
 		.then(function(comment) {
 		res.status(200).send(comment);
 	});

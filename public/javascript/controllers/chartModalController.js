@@ -53,7 +53,6 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 					});
 				});
 				$scope.comments = commentsCollection;
-				console.log($scope.comments);
 		});
 	
 		//	function to set the comment icon class and color
@@ -69,24 +68,23 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 		
 		$scope.cancelEditView=function(index){
 			$scope.activeCommentIndex=-1;
-			//alert($scope.comment.commentId
 		}
 		
 		$scope.saveEditedComment=function(commentIndex){
-			//console.log('Comment Id '+commentId+' will be updated soon');
-			console.log($scope.comments[commentIndex]);
-	
+			
 			var parameters={
 				commentId:$scope.comments[commentIndex].commentId,
 				comment: $scope.comments[commentIndex].comment,
-				bageClass:  $scope.comments[commentIndex].badgeClass,
-				bageIconClass:  $scope.comments[commentIndex].badgeIconClass,
+				commentType:  commentType,
+				commentCategory:  commentCategory
 			}
 			
+				$scope.comments[commentIndex].badgeIconClass=commentType;
+				$scope.comments[commentIndex].badgeClass=commentCategory;
+											
 			widgetManager.updateComment(parameters).then(function(data){
 				$scope.activeCommentIndex=-1;
-				console.log('comment updated successfully');
-				console.log($rootScope.loggedInUser.authToken);
+
 			});
 		}
 		
@@ -116,6 +114,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
 			$scope.comments.push({
                 displayName: $rootScope.loggedInUser.displayName, 
+				userid:$rootScope.loggedInUser.authToken,
                 badgeClass: commentCategory,
                 badgeIconClass: commentType,
                 comment: newComment,
@@ -134,8 +133,6 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
         });
 
     };
-
-    
 
     $scope.hide = function() {
         $uibModalInstance.dismiss('cancel');
