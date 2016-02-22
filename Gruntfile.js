@@ -57,14 +57,23 @@ module.exports = function(grunt) {
 			},
 			prod: {
 				src: './dist/server/bin/server.js'
+			},
+			test : {
+				src: './bin/server.js'
 			}
 		},
 		env: {
 			dev: {
-				NODE_DEV: 'development'
+				NODE_ENV: 'development',
+				PORT: 8080
 			},
 			prod: {
-				NODE_DEV: 'production'
+				NODE_ENV: 'production',
+				PORT: 2000
+			},
+			test: {
+				NODE_ENV: 'test',
+				PORT: 2000
 			}
 		},
 		jshint: {
@@ -82,7 +91,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 //	grunt.registerTask('copy file', 'Copies all the required files to distibution folder', ['copy']);
 //	grunt.registerTask('default', ['uglify', 'cssmin', 'mochaTest']);
-	grunt.registerTask('default', ['mochaTest', 'clean', 'copy', 'env:dev', 'execute:dev']);
-//	grunt.registerTask('default', ['env:dev', 'execute:dev']);
-//	grunt.registerTask('default', ['env:prod', 'execute:prod']);
+	grunt.registerTask('default', ['mochaTest', 'clean', 'copy', 'env:prod', 'execute:prod']);
+//	grunt.registerTask('default', ['env:test', 'execute:dev']);
+//grunt.registerTask('default', ['env:prod', 'execute:prod']);
 };

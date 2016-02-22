@@ -48,7 +48,7 @@ var server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+console.log('current environment & Port - ' + app.get('env') + ' & ' + port);
 if(server.listen(port)){
   server.listen(port);
   console.log('server started successfully!');
