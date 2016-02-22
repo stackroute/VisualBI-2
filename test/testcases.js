@@ -2,7 +2,7 @@ var assert = require('chai').assert,
 	 supertest = require('supertest'),
 	 app = require('../app.js');
 
-var server = supertest(app);//.agent("http://localhost:8080");
+var server = supertest.agent(app);
 
 describe('Test cases for non-authnticated routers', function() {
 	it('index page check', function(done) {
@@ -23,22 +23,22 @@ describe('Test cases for non-authnticated routers', function() {
 	});
 });
 
-//describe('Test cases for all authenticated routes', function(){
-//	this.timeout(10000);
-//	before(loginUser());
-//	
-//	it('get comments check', function(done) {
-//		var widgetId = '56bd852fca641709098d88b8';
-//		server.get('/comment/' + widgetId)
-//			.expect(200).end(function(err, res) {
-//				if(err) return done(err);
-//					assert.equal(res.body._id, widgetId);
-//					done();
-//		});
-//	});
-//	
-//	after(logoutUser());
-//});
+describe('Test cases for all authenticated routes', function(){
+	this.timeout(10000);
+	before(loginUser());
+	
+	it('get comments check', function(done) {
+		var widgetId = '56bd852fca641709098d88b8';
+		server.get('/comment/' + widgetId)
+			.expect(200).end(function(err, res) {
+				if(err) return done(err);
+					assert.equal(res.body._id, widgetId);
+					done();
+		});
+	});
+	
+	after(logoutUser());
+});
 
 
 

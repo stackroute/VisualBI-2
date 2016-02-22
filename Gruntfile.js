@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 			},
 			prod: {
 				NODE_ENV: 'production',
-				PORT: 2000
+				PORT: 8080
 			},
 			test: {
 				NODE_ENV: 'test',
