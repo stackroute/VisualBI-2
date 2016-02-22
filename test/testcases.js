@@ -15,7 +15,6 @@ describe('Test cases for non-authnticated routers', function() {
 		server.post('/login')
 			.send({ username: 'ashokruhela', password: 'abc@1234' })
 			.expect(200)
-			.timeout(10000)
 			.end(function(err, res){
 				if (err) return done(err);
 //					console.log('logged out from login check');
@@ -25,6 +24,7 @@ describe('Test cases for non-authnticated routers', function() {
 });
 
 describe('Test cases for all authenticated routes', function(){
+	this.timeout(10000);
 	before(loginUser());
 	
 	it('get comments check', function(done) {

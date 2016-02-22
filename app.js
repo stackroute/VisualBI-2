@@ -32,6 +32,7 @@ var express = require('express'),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
 	 passport = require('passport'),
+	 compress = require('compression');
 	 LocalStrategy = require('passport-local').Strategy;
 
 //custom modules
@@ -52,6 +53,9 @@ var app = express();
 var env = app.get('env');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+//enable expression
+app.use(compress()); 
 
 var cpath = env == 'development' ? 'public' : '../public';
 app.use(express.static(path.join(__dirname, cpath)));
@@ -108,5 +112,19 @@ if(app.get('env') === 'development') {
       });
    });
 }
+
+//Should log errors in a file
+if(app.get('env') === 'production') {
+   app.use(function(err, req, res, next) {
+		console.log("in error handler", err);
+      res.status(err.status || 500);
+      res.render('error', {
+         message: "err.message",
+         error: err
+      });
+   });
+}
+
+
 
 module.exports = app;

@@ -82,7 +82,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 //	grunt.registerTask('copy file', 'Copies all the required files to distibution folder', ['copy']);
 //	grunt.registerTask('default', ['uglify', 'cssmin', 'mochaTest']);
-//	grunt.registerTask('execute:dev', ['env:dev', 'execute:dev']);
-//	grunt.registerTask('execute:prod', ['env:prod', 'execute']);
-	grunt.registerTask('default', ['mochaTest', 'clean', 'copy']);
+	grunt.registerTask('default', ['mochaTest', 'clean', 'copy', 'env:dev', 'execute:dev']);
+//	grunt.registerTask('default', ['env:dev', 'execute:dev']);
+//	grunt.registerTask('default', ['env:prod', 'execute:prod']);
 };
