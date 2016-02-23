@@ -4,6 +4,12 @@ var assert = require('chai').assert,
 
 var server = supertest.agent(app);
 
+//test data to run test cases
+var username = 'ashokruhela',
+	 password = 'test@1234',
+	 widgetId = '56c9677ac4e209fd514df7ed',
+	 userid = '56bdc6bba18adc9e51a79847';
+
 describe('Test cases for non-authnticated routers', function() {
 	it('index page check', function(done) {
 		server.get('/')
@@ -13,7 +19,7 @@ describe('Test cases for non-authnticated routers', function() {
 	it('validates login route', function(done) {
 		this.timeout(10000);
 		server.post('/login')
-			.send({ username: 'ashokruhela', password: 'abc@1234' })
+			.send({ username: username, password: password })
 			.expect(200)
 			.end(function(err, res){
 				if (err) return done(err);
@@ -29,7 +35,6 @@ describe('Test cases for all routes which requires authentication', function(){
 	
 	//commentsRouter test cases
 	it('get comments check', function(done) {
-		var widgetId = '56bd852fca641709098d88b8';
 		server.get('/comment/' + widgetId)
 			.expect(200).end(function(err, res) {
 				if(err) return done(err);
@@ -39,7 +44,6 @@ describe('Test cases for all routes which requires authentication', function(){
 	});
 	
 	it('get commenters check', function(done) {
-		var widgetId = '56bd852fca641709098d88b8';
 		server.get('/comment/commenters/' + widgetId)
 			.expect(200, done);
 	});
@@ -57,7 +61,6 @@ describe('Test cases for all routes which requires authentication', function(){
 	});
 	
 	it('testing getDashboard for user route', function(done) {
-		var userid = '56bc9b6fdd0d21e72acbd058';
 		server.get('/dashboard/getDashboard/'+ userid)
 			.expect(200, done);
 	});
@@ -99,7 +102,7 @@ describe('Test cases for all routes which requires authentication', function(){
 function loginUser() {
     return function(done) {
         server.post('/login')
-            .send({ username: 'ashokruhela', password: 'abc@1234' })
+            .send({ username: username, password: password })
             .expect(200)
 			  .timeout(10000)
             .end(function (err, res) {

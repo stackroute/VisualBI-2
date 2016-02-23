@@ -1,16 +1,16 @@
 {
 	"Customer": {
 		"dbConfig": {
-			"host": "172.23.238.253",
+			"host": "localhost",
 			"port": "27017",
 			"dbName": "visualdb",
-			"url": "mongodb://172.23.238.253:27017/visualdb"
+			"url": "mongodb://localhost/visualdb"
 		},
 		"studioConfig": {
 			"host": "172.23.238.253",
 			"port": "27017",
 			"dbName": "visualBI",
-			"url": "mongodb://172.23.238.253:27017/visualBI"
+			"url": "mongodb://localhost/visualBI"
 		}
 	}
 }
