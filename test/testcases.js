@@ -6,7 +6,7 @@ var server = supertest.agent(app);
 
 //test data to run test cases
 var username = 'ashokruhela',
-	 password = 'test@1234',
+	 password = 'abc@1234',
 	 widgetId = '56c9677ac4e209fd514df7ed',
 	 userid = '56bdc6bba18adc9e51a79847';
 

@@ -74,20 +74,6 @@ module.exports = function(grunt) {
 		},
 		jshint: {
 			all: ['./public/javascript/services/*.js']
-		},
-		forever: {
-			prod: {
-				option: {
-					index: './dist/server/bin/server.js',
-					logDir: './logs'
-				}
-			},
-			dev: {
-				option: {
-					file: 'bin/server.js',
-					logDir: './logs'
-				}
-			}
 		}
 		
 	});
@@ -99,8 +85,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-env');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-forever');
 	grunt.registerTask('dist', 'Copy the required files to dis folder', ['clean', 'copy']);
-	grunt.registerTask('default', ['env:dev', 'mochaTest', 'clean', 'copy', 'env:prod', 'execute:prod']);
-	grunt.registerTask('start', ['env:prod', 'execute:prod']);
+	grunt.registerTask('default', ['env:dev', 'mochaTest', 'clean', 'copy']);
 };

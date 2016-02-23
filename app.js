@@ -57,7 +57,7 @@ app.set('view engine', 'ejs');
 //enable expression
 app.use(compress()); 
 
-var cpath = env == 'development' ? 'public' : '../public';
+var cpath = env == 'production' ? '../public' : 'public' ;
 app.use(express.static(path.join(__dirname, cpath)));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(cookieParser('tobo'));

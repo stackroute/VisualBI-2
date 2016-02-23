@@ -23,12 +23,12 @@
     * 6. Hari Prasad Timmapathini
 	  * 7. Yogesh Goyal
  */
-var mongoose = require('mongoose'),
-	 config = require('config');
+var mongoose = require('mongoose');
 //connecting multiple database
-var appConfig = config.get('Customer');
-var visualdb = mongoose.connect(appConfig.dbConfig.url);
-var studiodb = mongoose.createConnection(appConfig.studioConfig.url); //172.23.238.253
+var dataUrl = process.env.NODE_ENV == 'production' ? "mongodb://localhost/visualdb" : "mongodb://localhost/visualdb";
+var studioDataUrl = process.env.NODE_ENV == 'production' ? "mongodb://172.23.238.253/visualBI" : "mongodb://172.23.238.253/visualBI";
+var visualdb = mongoose.connect(dataUrl);
+var studiodb = mongoose.createConnection(studioDataUrl); //172.23.238.253
 
 var connectionSchema = require('../model/connections');
 var credentialSchema = require('../model/credential');
@@ -44,6 +44,3 @@ module.exports = {
   connectionModel : studiodb.model('Connection',connectionSchema)
 };
 
- // module.exports = {
- //   url: "mongodb://localhost:27017/visualdb"
- // };
