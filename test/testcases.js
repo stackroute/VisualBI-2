@@ -23,10 +23,11 @@ describe('Test cases for non-authnticated routers', function() {
 	});
 });
 
-describe('Test cases for all authenticated routes', function(){
+describe('Test cases for all routes which requires authentication', function(){
 	this.timeout(10000);
 	before(loginUser());
 	
+	//commentsRouter test cases
 	it('get comments check', function(done) {
 		var widgetId = '56bd852fca641709098d88b8';
 		server.get('/comment/' + widgetId)
@@ -35,6 +36,59 @@ describe('Test cases for all authenticated routes', function(){
 					assert.equal(res.body._id, widgetId);
 					done();
 		});
+	});
+	
+	it('get commenters check', function(done) {
+		var widgetId = '56bd852fca641709098d88b8';
+		server.get('/comment/commenters/' + widgetId)
+			.expect(200, done);
+	});
+	
+	//dashboard Router test cases
+	
+	it('testing userData route', function(done) {
+		server.get('/dashboard/userData')
+			.expect(200, done);
+	});
+	
+	it('testing getSharedDashboards route', function(done) {
+		server.get('/dashboard/userData')
+			.expect(200, done);
+	});
+	
+	it('testing getDashboard for user route', function(done) {
+		var userid = '56bc9b6fdd0d21e72acbd058';
+		server.get('/dashboard/getDashboard/'+ userid)
+			.expect(200, done);
+	});
+	
+	//user Router test cases
+	it('test to get dashboard for loggedin user', function(done) {
+		server.get('/user/dashboard')
+			.expect(200, done);
+	});
+	
+	it('test to get shared dashboard for loggedin user', function(done) {
+		server.get('/user/dashboard/sharedWithMe')
+			.expect(200, done);
+	});
+	
+	//test cases for widgetRouter
+	
+	it('test to get all widgets', function(done) {
+		server.get('/widgets')
+			.expect(200, done);
+	});
+	
+	it('test to get new widgetId', function(done) {
+		server.get('/widgets/getNewWidgetId')
+			.expect(200, done);
+	});
+	
+	//test cases for widgetMdsRouter
+	it('test to get all studio widgets', function(done) {
+		server.get('/widgetsMdx')
+			.expect(200, done);
 	});
 	
 	after(logoutUser());

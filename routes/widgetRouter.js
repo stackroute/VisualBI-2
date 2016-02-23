@@ -64,22 +64,22 @@ router.post('/renameTitle', function(req, res, next) {
 
 
 //Get the widget details
-router.get('/:id', function(req, res, next) {
-   // picks :id from the URL
-   var widgetId = req.params.id;
-
-    Widget.getWidget(widgetId, function(data){
-         res.send(data);
-      });
-});
+//router.get('/:id', function(req, res, next) {
+//   // picks :id from the URL
+//   var widgetId = req.params.id;
+//
+//    Widget.getWidget(widgetId, function(data){
+//         res.send(data);
+//      });
+//});
 
 //get chartdata for respective widget
-router.get('/data/:id', function(req, res, next) {
-   // picks :id from the URL
-   var widgetId = req.params.id;
-    Widget.getWidget(function(data){
-         res.send(data);
-      });
-});
+//router.get('/data/:id', function(req, res, next) {
+//   // picks :id from the URL
+//   var widgetId = req.params.id;
+//    Widget.getWidget(function(data){
+//         res.send(data);
+//      });
+//});
 
 module.exports = router;

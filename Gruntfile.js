@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 			},
 			prod: {
 				NODE_ENV: 'production',
-				PORT: 8080
+				PORT: 2000
 			},
 			test: {
 				NODE_ENV: 'test',
@@ -89,9 +89,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-env');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-//	grunt.registerTask('copy file', 'Copies all the required files to distibution folder', ['copy']);
-//	grunt.registerTask('default', ['uglify', 'cssmin', 'mochaTest']);
+	grunt.registerTask('dist', 'Copy the required files to dis folder', ['clean', 'copy']);
 	grunt.registerTask('default', ['mochaTest', 'clean', 'copy', 'env:prod', 'execute:prod']);
-//	grunt.registerTask('default', ['env:test', 'execute:dev']);
-//grunt.registerTask('default', ['env:prod', 'execute:prod']);
 };
