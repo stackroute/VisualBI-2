@@ -26,7 +26,7 @@
 var mongoose = require('mongoose');
 //connecting multiple database
 var dataUrl = process.env.NODE_ENV == 'production' ? "mongodb://localhost/visualdb" : "mongodb://localhost/visualdb";
-var studioDataUrl = process.env.NODE_ENV == 'production' ? "mongodb://172.23.238.253/visualBI" : "mongodb://172.23.238.253/visualBI";
+var studioDataUrl = process.env.NODE_ENV == 'production' ? "mongodb://localhost/visualBI" : "mongodb://localhost/visualBI";
 var visualdb = mongoose.connect(dataUrl);
 var studiodb = mongoose.createConnection(studioDataUrl); //172.23.238.253
 

@@ -85,6 +85,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-execute');
 	grunt.loadNpmTasks('grunt-env');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.registerTask('dist', 'Copy the required files to dis folder', ['clean', 'copy']);
-	grunt.registerTask('default', ['env:dev', 'mochaTest', 'clean', 'copy']);
+	grunt.loadNpmTasks('grunt-replace');
+	grunt.registerTask('replace', function() {
+		var data = grunt.file.readJSON('./package.json');
+		data.scripts.start = "NODE_ENV=production PORT=2000 forever start server/bin/server.js";
+		var content = JSON.stringify(data);
+		grunt.file.write('./dist/package.json', content);
+	})
+	grunt.registerTask('dist', 'Copy the required files to dist folder', ['clean', 'copy', 'replace']);
+	grunt.registerTask('default', ['env:dev', 'mochaTest', 'clean', 'copy', 'replace']);
 };
