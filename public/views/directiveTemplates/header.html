@@ -22,7 +22,8 @@
               <li class="dropdown-submenu" ng-show="currentUserData.sharedDashboards && currentUserData.sharedDashboards.length > 0">
               		<a tabindex="-1">Shared with me</a>
               		 <ul class="dropdown-menu">
-                  	<li><a ng-click="showSharedDashboard(dashboard.userid, dashboard.permission)" ng-repeat="dashboard in currentUserData.sharedDashboards">{{ dashboard.username}}</a></li>
+                  	<li><a ng-click="showSharedDashboard(dashboard.userid, dashboard.permission)" ng-repeat="dashboard in currentUserData.sharedDashboards">{{ dashboard.username}}</a>
+						 <span class="pull-left img-circle" ng-style="{{userDisplayImageStyle}}"></span></li>
 					    </ul>
               </li>
 				<li role="separator" class="divider"></li>
