@@ -24,6 +24,9 @@
 	 * 7. Yogesh Goyal
  */
 //Third party modules
+var favicon = require('serve-favicon');
+
+
 var express = require('express'),
     mongoose = require('mongoose'),
     path = require('path'),
@@ -59,6 +62,7 @@ app.use(compress());
 
 var cpath = env == 'production' ? '../public' : 'public' ;
 app.use(express.static(path.join(__dirname, cpath)));
+app.use(favicon(path.join(__dirname, cpath, 'favicon.ico')));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(cookieParser('tobo'));
 

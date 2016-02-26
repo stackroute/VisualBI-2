@@ -129,7 +129,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 				$scope.commentsVisibility = true;
 				$scope.showHideVisibility = true;
 			}
-			$route.reload();
+
         });
 
     };
