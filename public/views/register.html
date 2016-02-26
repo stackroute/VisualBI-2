@@ -1,5 +1,5 @@
 <div class ="outer">
-<div class="container" id="main">
+<div id="main">
 <div class="navbar navbar-fixed-top">
 <div class="container">
 
@@ -105,7 +105,7 @@
 
 
 
-        <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()" class="btn reg-btn regbutton-block">Log In</button>
+        <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()" class="btn reg-btn regbutton-block">Enter</button>
 	    <!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>--><br/>
         <div ng-show="registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ registerUserMessage }}</div>
        <div ng-show="loginCtrl.errorMessage.length > 0" class="alert alert-danger row warn" role="alert">{{ loginCtrl.errorMessage}}</div>
