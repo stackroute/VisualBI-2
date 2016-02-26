@@ -50,7 +50,7 @@ var widgetProto = function(studioid, title, chartRenderer, parameters) {
   this.title = title;
   this.chartRenderer = chartRenderer;
   this.parameters = parameters;
-}
+};
 
 //function to fetch the widget documents from visualBI widget collection
 widgetSchema.statics.getWidgets = function(callback) {
@@ -92,7 +92,7 @@ widgetSchema.statics.getWidgets = function(callback) {
        }
      }
      callback(data);
-   })
-}
+   });
+};
 
 module.exports = widgetSchema;

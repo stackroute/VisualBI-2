@@ -19,7 +19,7 @@
     * 2. Partha Mukherjee
     * 3. Nabila Rafi
     * 4. Venkatakrishnan U
-    * 5. Arun Karthic R
+    * 5. Arun Karthic R	
     * 6. Hari Prasad Timmapathini
 	 * 7. Yogesh Goyal
  */
@@ -90,7 +90,7 @@ var registerUser = function (user, done) {
 		email: user.email
 	}, user.password, function(err, account) {
 		if(err) {
-			done(err, 'failed')
+			done(err, 'failed');
 		} else {
 			//make an entry in user collection for new user
 			var newUser = new User({
@@ -110,5 +110,5 @@ var registerUser = function (user, done) {
 			});
 		}
 	});
-}
+};
 module.exports = router;

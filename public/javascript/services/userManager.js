@@ -67,7 +67,7 @@ angular.module('vbiApp')
                       });
                   });
             },
-            
+
               saveTab : function(params){
 
               $http({
@@ -106,6 +106,17 @@ angular.module('vbiApp')
 					.error(function(error){
 						return error;
 					});
-        		}
+        },
+
+         getSharedDashboards: function() {
+           return $http.get('/dashboard/getSharedDashboards')
+ 					.then(function(res) {
+ 						return res.data;
+ 					})
+ 					.catch(function(error){
+ 						return error;
+ 					});
+         }
+
         };
     }]);

@@ -35,7 +35,6 @@ var WidgetSchema = mongoose.Schema({
    commentsCounter :Number,
 	studioId: String,
    comments:[{
-	  _id : false,
      userid: String,//{ type: mongoose.Schema.ObjectId, ref: 'Credential' },
      comment: String,
 	  badgeClass: String,
@@ -51,8 +50,8 @@ var WidgetSchema = mongoose.Schema({
 WidgetSchema.statics.getWidgets = function(callback) {
    this.model('Widget').find({}, function(err, data) {
       callback(data);
-   })
-}
+   });
+};
 
 //WidgetSchema.statics.getWidget = function (widgetId, callback) {
 //   this.model('Widget').findOne({
@@ -68,7 +67,7 @@ WidgetSchema.statics.getComments = function (widgetId, callback) {
    return this.model('Widget').findOne({
 		 "_id" : mongoose.Types.ObjectId(widgetId)
 	}).exec(callback);
-}
+};
 
 WidgetSchema.statics.getCommenters = function(widgetId,callback) {
    this.model('Widget').find({
@@ -79,7 +78,7 @@ WidgetSchema.statics.getCommenters = function(widgetId,callback) {
    },function(err, data) {
      callback(data);
    });
-}
+};
 
 createNewWidgetId = function(callback) {
 
@@ -93,7 +92,7 @@ createNewWidgetId = function(callback) {
     if (err) return console.error(err);
     callback(res._id);
   });
-}
+};
 
 removeStatus = function(id) {
 
@@ -108,13 +107,29 @@ removeStatus = function(id) {
       if(err){
       }
   });
-}
+};
+
+reuseUnusedIds = function() {
+
+  var widget = mongoose.model('Widget', WidgetSchema);
+  widget.model('Widget').update({
+    '__v' : 0
+  },{
+    $set:{
+      status: 'blank'
+    }
+  },{multi: true},function(err, data) {
+      if(err){
+      }
+  });
+};
+
 
 WidgetSchema.statics.getNewWidgetId = function(callback) {
   this.model('Widget').findOne({
        'status': 'blank'
     },function(err, data) {
-      if(data == null) {
+      if(data === null) {
         createNewWidgetId(function(id) {
           removeStatus(id);
           callback(id);
@@ -124,7 +139,7 @@ WidgetSchema.statics.getNewWidgetId = function(callback) {
         callback(data._id);
       }
     });
-}
+};
 
 WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   var widgetCount = widgetList.length;
@@ -149,7 +164,8 @@ WidgetSchema.statics.saveWidget = function(userId, tabs, widgetList, User) {
   }
 
   User.saveTab(userId, tabs);
-}
+  reuseUnusedIds();
+};
 
 WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
 
@@ -163,7 +179,19 @@ WidgetSchema.statics.renameTitle = function(widgetId, newTitle) {
       if(err){
       }
   });
-}
+};
+
+WidgetSchema.statics.updateComment = function(updatedComment,done) {
+  return this.model('Widget').update({
+    'comments._id' : updatedComment.commentId
+  },{
+    $set:{
+      'comments.$.comment' : updatedComment.comment,
+	  'comments.$.badgeClass' : updatedComment.badgeClass,
+	  'comments.$.badgeIconClass' : updatedComment.badgeIconClass
+    }
+  }).exec(done);
+};
 
 WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
 	return this.model('Widget').update({ '_id' : widgetId }, {
@@ -174,7 +202,4 @@ WidgetSchema.statics.saveComment = function(widgetId, comment, done) {
 	}).exec(done);
 };
 
-//WidgetSchema.statics.updateCommenter = function(widgetId, commenterId, done) {};
-
-// mongoose.model("Widget", WidgetSchema);
 module.exports = WidgetSchema;

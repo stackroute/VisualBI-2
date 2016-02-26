@@ -38,7 +38,16 @@ angular.module('vbiApp')
 	 // line, bar or area chart in mdx grid
 	 $scope.widgetData = {}; // it has data for inline charts in mdx grid
 	 $scope.currentUserData = {};
-
+		
+	$scope.userDisplayImageStyle = {
+		'background-image':'url("../'+$rootScope.loggedInUser.imagePath.substring(6)+'")',
+		'background-size': '40px 40px',
+		'margin' : '5px 5px',
+		'height':'40px',
+		'width' : '40px',
+		'display-style' : 'inline'
+	};
+		
 	 userManager.getData()
 	 .then(function(userData) {
 			$scope.currentUserData = userData;
@@ -131,11 +140,13 @@ angular.module('vbiApp')
       var shareConfig = {
         templateUrl: 'shareModal',
         controller: 'shareDashboardController',
-        resolve: {
-          sharedDashboards: function(){
-            return currentUserData.dashboards[0].sharedWith; //assuming there is only one dashboard.
-          }
-        }
+        // resolve: {
+        //   sharedDashboards: function(){
+        //     userManager.getSharedDashboards().then(function(data){
+        //       return data; //return currentUserData.dashboards[0].sharedWith; assuming there is only one dashboard.
+        //     })
+        //   }
+        // }
       };
       $uibModal.open(shareConfig);
   }
@@ -284,16 +295,4 @@ angular.module('vbiApp')
       // }, function errorCallback(response) {
       // });
     }
-}]).directive('showonhoverparent',
-   function() {
-      return {
-         link : function(scope, element, attrs) {
-            element.parent().bind('mouseenter', function() {
-                element.show();
-            });
-            element.parent().bind('mouseleave', function() {
-                 element.hide();
-            });
-       }
-   };
-});
+}]);

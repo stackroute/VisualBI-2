@@ -49,14 +49,26 @@ router.post('/',function(req, res, next){
 
 });
 
+//updates comments for widget
+router.post('/updateComment',function(req, res, next){
+
+	Widget.updateComment({commentId: req.body.commentId,
+						  comment: req.body.comment,
+						  badgeIconClass: req.body.commentType,
+						  badgeClass: req.body.commentCategory})
+		.then(function(comment) {
+		res.status(200).send(comment);
+	});
+
+});
 //gets the comments for a widget
 router.get('/:widgetId', function(req, res, next) {
 	
 	Widget.getComments(req.params.widgetId)
 	.then(function(widget) {
 		res.status(200).json(widget);
-	})
-})
+	});
+});
 
 //get commenters for a widget
 router.get('/commenters/:widgetId',function(req,res,next){

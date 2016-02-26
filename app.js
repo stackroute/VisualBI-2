@@ -32,6 +32,7 @@ var express = require('express'),
     flash = require('connect-flash'),
     cookieParser = require('cookie-parser'),
 	 passport = require('passport'),
+	 compress = require('compression');
 	 LocalStrategy = require('passport-local').Strategy;
 
 //custom modules
@@ -40,7 +41,7 @@ var indexRouter = require('./routes/indexRouter'),
     widgetRouter = require('./routes/widgetRouter'),
     widgetMdxRouter = require('./routes/widgetMdxRouter'),
     dashboardRouter = require('./routes/dashboardRouter'),
-    chartdataRouter = require('./routes/chartdataRouter'),
+    chartdataRouter = require('./routes/chartDataRouter'),
     dbConfig = require('./config/db'),
     Credential = dbConfig.credentialModel,
     gridRouter = require('./routes/gridRouter'),
@@ -49,12 +50,15 @@ var indexRouter = require('./routes/indexRouter'),
 	uploadImageRouter=require('./routes/uploadImageRouter');
 
 var app = express();
-
+var env = app.get('env');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//enable expression
+app.use(compress()); 
 
-app.use(express.static(path.join(__dirname, 'public')));
+var cpath = env == 'production' ? '../public' : 'public' ;
+app.use(express.static(path.join(__dirname, cpath)));
 // instruct the app to use the `bodyParser()` middleware for all routes
 app.use(cookieParser('tobo'));
 
@@ -100,13 +104,27 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if(app.get('env') === 'development') {
    app.use(function(err, req, res, next) {
-		console.log("in error handler", err)
+		console.log("in error handler", err);
       res.status(err.status || 500);
       res.render('error', {
          message: "err.message",
          error: err
-      })
+      });
    });
 }
+
+//Should log errors in a file
+if(app.get('env') === 'production') {
+   app.use(function(err, req, res, next) {
+		console.log("in error handler", err);
+      res.status(err.status || 500);
+      res.render('error', {
+         message: "err.message",
+         error: err
+      });
+   });
+}
+
+
 
 module.exports = app;

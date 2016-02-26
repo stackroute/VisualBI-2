@@ -9,54 +9,54 @@
 <div class="registerForm">
 
   <ul class="tab-group" ng-init="$root.showRegisterPage=false">
-    <li class="tab active"><a href="" ng-click="$root.showRegisterPage=true">Sign Up</a></li>
-    <li class="active1"><a href="" ng-click="$root.showRegisterPage=false">Log In</a></li>
+    <li class="tab tab-btn-default"><a href="" ng-click="$root.showRegisterPage=true" ng-style="$root.showRegisterPage==false? highlightClass : lowlightClass">Sign Up</a></li>
+    <li class="tab-btn-default"><a href="" ng-click="$root.showRegisterPage=false" ng-style="$root.showRegisterPage==true? highlightClass : lowlightClass" >Log In</a></li>
   </ul>
 
   <div class="tab-content">
     <div  ng-controller="registerController as regCtrl" >
     <div id="register-signup" ng-show ="showRegisterPage==true">
-
-      <h1>Sign Up</h1>
+	<div class="slate-logo"></div>
+<!--      <h1>slate</h1>-->
 
       <form name="form" role="form" novalidate>
 
         <div class="top-row">
           <div class="field-wrap" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
             <label for="firstname">First Name </label>
-            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="regCtrl.user.firstName" required />
+            <input type="text" name="firstName" id="firstName" class="form-control register-form-control" ng-model="regCtrl.user.firstName" required />
             <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
           </div>
 
           <div class="field-wrap" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
              <label for="lastname">Last Name </label>
-            <input type="text" name="lastName" id="lastName" class="form-control" ng-model="regCtrl.user.lastName" required />
+            <input type="text" name="lastName" id="lastName" class="form-control register-form-control" ng-model="regCtrl.user.lastName" required />
             <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
           </div>
         </div>
 
         <div class="field-wrap" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
           <label for ="username">Username</label>
-          <input type="text" name="username" id="username" class="form-control" ng-model="regCtrl.user.username" required />
+          <input type="text" name="username" id="username" class="form-control register-form-control" ng-model="regCtrl.user.username" required />
           <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
         </div>
 
         <div class="field-wrap" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
           <label for ="email">Email Address</label>
-          <input type="email" name="email" id="email" class="form-control" ng-model="regCtrl.user.email" required />
+          <input type="email" name="email" id="email" class="form-control register-form-control" ng-model="regCtrl.user.email" required />
           <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">E-mail is required</span>
         </div>
 
         <div class="field-wrap" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
           <label for = "password">Set A Password</label>
-          <input type="password" id="password" name="password" class="form-control" ng-model="regCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
+          <input type="password" id="password" name="password" class="form-control register-form-control" ng-model="regCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
           <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
         </div>
 
 
         <div class="field-wrap" ng-class="{ 'has-error': form.file.$error.maxSize && form.file.$error.required }">
           <label for "image">Upload Image(optional)</label>
-        <input type="file" ngf-select ng-model="regCtrl.file" name="file" class="form-control"   ngf-pattern="'image/*'"
+        <input type="file" ngf-select ng-model="regCtrl.file" name="file" class="form-control register-form-control"   ngf-pattern="'image/*'"
             accept="image/*" ngf-max-size="2MB" />
 <!--
              <label>
@@ -67,10 +67,13 @@
             {{regCtrl.file.size / 1000000|number:1}}MB: max 2M</i>
 -->
             <button ng-click="regCtrl.submit()" class="btn2 small">Upload</button>
-            <p>{{regCtrl.progress}}</p>
+            <p ng-show="imageUploadIndc"><img src="images/loading.gif"/>&nbsp;Uploading&nbsp;:&nbsp;{{regCtrl.progress}}&nbsp;&#37;
+			</p>
+			<p ng-show="imageUploadedIndc">Image uploaded successfully!</p>
         </div>
         <div>
-        <button type="submit" ng-disabled="form.$invalid"  ng-click="regCtrl.register()"class="regbutton regbutton-block">Get Started</button>
+        <button type="submit" ng-disabled="form.$invalid"  ng-click="regCtrl.register()" class="btn reg-btn regbutton-block">Get Started</button>
+		
         </div>
           <br/>
         <div ng-show="regCtrl.registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ regCtrl.registerUserMessage }}</div>
@@ -80,29 +83,30 @@
 
     </div>
   </div>
+
     <div  ng-controller="loginController as loginCtrl" >
     <div id="register-login" ng-show="showRegisterPage==false">
 
-      <h1>Slate</h1>
+      <div class="slate-logo"></div>
 
       <form name="form" role="form">
 
         <div class="field-wrap" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
           <label for ="Username">Username</label>
-            <input type="text" name="username" id="username" class="form-control" ng-model="loginCtrl.user.username"  required />
+            <input type="text" name="username" id="username" class="form-control register-form-control" ng-model="loginCtrl.user.username"  required />
             <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
         </div>
 
         <div class="field-wrap">
           <label>Password</label>
-        <input type="password" id="password" name="password" class="form-control" ng-model="loginCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
+        <input type="password" id="password" name="password" class="form-control register-form-control" ng-model="loginCtrl.user.password" ng-minlength="1" ng-maxlength="20"  required  />
         <span ng-show="form.password.$error.required && form.password.$dirty" class="help-block">Password is required</span>
         </div>
 
 
 
-        <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()"class="regbutton regbutton-block">Log In</button>
-<!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>--><br/>
+        <button type="submit" ng-disabled="form.$invalid"  ng-click="loginCtrl.login()" class="btn reg-btn regbutton-block">Log In</button>
+	    <!--        <a href="" ng-click="loginCtrl.newUser()">i don't have account</a>--><br/>
         <div ng-show="registerUserMessage.length > 0" class="alert alert-success" role="alert">{{ registerUserMessage }}</div>
        <div ng-show="loginCtrl.errorMessage.length > 0" class="alert alert-danger row warn" role="alert">{{ loginCtrl.errorMessage}}</div>
 

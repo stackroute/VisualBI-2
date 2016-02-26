@@ -58,7 +58,7 @@ router.post('/savetab', function(req, res, next) {
 router.get('/dashboard/sharedWithMe', function(req, res, next) {
     User.getDashboardsSharedWithMe(req.user._id)
 		 .then(function(data) {
-		 res.status(200).json(data)
+		 res.status(200).json(data);
 	 });
 });
 

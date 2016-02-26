@@ -21,7 +21,7 @@
     * 4. Venkatakrishnan U
     * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
-	 * 7. Yogesh Goyal
+	* 7. Yogesh Goyal
  */
 /* Toggle Styles */
 
@@ -29,7 +29,12 @@ body{
 	background-color:white;
 	margin-top:50px;
 }
-
+.slate-logo{
+	background : url('../images/slate-logo.png') no-repeat;
+	padding: 50px 50px;
+	height: 130px;
+	margin: 0px 210px;
+}
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #555;
     background-color: #f5f5f5;
@@ -41,7 +46,15 @@ body{
 
 .navbar-brand{
 	margin: 0px 40px 0px 0px;
+	background : url('../images/slate-logo.png') no-repeat;
+	background-size: 65px 45px;
+	width: 110px;
 	font-size: 2.2em;
+	font-weight:900;
+	text-align: center;
+  	color: #137AC5;
+  	font-family: 'Poiret One', serif;
+	margin: 0px 20px;
 }
 
 .tab-content{
@@ -159,7 +172,6 @@ body{
 	cursor: pointer;
 }
 
-
 .glyph-right-space{
 	margin-right: 5px;
 }
@@ -193,6 +205,9 @@ body{
 .tab-content > .active {
   display: block;
   height: auto;
+}
+.tab-content .btn:hover{
+	color:white;
 }
 
 .edit-btn {
@@ -288,13 +303,16 @@ table,  th,  td{
 	margin:10px 0px;
 }
 
+.tabs-glyph {
+	font-size: 30px;
+}
+
 .panel-width-style{
 	z-index: 1000;
 	position: fixed;
-	left: 105px;
+	left: 85px;
 	width: 0;
-	/*height: 100%;*/
-	/*margin-left: -150px;*/
+	margin-top: 40px;
 	overflow-y: auto;
 	-webkit-transition: all 0.5s ease;
 	-moz-transition: all 0.5s ease;
@@ -308,7 +326,7 @@ table,  th,  td{
 }
 
 .nav-customWidget-style{
-	margin-top: 100px;
+	margin-top: 60px;
 	position:fixed;
 }
 
@@ -317,15 +335,50 @@ table,  th,  td{
 	max-height: 700px;
 }
 
+.tabs-left>.nav-tabs>li {
+	float:none;
+	padding-left: 10px;
+	text-align: center;
+}
 
-.tabs-below>.nav-tabs,.tabs-right>.nav-tabs,.tabs-left>.nav-tabs{border-bottom:0;}
+.tabs-below>.nav-tabs,.tabs-left>.nav-tabs {
+	border-bottom:0;
+}
 
-.tabs-left>.nav-tabs>li,.tabs-right>.nav-tabs>li{float:none;}
-.tabs-left>.nav-tabs>li>a,.tabs-right>.nav-tabs>li>a{min-width:74px;margin-right:0;margin-bottom:3px;}
-.tabs-left>.nav-tabs{float:left;margin-right:19px;border-right:1px solid #ddd;}
-.tabs-left>.nav-tabs>li>a{margin-right:-1px;-webkit-border-radius:4px 0 0 4px;-moz-border-radius:4px 0 0 4px;border-radius:4px 0 0 4px;}
-.tabs-left>.nav-tabs>li>a:hover,.tabs-left>.nav-tabs>li>a:focus{border-color:#eeeeee #dddddd #eeeeee #eeeeee;}
-.tabs-left>.nav-tabs .active>a,.tabs-left>.nav-tabs .active>a:hover,.tabs-left>.nav-tabs .active>a:focus{border-color:#ddd transparent #ddd #ddd;*border-right-color:#ffffff;}
+.tabs-left>.nav-tabs>li>a {
+	min-width:74px;
+	margin-right:0;
+	margin-bottom:3px;
+}
+
+.tabs-left>.nav-tabs {
+	float:left;
+	margin-right:19px;
+}
+
+.tabs-left>.nav-tabs>li>a {
+	margin-right:-1px;
+	-webkit-border-radius:4px 0 0 4px;
+	-moz-border-radius:4px 0 0 4px;
+	border-radius:4px 0 0 4px;
+}
+
+.tabs-left>.nav-tabs>li>a:hover,.tabs-left>.nav-tabs>li>a:focus {
+	border-color:#eeeeee #dddddd #eeeeee #eeeeee;
+}
+
+.tabs-left>.nav-tabs .active>a,.tabs-left>.nav-tabs .active>a:hover,.tabs-left>.nav-tabs .active>a:focus {
+	border-color:#ddd transparent #ddd #ddd;
+	*border-right-color:#ffffff;
+}
+
+.share-modal {
+	margin-right: 5px;
+}
+
+.save-row, .add-row {
+	margin: 5px;
+}
 
 @media(min-width:768px) {
     #wrapper {
@@ -416,15 +469,20 @@ margin-top: 85px;
   background-color:white;
 }
 .registerForm {
-  /*background: rgba(19, 35, 47, 0.7);*/
-  background-color: #4f4d4d;
-	color:white;
+  /* background: rgba(19, 35, 47, 0.7); */
+  background-color: rgba(193, 202, 220, 0.26);
+  color: white;
   /*background-color: #cc0000;*/
   padding: 40px;
   max-width: 600px;
   margin: 40px auto;
-  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.registerForm p{
+  color: #3A71EF;
+}
+
 .registerForm .tab-group {
   list-style: none;
   padding: 0;
@@ -439,7 +497,7 @@ margin-top: 85px;
   display: block;
   text-decoration: none;
   padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
+  background: rgba(186, 216, 186, 0.26);
    font-size: 20px;
   float: left;
   width: 50%;
@@ -449,27 +507,31 @@ margin-top: 85px;
   transition: .5s ease;
 }
 
-.registerForm .tab-group .active a {
-  /*background: #1ab188;*/
-  background: #d3d5e1;
-  color: #black;*/
+
+.registerForm .tab-group .tab-btn-default a {
+  background: #77aaff;
+  color: whitesmoke;
 }
-.registerForm .tab-group .active1 a {
-  /*background: #1ab188;*/
-  background: #4a65be;
-  color: #ffffff;*/
+
+.registerForm .tab-group a:hover {
+	background : #337ab7;
+	color: #ffffff;
 }
 
 #register-login h1, #register-signup h1 {
   text-align: center;
-  color: #ffffff;
-  font-weight: 300;
+  color: #137AC5;
   margin: 0 0 40px;
+  font-family: 'Poiret One', serif;
+  font-weight: 700;
 }
 
 .registerForm label{
-    color:white;
-    font-family: 'Raleway', serif;
+    color:#747474;
+    font-family: 'Noto Sans',sans-serif;
+/*	letter-spacing: 1px;/*/
+	font-weight: 700;
+	font-size: 14px;
 }
 
 .field-wrap {
@@ -491,19 +553,26 @@ margin-top: 85px;
   margin: 0;
 }
 
-.regbutton {
+.register-form-control{
+	background: rgba(255,255,255,0.6);
+}
+
+.reg-btn {
   border: 0;
-  outline: none;
-  border-radius: 0;
-  padding: 15px 0;
+  border-radius: 6px;
+  font-family: Montserrat,Helvetica,Arial,sans-serif;
+  padding: 10px 0;
   font-size: 2rem;
-  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background:#008880 ;
+  background: #337ab7;
 }
-.regbutton:hover, .regbutton:focus {
-  background: #008880;
+
+.reg-btn:hover, .reg-btn:focus {
+  background: 	#286192;
+}
+.reg-btn:click {
+  background: 	#2d6da4;
 }
 
 .regbutton-block {
@@ -524,7 +593,15 @@ margin: 0px;
 }
 
 .modal-lg {
-	width: 1500px;
+	width: 1200px;
+}
+
+/*Override Chrome's autocomplete defaults*/
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input:-webkit-autofill:hover, input:-webkit-autofill:focus{
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
 @media  (max-width: 768px) {

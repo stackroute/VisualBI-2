@@ -21,29 +21,35 @@
     * 4. Venkatakrishnan U
     * 5. Arun Karthic R
     * 6. Hari Prasad Timmapathini
-	 * 7. Yogesh Goyal
- */
+	* 7. Yogesh Goyal
+ 	*/
 angular.module('vbiApp').controller('chartModalController',['userManager','$scope','$http','$uibModalInstance','chartInfo','$route','widgetManager','$rootScope', function(userManager,$scope,$http,$uibModalInstance,chartInfo,$route,widgetManager,$rootScope){
 		
     //	set the default comment icon as check icon and color to blue(info)
     var commentType = 'glyphicon-check',
         commentCategory = 'primary',
 		commentsCollection=[];
-		$scope.commentsVisibility = true;
+		$scope.commentsVisibility = false;
+		$scope.showCommentEditor=false;
 		$scope.chartInfo = chartInfo;
+		$scope.updatedComment; 	
 	
 		widgetManager.getComment(chartInfo.widgetId)
 			.then(function(widgetData){
 				var userComments = widgetData.data.comments;
-	
+				$scope.showHideVisibility= (widgetData.data.commenters.length>0) ? true : false;
+				$scope.commentsVisibility= (widgetData.data.commenters.length>0) ? true : false;
+
 				angular.forEach(userComments, function(comment, key){
 					commentsCollection.push({
+					commentId : comment._id,
+					userid: comment.userid,
 					displayName: comment.displayName,
 					comment: comment.comment,
 					badgeClass: comment.badgeClass,
 					badgeIconClass: comment.badgeIconClass,
 					commenterThumb: {'background-image': 'url("../'+comment.userImage.substring(6)+'")','background-size': '50px 50px'},
-					when: Date()
+					when: comment.datetime
 					});
 				});
 				$scope.comments = commentsCollection;
@@ -53,7 +59,35 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 		$scope.registerCommentType=function(icon){
 			commentType='glyphicon-'+icon;
 			}
-	
+		$scope.showEditView=function(index){
+			$scope.activeCommentIndex=index;
+		}
+		$scope.isShowingEditView=function(index){
+			return $scope.activeCommentIndex===index;
+		}
+		
+		$scope.cancelEditView=function(index){
+			$scope.activeCommentIndex=-1;
+		}
+		
+		$scope.saveEditedComment=function(commentIndex){
+			
+			var parameters={
+				commentId:$scope.comments[commentIndex].commentId,
+				comment: $scope.comments[commentIndex].comment,
+				commentType:  commentType,
+				commentCategory:  commentCategory
+			}
+			
+				$scope.comments[commentIndex].badgeIconClass=commentType;
+				$scope.comments[commentIndex].badgeClass=commentCategory;
+											
+			widgetManager.updateComment(parameters).then(function(data){
+				$scope.activeCommentIndex=-1;
+
+			});
+		}
+		
 		//	function to write to comment entered by the user to the database and to add the comment to modal view
 
 	
@@ -80,6 +114,7 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
 			$scope.comments.push({
                 displayName: $rootScope.loggedInUser.displayName, 
+				userid:$rootScope.loggedInUser.authToken,
                 badgeClass: commentCategory,
                 badgeIconClass: commentType,
                 comment: newComment,
@@ -89,12 +124,15 @@ angular.module('vbiApp').controller('chartModalController',['userManager','$scop
 
             $scope.userComment = '';
             commentType = 'glyphicon-check', commentCategory = 'primary';
-  
+	
+			if($scope.showHideVisibility == false){
+				$scope.commentsVisibility = true;
+				$scope.showHideVisibility = true;
+			}
+			$route.reload();
         });
 
     };
-
-    
 
     $scope.hide = function() {
         $uibModalInstance.dismiss('cancel');
