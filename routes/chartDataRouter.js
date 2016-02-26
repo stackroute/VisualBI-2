@@ -35,7 +35,7 @@ router.use(utils.isAuthenticated);
 router.get('/:chartType', function(req, res, next) {
    // picks :chartType from the URL
    var chartType = req.params.chartType;
-   var filePath = path.join(__dirname, '../public/data/chartdata/' + chartType + ".json");
+	var filePath = process.env.NODE_ENV == 'production' ? path.join(__dirname, '../../public/data/chartdata/' + chartType + ".json") : path.join(__dirname, '../public/data/chartdata/' + chartType + ".json");
       var chartJsonData = utils.readFile(filePath);
       res.json(chartJsonData);
 });
