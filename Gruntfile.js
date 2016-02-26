@@ -89,6 +89,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('replace', function() {
 		var data = grunt.file.readJSON('./package.json');
 		data.scripts.start = "NODE_ENV=production PORT=2000 forever start server/bin/server.js";
+		//remove dev dependency from productions file
+		data.devDependencies = {};
+		
 		var content = JSON.stringify(data);
 		grunt.file.write('./dist/package.json', content);
 	})
