@@ -1,7 +1,7 @@
 #VISUAL-BI
 ##Visual-BI is an open source business intelligence tool with easy to use interface.
 
-Version ###0.0.1
+Version 0.0.2
 
 Technologies used
 
@@ -18,13 +18,14 @@ Installation
 You need supervisor installed globally:
 
 $ npm i -g supervisor
-$ git clone [git-repo-url] VisualBI
-$ cd VisualBI
+$ git clone [git-repo-url] VisualBI-2
+$ cd VisualBI-2
 $ npm install
 $ npm start
-Todos
 
+Todos
 Write Tests
+
 License
 
 Apache
