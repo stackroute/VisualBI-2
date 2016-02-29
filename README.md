@@ -7,8 +7,8 @@ Technologies used
 
 Visual-BI uses a number of open source technologies to work properly:
 
-jQuery - A write-less-do-more Javascript library
-Twitter Bootstrap - great UI boilerplate for modern web apps
+jQuery - A write-less-do-more Javascript library<br />
+Twitter Bootstrap - great UI boilerplate for modern web apps<br />
 AngularJS - Front end web framework
 node.js - evented I/O for the backend
 Express - fast node.js network app framework
