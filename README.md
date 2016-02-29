@@ -18,10 +18,10 @@ Installation
 
 You need supervisor installed globally:
 
-$ npm i -g supervisor<br /><br /><br /><br /><br />
-$ git clone [git-repo-url] VisualBI-2<br /><br /><br /><br />
-$ cd VisualBI-2<br /><br /><br />
-$ npm install<br /><br />
+$ npm i -g supervisor<br />
+$ git clone [git-repo-url] VisualBI-2<br />
+$ cd VisualBI-2<br />
+$ npm install<br />
 $ npm start<br />
 
 Todos
